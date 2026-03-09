@@ -77,6 +77,52 @@ const ROSE_LIST = [
     "Bremer","Locatelli","Miretti","Koopmeiners","Thuram K.","McKennie","Conceicao",
     "Zhegrova","Adzic","David","Openda","Yildiz","Vlahovic","Milik","Kostic","Boga"
   ]},
+  { key:"Fiorentina", nome:"ACF Fiorentina", emoji:"💜", giocatori:[
+    "De Gea","Christensen","Lezzerini",
+    "Comuzzo","Pongracic","Ranieri","Kouadio","Rugani","Košpo",
+    "Fortini","Gosens","Parisi","Balbo","Dodô","Lamptey",
+    "Mandragora","Fagioli","Fazzini","Brescianini","Ndour",
+    "Fabbian","Sabiri","Harrison","Solomon","Gudmundsson","Kean","Piccoli"
+  ]},
+  { key:"Lecce", nome:"US Lecce", emoji:"🟡", giocatori:[
+    "Falcone","Früchtl","Samooja",
+    "Tiago Gabriel","Siebert","Gaspar","Jean","Pérez",
+    "Gallo","Ndaba","Veiga",
+    "Ramadani","Fofana","Ngom","Berisha","Coulibaly","Helgason","Sala",
+    "Gandelsman","Marchwiński","Sottil","Banda","Pierotti","N'Dri",
+    "Camarda","Stulic","Cheddira"
+  ]},
+  { key:"Napoli", nome:"SSC Napoli", emoji:"🔵", giocatori:[
+    "Milinkovic-Savic","Meret","Contini","Ferrante",
+    "Buongiorno","Beukema","Rrahmani","Juan Jesus",
+    "Olivera","Gutiérrez","Spinazzola","Di Lorenzo","Mazzocchi",
+    "Gilmour","Lobotka","McTominay","Anguissa",
+    "De Bruyne","Elmas","Vergara","Alisson Santos","Neres","Politano",
+    "Højlund","Lukaku","Giovane"
+  ]},
+  { key:"Bologna", nome:"Bologna FC", emoji:"🔴", giocatori:[
+    "Skorupski","Ravaglia","Pessina",
+    "Lucumí","Heggem","Vitík","Helland","Casale","Bonifazi",
+    "Miranda","Lykogiannis","João Mário","Zortea","De Silvestri",
+    "Moro","Ferguson","Pobega","Sohm","Freuler",
+    "Odgaard","Cambiaghi","Rowe","Domínguez","Orsolini","Bernardeschi",
+    "Castro","Dallinga"
+  ]},
+  { key:"Atalanta", nome:"Atalanta BC", emoji:"🖤", giocatori:[
+    "Carnesecchi","Sportiello","Rossi",
+    "Hien","Scalvini","Ahanor","Kossounou","Kolasinac","Djimsiti",
+    "De Roon","Éderson","Musah","Pašalić","Bellanova","Zappacosta",
+    "Zalewski","Bakker","Bernasconi",
+    "De Ketelaere","Samardžić","Sulemana","Raspadori","Scamacca","Krstović"
+  ]},
+  { key:"Lazio", nome:"SS Lazio", emoji:"🦅", giocatori:[
+    "Provedel","Motta","Furlanetto",
+    "Gila","Romagnoli","Provstgaard","Gigot","Patric",
+    "Tavares","Pellegrini","Marusic","Lazzari","Hysaj",
+    "Rovella","Belahyane","Cataldi","Taylor","Bašić",
+    "Maldini","Przyborek","Dele-Bashiru","Zaccagni","Isaksen","Noslin","Cancellieri","Pedro",
+    "Dia","Ratkov"
+  ]},
 ];
 
 // ── CARRIERE ────────────────────────────────────────────────────────────
@@ -107,6 +153,140 @@ const CAREERS = [
     { club:"Milan",     period:"1995–1997", apps:59, goals:19, note:"Due stagioni, mai titolare fisso" },
     { club:"Bologna",   period:"1997–2000", apps:97, goals:39, note:"Rinascita dopo anni difficili" },
     { club:"Nazionale", period:"1988–2004", apps:56, goals:27, note:"Finale Mondiale 1994, rigore sbagliato" },
+  ]},
+  { answer:"Paolo Maldini", clues:[
+    { club:"AC Milan",   period:"1985–2009", apps:902, goals:33, note:"7 Scudetti, 5 Champions League, Capitano leggendario" },
+    { club:"Nazionale",  period:"1988–2002", apps:126, goals:7,  note:"Finale Mondiale 1994, Europeo 1988" },
+  ]},
+  { answer:"Ronaldo", clues:[
+    { club:"Cruzeiro",       period:"1993–1994", apps:14, goals:12, note:"Esordio in Brasile a 16 anni" },
+    { club:"PSV Eindhoven",  period:"1994–1996", apps:46, goals:42, note:"Capocannoniere Eredivisie a 17 anni" },
+    { club:"Barcellona",     period:"1996–1997", apps:37, goals:34, note:"Coppa UEFA e Coppa del Re" },
+    { club:"Inter",          period:"1997–2002", apps:99, goals:59, note:"Pallone d'Oro 1997 e 2002" },
+    { club:"Real Madrid",    period:"2002–2007", apps:177, goals:104, note:"La Liga 2003, gol leggendari al Bernabéu" },
+    { club:"Nazionale",      period:"1994–2011", apps:98, goals:62, note:"2 Mondiali vinti: 1994 e 2002" },
+  ]},
+  { answer:"Zinedine Zidane", clues:[
+    { club:"Cannes",         period:"1989–1992", apps:61, goals:6,  note:"Esordio nel calcio professionistico francese" },
+    { club:"Bordeaux",       period:"1992–1996", apps:139, goals:28, note:"Coppa UEFA 1996, si impone in Europa" },
+    { club:"Juventus",       period:"1996–2001", apps:212, goals:31, note:"2 Scudetti, 2 finali Champions League" },
+    { club:"Real Madrid",    period:"2001–2006", apps:227, goals:49, note:"Champions League 2002, gol di tacco in finale" },
+    { club:"Nazionale",      period:"1994–2006", apps:108, goals:31, note:"Mondiale 1998, Euro 2000, finale Mondiale 2006" },
+  ]},
+  { answer:"Ronaldinho", clues:[
+    { club:"Grêmio",         period:"1998–2001", apps:47, goals:21, note:"Esordio in Brasile, subito devastante" },
+    { club:"PSG",            period:"2001–2003", apps:55, goals:17, note:"Ligue 1, si fa notare da tutta Europa" },
+    { club:"Barcellona",     period:"2003–2008", apps:207, goals:94, note:"2 La Liga, Champions League 2006, Pallone d'Oro 2005" },
+    { club:"Milan",          period:"2008–2010", apps:73, goals:21, note:"Due stagioni in rossonero" },
+    { club:"Nazionale",      period:"1999–2013", apps:97, goals:33, note:"Mondiale 2002, Copa América 1999" },
+  ]},
+  { answer:"Thierry Henry", clues:[
+    { club:"Monaco",         period:"1994–1999", apps:105, goals:20, note:"Esordio da ala, poi attaccante" },
+    { club:"Juventus",       period:"1999–1999", apps:16,  goals:3,  note:"Breve esperienza in Serie A" },
+    { club:"Arsenal",        period:"1999–2007", apps:369, goals:228, note:"2 Premier League, capocannoniere record, Invincibili 2004" },
+    { club:"Barcellona",     period:"2007–2010", apps:121, goals:49, note:"Champions League 2009, La Liga" },
+    { club:"Nazionale",      period:"1997–2010", apps:123, goals:51, note:"Mondiale 1998, Euro 2000" },
+  ]},
+  { answer:"Andrés Iniesta", clues:[
+    { club:"Barcellona B",   period:"2002–2004", apps:45, goals:7,  note:"Cresciuto nella Masia dal 1996" },
+    { club:"Barcellona",     period:"2004–2018", apps:674, goals:57, note:"9 La Liga, 4 Champions League, gol finale Mondiale 2010" },
+    { club:"Vissel Kobe",    period:"2018–2023", apps:136, goals:20, note:"Porta il calcio spagnolo in Giappone" },
+    { club:"Nazionale",      period:"2006–2018", apps:131, goals:13, note:"Mondiale 2010, Euro 2008 e 2012" },
+  ]},
+  { answer:"Xavi Hernández", clues:[
+    { club:"Barcellona B",   period:"1997–1999", apps:39, goals:5,  note:"Prodotto della Masia" },
+    { club:"Barcellona",     period:"1999–2015", apps:767, goals:85, note:"8 La Liga, 4 Champions League, faro del tiki-taka" },
+    { club:"Al-Sadd",        period:"2015–2019", apps:87, goals:14, note:"Chiude la carriera in Qatar" },
+    { club:"Nazionale",      period:"2000–2014", apps:133, goals:13, note:"Mondiale 2010, Euro 2008 e 2012" },
+  ]},
+  { answer:"Cafu", clues:[
+    { club:"São Paulo",      period:"1990–1994", apps:102, goals:8,  note:"Esordio e titolo Brasileirão" },
+    { club:"Roma",           period:"1997–2003", apps:170, goals:10, note:"Scudetto 2001, beniamino di Trigoria" },
+    { club:"Milan",          period:"2003–2008", apps:128, goals:5,  note:"Champions League 2007" },
+    { club:"Nazionale",      period:"1990–2006", apps:142, goals:5,  note:"3 Mondiali: 1994, 1998 (finale), 2002 (vinto)" },
+  ]},
+  { answer:"Oliver Kahn", clues:[
+    { club:"Karlsruher SC",  period:"1987–1994", apps:156, goals:0, note:"Esordio e crescita nel calcio tedesco" },
+    { club:"Bayern Monaco",  period:"1994–2008", apps:632, goals:0, note:"8 Bundesliga, Champions League 2001, portiere dominante" },
+    { club:"Nazionale",      period:"1994–2006", apps:86,  goals:0, note:"Finale Mondiale 2002, Pallone d'Oro del torneo" },
+  ]},
+  { answer:"Gabriel Batistuta", clues:[
+    { club:"Boca Juniors",   period:"1990–1991", apps:30, goals:13, note:"Esordio in Argentina" },
+    { club:"Fiorentina",     period:"1991–2000", apps:269, goals:168, note:"Leggenda viola, top scorer all-time del club" },
+    { club:"Roma",           period:"2000–2003", apps:72, goals:30, note:"Scudetto 2001 con Capello" },
+    { club:"Nazionale",      period:"1991–2002", apps:78, goals:54, note:"Copa América 1991 e 1993" },
+  ]},
+  { answer:"Raúl González", clues:[
+    { club:"Atlético Madrid B", period:"1992–1994", apps:29, goals:16, note:"Cresciuto nell'Atlético, poi passato al Real" },
+    { club:"Real Madrid",    period:"1994–2010", apps:741, goals:323, note:"6 La Liga, 3 Champions League, capitano storico" },
+    { club:"Schalke 04",     period:"2010–2012", apps:98, goals:40,  note:"Protagonista in Bundesliga" },
+    { club:"Nazionale",      period:"1996–2006", apps:102, goals:44, note:"Euro 2000 finalista, Mondiale 2002" },
+  ]},
+  { answer:"Pavel Nedvěd", clues:[
+    { club:"Sparta Praga",   period:"1992–1996", apps:116, goals:26, note:"Esordio e titoli cechi" },
+    { club:"Lazio",          period:"1996–2001", apps:193, goals:44, note:"Scudetto 1999-2000, Coppa UEFA 1999" },
+    { club:"Juventus",       period:"2001–2009", apps:327, goals:64, note:"Pallone d'Oro 2003, 5 Scudetti (3 revocati)" },
+    { club:"Nazionale",      period:"1994–2006", apps:91,  goals:18, note:"Finale Euro 1996, semifinale Mondiale 2006" },
+  ]},
+  { answer:"Gianluigi Buffon", clues:[
+    { club:"Parma",          period:"1995–2001", apps:168, goals:0, note:"Esordio a 17 anni, Coppa UEFA e Coppa Italia" },
+    { club:"Juventus",       period:"2001–2018", apps:640, goals:0, note:"10 Scudetti, finale Champions League 2003 e 2015" },
+    { club:"PSG",            period:"2018–2019", apps:25,  goals:0, note:"Ligue 1, esperienza parigina" },
+    { club:"Nazionale",      period:"1997–2018", apps:176, goals:0, note:"Mondiale 2006, record presenze Azzurri" },
+  ]},
+  { answer:"Andrea Pirlo", clues:[
+    { club:"Brescia",        period:"1995–2001", apps:94, goals:12, note:"Esordio e maturazione in Serie A" },
+    { club:"Inter",          period:"1998–2001", apps:30, goals:2,  note:"Poco spazio, poi prestiti" },
+    { club:"Milan",          period:"2001–2011", apps:401, goals:32, note:"2 Champions League, 2 Scudetti, regista totale" },
+    { club:"Juventus",       period:"2011–2015", apps:164, goals:22, note:"4 Scudetti consecutivi da parametro zero" },
+    { club:"Nazionale",      period:"2002–2015", apps:116, goals:13, note:"Mondiale 2006, MVP Euro 2012" },
+  ]},
+  { answer:"Lionel Messi", clues:[
+    { club:"Barcellona B",   period:"2003–2005", apps:22, goals:6,   note:"Debutto in prima squadra a 17 anni" },
+    { club:"Barcellona",     period:"2004–2021", apps:778, goals:672, note:"10 La Liga, 4 Champions League, 6 Palloni d'Oro al Barça" },
+    { club:"PSG",            period:"2021–2023", apps:75,  goals:32,  note:"Due Ligue 1" },
+    { club:"Inter Miami",    period:"2023–",     apps:50,  goals:38,  note:"MLS, rinascita americana" },
+    { club:"Nazionale",      period:"2005–",     apps:191, goals:109, note:"Mondiale 2022, 3 Copa América, Pallone d'Oro 2023" },
+  ]},
+  { answer:"Cristiano Ronaldo", clues:[
+    { club:"Sporting CP",    period:"2002–2003", apps:25, goals:3,   note:"Esordio in Portugal, notato da Ferguson" },
+    { club:"Manchester Utd", period:"2003–2009", apps:292, goals:118, note:"3 Premier League, Champions League 2008, Pallone d'Oro 2008" },
+    { club:"Real Madrid",    period:"2009–2018", apps:438, goals:450, note:"4 Champions League, 2 La Liga, record gol assoluto" },
+    { club:"Juventus",       period:"2018–2021", apps:134, goals:101, note:"2 Scudetti, top scorer Serie A 2020-21" },
+    { club:"Al-Nassr",       period:"2023–",     apps:80,  goals:68,  note:"Arabia Saudita, ambasciatore globale" },
+    { club:"Nazionale",      period:"2003–",     apps:221, goals:135, note:"Euro 2016, Nations League 2019, record gol nazionali" },
+  ]},
+  { answer:"Luka Modrić", clues:[
+    { club:"Dinamo Zagabria", period:"2003–2008", apps:108, goals:18, note:"Esordio e titoli croati" },
+    { club:"Tottenham",       period:"2008–2012", apps:160, goals:17, note:"Si afferma in Premier League" },
+    { club:"Real Madrid",     period:"2012–",     apps:530, goals:40, note:"5 Champions League, 3 La Liga, Pallone d'Oro 2018" },
+    { club:"Nazionale",       period:"2006–",     apps:180, goals:24, note:"Finale Mondiale 2018, Nations League" },
+  ]},
+  { answer:"Robert Lewandowski", clues:[
+    { club:"Lech Poznań",    period:"2008–2010", apps:82, goals:41, note:"Esplode in Polonia, acquistato dal Borussia" },
+    { club:"Borussia Dortmund", period:"2010–2014", apps:187, goals:103, note:"2 Bundesliga, finale Champions League 2013" },
+    { club:"Bayern Monaco",  period:"2014–2022", apps:374, goals:344, note:"8 Bundesliga, Champions League 2020, 41 gol in una stagione" },
+    { club:"Barcellona",     period:"2022–",     apps:100, goals:70,  note:"La Liga 2022-23, gol subito decisivi" },
+    { club:"Nazionale",      period:"2008–",     apps:148, goals:82,  note:"Record gol assoluto Polonia" },
+  ]},
+  { answer:"Karim Benzema", clues:[
+    { club:"Lione",          period:"2004–2009", apps:148, goals:66, note:"Esordio in Ligue 1 a 17 anni, 3 titoli francesi" },
+    { club:"Real Madrid",    period:"2009–2023", apps:648, goals:354, note:"5 Champions League, 4 La Liga, Pallone d'Oro 2022" },
+    { club:"Al-Ittihad",     period:"2023–2024", apps:31,  goals:8,  note:"Arabia Saudita, esperienza difficile" },
+    { club:"Nazionale",      period:"2007–2022", apps:97,  goals:37, note:"Mondiale 2018, Euro 2021 quarti" },
+  ]},
+  { answer:"Neymar Jr.", clues:[
+    { club:"Santos",         period:"2009–2013", apps:225, goals:136, note:"Idolo brasiliano, Copa Libertadores 2011" },
+    { club:"Barcellona",     period:"2013–2017", apps:186, goals:105, note:"Champions League 2015, tridente MSN con Messi e Suárez" },
+    { club:"PSG",            period:"2017–2023", apps:173, goals:118, note:"Trasferimento record €222M, 5 Ligue 1" },
+    { club:"Al-Hilal",       period:"2023–2024", apps:7,   goals:1,   note:"Arabia Saudita, infortuni continui" },
+    { club:"Nazionale",      period:"2010–",     apps:128, goals:79,  note:"Mondiale 2014 in casa, oro olimpico 2016" },
+  ]},
+  { answer:"Kylian Mbappé", clues:[
+    { club:"Monaco",         period:"2015–2017", apps:69, goals:27,  note:"Esplode a 17 anni, semifinale Champions League 2017" },
+    { club:"PSG",            period:"2017–2024", apps:308, goals:256, note:"6 Ligue 1, capocannoniere assoluto PSG" },
+    { club:"Real Madrid",    period:"2024–",     apps:50,  goals:30,  note:"Champions League, La Liga" },
+    { club:"Nazionale",      period:"2017–",     apps:90,  goals:48,  note:"Mondiale 2018, finale Mondiale 2022" },
   ]},
 ];
 
@@ -187,7 +367,7 @@ function useCountdown(){
 // ── COLORI / STILI ───────────────────────────────────────────────────────
 const US={black:"#111",orange:"#f5e000",bg:"#f4f4f4",border:"#e2e2e2",muted:"#888",green:"#16a34a",greenL:"#dcfce7",red:"#dc2626",redL:"#fee2e2",yellow:"#d97706"};
 const T={
-  app:{minHeight:"100vh",background:US.bg,fontFamily:"'Helvetica Neue',Arial,sans-serif",animation:"fadeSlideIn 0.25s ease forwards"},
+  app:{minHeight:"100vh",background:US.bg,fontFamily:"'Helvetica Neue',Arial,sans-serif",animation:"fadeSlideIn 0.35s ease forwards"},
   hdr:{background:US.black,color:"#fff",padding:"13px 18px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:`3px solid ${US.orange}`},
   ey:{fontSize:"8px",letterSpacing:"3px",textTransform:"uppercase",color:US.orange,marginBottom:"2px",fontWeight:"700"},
   ht:{fontSize:"17px",fontWeight:"700",margin:0},
@@ -221,13 +401,13 @@ function Hdr({title,sub,onHome,archiveNav}){
         <div style={T.ht}>{title}</div>
         {sub&&<div style={{fontSize:"9px",color:"#777",marginTop:"1px"}}>{sub}</div>}
       </div>
-      {archiveNav&&<div style={{display:"flex",alignItems:"center",gap:"5px",marginRight:"8px"}}>
-        <button onClick={archiveNav.prev} disabled={archiveNav.day<=1} style={{...T.bk,padding:"4px 8px",opacity:archiveNav.day<=1?0.3:1}}>◀</button>
-        <div style={{textAlign:"center",minWidth:"52px"}}>
+      {archiveNav&&<div style={{display:"flex",alignItems:"center",gap:"4px"}}>
+        <button onClick={archiveNav.prev} disabled={archiveNav.day<=1} style={{...T.bk,padding:"5px 10px",fontSize:"12px",opacity:archiveNav.day<=1?0.3:1}}>◀</button>
+        <div style={{textAlign:"center",minWidth:"44px"}}>
           <div style={{fontSize:"11px",color:"#fff",fontWeight:"700"}}>#{archiveNav.day}</div>
-          <div style={{fontSize:"8px",color:"#aaa"}}>{dayToDate(archiveNav.day,archiveNav.poolSize)}</div>
+          <div style={{fontSize:"8px",color:"#888"}}>{dayToDate(archiveNav.day,archiveNav.poolSize)}</div>
         </div>
-        <button onClick={archiveNav.next} disabled={archiveNav.day>=archiveNav.max} style={{...T.bk,padding:"4px 8px",opacity:archiveNav.day>=archiveNav.max?0.3:1}}>▶</button>
+        <button onClick={archiveNav.next} disabled={archiveNav.day>=archiveNav.max} style={{...T.bk,padding:"5px 10px",fontSize:"12px",opacity:archiveNav.day>=archiveNav.max?0.3:1}}>▶</button>
       </div>}
       {onHome&&<button style={T.bk} onClick={onHome} onMouseEnter={e=>{e.currentTarget.style.color="#fff";e.currentTarget.style.borderColor="#fff";}} onMouseLeave={e=>{e.currentTarget.style.color="#aaa";e.currentTarget.style.borderColor="#444";}}>← Home</button>}
     </div>
@@ -237,15 +417,53 @@ function Hdr({title,sub,onHome,archiveNav}){
 // ── ARCHIVE WRAPPER ──────────────────────────────────────────────────────
 const POOL_SIZES={calciodle:DB.length,wordle:DB.length,hangman:DB.length,valore2:DB.length,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:12,transfer:15};
 
+const PAGE_SIZE=10;
 function ArchiveWrapper({gameKey,children}){
   const poolSize=POOL_SIZES[gameKey]||DB.length;
-  const todayN=poolSize; // today is always max
-  const[num,setNum]=useState(todayN);
+  const todayN=poolSize;
+  const[num,setNum]=useState(Math.max(1,todayN-1));
+  // page: which group of 10 we show. page=0 → most recent 10 (excluding today)
+  const[page,setPage]=useState(0);
   const seed=seedForNum(num,poolSize);
   const isToday=num===todayN;
-  return children({day:num,seed,isToday,
-    archiveNav:{day:num,max:todayN,poolSize,prev:()=>setNum(n=>Math.max(1,n-1)),next:()=>setNum(n=>Math.min(todayN,n+1))}
-  });
+
+  // build chip list for current page (excluding today=todayN)
+  // page 0: todayN-1 down to todayN-PAGE_SIZE
+  // page 1: todayN-PAGE_SIZE-1 down to todayN-PAGE_SIZE*2
+  const pageStart=todayN-1-page*PAGE_SIZE; // highest num in this page
+  const pageEnd=Math.max(1,pageStart-PAGE_SIZE+1);
+  const chips=[];
+  for(let n=pageStart;n>=pageEnd;n--)chips.push(n);
+  const hasPrev=pageStart-PAGE_SIZE>=1;
+  const hasNext=page>0;
+
+  const archiveNav={
+    day:num,max:todayN,poolSize,
+    prev:()=>setNum(n=>Math.max(1,n-1)),
+    next:()=>setNum(n=>Math.min(todayN,n+1))
+  };
+
+  const chipBar=(
+    <div style={{background:"#1a1a1a",padding:"8px 14px",borderBottom:"1px solid #2a2a2a"}}>
+      <div style={{display:"flex",alignItems:"center",gap:"4px"}}>
+        {hasPrev&&<button onClick={()=>setPage(p=>p+1)} style={{...T.bk,padding:"4px 7px",fontSize:"10px",flexShrink:0}}>◀</button>}
+        <div style={{display:"flex",gap:"5px",overflowX:"auto",flex:1,paddingBottom:"2px"}}
+          ref={el=>{if(el)el.scrollLeft=0;}}>
+          {chips.map(n=>(
+            <div key={n} onClick={()=>setNum(n)}
+              style={{flexShrink:0,background:num===n?"#2a2200":"#222",border:`1.5px solid ${num===n?US.orange:"#333"}`,
+                borderRadius:"6px",padding:"4px 8px",cursor:"pointer",textAlign:"center",minWidth:"46px"}}>
+              <div style={{fontSize:"10px",fontWeight:"700",color:num===n?US.orange:"#ccc"}}>#{n}</div>
+              <div style={{fontSize:"7px",color:num===n?US.orange:"#555",marginTop:"1px"}}>{dayToDate(n,poolSize)}</div>
+            </div>
+          ))}
+        </div>
+        {hasNext&&<button onClick={()=>setPage(p=>Math.max(0,p-1))} style={{...T.bk,padding:"4px 7px",fontSize:"10px",flexShrink:0}}>▶</button>}
+      </div>
+    </div>
+  );
+
+  return children({day:num,seed,isToday,archiveNav,chipBar});
 }
 
 // ── CALCIODLE ────────────────────────────────────────────────────────────
@@ -255,7 +473,7 @@ function eC(k,g,t){if(k==="age"){const d=Math.abs(g-t);return d===0?"green":d<=3
 function aD(k,g,t){if(k!=="age"&&k!=="value")return null;return g===t?null:g<t?"▲":"▼";}
 function cS(c){return{flex:1,minWidth:0,borderRadius:"2px",background:CLR[c]?.bg||"#fff",border:`1.5px solid ${CLR[c]?.bg||"#e8e8e8"}`,color:CLR[c]?.tx||"#ccc",fontSize:"8px",textAlign:"center",padding:"4px 2px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",minHeight:"32px",overflow:"hidden"};}
 
-function CalciodleGame({day,seed,isToday,archiveNav,onHome}){
+function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const target=useMemo(()=>DB[seed%DB.length],[seed]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);const[animRows,setAnimRows]=useState(new Set());
@@ -274,11 +492,11 @@ function CalciodleGame({day,seed,isToday,archiveNav,onHome}){
   // Flip cell component
   function FlipCell({value,arrow,color,colIdx,rowIdx}){
     const flipped=animRows.has(rowIdx);
-    const delay=colIdx*110;
+    const delay=colIdx*150;
     const bg=CLR[color]?.bg||"#e0e0e0";
     return(
       <div style={{flex:1,minWidth:0,height:"38px",perspective:"400px"}}>
-        <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.5s ease ${delay}ms`,transform:flipped?"rotateX(180deg)":"rotateX(0deg)"}}>
+        <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.7s ease ${delay}ms`,transform:flipped?"rotateX(180deg)":"rotateX(0deg)"}}>
           {/* front — gray placeholder */}
           <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e8e8e8",borderRadius:"3px",display:"flex",alignItems:"center",justifyContent:"center"}}/>
           {/* back — colored result */}
@@ -290,7 +508,7 @@ function CalciodleGame({day,seed,isToday,archiveNav,onHome}){
       </div>
     );
   }
-  return(<div style={T.app}><Hdr title="Calciodle" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+  return(<div style={T.app}><Hdr title="Calciodle" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={T.body}>
       {/* INPUT PRIMA — sempre visibile su mobile */}
       {!ov&&<div style={{marginBottom:"14px"}}>
@@ -324,17 +542,17 @@ function CalciodleGame({day,seed,isToday,archiveNav,onHome}){
       </div>
     </div>
     {mo&&<div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100,padding:"16px"}} onClick={()=>sMo(false)}><div style={{background:"#fff",borderRadius:"4px",maxWidth:"280px",width:"100%",overflow:"hidden"}} onClick={e=>e.stopPropagation()}><div style={{background:US.black,color:"#fff",padding:"11px 16px"}}><div style={{fontSize:"8px",color:"#888",marginBottom:"2px"}}>{won?`Trovato in ${G.length}`:"Game Over"}</div><div style={{fontSize:"16px"}}>{won?"Complimenti!":"Era..."}</div></div><div style={{padding:"12px 16px"}}><div style={{border:"1.5px solid #e8e8e8",borderRadius:"2px",padding:"9px",marginBottom:"9px"}}><div style={{fontWeight:"700",marginBottom:"3px"}}>{target.name}</div>{[["Club",target.club],["Nazione",target.nation],["Valore",`€${target.value}M`]].map(([k,v])=><div key={k} style={{fontSize:"11px",color:"#777"}}><strong>{k}:</strong> {v}</div>)}</div><button onClick={()=>sMo(false)} style={{...T.pb,width:"100%"}}>Chiudi</button>
-              <ShareButton text={`⚽ Calciodle #${day}\n${won?`Trovato in ${G.length}/6`:"Non trovato"}\n${G.map((_,i)=>won&&i===G.length-1?"🟩":"🟥").join("")}\nuniverso-quiz-hmix.vercel.app`}/>
+              <ShareButton text={`⚽ Calciodle #${day}\n${won?`Trovato in ${G.length}/6`:"Non trovato"}\n${G.map((_,i)=>won&&i===G.length-1?"🟩":"🟥").join("")}\nuniverso-quiz-hmix.vercel.app`}/>{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}
               {!isToday&&<button onClick={()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows(new Set());}} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>🔀 Rigioca</button>}</div></div></div>}
   </div>);
 }
-function Calciodle({onHome,isDaily}){
-  if(isDaily){const d=DB.length,s=todaySeed();return<CalciodleGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="calciodle">{({day,seed,isToday,archiveNav})=><CalciodleGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+function Calciodle({onHome,isDaily,onArchive}){
+  if(isDaily){const d=DB.length,s=todaySeed();return<CalciodleGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="calciodle">{({day,seed,isToday,archiveNav,chipBar})=><CalciodleGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 // ── WORDLE COGNOME ───────────────────────────────────────────────────────
-function WordleGame({day,seed,isToday,archiveNav,onHome}){
+function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const ROUNDS=5,MAX_ATT=6;
   const pool=useMemo(()=>{const rng=seedRandom(seed+77);return shuffle(DB.filter(p=>normStr(p.surname).length>=4&&normStr(p.surname).length<=8),rng);},[seed]);
   const player=pool[0];
@@ -370,7 +588,7 @@ function WordleGame({day,seed,isToday,archiveNav,onHome}){
   const colBg={green:US.green,yellow:US.yellow,gray:"#9ca3af"};
 
   const[hint,setHint]=useState(false);
-  return(<div style={T.app}><Hdr title="Wordle Cognome" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+  return(<div style={T.app}><Hdr title="Wordle Cognome" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"400px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
         <span style={{fontSize:"11px",color:"#aaa"}}>{word.length} lettere</span>
@@ -390,7 +608,7 @@ function WordleGame({day,seed,isToday,archiveNav,onHome}){
               const bd=filled?"transparent":isActive&&disp[ci].trim()?`2px solid ${US.black}`:"2px solid #d0d0d0";
               if(filled){
                 return(<div key={ci} className="flip-cell" style={{width:"42px",height:"42px"}}>
-                  <div className={`flip-inner flipped`} style={{transitionDelay:`${ci*80}ms`}}>
+                  <div className={`flip-inner flipped`} style={{transitionDelay:`${ci*130}ms`}}>
                     <div className="flip-back" style={{background:colBg[filled.s]||"#e0e0e0",color:"#fff",fontSize:"16px"}}>{filled.c}</div>
                   </div>
                 </div>);
@@ -411,19 +629,19 @@ function WordleGame({day,seed,isToday,archiveNav,onHome}){
         <div style={{fontSize:"14px",fontWeight:"700",marginBottom:"4px"}}>{status==="won"?"Corretto!":"Era..."}</div>
         <div style={{fontSize:"18px",fontWeight:"700",letterSpacing:"3px"}}>{word}</div>
         <div style={{fontSize:"11px",marginTop:"2px",color:"#666"}}>{player.name} · {player.club}</div>
-        <ShareButton text={`🔤 Wordle #${day} — ${word}\n${attempts.map(a=>a.map(x=>x.s==="green"?"🟩":x.s==="yellow"?"🟨":"⬛").join("")).join("\n")}\nuniverso-quiz-hmix.vercel.app`}/>
+        <ShareButton text={`🔤 Wordle #${day} — ${word}\n${attempts.map(a=>a.map(x=>x.s==="green"?"🟩":x.s==="yellow"?"🟨":"⬛").join("")).join("\n")}\nuniverso-quiz-hmix.vercel.app`}/>{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}
         {!isToday&&<button onClick={()=>{setAttempts([]);setCurrent("");setStatus("playing");}} style={{...T.sb,marginTop:"10px",color:US.black}}>🔀 Rigioca</button>}
       </div>}
     </div>
   </div>);
 }
-function WordleCognome({onHome,isDaily}){
+function WordleCognome({onHome,isDaily,onArchive}){
   if(isDaily){const d=DB.length,s=todaySeed();return<WordleGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="wordle">{({day,seed,isToday,archiveNav})=><WordleGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+  return<ArchiveWrapper gameKey="wordle">{({day,seed,isToday,archiveNav,chipBar})=><WordleGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
 }
 
 // ── IMPICCATO (senza indizi) ─────────────────────────────────────────────
-function HangmanGame({day,seed,isToday,archiveNav,onHome}){
+function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const M=7;
   const pool=useMemo(()=>{const rng=seedRandom(seed+13);return shuffle(DB.filter(p=>normStr(p.surname).length>=4),rng);},[seed]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
@@ -435,7 +653,7 @@ function HangmanGame({day,seed,isToday,archiveNav,onHome}){
   const bodyParts=[<circle key="h" cx="50" cy="19" r="8" stroke="#333" strokeWidth="2.5" fill="none"/>,<line key="b" x1="50" y1="27" x2="50" y2="58" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="la" x1="50" y1="37" x2="35" y2="49" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="ra" x1="50" y1="37" x2="65" y2="49" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="ll" x1="50" y1="58" x2="37" y2="75" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="rl" x1="50" y1="58" x2="63" y2="75" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="rp" x1="50" y1="6" x2="50" y2="11" stroke="#333" strokeWidth="2.5"/>];
 
   const[hint,setHint]=useState(false);
-  return(<div style={T.app}><Hdr title="Impiccato" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+  return(<div style={T.app}><Hdr title="Impiccato" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"400px"}}>
       <div style={{display:"flex",justifyContent:"flex-end",marginBottom:"6px"}}>
         <button onClick={()=>setHint(h=>!h)} style={{background:"none",border:`1px solid ${hint?US.yellow:"#ddd"}`,borderRadius:"4px",padding:"3px 9px",fontSize:"9px",color:hint?US.yellow:"#aaa",cursor:"pointer",fontFamily:"inherit"}}>💡 {hint?"Nascondi":"Indizio"}</button>
@@ -450,13 +668,13 @@ function HangmanGame({day,seed,isToday,archiveNav,onHome}){
     </div>
   </div>);
 }
-function Hangman({onHome,isDaily}){
-  if(isDaily){const d=DB.length,s=todaySeed();return<HangmanGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="hangman">{({day,seed,isToday,archiveNav})=><HangmanGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+function Hangman({onHome,isDaily,onArchive}){
+  if(isDaily){const d=DB.length,s=todaySeed();return<HangmanGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="hangman">{({day,seed,isToday,archiveNav,chipBar})=><HangmanGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 // ── CHI VALE DI PIÙ ──────────────────────────────────────────────────────
-function ValoreGame({day,seed,isToday,archiveNav,onHome}){
+function ValoreGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const pairs=useMemo(()=>{const rng=seedRandom(seed+3);const sh=shuffle(DB,rng),p=[];for(let i=0;i<sh.length-1;i+=2)if(sh[i].value!==sh[i+1].value)p.push([sh[i],sh[i+1]]);return p;},[seed]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const RR=Math.min(3,pairs.length);
@@ -465,7 +683,7 @@ function ValoreGame({day,seed,isToday,archiveNav,onHome}){
   if(!pairs.length||dn)return(<div style={T.app}><Hdr title="Chi Vale di Più?" onHome={onHome}/><div style={{...T.body,textAlign:"center",paddingTop:"40px"}}><div style={{fontSize:"48px",fontWeight:"300",color:US.black}}>{sc}<span style={{fontSize:"18px"}}> / {RR}</span></div><div style={{fontSize:"12px",color:"#888",marginBottom:"3px"}}>risposte corrette</div><div style={{fontSize:"11px",color:"#aaa",marginBottom:"18px"}}>Serie migliore: {best}</div><button onClick={onHome} style={T.pb}>Home</button></div></div>);
   const[a,b]=pairs[rn],cor=a.value>b.value?a:b;
   function choose(p){if(ch)return;sCh(p);const ok=p.name===cor.name;if(ok){sSc(x=>x+1);const ns=str+1;sStr(ns);sBest(x=>Math.max(x,ns));}else sStr(0);setTimeout(()=>{sCh(null);const nr=rn+1;if(nr>=RR)sDn(true);else sRn(nr);},1500);}
-  return(<div style={T.app}><Hdr title="Chi Vale di Più?" sub={`${label} · #${day} · ${rn+1}/${RR}`} onHome={onHome} archiveNav={archiveNav}/>
+  return(<div style={T.app}><Hdr title="Chi Vale di Più?" sub={`${label} · #${day} · ${rn+1}/${RR}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"480px"}}>
       <div style={{height:"3px",background:"#e0e0e0",borderRadius:"2px",marginBottom:"16px",overflow:"hidden"}}><div style={{height:"100%",width:`${(rn/RR*100).toFixed(0)}%`,background:US.green,transition:"width 0.3s"}}/></div>
       <div style={{fontSize:"11px",color:"#aaa",textAlign:"center",marginBottom:"12px"}}>Chi ha il valore di mercato più alto?</div>
@@ -474,13 +692,13 @@ function ValoreGame({day,seed,isToday,archiveNav,onHome}){
     </div>
   </div>);
 }
-function ChiValeDiPiu({onHome,isDaily}){
+function ChiValeDiPiu({onHome,isDaily,onArchive}){
   if(isDaily){const d=DB.length,s=todaySeed();return<ValoreGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="valore2">{({day,seed,isToday,archiveNav})=><ValoreGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+  return<ArchiveWrapper gameKey="valore2">{({day,seed,isToday,archiveNav,chipBar})=><ValoreGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
 }
 
 // ── CARRIERA ─────────────────────────────────────────────────────────────
-function CarreiraGame({day,seed,isToday,archiveNav,onHome}){
+function CarreiraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const player=CAREERS[seed%CAREERS.length];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const maxC=player.clues.length;
@@ -495,7 +713,7 @@ function CarreiraGame({day,seed,isToday,archiveNav,onHome}){
     sGu("");
   }
   if(fin)return(<div style={T.app}><Hdr title="Indovina dalla Carriera" onHome={onHome}/><div style={{...T.body,textAlign:"center",paddingTop:"40px"}}><div style={{fontSize:"48px",fontWeight:"300",color:US.black}}>{sc}</div><div style={{fontSize:"12px",color:"#888",marginBottom:"18px"}}>punti totali</div><button onClick={onHome} style={T.pb}>Home</button></div></div>);
-  return(<div style={T.app}><Hdr title="Indovina dalla Carriera" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+  return(<div style={T.app}><Hdr title="Indovina dalla Carriera" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"520px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
         <div style={{fontSize:"11px",color:"#888"}}>{st==="p"&&<>Vale <strong style={{color:US.black}}>{pts} punt{pts===1?"o":"i"}</strong></>}</div>
@@ -520,9 +738,9 @@ function CarreiraGame({day,seed,isToday,archiveNav,onHome}){
     </div>
   </div>);
 }
-function Carriera({onHome,isDaily}){
+function Carriera({onHome,isDaily,onArchive}){
   if(isDaily){const d=CAREERS.length,s=todaySeed();return<CarreiraGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="carriera">{({day,seed,isToday,archiveNav})=><CarreiraGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+  return<ArchiveWrapper gameKey="carriera">{({day,seed,isToday,archiveNav,chipBar})=><CarreiraGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
 }
 
 // ── ROSA QUIZ ─────────────────────────────────────────────────────────────
@@ -533,7 +751,7 @@ function TimerRing({seconds,total}){
   return(<svg width="76" height="76" viewBox="0 0 76 76"><circle cx="38" cy="38" r={r} fill="none" stroke="#e0e0e0" strokeWidth="5"/><circle cx="38" cy="38" r={r} fill="none" stroke={color} strokeWidth="5" strokeDasharray={circ} strokeDashoffset={circ*(1-frac)} strokeLinecap="round" transform="rotate(-90 38 38)" style={{transition:"stroke-dashoffset 1s linear,stroke 0.3s"}}/><text x="38" y="43" textAnchor="middle" fontSize="17" fontWeight="700" fill={color} fontFamily="'Helvetica Neue',Arial,sans-serif">{seconds}</text></svg>);
 }
 
-function RosaQuizGame({day,seed,isToday,archiveNav,onHome}){
+function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const TOTAL=60;
   const squadra=ROSE_LIST[seed%ROSE_LIST.length];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
@@ -559,7 +777,7 @@ function RosaQuizGame({day,seed,isToday,archiveNav,onHome}){
     const missed=squadra.giocatori.filter(p=>!found.includes(p));
     const pct=Math.round(found.length/squadra.giocatori.length*100);
     const emoji=pct===100?"🏆":pct>=70?"🥇":pct>=40?"👍":"📚";
-    return(<div style={T.app}><Hdr title={`Rosa Quiz · ${squadra.nome}`} sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+    return(<div style={T.app}><Hdr title={`Rosa Quiz · ${squadra.nome}`} sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
       <div style={T.body}>
         <div style={{textAlign:"center",marginBottom:"20px"}}><div style={{fontSize:"36px"}}>{emoji}</div><div style={{fontSize:"50px",fontWeight:"300",color:US.black,lineHeight:1}}>{found.length}<span style={{fontSize:"18px",color:US.muted}}>/{squadra.giocatori.length}</span></div><div style={{fontSize:"11px",color:US.muted,marginTop:"3px"}}>trovati ({pct}%)</div></div>
         {found.length>0&&<div style={{marginBottom:"14px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.green,marginBottom:"6px",fontWeight:"700"}}>✓ Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"5px"}}>{found.map(p=><div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"3px 8px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}
@@ -571,7 +789,7 @@ function RosaQuizGame({day,seed,isToday,archiveNav,onHome}){
       </div>
     </div>);
   }
-  return(<div style={T.app}><Hdr title={`Rosa Quiz · ${squadra.emoji} ${squadra.nome}`} sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+  return(<div style={T.app}><Hdr title={`Rosa Quiz · ${squadra.emoji} ${squadra.nome}`} sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={T.body}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"14px"}}>
         <TimerRing seconds={seconds} total={TOTAL}/>
@@ -586,9 +804,9 @@ function RosaQuizGame({day,seed,isToday,archiveNav,onHome}){
     </div>
   </div>);
 }
-function RosaQuiz({onHome,isDaily}){
-  if(isDaily){const d=ROSE_LIST.length,s=todaySeed();return<RosaQuizGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="rosa">{({day,seed,isToday,archiveNav})=><RosaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+function RosaQuiz({onHome,isDaily,onArchive}){
+  if(isDaily){const d=ROSE_LIST.length,s=todaySeed();return<RosaQuizGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="rosa">{({day,seed,isToday,archiveNav,chipBar})=><RosaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 
@@ -628,7 +846,7 @@ const LISTA_CATEGORIES = [
 // Pool size per lista
 const LISTA_POOL = LISTA_CATEGORIES.length;
 
-function ListaQuizGame({day,seed,isToday,archiveNav,onHome}){
+function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const TOTAL=90,BONUS=5;
   const cat=LISTA_CATEGORIES[(seed%LISTA_POOL)];
   // use unique answers if defined (for categories with repeated winners)
@@ -667,7 +885,7 @@ function ListaQuizGame({day,seed,isToday,archiveNav,onHome}){
   if(done){
     const missed=validAnswers.filter(p=>!found.includes(p));
     const emoji=pct===100?"🏆":pct>=70?"🥇":pct>=40?"👍":"📚";
-    return(<div style={T.app}><Hdr title="Lista Quiz" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+    return(<div style={T.app}><Hdr title="Lista Quiz" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
       <div style={T.body}>
         <div style={{marginBottom:"14px",padding:"10px 13px",background:US.black,borderRadius:"6px"}}>
           <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"2px"}}>Categoria</div>
@@ -687,7 +905,7 @@ function ListaQuizGame({day,seed,isToday,archiveNav,onHome}){
       </div>
     </div>);
   }
-  return(<div style={T.app}><Hdr title="Lista Quiz" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+  return(<div style={T.app}><Hdr title="Lista Quiz" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={T.body}>
       <div style={{marginBottom:"12px",padding:"10px 13px",background:US.black,borderRadius:"6px"}}>
         <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"2px"}}>Categoria di oggi</div>
@@ -710,9 +928,9 @@ function ListaQuizGame({day,seed,isToday,archiveNav,onHome}){
     </div>
   </div>);
 }
-function ListaQuiz({onHome,isDaily}){
-  if(isDaily){const d=LISTA_POOL,s=todaySeed();return<ListaQuizGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="lista">{({day,seed,isToday,archiveNav})=><ListaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+function ListaQuiz({onHome,isDaily,onArchive}){
+  if(isDaily){const d=LISTA_POOL,s=todaySeed();return<ListaQuizGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="lista">{({day,seed,isToday,archiveNav,chipBar})=><ListaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 // ── INDOVINA IL TRASFERIMENTO ─────────────────────────────────────────────
@@ -734,7 +952,7 @@ const TRANSFERS = [
   {player:"Zlatan Ibrahimović",   from:"Inter",         to:"Barcellona",  year:2009, fee:70},
 ];
 
-function TransferGame({day,seed,isToday,archiveNav,onHome}){
+function TransferGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const tr=TRANSFERS[seed%TRANSFERS.length];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   // 3 fields to guess: fee (±5M), from, year
@@ -767,7 +985,7 @@ function TransferGame({day,seed,isToday,archiveNav,onHome}){
   }
   const score=Object.values(results).filter(v=>v==="green").length;
   const colMap={green:US.green,yellow:US.yellow,red:US.red};
-  return(<div style={T.app}><Hdr title="Indovina il Trasferimento" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+  return(<div style={T.app}><Hdr title="Indovina il Trasferimento" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"480px"}}>
       {/* Player card */}
       <div style={{background:US.black,borderRadius:"8px",padding:"14px 16px",marginBottom:"18px"}}>
@@ -817,9 +1035,9 @@ function TransferGame({day,seed,isToday,archiveNav,onHome}){
     </div>
   </div>);
 }
-function IndivinaTransferimento({onHome,isDaily}){
+function IndivinaTransferimento({onHome,isDaily,onArchive}){
   if(isDaily){const d=TRANSFERS.length,s=todaySeed();return<TransferGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="transfer">{({day,seed,isToday,archiveNav})=><TransferGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+  return<ArchiveWrapper gameKey="transfer">{({day,seed,isToday,archiveNav,chipBar})=><TransferGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
 }
 
 // ── HOME ──────────────────────────────────────────────────────────────────
@@ -882,12 +1100,12 @@ export default function App(){
     s.innerHTML=`
       input,select,textarea{font-size:16px !important;}
       .flip-cell{perspective:300px;}
-      .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.45s ease;}
+      .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.65s ease;}
       .flip-inner.flipped{transform:rotateX(360deg);}
       .flip-front,.flip-back{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:3px;font-weight:700;}
       .flip-back{backface-visibility:hidden;}
-      @keyframes fadeSlideIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-      .game-enter{animation:fadeSlideIn 0.25s ease forwards;}
+      @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+      .game-enter{animation:fadeSlideIn 0.35s ease forwards;}
     `;
     document.head.appendChild(s);
     return()=>document.head.removeChild(s);
@@ -897,13 +1115,14 @@ export default function App(){
   const isDaily=sc.endsWith("_daily");
   const key=sc.replace("_daily","").replace("_archive","");
   if(sc==="home")return<Home onSelect={sSc}/>;
-  if(key==="calciodle")return<Calciodle onHome={home} isDaily={isDaily}/>;
-  if(key==="wordle")return<WordleCognome onHome={home} isDaily={isDaily}/>;
-  if(key==="hangman")return<Hangman onHome={home} isDaily={isDaily}/>;
-  if(key==="valore2")return<ChiValeDiPiu onHome={home} isDaily={isDaily}/>;
-  if(key==="carriera")return<Carriera onHome={home} isDaily={isDaily}/>;
-  if(key==="rosa")return<RosaQuiz onHome={home} isDaily={isDaily}/>;
-  if(key==="lista")return<ListaQuiz onHome={home} isDaily={isDaily}/>;
-  if(key==="transfer")return<IndivinaTransferimento onHome={home} isDaily={isDaily}/>;
+  const goArchive=()=>sSc(key+"_archive");
+  if(key==="calciodle")return<Calciodle onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="wordle")return<WordleCognome onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="hangman")return<Hangman onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="valore2")return<ChiValeDiPiu onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="carriera")return<Carriera onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="rosa")return<RosaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="lista")return<ListaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="transfer")return<IndivinaTransferimento onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
   return<Home onSelect={sSc}/>;
 }
