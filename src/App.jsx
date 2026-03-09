@@ -134,6 +134,46 @@ function seedForNum(num,poolSize){return seedForDaysAgo(daysAgoForNum(num,poolSi
 function shuffle(arr,rng){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function normStr(s){return s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
 function normLow(s){return s.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
+function levenshtein(a,b){
+  const m=a.length,n=b.length;
+  const dp=Array.from({length:m+1},(_,i)=>Array.from({length:n+1},(_,j)=>i===0?j:j===0?i:0));
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
+  return dp[m][n];
+}
+function fuzzyMatch(input,answer){
+  const i=normLow(input),a=normLow(answer);
+  if(i===a)return true;
+  // exact match on any word of the answer (es. "Inzaghi" in "F. Inzaghi")
+  if(a.split(" ").some(w=>w===i))return true;
+  // levenshtein <=1 on full answer or on any word (min 3 chars input)
+  if(i.length>=3&&levenshtein(i,a)<=1)return true;
+  if(i.length>=3&&a.split(" ").some(w=>w.length>=3&&levenshtein(i,w)<=1))return true;
+  return false;
+}
+
+// ── STORAGE HELPERS ─────────────────────────────────────────────────────
+function todayKey(){const d=new Date();return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;}
+function saveResult(gameKey,data){
+  try{
+    const k=`uq_${gameKey}_${todayKey()}`;
+    localStorage.setItem(k,JSON.stringify(data));
+    // update streak
+    const sk="uq_streak";
+    const raw=localStorage.getItem(sk);
+    const streak=raw?JSON.parse(raw):{count:0,lastDate:""};
+    const today=todayKey();
+    const yesterday=()=>{const d=new Date();d.setDate(d.getDate()-1);return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;}
+    if(streak.lastDate===today)return; // already counted today
+    const newCount=streak.lastDate===yesterday()?streak.count+1:1;
+    localStorage.setItem(sk,JSON.stringify({count:newCount,lastDate:today}));
+  }catch(e){}
+}
+function loadResult(gameKey){
+  try{const k=`uq_${gameKey}_${todayKey()}`;const r=localStorage.getItem(k);return r?JSON.parse(r):null;}catch(e){return null;}
+}
+function loadStreak(){
+  try{const r=localStorage.getItem("uq_streak");return r?JSON.parse(r):{count:0,lastDate:""};}catch(e){return{count:0,lastDate:""};}
+}
 
 function useCountdown(){
   const[t,sT]=useState("");
@@ -147,7 +187,7 @@ function useCountdown(){
 // ── COLORI / STILI ───────────────────────────────────────────────────────
 const US={black:"#111",orange:"#f5e000",bg:"#f4f4f4",border:"#e2e2e2",muted:"#888",green:"#16a34a",greenL:"#dcfce7",red:"#dc2626",redL:"#fee2e2",yellow:"#d97706"};
 const T={
-  app:{minHeight:"100vh",background:US.bg,fontFamily:"'Helvetica Neue',Arial,sans-serif"},
+  app:{minHeight:"100vh",background:US.bg,fontFamily:"'Helvetica Neue',Arial,sans-serif",animation:"fadeSlideIn 0.25s ease forwards"},
   hdr:{background:US.black,color:"#fff",padding:"13px 18px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:`3px solid ${US.orange}`},
   ey:{fontSize:"8px",letterSpacing:"3px",textTransform:"uppercase",color:US.orange,marginBottom:"2px",fontWeight:"700"},
   ht:{fontSize:"17px",fontWeight:"700",margin:0},
@@ -161,6 +201,17 @@ const T={
 
 // ── HEADER ───────────────────────────────────────────────────────────────
 function dayToDate(num,poolSize){return dateForDaysAgo(daysAgoForNum(num,poolSize));}
+
+function ShareButton({text}){
+  const[copied,setCopied]=useState(false);
+  function share(){
+    try{navigator.clipboard.writeText(text).then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2000);});}
+    catch(e){/* fallback */const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);setCopied(true);setTimeout(()=>setCopied(false),2000);}
+  }
+  return(<button onClick={share} style={{...T.sb,display:"flex",alignItems:"center",gap:"6px",justifyContent:"center",width:"100%",marginTop:"8px",background:copied?US.greenL:"#fff",borderColor:copied?US.green:"#333",color:copied?US.green:US.black}}>
+    {copied?"✓ Copiato!":"📤 Condividi risultato"}
+  </button>);
+}
 
 function Hdr({title,sub,onHome,archiveNav}){
   return(
@@ -184,7 +235,7 @@ function Hdr({title,sub,onHome,archiveNav}){
 }
 
 // ── ARCHIVE WRAPPER ──────────────────────────────────────────────────────
-const POOL_SIZES={calciodle:DB.length,wordle:DB.length,hangman:DB.length,valore2:DB.length,carriera:CAREERS.length,rosa:ROSE_LIST.length};
+const POOL_SIZES={calciodle:DB.length,wordle:DB.length,hangman:DB.length,valore2:DB.length,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:12,transfer:15};
 
 function ArchiveWrapper({gameKey,children}){
   const poolSize=POOL_SIZES[gameKey]||DB.length;
@@ -207,25 +258,74 @@ function cS(c){return{flex:1,minWidth:0,borderRadius:"2px",background:CLR[c]?.bg
 function CalciodleGame({day,seed,isToday,archiveNav,onHome}){
   const target=useMemo(()=>DB[seed%DB.length],[seed]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
-  const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);
-  // reset on day change
-  useEffect(()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);},[seed]);
+  const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);const[animRows,setAnimRows]=useState(new Set());
+  useEffect(()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows(new Set());},[seed]);
   function onI(v){sI(v);if(v.length<2){sSg([]);return;}sSg(DB.filter(p=>p.name.toLowerCase().includes(v.toLowerCase())&&!G.find(x=>x.name===p.name)).slice(0,5));}
-  function sub(p){if(ov)return;const ng=[...G,p];const w=p.name===target.name,o=ng.length>=6;sG(ng);sI("");sSg([]);if(w){sW(true);sO(true);setTimeout(()=>sMo(true),400);}else if(o){sO(true);setTimeout(()=>sMo(true),400);}}
-  const em=Math.max(0,6-G.length-(ov?0:1));
+  function sub(p){
+    if(ov)return;
+    const ri=G.length;
+    const ng=[...G,p];const w=p.name===target.name,o=ng.length>=6;
+    sG(ng);sI("");sSg([]);
+    // trigger flip animation for this row
+    setTimeout(()=>setAnimRows(s=>new Set([...s,ri])),50);
+    if(w){sW(true);sO(true);if(isToday)saveResult("calciodle",{won:true,attempts:ng.length});setTimeout(()=>sMo(true),COLS.length*120+600);}
+    else if(o){sO(true);if(isToday)saveResult("calciodle",{won:false,attempts:6});setTimeout(()=>sMo(true),COLS.length*120+600);}
+  }
+  // Flip cell component
+  function FlipCell({value,arrow,color,colIdx,rowIdx}){
+    const flipped=animRows.has(rowIdx);
+    const delay=colIdx*110;
+    const bg=CLR[color]?.bg||"#e0e0e0";
+    return(
+      <div style={{flex:1,minWidth:0,height:"38px",perspective:"400px"}}>
+        <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.5s ease ${delay}ms`,transform:flipped?"rotateX(180deg)":"rotateX(0deg)"}}>
+          {/* front — gray placeholder */}
+          <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e8e8e8",borderRadius:"3px",display:"flex",alignItems:"center",justifyContent:"center"}}/>
+          {/* back — colored result */}
+          <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateX(180deg)",background:bg,borderRadius:"3px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",overflow:"hidden"}}>
+            <span style={{fontWeight:"700",fontSize:"8px",color:"#fff",lineHeight:1.2,textAlign:"center",padding:"0 2px"}}>{value}</span>
+            {arrow&&<span style={{fontSize:"7px",color:"rgba(255,255,255,0.85)"}}>{arrow}</span>}
+          </div>
+        </div>
+      </div>
+    );
+  }
   return(<div style={T.app}><Hdr title="Calciodle" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
     <div style={T.body}>
-      <div style={{display:"flex",gap:"4px",marginBottom:"12px",alignItems:"center"}}>{Array.from({length:6}).map((_,i)=><div key={i} style={{height:"3px",width:"26px",borderRadius:"2px",background:i<G.length?(won&&i===G.length-1?US.green:US.red):"#e0e0e0"}}/>)}<span style={{fontSize:"9px",color:"#bbb",marginLeft:"4px"}}>{ov?(won?"✓":"✗"):`${G.length}/6`}</span></div>
+      {/* INPUT PRIMA — sempre visibile su mobile */}
+      {!ov&&<div style={{marginBottom:"14px"}}>
+        <span style={T.lb}>Inserisci un giocatore ({G.length}/6)</span>
+        <div style={{position:"relative"}}>
+          <input style={{...T.ip,width:"100%"}} value={inp} onChange={e=>onI(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&sg.length)sub(sg[0]);}} placeholder="Cerca nome..." autoFocus/>
+          {sg.length>0&&<div style={{position:"absolute",top:"100%",left:0,right:0,background:"#fff",border:"1.5px solid #e0e0e0",borderRadius:"2px",zIndex:10,boxShadow:"0 4px 12px rgba(0,0,0,0.1)",marginTop:"2px"}}>
+            {sg.map((p,i)=><div key={i} onClick={()=>sub(p)} style={{padding:"7px 11px",cursor:"pointer",fontSize:"12px",borderBottom:"1px solid #f5f5f5",display:"flex",justifyContent:"space-between"}} onMouseEnter={e=>e.currentTarget.style.background="#f8f8f6"} onMouseLeave={e=>e.currentTarget.style.background="#fff"}>
+              <span>{p.name}</span><span style={{color:"#bbb",fontSize:"10px"}}>{p.club}</span>
+            </div>)}
+          </div>}
+        </div>
+      </div>}
+      {ov&&<div style={{marginBottom:"12px",padding:"9px 12px",background:won?US.greenL:US.redL,borderRadius:"6px",textAlign:"center",fontSize:"12px",fontWeight:"700",color:won?US.green:US.red}}>{won?`✓ Trovato in ${G.length}/6`:`✗ Era ${target.name}`}</div>}
+      {/* LEGENDA */}
+      <div style={{display:"flex",gap:"10px",marginBottom:"10px"}}>{[[US.green,"Esatto"],[US.yellow,"Vicino"],[US.red,"Sbagliato"]].map(([c,l])=><div key={c} style={{display:"flex",alignItems:"center",gap:"3px",fontSize:"9px",color:"#999"}}><div style={{width:"8px",height:"8px",borderRadius:"2px",background:c}}/>{l}</div>)}</div>
+      {/* GRIGLIA — header + righe indovinati */}
       <div style={{width:"100%"}}>
-      <div style={{display:"flex",gap:"3px",marginBottom:"2px",paddingLeft:"52px"}}>{COLS.map(c=><div key={c.key} style={{flex:1,fontSize:"7px",letterSpacing:"1px",textTransform:"uppercase",color:"#bbb",textAlign:"center"}}>{c.label}</div>)}</div>
-      {G.map((g,ri)=><div key={ri} style={{display:"flex",gap:"3px",alignItems:"center",marginBottom:"2px"}}><div style={{width:"50px",fontSize:"8px",color:"#555",textAlign:"right",paddingRight:"5px",flexShrink:0,overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{g.name.split(" ").pop()}</div>{COLS.map(c=>{const cl=eC(c.key,g[c.key],target[c.key]);const ar=aD(c.key,g[c.key],target[c.key]);return<div key={c.key} style={cS(cl)}><span style={{fontWeight:"700",fontSize:"8px"}}>{g[c.key]}{c.key==="value"?"M":""}</span>{ar&&<span style={{fontSize:"7px"}}>{ar}</span>}</div>;})}</div>)}
-      {!ov&&<div style={{display:"flex",gap:"3px",alignItems:"center",marginBottom:"2px"}}><div style={{width:"50px",flexShrink:0}}/>{COLS.map(c=><div key={c.key} style={cS("active")}>·</div>)}</div>}
-      {Array.from({length:em}).map((_,i)=><div key={i} style={{display:"flex",gap:"3px",alignItems:"center",marginBottom:"2px",opacity:0.2}}><div style={{width:"50px",flexShrink:0}}/>{COLS.map(c=><div key={c.key} style={cS("empty")}>·</div>)}</div>)}
-      {!ov&&<div style={{marginTop:"14px"}}><span style={T.lb}>Inserisci un giocatore</span><div style={{position:"relative"}}><input style={{...T.ip,width:"100%"}} value={inp} onChange={e=>onI(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&sg.length)sub(sg[0]);}} placeholder="Cerca nome..."/>{sg.length>0&&<div style={{position:"absolute",top:"100%",left:0,right:0,background:"#fff",border:"1.5px solid #e0e0e0",borderRadius:"2px",zIndex:10,boxShadow:"0 4px 12px rgba(0,0,0,0.1)",marginTop:"2px"}}>{sg.map((p,i)=><div key={i} onClick={()=>sub(p)} style={{padding:"7px 11px",cursor:"pointer",fontSize:"12px",borderBottom:"1px solid #f5f5f5",display:"flex",justifyContent:"space-between"}} onMouseEnter={e=>e.currentTarget.style.background="#f8f8f6"} onMouseLeave={e=>e.currentTarget.style.background="#fff"}><span>{p.name}</span><span style={{color:"#bbb",fontSize:"10px"}}>{p.club}</span></div>)}</div>}</div></div>}
+        <div style={{display:"flex",gap:"3px",marginBottom:"4px",paddingLeft:"52px"}}>{COLS.map(c=><div key={c.key} style={{flex:1,fontSize:"7px",letterSpacing:"1px",textTransform:"uppercase",color:"#bbb",textAlign:"center"}}>{c.label}</div>)}</div>
+        {G.map((g,ri)=>(
+          <div key={ri} style={{display:"flex",gap:"3px",alignItems:"center",marginBottom:"3px"}}>
+            <div style={{width:"50px",fontSize:"8px",color:"#555",textAlign:"right",paddingRight:"5px",flexShrink:0,overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{g.name.split(" ").pop()}</div>
+            {COLS.map((c,ci)=>{
+              const cl=eC(c.key,g[c.key],target[c.key]);
+              const ar=aD(c.key,g[c.key],target[c.key]);
+              const val=`${g[c.key]}${c.key==="value"?"M":""}`;
+              return<FlipCell key={c.key} value={val} arrow={ar} color={cl} colIdx={ci} rowIdx={ri}/>;
+            })}
+          </div>
+        ))}
       </div>
-      <div style={{display:"flex",gap:"10px",marginTop:"10px"}}>{[[US.green,"Esatto"],[US.yellow,"Vicino"],[US.red,"Sbagliato"]].map(([c,l])=><div key={c} style={{display:"flex",alignItems:"center",gap:"3px",fontSize:"9px",color:"#999"}}><div style={{width:"8px",height:"8px",borderRadius:"2px",background:c}}/>{l}</div>)}</div>
     </div>
-    {mo&&<div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100,padding:"16px"}} onClick={()=>sMo(false)}><div style={{background:"#fff",borderRadius:"4px",maxWidth:"280px",width:"100%",overflow:"hidden"}} onClick={e=>e.stopPropagation()}><div style={{background:US.black,color:"#fff",padding:"11px 16px"}}><div style={{fontSize:"8px",color:"#888",marginBottom:"2px"}}>{won?`Trovato in ${G.length}`:"Game Over"}</div><div style={{fontSize:"16px"}}>{won?"Complimenti!":"Era..."}</div></div><div style={{padding:"12px 16px"}}><div style={{border:"1.5px solid #e8e8e8",borderRadius:"2px",padding:"9px",marginBottom:"9px"}}><div style={{fontWeight:"700",marginBottom:"3px"}}>{target.name}</div>{[["Club",target.club],["Nazione",target.nation],["Valore",`€${target.value}M`]].map(([k,v])=><div key={k} style={{fontSize:"11px",color:"#777"}}><strong>{k}:</strong> {v}</div>)}</div><button onClick={()=>sMo(false)} style={{...T.pb,width:"100%"}}>Chiudi</button>{!isToday&&<button onClick={()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);}} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>🔀 Rigioca</button>}</div></div></div>}
+    {mo&&<div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100,padding:"16px"}} onClick={()=>sMo(false)}><div style={{background:"#fff",borderRadius:"4px",maxWidth:"280px",width:"100%",overflow:"hidden"}} onClick={e=>e.stopPropagation()}><div style={{background:US.black,color:"#fff",padding:"11px 16px"}}><div style={{fontSize:"8px",color:"#888",marginBottom:"2px"}}>{won?`Trovato in ${G.length}`:"Game Over"}</div><div style={{fontSize:"16px"}}>{won?"Complimenti!":"Era..."}</div></div><div style={{padding:"12px 16px"}}><div style={{border:"1.5px solid #e8e8e8",borderRadius:"2px",padding:"9px",marginBottom:"9px"}}><div style={{fontWeight:"700",marginBottom:"3px"}}>{target.name}</div>{[["Club",target.club],["Nazione",target.nation],["Valore",`€${target.value}M`]].map(([k,v])=><div key={k} style={{fontSize:"11px",color:"#777"}}><strong>{k}:</strong> {v}</div>)}</div><button onClick={()=>sMo(false)} style={{...T.pb,width:"100%"}}>Chiudi</button>
+              <ShareButton text={`⚽ Calciodle #${day}\n${won?`Trovato in ${G.length}/6`:"Non trovato"}\n${G.map((_,i)=>won&&i===G.length-1?"🟩":"🟥").join("")}\nuniverso-quiz-hmix.vercel.app`}/>
+              {!isToday&&<button onClick={()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows(new Set());}} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>🔀 Rigioca</button>}</div></div></div>}
   </div>);
 }
 function Calciodle({onHome,isDaily}){
@@ -311,6 +411,7 @@ function WordleGame({day,seed,isToday,archiveNav,onHome}){
         <div style={{fontSize:"14px",fontWeight:"700",marginBottom:"4px"}}>{status==="won"?"Corretto!":"Era..."}</div>
         <div style={{fontSize:"18px",fontWeight:"700",letterSpacing:"3px"}}>{word}</div>
         <div style={{fontSize:"11px",marginTop:"2px",color:"#666"}}>{player.name} · {player.club}</div>
+        <ShareButton text={`🔤 Wordle #${day} — ${word}\n${attempts.map(a=>a.map(x=>x.s==="green"?"🟩":x.s==="yellow"?"🟨":"⬛").join("")).join("\n")}\nuniverso-quiz-hmix.vercel.app`}/>
         {!isToday&&<button onClick={()=>{setAttempts([]);setCurrent("");setStatus("playing");}} style={{...T.sb,marginTop:"10px",color:US.black}}>🔀 Rigioca</button>}
       </div>}
     </div>
@@ -344,7 +445,8 @@ function HangmanGame({day,seed,isToday,archiveNav,onHome}){
       <div style={{display:"flex",justifyContent:"center",gap:"4px",marginBottom:"14px",flexWrap:"wrap"}}>{wd.split("").map((c,i)=><div key={i} style={{width:"28px",height:"36px",borderBottom:`2.5px solid ${st==="l"&&!gu.has(c)?US.red:US.black}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"17px",fontWeight:"700",color:st==="l"&&!gu.has(c)?US.red:US.black}}>{gu.has(c)||st==="l"?c:""}</div>)}</div>
       <div style={{textAlign:"center",marginBottom:"10px",fontSize:"10px",color:"#999"}}>Errori: <strong style={{color:wc>=5?US.red:"#333"}}>{wc}/{M}</strong></div>
       {st==="p"&&<div>{[["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"]].map((row,ri)=><div key={ri} style={{display:"flex",justifyContent:"center",gap:"2px",marginBottom:"2px"}}>{row.map(k=>{const u=gu.has(k),cr=wd.includes(k)&&u,wr2=!wd.includes(k)&&u;return<button key={k} onClick={()=>g(k)} disabled={u} style={{background:cr?US.green:wr2?US.red:u?"#ccc":"#e8e8e8",color:u?"#fff":"#333",border:"none",borderRadius:"3px",padding:"7px 4px",minWidth:"24px",fontSize:"10px",fontWeight:"600",cursor:u?"default":"pointer",fontFamily:"inherit",opacity:u?0.7:1}}>{k}</button>;})} </div>)}</div>}
-      {(st==="w"||st==="l")&&<div style={{textAlign:"center",marginTop:"10px"}}><div style={{padding:"9px",borderRadius:"2px",background:st==="w"?US.greenL:US.redL,color:st==="w"?US.green:US.red,fontSize:"12px",marginBottom:"10px"}}>{st==="w"?`Bravo! Era ${pl.name} — ${wc} error${wc===1?"e":"i"}`:`Era ${pl.name}`}</div><button onClick={onHome} style={T.pb}>Home</button></div>}
+      {(st==="w"||st==="l")&&<div style={{textAlign:"center",marginTop:"10px"}}><div style={{padding:"9px",borderRadius:"2px",background:st==="w"?US.greenL:US.redL,color:st==="w"?US.green:US.red,fontSize:"12px",marginBottom:"10px"}}>{st==="w"?`Bravo! Era ${pl.name} — ${wc} error${wc===1?"e":"i"}`:`Era ${pl.name}`}</div><ShareButton text={`🪢 Impiccato #${day} — ${st==="w"?"Trovato":"Non trovato"} (${wc}/${M} errori)\n${wd}\nuniverso-quiz-hmix.vercel.app`}/>
+        <button onClick={onHome} style={{...T.pb,marginTop:"8px"}}>Home</button></div>}
     </div>
   </div>);
 }
@@ -357,7 +459,7 @@ function Hangman({onHome,isDaily}){
 function ValoreGame({day,seed,isToday,archiveNav,onHome}){
   const pairs=useMemo(()=>{const rng=seedRandom(seed+3);const sh=shuffle(DB,rng),p=[];for(let i=0;i<sh.length-1;i+=2)if(sh[i].value!==sh[i+1].value)p.push([sh[i],sh[i+1]]);return p;},[seed]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
-  const RR=Math.min(6,pairs.length);
+  const RR=Math.min(3,pairs.length);
   const[rn,sRn]=useState(0);const[sc,sSc]=useState(0);const[ch,sCh]=useState(null);const[dn,sDn]=useState(false);const[str,sStr]=useState(0);const[best,sBest]=useState(0);
   useEffect(()=>{sRn(0);sSc(0);sCh(null);sDn(false);sStr(0);sBest(0);},[seed]);
   if(!pairs.length||dn)return(<div style={T.app}><Hdr title="Chi Vale di Più?" onHome={onHome}/><div style={{...T.body,textAlign:"center",paddingTop:"40px"}}><div style={{fontSize:"48px",fontWeight:"300",color:US.black}}>{sc}<span style={{fontSize:"18px"}}> / {RR}</span></div><div style={{fontSize:"12px",color:"#888",marginBottom:"3px"}}>risposte corrette</div><div style={{fontSize:"11px",color:"#aaa",marginBottom:"18px"}}>Serie migliore: {best}</div><button onClick={onHome} style={T.pb}>Home</button></div></div>);
@@ -427,14 +529,16 @@ function Carriera({onHome,isDaily}){
 function TimerRing({seconds,total}){
   const r=32,circ=2*Math.PI*r;
   const color=seconds<=10?US.red:seconds<=20?US.yellow:US.green;
-  return(<svg width="76" height="76" viewBox="0 0 76 76"><circle cx="38" cy="38" r={r} fill="none" stroke="#e0e0e0" strokeWidth="5"/><circle cx="38" cy="38" r={r} fill="none" stroke={color} strokeWidth="5" strokeDasharray={circ} strokeDashoffset={circ*(1-seconds/total)} strokeLinecap="round" transform="rotate(-90 38 38)" style={{transition:"stroke-dashoffset 1s linear,stroke 0.3s"}}/><text x="38" y="43" textAnchor="middle" fontSize="17" fontWeight="700" fill={color} fontFamily="'Helvetica Neue',Arial,sans-serif">{seconds}</text></svg>);
+  const frac=Math.min(1,seconds/total);
+  return(<svg width="76" height="76" viewBox="0 0 76 76"><circle cx="38" cy="38" r={r} fill="none" stroke="#e0e0e0" strokeWidth="5"/><circle cx="38" cy="38" r={r} fill="none" stroke={color} strokeWidth="5" strokeDasharray={circ} strokeDashoffset={circ*(1-frac)} strokeLinecap="round" transform="rotate(-90 38 38)" style={{transition:"stroke-dashoffset 1s linear,stroke 0.3s"}}/><text x="38" y="43" textAnchor="middle" fontSize="17" fontWeight="700" fill={color} fontFamily="'Helvetica Neue',Arial,sans-serif">{seconds}</text></svg>);
 }
 
 function RosaQuizGame({day,seed,isToday,archiveNav,onHome}){
   const TOTAL=60;
   const squadra=ROSE_LIST[seed%ROSE_LIST.length];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
-  const[input,setInput]=useState("");const[found,setFound]=useState([]);const[wrong,setWrong]=useState(null);const[seconds,setSeconds]=useState(TOTAL);const[lastFound,setLastFound]=useState(null);const[done,setDone]=useState(false);
+  const BONUS=5;
+  const[input,setInput]=useState("");const[found,setFound]=useState([]);const[wrong,setWrong]=useState(null);const[seconds,setSeconds]=useState(TOTAL);const[lastFound,setLastFound]=useState(null);const[done,setDone]=useState(false);const[bonusFlash,setBonusFlash]=useState(false);
   const inputRef=useRef(null);const timerRef=useRef(null);
   useEffect(()=>{setInput("");setFound([]);setWrong(null);setSeconds(TOTAL);setLastFound(null);setDone(false);},[seed]);
   useEffect(()=>{
@@ -446,8 +550,8 @@ function RosaQuizGame({day,seed,isToday,archiveNav,onHome}){
   },[seed,done]);
   function submit(){
     const v=normLow(input);if(!v)return;
-    const match=squadra.giocatori.find(p=>normLow(p)===v&&!found.includes(p));
-    if(match){setFound(f=>[...f,match]);setLastFound(match);setWrong(null);setInput("");setTimeout(()=>setLastFound(null),1200);}
+    const match=squadra.giocatori.find(p=>fuzzyMatch(input,p)&&!found.includes(p));
+    if(match){setFound(f=>[...f,match]);setLastFound(match);setWrong(null);setInput("");setSeconds(s=>s+BONUS);setBonusFlash(true);setTimeout(()=>{setLastFound(null);setBonusFlash(false);},1200);}
     else{setWrong(input);setInput("");setTimeout(()=>setWrong(null),800);}
     inputRef.current?.focus();
   }
@@ -460,7 +564,10 @@ function RosaQuizGame({day,seed,isToday,archiveNav,onHome}){
         <div style={{textAlign:"center",marginBottom:"20px"}}><div style={{fontSize:"36px"}}>{emoji}</div><div style={{fontSize:"50px",fontWeight:"300",color:US.black,lineHeight:1}}>{found.length}<span style={{fontSize:"18px",color:US.muted}}>/{squadra.giocatori.length}</span></div><div style={{fontSize:"11px",color:US.muted,marginTop:"3px"}}>trovati ({pct}%)</div></div>
         {found.length>0&&<div style={{marginBottom:"14px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.green,marginBottom:"6px",fontWeight:"700"}}>✓ Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"5px"}}>{found.map(p=><div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"3px 8px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}
         {missed.length>0&&<div style={{marginBottom:"18px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.red,marginBottom:"6px",fontWeight:"700"}}>✗ Mancati</div><div style={{display:"flex",flexWrap:"wrap",gap:"5px"}}>{missed.map(p=><div key={p} style={{background:US.redL,color:US.red,border:"1px solid #fecaca",borderRadius:"4px",padding:"3px 8px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}
-        <div style={{textAlign:"center"}}><button onClick={onHome} style={T.pb}>Home</button></div>
+        <div style={{textAlign:"center"}}>
+          <ShareButton text={`👕 Rosa Quiz #${day} — ${squadra.nome}\n${found.length}/${squadra.giocatori.length} trovati (${pct}%)\nuniverso-quiz-hmix.vercel.app`}/>
+          <button onClick={onHome} style={{...T.pb,marginTop:"8px"}}>Home</button>
+        </div>
       </div>
     </div>);
   }
@@ -471,8 +578,8 @@ function RosaQuizGame({day,seed,isToday,archiveNav,onHome}){
         <div style={{textAlign:"right"}}><div style={{fontSize:"36px",fontWeight:"300",color:US.black,lineHeight:1}}>{found.length}</div><div style={{fontSize:"10px",color:US.muted}}>su {squadra.giocatori.length}</div></div>
       </div>
       <div style={{marginBottom:"12px"}}>
-        <input ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} placeholder="Scrivi un cognome..." style={{width:"100%",boxSizing:"border-box",border:`2px solid ${wrong?US.red:lastFound?US.green:US.border}`,borderRadius:"6px",padding:"11px 13px",fontSize:"14px",fontFamily:"inherit",outline:"none",color:US.black,background:wrong?US.redL:lastFound?US.greenL:"#fff",transition:"all 0.2s"}}/>
-        {lastFound&&<div style={{fontSize:"11px",color:US.green,marginTop:"4px",fontWeight:"600"}}>✓ {lastFound} — +1 punto!</div>}
+        <input ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} onFocus={e=>setTimeout(()=>e.target.scrollIntoView({behavior:"smooth",block:"center"}),300)} placeholder="Scrivi un cognome..." style={{width:"100%",boxSizing:"border-box",border:`2px solid ${wrong?US.red:lastFound?US.green:US.border}`,borderRadius:"6px",padding:"11px 13px",fontSize:"14px",fontFamily:"inherit",outline:"none",color:US.black,background:wrong?US.redL:lastFound?US.greenL:"#fff",transition:"all 0.2s"}}/>
+        {lastFound&&<div style={{fontSize:"11px",color:US.green,marginTop:"4px",fontWeight:"600",display:"flex",alignItems:"center",gap:"8px"}}>✓ {lastFound}<span style={{background:US.green,color:"#fff",borderRadius:"4px",padding:"1px 6px",fontSize:"10px"}}>+{BONUS}s ⏱</span></div>}
         {wrong&&<div style={{fontSize:"11px",color:US.red,marginTop:"4px"}}>✗ "{wrong}" — non trovato</div>}
       </div>
       {found.length>0&&<div><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.muted,marginBottom:"6px"}}>Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"5px"}}>{found.map(p=><div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"3px 8px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}
@@ -484,14 +591,247 @@ function RosaQuiz({onHome,isDaily}){
   return<ArchiveWrapper gameKey="rosa">{({day,seed,isToday,archiveNav})=><RosaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
 }
 
+
+// ── LISTA QUIZ ────────────────────────────────────────────────────────────
+const LISTA_CATEGORIES = [
+  { id:1, title:"Convocati Italia Mondiale 2006", desc:"Chi erano i 23 di Lippi?",
+    answers:["Buffon","Peruzzi","Amelia","Cannavaro","Nesta","Materazzi","Barzagli","Zaccardo","Oddo","Zambrotta","Grosso","De Rossi","Pirlo","Gattuso","Perrotta","Camoranesi","Barone","Totti","Del Piero","Gilardino","Iaquinta","Inzaghi","Toni"] },
+  { id:2, title:"Convocati Italia Euro 2020", desc:"Chi erano i 26 di Mancini?",
+    answers:["Donnarumma","Meret","Sirigu","Acerbi","Bastoni","Bonucci","Chiellini","Di Lorenzo","Emerson","Florenzi","Spinazzola","Toloi","Barella","Cristante","Jorginho","Locatelli","Pellegrini","Sensi","Verratti","Belotti","Berardi","Bernardeschi","Chiesa","Immobile","Insigne","Raspadori"] },
+  { id:3, title:"Capocannonieri Mondiali dal 1990", desc:"Un nome per ogni edizione",
+    answers:["Schillaci","Stoichkov","Salenko","Ronaldo","Klose","Morientes","Miroslaw","Klose","Villa","Forlan","Sneijder","Mueller","Mueller","Kane","Mbappe"],
+    unique:["Schillaci","Stoichkov","Salenko","Ronaldo","Klose","Morientes","Miroslaw","Villa","Forlan","Sneijder","Mueller","Kane","Mbappe"] },
+  { id:4, title:"Capocannonieri Serie A dal 2010/11", desc:"15 stagioni, 15 bomber",
+    answers:["Di Natale","Ibrahimovic","Cavani","Immobile","Icardi","Toni","Higuain","Dzeko","Icardi","Immobile","Quagliarella","Immobile","Ronaldo","Immobile","Osimhen","Lautaro","Retegui"],
+    unique:["Di Natale","Ibrahimovic","Cavani","Immobile","Icardi","Toni","Higuain","Dzeko","Quagliarella","Ronaldo","Osimhen","Lautaro","Retegui"] },
+  { id:5, title:"Vincitori Pallone d'Oro dal 2000", desc:"Solo cognomi, un nome per ogni anno",
+    answers:["Figo","Owen","Ronaldo","Nedved","Shevchenko","Ronaldinho","Cannavaro","Kaka","Messi","Messi","Messi","Messi","Ronaldo","Ronaldo","Ronaldo","Ronaldo","Modric","Messi","Messi","Lewandowski","Messi","Benzema","Messi","Messi","Bellingham","Rodri"],
+    unique:["Figo","Owen","Ronaldo","Nedved","Shevchenko","Ronaldinho","Cannavaro","Kaka","Messi","Modric","Benzema","Bellingham","Rodri","Lewandowski"] },
+  { id:6, title:"Allenatori Scudetto dal 2000", desc:"Chi ha vinto il titolo in panchina?",
+    answers:["Eriksson","Lippi","Capello","Ancelotti","Capello","Mancini","Mancini","Mancini","Mourinho","Allegri","Allegri","Allegri","Allegri","Allegri","Sarri","Conte","Pioli","Allegri","Inzaghi","Spalletti","Conte"],
+    unique:["Eriksson","Lippi","Capello","Ancelotti","Mancini","Mourinho","Allegri","Sarri","Conte","Pioli","Inzaghi","Spalletti"] },
+  { id:7, title:"Top 20 italiani più preziosi", desc:"Fonte: Transfermarkt 2025",
+    answers:["Tonali","Bastoni","Barella","Calafiori","Dimarco","Buongiorno","Donnarumma","Kean","Retegui","Esposito","Udogie","Kayode","Cambiaso","Rovella","Frattesi","Palestra","Lucca","Ricci","Scalvini","Scamacca"] },
+  { id:8, title:"Top 10 italiani gol in Champions League", desc:"All-time, qualificazioni incluse (Transfermarkt)",
+    answers:["Inzaghi","Del Piero","Simone","Altafini","Mazzola","Totti","Inzaghi S","Immobile","Gilardino","Insigne"],
+    unique:["Inzaghi","Del Piero","Simone","Altafini","Mazzola","Totti","Immobile","Gilardino","Insigne"] },
+  { id:9, title:"Top 20 acquisti più cari della Serie A", desc:"Fonte: Transfermarkt",
+    answers:["Ronaldo","Higuain","De Ligt","Vlahovic","Arthur","Osimhen","Lukaku","Koopmeiners","Crespo","Buffon","Douglas Luiz","Bremer","Lozano","Leao","Mendieta","Vieri","Nedved","Joao Mario","Chiesa","Hakimi"] },
+  { id:10, title:"Top 20 cessioni più costose della Serie A", desc:"Fonte: Transfermarkt",
+    answers:["Lukaku","Pogba","Higuain","Vlahovic","Kvaratskhelia","Hojlund","Zidane","Osimhen","Alisson","Ibrahimovic","Retegui","Hakimi","De Ligt","Kaka","Cancelo","Cavani","Tonali","Pjanic","Koopmeiners","Jorginho"] },
+  { id:11, title:"Top 15 italiani gol in Champions League", desc:"I marcatori italiani all-time in UCL",
+    answers:["Maldini","Del Piero","Inzaghi","Totti","Vieri","Baggio","Nesta","Gattuso","Cannavaro","Pirlo","Shevchenko","Zola","Buffon","De Rossi","Gilardino"] },
+  { id:12, title:"Italiani con triplette nelle top 20 leghe estere (XXI secolo)", desc:"Fonte: Transfermarkt",
+    answers:["Toni","Pelle","Balotelli","Napoleoni","Rigano","Zaza","Said","Battocchio","Okaka","Rossi","Grifo"] },
+];
+
+// Pool size per lista
+const LISTA_POOL = LISTA_CATEGORIES.length;
+
+function ListaQuizGame({day,seed,isToday,archiveNav,onHome}){
+  const TOTAL=90,BONUS=5;
+  const cat=LISTA_CATEGORIES[(seed%LISTA_POOL)];
+  // use unique answers if defined (for categories with repeated winners)
+  const validAnswers=cat.unique||cat.answers;
+  const label=isToday?"🗓 Giornaliero":"📂 Archivio";
+  const[input,setInput]=useState("");
+  const[found,setFound]=useState([]);
+  const[wrong,setWrong]=useState(null);
+  const[seconds,setSeconds]=useState(TOTAL);
+  const[lastFound,setLastFound]=useState(null);
+  const[done,setDone]=useState(false);
+  const inputRef=useRef(null);
+  const timerRef=useRef(null);
+  useEffect(()=>{setInput("");setFound([]);setWrong(null);setSeconds(TOTAL);setLastFound(null);setDone(false);},[seed]);
+  useEffect(()=>{
+    if(done)return;
+    clearInterval(timerRef.current);
+    timerRef.current=setInterval(()=>setSeconds(s=>{if(s<=1){clearInterval(timerRef.current);setDone(true);return 0;}return s-1;}),1000);
+    setTimeout(()=>inputRef.current?.focus(),100);
+    return()=>clearInterval(timerRef.current);
+  },[seed,done]);
+  function submit(){
+    const v=normLow(input);if(!v)return;
+    const match=validAnswers.find(p=>fuzzyMatch(input,p)&&!found.includes(p));
+    if(match){
+      setFound(f=>[...f,match]);setLastFound(match);setWrong(null);setInput("");
+      setSeconds(s=>s+BONUS);
+      setTimeout(()=>setLastFound(null),1200);
+    } else {
+      setWrong(input);setInput("");setTimeout(()=>setWrong(null),800);
+    }
+    inputRef.current?.focus();
+  }
+  const total=validAnswers.length;
+  const pct=Math.round(found.length/total*100);
+  if(done){
+    const missed=validAnswers.filter(p=>!found.includes(p));
+    const emoji=pct===100?"🏆":pct>=70?"🥇":pct>=40?"👍":"📚";
+    return(<div style={T.app}><Hdr title="Lista Quiz" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+      <div style={T.body}>
+        <div style={{marginBottom:"14px",padding:"10px 13px",background:US.black,borderRadius:"6px"}}>
+          <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"2px"}}>Categoria</div>
+          <div style={{fontSize:"13px",fontWeight:"700",color:"#fff"}}>{cat.title}</div>
+        </div>
+        <div style={{textAlign:"center",marginBottom:"20px"}}>
+          <div style={{fontSize:"36px"}}>{emoji}</div>
+          <div style={{fontSize:"50px",fontWeight:"300",color:US.black,lineHeight:1}}>{found.length}<span style={{fontSize:"18px",color:US.muted}}>/{total}</span></div>
+          <div style={{fontSize:"11px",color:US.muted,marginTop:"3px"}}>trovati ({pct}%)</div>
+        </div>
+        {found.length>0&&<div style={{marginBottom:"14px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.green,marginBottom:"6px",fontWeight:"700"}}>✓ Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"5px"}}>{found.map(p=><div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"3px 8px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}
+        {missed.length>0&&<div style={{marginBottom:"18px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.red,marginBottom:"6px",fontWeight:"700"}}>✗ Mancati</div><div style={{display:"flex",flexWrap:"wrap",gap:"5px"}}>{missed.map(p=><div key={p} style={{background:US.redL,color:US.red,border:"1px solid #fecaca",borderRadius:"4px",padding:"3px 8px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}
+        <div style={{textAlign:"center"}}>
+          <ShareButton text={`📋 Lista Quiz #${day}\n${cat.title}\n${found.length}/${total} trovati (${pct}%)\nuniverso-quiz-hmix.vercel.app`}/>
+          <button onClick={onHome} style={{...T.pb,marginTop:"8px"}}>Home</button>
+        </div>
+      </div>
+    </div>);
+  }
+  return(<div style={T.app}><Hdr title="Lista Quiz" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+    <div style={T.body}>
+      <div style={{marginBottom:"12px",padding:"10px 13px",background:US.black,borderRadius:"6px"}}>
+        <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"2px"}}>Categoria di oggi</div>
+        <div style={{fontSize:"13px",fontWeight:"700",color:"#fff"}}>{cat.title}</div>
+        <div style={{fontSize:"10px",color:"#888",marginTop:"2px"}}>{cat.desc}</div>
+      </div>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"14px"}}>
+        <TimerRing seconds={seconds} total={TOTAL}/>
+        <div style={{textAlign:"right"}}>
+          <div style={{fontSize:"36px",fontWeight:"300",color:US.black,lineHeight:1}}>{found.length}<span style={{fontSize:"16px",color:US.muted}}>/{total}</span></div>
+          <div style={{fontSize:"9px",color:US.yellow,marginTop:"2px"}}>+{BONUS}s per risposta ✓</div>
+        </div>
+      </div>
+      <div style={{marginBottom:"12px"}}>
+        <input ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} onFocus={e=>setTimeout(()=>e.target.scrollIntoView({behavior:"smooth",block:"center"}),300)} placeholder="Scrivi un nome..." style={{width:"100%",boxSizing:"border-box",border:`2px solid ${wrong?US.red:lastFound?US.green:US.border}`,borderRadius:"6px",padding:"11px 13px",fontSize:"14px",fontFamily:"inherit",outline:"none",color:US.black,background:wrong?US.redL:lastFound?US.greenL:"#fff",transition:"all 0.2s"}}/>
+        {lastFound&&<div style={{fontSize:"11px",color:US.green,marginTop:"4px",fontWeight:"600",display:"flex",alignItems:"center",gap:"8px"}}>✓ {lastFound}<span style={{background:US.green,color:"#fff",borderRadius:"4px",padding:"1px 6px",fontSize:"10px"}}>+{BONUS}s ⏱</span></div>}
+        {wrong&&<div style={{fontSize:"11px",color:US.red,marginTop:"4px"}}>✗ "{wrong}" — non in lista</div>}
+      </div>
+      {found.length>0&&<div><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.muted,marginBottom:"6px"}}>Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"5px"}}>{found.map(p=><div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"3px 8px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}
+    </div>
+  </div>);
+}
+function ListaQuiz({onHome,isDaily}){
+  if(isDaily){const d=LISTA_POOL,s=todaySeed();return<ListaQuizGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
+  return<ArchiveWrapper gameKey="lista">{({day,seed,isToday,archiveNav})=><ListaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+}
+
+// ── INDOVINA IL TRASFERIMENTO ─────────────────────────────────────────────
+const TRANSFERS = [
+  {player:"Cristiano Ronaldo",    from:"Real Madrid",  to:"Juventus",    year:2018, fee:117},
+  {player:"Gonzalo Higuaín",      from:"Napoli",        to:"Juventus",    year:2016, fee:90},
+  {player:"Matthijs de Ligt",     from:"Ajax",          to:"Juventus",    year:2019, fee:86},
+  {player:"Dušan Vlahović",       from:"Fiorentina",    to:"Juventus",    year:2022, fee:85},
+  {player:"Victor Osimhen",       from:"Lille",         to:"Napoli",      year:2020, fee:79},
+  {player:"Romelu Lukaku",        from:"Manchester Utd",to:"Inter",       year:2019, fee:74},
+  {player:"Teun Koopmeiners",     from:"Atalanta",      to:"Juventus",    year:2024, fee:58},
+  {player:"Hernán Crespo",        from:"Parma",         to:"Lazio",       year:2000, fee:57},
+  {player:"Gianluigi Buffon",     from:"Parma",         to:"Juventus",    year:2001, fee:53},
+  {player:"Bremer",               from:"Torino",        to:"Juventus",    year:2022, fee:51},
+  {player:"Romelu Lukaku",        from:"Chelsea",       to:"Inter",       year:2021, fee:115},
+  {player:"Rasmus Højlund",       from:"Atalanta",      to:"Man United",  year:2023, fee:78},
+  {player:"Khvicha Kvaratskhelia",from:"Napoli",        to:"PSG",         year:2025, fee:80},
+  {player:"Sandro Tonali",        from:"Milan",         to:"Newcastle",   year:2023, fee:61},
+  {player:"Zlatan Ibrahimović",   from:"Inter",         to:"Barcellona",  year:2009, fee:70},
+];
+
+function TransferGame({day,seed,isToday,archiveNav,onHome}){
+  const tr=TRANSFERS[seed%TRANSFERS.length];
+  const label=isToday?"🗓 Giornaliero":"📂 Archivio";
+  // 3 fields to guess: fee (±5M), from, year
+  // step: 0=fee, 1=from, 2=year, 3=done
+  const[step,setStep]=useState(0);
+  const[vals,setVals]=useState({fee:"",from:"",year:""});
+  const[results,setResults]=useState({});
+  const[curInput,setCurInput]=useState("");
+  const transferInputRef=useRef(null);
+  useEffect(()=>{setStep(0);setVals({fee:"",from:"",year:""});setResults({});setCurInput("");},[seed]);
+  useEffect(()=>{setTimeout(()=>transferInputRef.current?.focus(),100);},[step]);
+  const FIELDS=[
+    {key:"fee",  label:"💰 Cifra (milioni €)",      placeholder:"es. 75",   type:"number"},
+    {key:"from", label:"🏟 Squadra di partenza",     placeholder:"es. Fiorentina", type:"text"},
+    {key:"year", label:"📅 Anno del trasferimento",  placeholder:"es. 2022", type:"number"},
+  ];
+  function evalField(key,val){
+    if(key==="fee"){const n=parseInt(val);return Math.abs(n-tr.fee)<=5?"green":Math.abs(n-tr.fee)<=15?"yellow":"red";}
+    if(key==="from"){return fuzzyMatch(val,tr.from)?"green":"red";}
+    if(key==="year"){const n=parseInt(val);return n===tr.year?"green":Math.abs(n-tr.year)===1?"yellow":"red";}
+  }
+  function submitField(){
+    if(!curInput.trim())return;
+    const key=FIELDS[step].key;
+    const res=evalField(key,curInput);
+    setResults(r=>({...r,[key]:res}));
+    setVals(v=>({...v,[key]:curInput}));
+    setCurInput("");
+    if(step<2)setStep(s=>s+1);else setStep(3);
+  }
+  const score=Object.values(results).filter(v=>v==="green").length;
+  const colMap={green:US.green,yellow:US.yellow,red:US.red};
+  return(<div style={T.app}><Hdr title="Indovina il Trasferimento" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>
+    <div style={{...T.body,maxWidth:"480px"}}>
+      {/* Player card */}
+      <div style={{background:US.black,borderRadius:"8px",padding:"14px 16px",marginBottom:"18px"}}>
+        <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"4px"}}>Il giocatore</div>
+        <div style={{fontSize:"20px",fontWeight:"700",color:"#fff",marginBottom:"2px"}}>{tr.player}</div>
+        <div style={{fontSize:"12px",color:"#888"}}>→ <strong style={{color:"#fff"}}>{tr.to}</strong></div>
+      </div>
+      {/* Completed fields */}
+      <div style={{display:"flex",flexDirection:"column",gap:"8px",marginBottom:"12px"}}>
+        {FIELDS.map(({key,label},i)=>{
+          const done=results[key];
+          if(i>step&&!done)return null;
+          if(i===step&&step<3)return(
+            <div key={key}>
+              <span style={T.lb}>{label}</span>
+              <div style={{display:"flex",gap:"7px"}}>
+                <input ref={transferInputRef} type={FIELDS[step].type} value={curInput} onChange={e=>setCurInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&curInput.trim()&&submitField()} placeholder={FIELDS[step].placeholder} style={{...T.ip,flex:1}} autoFocus/>
+                <button onClick={submitField} disabled={!curInput.trim()} style={{...T.pb,opacity:curInput.trim()?1:0.4}}>OK</button>
+              </div>
+            </div>
+          );
+          if(done)return(
+            <div key={key} style={{padding:"8px 11px",borderRadius:"4px",background:done==="green"?US.greenL:done==="yellow"?"#fffbea":US.redL,border:`1.5px solid ${colMap[done]}`}}>
+              <div style={{fontSize:"8px",color:colMap[done],fontWeight:"700",textTransform:"uppercase",letterSpacing:"1px",marginBottom:"2px"}}>{label}</div>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                <span style={{fontSize:"13px",fontWeight:"700",color:US.black}}>{vals[key]}{key==="fee"?"M":""}</span>
+                <span style={{fontSize:"10px",color:colMap[done],fontWeight:"700"}}>
+                  {done==="green"?"✓ Esatto":
+                   key==="fee"?`Risposta: €${tr.fee}M`:
+                   key==="from"?`Risposta: ${tr.from}`:
+                   `Risposta: ${tr.year}`}
+                  {done==="yellow"&&(key==="fee"?" (vicino)":key==="year"?" (±1 anno)":"")}
+                </span>
+              </div>
+            </div>
+          );
+          return null;
+        })}
+      </div>
+      {step===3&&<div style={{textAlign:"center",padding:"12px",background:score===3?US.greenL:score>=1?"#fffbea":US.redL,borderRadius:"6px",color:score===3?US.green:score>=1?US.yellow:US.red,marginTop:"4px"}}>
+        <div style={{fontSize:"20px",fontWeight:"700"}}>{score}/3 corretti</div>
+        <div style={{fontSize:"11px",marginTop:"4px",color:"#666"}}>{score===3?"Perfetto!":score===2?"Quasi!":score===1?"Ci sei vicino":"Riprova domani"}</div>
+        <ShareButton text={`💸 Trasferimento #${day}\n${tr.player} → ${tr.to}\n${["fee","from","year"].map(k=>results[k]==="green"?"✅":results[k]==="yellow"?"🟨":"❌").join(" ")} ${score}/3\nuniverso-quiz-hmix.vercel.app`}/>
+        <button onClick={onHome} style={{...T.pb,marginTop:"8px"}}>Home</button>
+      </div>}
+      {step<3&&<div style={{display:"flex",gap:"10px",marginTop:"10px"}}>{[[US.green,"Esatto"],[US.yellow,"Vicino"],[US.red,"Sbagliato"]].map(([c,l])=><div key={c} style={{display:"flex",alignItems:"center",gap:"3px",fontSize:"9px",color:"#999"}}><div style={{width:"8px",height:"8px",borderRadius:"2px",background:c}}/>{l}</div>)}</div>}
+    </div>
+  </div>);
+}
+function IndivinaTransferimento({onHome,isDaily}){
+  if(isDaily){const d=TRANSFERS.length,s=todaySeed();return<TransferGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
+  return<ArchiveWrapper gameKey="transfer">{({day,seed,isToday,archiveNav})=><TransferGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+}
+
 // ── HOME ──────────────────────────────────────────────────────────────────
 const MODES=[
-  {key:"calciodle", label:"Calciodle",             icon:"🟩", desc:"Indovina il giocatore"},
-  {key:"wordle",    label:"Wordle Cognome",         icon:"🔤", desc:"Indovina il cognome lettera per lettera"},
-  {key:"hangman",   label:"Impiccato",              icon:"🪢", desc:"Indovina il cognome"},
-  {key:"valore2",   label:"Chi Vale di Più?",       icon:"⚖️", desc:"Confronta i valori di mercato"},
-  {key:"carriera",  label:"Indovina la Carriera",   icon:"🔍", desc:"Indovi da club e statistiche"},
-  {key:"rosa",      label:"Rosa Quiz",              icon:"👕", desc:"60 secondi per nominare la rosa"},
+  {key:"calciodle", label:"Calciodle",               icon:"🟩", desc:"Indovina il giocatore"},
+  {key:"wordle",    label:"Wordle Cognome",           icon:"🔤", desc:"Indovina il cognome lettera per lettera"},
+  {key:"hangman",   label:"Impiccato",                icon:"🪢", desc:"Indovina il cognome"},
+  {key:"valore2",   label:"Chi Vale di Più?",         icon:"⚖️", desc:"Confronta i valori di mercato"},
+  {key:"carriera",  label:"Indovina la Carriera",     icon:"🔍", desc:"Indovina da club e statistiche"},
+  {key:"rosa",      label:"Rosa Quiz",                icon:"👕", desc:"60 secondi per nominare la rosa"},
+  {key:"lista",     label:"Lista Quiz",               icon:"📋", desc:"Nomina tutti i nomi della categoria"},
+  {key:"transfer",  label:"Indovina il Trasferimento",icon:"💸", desc:"Cifra, squadra e anno del trasferimento"},
 ];
 
 function Card({m,onDaily,onArchive}){
@@ -509,6 +849,7 @@ function Card({m,onDaily,onArchive}){
 function Home({onSelect}){
   const today=new Date().toLocaleDateString("it-IT",{weekday:"long",day:"numeric",month:"long"});
   const countdown=useCountdown();
+  const streak=loadStreak();
   return(<div style={{...T.app,paddingBottom:"40px"}}>
     <div style={{background:US.black,color:"#fff",padding:"18px 18px 14px",borderBottom:`3px solid ${US.orange}`}}>
       <div style={{fontSize:"8px",letterSpacing:"3px",textTransform:"uppercase",color:US.orange,marginBottom:"2px",fontWeight:"700"}}>Universo Sportivo</div>
@@ -516,7 +857,7 @@ function Home({onSelect}){
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"6px"}}>
         <div>
           <div style={{fontSize:"10px",color:"#666",textTransform:"capitalize"}}>{today}</div>
-
+          {streak.count>0&&<div style={{fontSize:"9px",color:US.orange,marginTop:"2px",fontWeight:"700"}}>🔥 Serie: {streak.count} {streak.count===1?"giorno":"giorni"}</div>}
         </div>
         <div style={{display:"flex",alignItems:"center",gap:"5px",background:"rgba(255,255,255,0.07)",borderRadius:"6px",padding:"5px 10px"}}>
           <span style={{fontSize:"9px",color:"#555"}}>🔄 refresh in</span>
@@ -545,6 +886,8 @@ export default function App(){
       .flip-inner.flipped{transform:rotateX(360deg);}
       .flip-front,.flip-back{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:3px;font-weight:700;}
       .flip-back{backface-visibility:hidden;}
+      @keyframes fadeSlideIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+      .game-enter{animation:fadeSlideIn 0.25s ease forwards;}
     `;
     document.head.appendChild(s);
     return()=>document.head.removeChild(s);
@@ -560,5 +903,7 @@ export default function App(){
   if(key==="valore2")return<ChiValeDiPiu onHome={home} isDaily={isDaily}/>;
   if(key==="carriera")return<Carriera onHome={home} isDaily={isDaily}/>;
   if(key==="rosa")return<RosaQuiz onHome={home} isDaily={isDaily}/>;
+  if(key==="lista")return<ListaQuiz onHome={home} isDaily={isDaily}/>;
+  if(key==="transfer")return<IndivinaTransferimento onHome={home} isDaily={isDaily}/>;
   return<Home onSelect={sSc}/>;
 }
