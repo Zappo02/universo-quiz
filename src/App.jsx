@@ -495,7 +495,8 @@ function aD(k,g,t){if(k!=="age"&&k!=="value")return null;return g===t?null:g<t?"
 function cS(c){return{flex:1,minWidth:0,borderRadius:"2px",background:CLR[c]?.bg||"#fff",border:`1.5px solid ${CLR[c]?.bg||"#e8e8e8"}`,color:CLR[c]?.tx||"#ccc",fontSize:"8px",textAlign:"center",padding:"4px 2px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",minHeight:"32px",overflow:"hidden"};}
 
 function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
-  const target=useMemo(()=>DB[seed%DB.length],[seed]);
+  const dailyPool=useMemo(()=>shuffle([...DB],seedRandom(seed)),[seed]);
+  const target=useMemo(()=>dailyPool[0],[dailyPool]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("calciodle"):null;
   const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);const[animRows,setAnimRows]=useState(new Set());
@@ -582,7 +583,7 @@ function Calciodle({onHome,isDaily,onArchive}){
 // ── WORDLE COGNOME ───────────────────────────────────────────────────────
 function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const ROUNDS=5,MAX_ATT=6;
-  const pool=useMemo(()=>{const rng=seedRandom(seed+77);return shuffle(DB.filter(p=>normStr(p.surname).length>=4&&normStr(p.surname).length<=8),rng);},[seed]);
+  const pool=useMemo(()=>{const daily=shuffle([...DB],seedRandom(seed));return daily.filter(p=>normStr(p.surname).length>=4&&normStr(p.surname).length<=8).slice(1);},[seed]);
   const player=pool[0];
   const word=normStr(player.surname);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
@@ -671,14 +672,14 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function WordleCognome({onHome,isDaily,onArchive}){
-  if(isDaily){const d=DB.length,s=todaySeed();return<WordleGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="wordle">{({day,seed,isToday,archiveNav,chipBar})=><WordleGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+  if(isDaily){const d=DB.length,s=todaySeed();return<WordleGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="wordle">{({day,seed,isToday,archiveNav,chipBar})=><WordleGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 // ── IMPICCATO (senza indizi) ─────────────────────────────────────────────
 function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const M=7;
-  const pool=useMemo(()=>{const rng=seedRandom(seed+13);return shuffle(DB.filter(p=>normStr(p.surname).length>=4),rng);},[seed]);
+  const pool=useMemo(()=>{const daily=shuffle([...DB],seedRandom(seed));return daily.filter(p=>normStr(p.surname).length>=4).slice(2);},[seed]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("hangman"):null;
   const[gu,sGu]=useState(new Set());const[st,sSt]=useState("p");
@@ -716,7 +717,7 @@ function Hangman({onHome,isDaily,onArchive}){
 
 // ── CHI VALE DI PIÙ ──────────────────────────────────────────────────────
 function ValoreGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
-  const pairs=useMemo(()=>{const rng=seedRandom(seed+3);const sh=shuffle(DB,rng),p=[];for(let i=0;i<sh.length-1;i+=2)if(sh[i].value!==sh[i+1].value)p.push([sh[i],sh[i+1]]);return p;},[seed]);
+  const pairs=useMemo(()=>{const rng=seedRandom(seed+300011);const sh=shuffle(DB,rng),p=[];for(let i=0;i<sh.length-1;i+=2)if(sh[i].value!==sh[i+1].value)p.push([sh[i],sh[i+1]]);return p;},[seed]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("valore2"):null;
   const RR=Math.min(3,pairs.length);
@@ -812,7 +813,7 @@ function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     setTimeout(()=>inputRef.current?.focus(),100);
     return()=>clearInterval(timerRef.current);
   },[seed,done]);
-  useEffect(()=>{if(done&&isToday)saveResult("rosa",{found:found.length,total:squadra.giocatori.length,nome:squadra.nome});},[done]);
+  useEffect(()=>{if(done&&isToday)saveResult("rosa",{found:found.length,total:squadra.giocatori.length,nome:squadra.nome,foundNames:found,allNames:squadra.giocatori});},[done]);
   function submit(){
     const v=normLow(input);if(!v)return;
     const match=squadra.giocatori.find(p=>fuzzyMatch(input,p)&&!found.includes(p));
@@ -820,7 +821,7 @@ function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     else{setWrong(input);setInput("");setTimeout(()=>setWrong(null),800);}
     inputRef.current?.focus();
   }
-  if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Rosa Quiz" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="rosa" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>👕</div><div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.nome}</div><div style={{fontSize:"12px",color:US.muted,marginBottom:"8px"}}>{s.found}/{s.total} trovati ({Math.round(s.found/s.total*100)}%)</div><ShareButton text={`👕 Rosa Quiz #${day} — ${s.nome}\n${s.found}/${s.total} trovati\nuniverso-quiz-hmix.vercel.app`}/></>}</DoneScreen></div>);
+  if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Rosa Quiz" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="rosa" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=>{const fn=s.foundNames||[];const all=s.allNames||[];const ms=all.filter(p=>!fn.includes(p));return<><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>👕</div><div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.nome}</div><div style={{fontSize:"12px",color:US.muted,marginBottom:"10px"}}>{s.found}/{s.total} trovati ({Math.round(s.found/s.total*100)}%)</div>{fn.length>0&&<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.green,marginBottom:"5px",fontWeight:"700"}}>✓ Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{fn.map(p=><div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}{ms.length>0&&<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.red,marginBottom:"5px",fontWeight:"700"}}>✗ Mancati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{ms.map(p=><div key={p} style={{background:US.redL,color:US.red,border:"1px solid #fecaca",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}<ShareButton text={`👕 Rosa Quiz #${day} — ${s.nome}\n${s.found}/${s.total} trovati\nuniverso-quiz-hmix.vercel.app`}/></>;}</DoneScreen></div>);
   if(done){
     const missed=squadra.giocatori.filter(p=>!found.includes(p));
     const pct=Math.round(found.length/squadra.giocatori.length*100);
@@ -842,7 +843,11 @@ function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     <div style={T.body}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"14px"}}>
         <TimerRing seconds={seconds} total={TOTAL}/>
-        <div style={{textAlign:"right"}}><div style={{fontSize:"36px",fontWeight:"300",color:US.black,lineHeight:1}}>{found.length}</div><div style={{fontSize:"10px",color:US.muted}}>su {squadra.giocatori.length}</div></div>
+        <div style={{textAlign:"center"}}>
+          <div style={{fontSize:"36px",fontWeight:"300",color:US.black,lineHeight:1}}>{found.length}</div>
+          <div style={{fontSize:"10px",color:US.muted}}>su {squadra.giocatori.length}</div>
+          <button onClick={()=>setDone(true)} style={{marginTop:"6px",background:"none",border:`1px solid ${US.border}`,borderRadius:"4px",padding:"3px 10px",fontSize:"9px",color:US.muted,cursor:"pointer",fontFamily:"inherit"}}>⏹ Termina</button>
+        </div>
       </div>
       <div style={{marginBottom:"12px"}}>
         <input ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} onFocus={e=>setTimeout(()=>e.target.scrollIntoView({behavior:"smooth",block:"center"}),300)} placeholder="Scrivi un cognome..." style={{width:"100%",boxSizing:"border-box",border:`2px solid ${wrong?US.red:lastFound?US.green:US.border}`,borderRadius:"6px",padding:"11px 13px",fontSize:"14px",fontFamily:"inherit",outline:"none",color:US.black,background:wrong?US.redL:lastFound?US.greenL:"#fff",transition:"all 0.2s"}}/>
@@ -918,8 +923,8 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     setTimeout(()=>inputRef.current?.focus(),100);
     return()=>clearInterval(timerRef.current);
   },[seed,done]);
-  useEffect(()=>{if(done&&isToday)saveResult("rosa",{found:found.length,total:squadra.giocatori.length,nome:squadra.nome});},[done]);
-  useEffect(()=>{if(done&&isToday)saveResult("lista",{found:found.length,total:validAnswers.length,title:cat.title});},[done]);
+  useEffect(()=>{if(done&&isToday)saveResult("rosa",{found:found.length,total:squadra.giocatori.length,nome:squadra.nome,foundNames:found,allNames:squadra.giocatori});},[done]);
+  useEffect(()=>{if(done&&isToday)saveResult("lista",{found:found.length,total:validAnswers.length,title:cat.title,foundNames:found,allNames:validAnswers});},[done]);
   function submit(){
     const v=normLow(input);if(!v)return;
     const match=validAnswers.find(p=>fuzzyMatch(input,p)&&!found.includes(p));
@@ -934,7 +939,7 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   }
   const total=validAnswers.length;
   const pct=Math.round(found.length/total*100);
-  if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Lista Quiz" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="lista" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>📋</div><div style={{fontSize:"13px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.title}</div><div style={{fontSize:"12px",color:US.muted,marginBottom:"8px"}}>{s.found}/{s.total} trovati ({Math.round(s.found/s.total*100)}%)</div><ShareButton text={`📋 Lista Quiz #${day}\n${s.title}\n${s.found}/${s.total} trovati\nuniverso-quiz-hmix.vercel.app`}/></>}</DoneScreen></div>);
+  if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Lista Quiz" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="lista" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=>{const fn=s.foundNames||[];const all=s.allNames||[];const ms=all.filter(p=>!fn.includes(p));return<><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>📋</div><div style={{fontSize:"13px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.title}</div><div style={{fontSize:"12px",color:US.muted,marginBottom:"10px"}}>{s.found}/{s.total} trovati ({Math.round(s.found/s.total*100)}%)</div>{fn.length>0&&<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.green,marginBottom:"5px",fontWeight:"700"}}>✓ Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{fn.map(p=><div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}{ms.length>0&&<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.red,marginBottom:"5px",fontWeight:"700"}}>✗ Mancati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{ms.map(p=><div key={p} style={{background:US.redL,color:US.red,border:"1px solid #fecaca",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}<ShareButton text={`📋 Lista Quiz #${day}\n${s.title}\n${s.found}/${s.total} trovati\nuniverso-quiz-hmix.vercel.app`}/></>;}</DoneScreen></div>);
   if(done){
     const missed=validAnswers.filter(p=>!found.includes(p));
     const emoji=pct===100?"🏆":pct>=70?"🥇":pct>=40?"👍":"📚";
@@ -968,9 +973,10 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
       </div>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"14px"}}>
         <TimerRing seconds={seconds} total={TOTAL}/>
-        <div style={{textAlign:"right"}}>
+        <div style={{textAlign:"center"}}>
           <div style={{fontSize:"36px",fontWeight:"300",color:US.black,lineHeight:1}}>{found.length}<span style={{fontSize:"16px",color:US.muted}}>/{total}</span></div>
           <div style={{fontSize:"9px",color:US.yellow,marginTop:"2px"}}>+{BONUS}s per risposta ✓</div>
+          <button onClick={()=>setDone(true)} style={{marginTop:"6px",background:"none",border:`1px solid ${US.border}`,borderRadius:"4px",padding:"3px 10px",fontSize:"9px",color:US.muted,cursor:"pointer",fontFamily:"inherit"}}>⏹ Termina</button>
         </div>
       </div>
       <div style={{marginBottom:"12px"}}>
@@ -1092,8 +1098,8 @@ function TransferGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function IndivinaTransferimento({onHome,isDaily,onArchive}){
-  if(isDaily){const d=TRANSFERS.length,s=todaySeed();return<TransferGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="transfer">{({day,seed,isToday,archiveNav,chipBar})=><TransferGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+  if(isDaily){const d=TRANSFERS.length,s=todaySeed();return<TransferGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="transfer">{({day,seed,isToday,archiveNav,chipBar})=><TransferGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 // ── HOME ──────────────────────────────────────────────────────────────────
