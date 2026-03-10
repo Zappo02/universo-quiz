@@ -333,27 +333,31 @@ function fuzzyMatch(input,answer){
 
 // ── STORAGE HELPERS ─────────────────────────────────────────────────────
 function todayKey(){const d=new Date();return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;}
+// Persistent storage: tries localStorage first, falls back to in-memory (iframe sandbox safe)
+const _mem={};
+function _get(k){try{const v=localStorage.getItem(k);if(v!=null)return v;}catch(e){}return _mem[k]??null;}
+function _set(k,v){try{localStorage.setItem(k,v);}catch(e){}_mem[k]=v;}
 function saveResult(gameKey,data){
   try{
     const k=`uq_${gameKey}_${todayKey()}`;
-    if(localStorage.getItem(k))return; // already saved today, don't overwrite
-    localStorage.setItem(k,JSON.stringify(data));
+    if(_get(k))return; // already saved today, don't overwrite
+    _set(k,JSON.stringify(data));
     // update streak only on first save of the day across all games
     const sk="uq_streak";
-    const raw=localStorage.getItem(sk);
+    const raw=_get(sk);
     const streak=raw?JSON.parse(raw):{count:0,lastDate:""};
     const today=todayKey();
     if(streak.lastDate===today)return;
     const yest=(()=>{const d=new Date();d.setDate(d.getDate()-1);return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;})();
     const newCount=streak.lastDate===yest?streak.count+1:1;
-    localStorage.setItem(sk,JSON.stringify({count:newCount,lastDate:today}));
+    _set(sk,JSON.stringify({count:newCount,lastDate:today}));
   }catch(e){}
 }
 function loadResult(gameKey){
-  try{const k=`uq_${gameKey}_${todayKey()}`;const r=localStorage.getItem(k);return r?JSON.parse(r):null;}catch(e){return null;}
+  try{const k=`uq_${gameKey}_${todayKey()}`;const r=_get(k);return r?JSON.parse(r):null;}catch(e){return null;}
 }
 function loadStreak(){
-  try{const r=localStorage.getItem("uq_streak");return r?JSON.parse(r):{count:0,lastDate:""};}catch(e){return{count:0,lastDate:""};}
+  try{const r=_get("uq_streak");return r?JSON.parse(r):{count:0,lastDate:""};}catch(e){return{count:0,lastDate:""};}
 }
 
 function useCountdown(){
@@ -416,7 +420,7 @@ function Hdr({title,sub,onHome,archiveNav}){
         <div style={T.ht}>{title}</div>
         {sub&&<div style={{fontSize:"9px",color:"#777",marginTop:"1px"}}>{sub}</div>}
       </div>
-      {archiveNav&&<div style={{display:"flex",alignItems:"center",gap:"4px"}}>
+      {archiveNav&&<div style={{display:"flex",alignItems:"center",gap:"4px",marginRight:"10px"}}>
         <button onClick={archiveNav.prev} disabled={archiveNav.day<=1} style={{...T.bk,padding:"5px 10px",fontSize:"12px",opacity:archiveNav.day<=1?0.3:1}}>◀</button>
         <div style={{textAlign:"center",minWidth:"44px"}}>
           <div style={{fontSize:"11px",color:"#fff",fontWeight:"700"}}>#{archiveNav.day}</div>
@@ -445,12 +449,14 @@ function ArchiveWrapper({gameKey,children}){
   // build chip list for current page (excluding today=todayN)
   // page 0: todayN-1 down to todayN-PAGE_SIZE
   // page 1: todayN-PAGE_SIZE-1 down to todayN-PAGE_SIZE*2
-  const pageStart=todayN-1-page*PAGE_SIZE; // highest num in this page
+  // chips in ascending order so oldest is leftmost, newest is rightmost
+  // ◀ goes to older page (higher page index), ▶ goes to newer page
+  const pageStart=todayN-1-page*PAGE_SIZE;
   const pageEnd=Math.max(1,pageStart-PAGE_SIZE+1);
   const chips=[];
-  for(let n=pageStart;n>=pageEnd;n--)chips.push(n);
-  const hasPrev=pageStart-PAGE_SIZE>=1;
-  const hasNext=page>0;
+  for(let n=pageEnd;n<=pageStart;n++)chips.push(n); // ascending: 2,3,4... newest rightmost
+  const hasOlder=pageStart-PAGE_SIZE>=1; // can go to older page
+  const hasNewer=page>0;                 // can go to newer page
 
   const archiveNav={
     day:num,max:todayN,poolSize,
@@ -461,9 +467,9 @@ function ArchiveWrapper({gameKey,children}){
   const chipBar=(
     <div style={{background:"#1a1a1a",padding:"8px 14px",borderBottom:"1px solid #2a2a2a"}}>
       <div style={{display:"flex",alignItems:"center",gap:"4px"}}>
-        {hasPrev&&<button onClick={()=>setPage(p=>p+1)} style={{...T.bk,padding:"4px 7px",fontSize:"10px",flexShrink:0}}>◀</button>}
+        {hasOlder&&<button onClick={()=>setPage(p=>p+1)} style={{...T.bk,padding:"4px 7px",fontSize:"10px",flexShrink:0}}>◀</button>}
         <div style={{display:"flex",gap:"5px",overflowX:"auto",flex:1,paddingBottom:"2px"}}
-          ref={el=>{if(el)el.scrollLeft=0;}}>
+          ref={el=>{if(el)el.scrollLeft=el.scrollWidth;}}>
           {chips.map(n=>(
             <div key={n} onClick={()=>setNum(n)}
               style={{flexShrink:0,background:num===n?"#2a2200":"#222",border:`1.5px solid ${num===n?US.orange:"#333"}`,
@@ -473,7 +479,7 @@ function ArchiveWrapper({gameKey,children}){
             </div>
           ))}
         </div>
-        {hasNext&&<button onClick={()=>setPage(p=>Math.max(0,p-1))} style={{...T.bk,padding:"4px 7px",fontSize:"10px",flexShrink:0}}>▶</button>}
+        {hasNewer&&<button onClick={()=>setPage(p=>Math.max(0,p-1))} style={{...T.bk,padding:"4px 7px",fontSize:"10px",flexShrink:0}}>▶</button>}
       </div>
     </div>
   );
@@ -580,6 +586,7 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const player=pool[0];
   const word=normStr(player.surname);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
+  const savedToday=isToday?loadResult("wordle"):null;
   const[attempts,setAttempts]=useState([]);
   const[current,setCurrent]=useState("");
   const[status,setStatus]=useState("playing"); // playing | won | lost
@@ -673,6 +680,7 @@ function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const M=7;
   const pool=useMemo(()=>{const rng=seedRandom(seed+13);return shuffle(DB.filter(p=>normStr(p.surname).length>=4),rng);},[seed]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
+  const savedToday=isToday?loadResult("hangman"):null;
   const[gu,sGu]=useState(new Set());const[st,sSt]=useState("p");
   useEffect(()=>{sGu(new Set());sSt("p");},[seed]);
   const pl=pool[0],wd=normStr(pl.surname),wr=[...gu].filter(c=>!wd.includes(c)),wc=wr.length,rv=wd.split("").every(c=>gu.has(c));
@@ -728,8 +736,8 @@ function ValoreGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function ChiValeDiPiu({onHome,isDaily,onArchive}){
-  if(isDaily){const d=DB.length,s=todaySeed();return<ValoreGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="valore2">{({day,seed,isToday,archiveNav,chipBar})=><ValoreGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+  if(isDaily){const d=DB.length,s=todaySeed();return<ValoreGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="valore2">{({day,seed,isToday,archiveNav,chipBar})=><ValoreGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 // ── CARRIERA ─────────────────────────────────────────────────────────────
@@ -776,8 +784,8 @@ function CarreiraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function Carriera({onHome,isDaily,onArchive}){
-  if(isDaily){const d=CAREERS.length,s=todaySeed();return<CarreiraGame day={d} seed={s} isToday archiveNav={null} onHome={onHome}/>;}
-  return<ArchiveWrapper gameKey="carriera">{({day,seed,isToday,archiveNav,chipBar})=><CarreiraGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} onHome={onHome}/>}</ArchiveWrapper>;
+  if(isDaily){const d=CAREERS.length,s=todaySeed();return<CarreiraGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="carriera">{({day,seed,isToday,archiveNav,chipBar})=><CarreiraGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 // ── ROSA QUIZ ─────────────────────────────────────────────────────────────
@@ -800,10 +808,11 @@ function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   useEffect(()=>{
     if(done)return;
     clearInterval(timerRef.current);
-    timerRef.current=setInterval(()=>setSeconds(s=>{if(s<=1){clearInterval(timerRef.current);setDone(true);if(isToday)saveResult("rosa",{found:found.length,total:squadra.giocatori.length,nome:squadra.nome});return 0;}return s-1;}),1000);
+    timerRef.current=setInterval(()=>setSeconds(s=>{if(s<=1){clearInterval(timerRef.current);setDone(true);return 0;}return s-1;}),1000);
     setTimeout(()=>inputRef.current?.focus(),100);
     return()=>clearInterval(timerRef.current);
   },[seed,done]);
+  useEffect(()=>{if(done&&isToday)saveResult("rosa",{found:found.length,total:squadra.giocatori.length,nome:squadra.nome});},[done]);
   function submit(){
     const v=normLow(input);if(!v)return;
     const match=squadra.giocatori.find(p=>fuzzyMatch(input,p)&&!found.includes(p));
@@ -905,10 +914,12 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   useEffect(()=>{
     if(done)return;
     clearInterval(timerRef.current);
-    timerRef.current=setInterval(()=>setSeconds(s=>{if(s<=1){clearInterval(timerRef.current);setDone(true);if(isToday)saveResult("lista",{found:found.length,total:validAnswers.length,title:cat.title});return 0;}return s-1;}),1000);
+    timerRef.current=setInterval(()=>setSeconds(s=>{if(s<=1){clearInterval(timerRef.current);setDone(true);return 0;}return s-1;}),1000);
     setTimeout(()=>inputRef.current?.focus(),100);
     return()=>clearInterval(timerRef.current);
   },[seed,done]);
+  useEffect(()=>{if(done&&isToday)saveResult("rosa",{found:found.length,total:squadra.giocatori.length,nome:squadra.nome});},[done]);
+  useEffect(()=>{if(done&&isToday)saveResult("lista",{found:found.length,total:validAnswers.length,title:cat.title});},[done]);
   function submit(){
     const v=normLow(input);if(!v)return;
     const match=validAnswers.find(p=>fuzzyMatch(input,p)&&!found.includes(p));
