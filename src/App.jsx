@@ -972,10 +972,12 @@ function fuzzyMatch(input,answer){
 
 // ── STORAGE HELPERS ─────────────────────────────────────────────────────
 function todayKey(){const d=new Date();return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;}
-// Persistent storage: tries localStorage first, falls back to in-memory (iframe sandbox safe)
+// Persistent storage: tries cookies first (iframe-safe), then localStorage, then in-memory
 const _mem={};
-function _get(k){try{const v=localStorage.getItem(k);if(v!=null)return v;}catch(e){}return _mem[k]??null;}
-function _set(k,v){try{localStorage.setItem(k,v);}catch(e){}_mem[k]=v;}
+function _cookieGet(k){try{const m=document.cookie.match(new RegExp("(?:^|; )"+k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"=([^;]*)"));return m?decodeURIComponent(m[1]):null;}catch(e){return null;}}
+function _cookieSet(k,v){try{const exp=new Date();exp.setFullYear(exp.getFullYear()+1);document.cookie=k+"="+encodeURIComponent(v)+";expires="+exp.toUTCString()+";path=/;SameSite=None;Secure";}catch(e){}}
+function _get(k){const c=_cookieGet(k);if(c!=null)return c;try{const v=localStorage.getItem(k);if(v!=null)return v;}catch(e){}return _mem[k]??null;}
+function _set(k,v){_cookieSet(k,v);try{localStorage.setItem(k,v);}catch(e){}_mem[k]=v;}
 function saveResult(gameKey,data){
   try{
     const k=`uq_${gameKey}_${todayKey()}`;
