@@ -1084,7 +1084,8 @@ function ArchiveWrapper({gameKey,children}){
   const[num,setNum]=useState(Math.max(1,todayN-1));
   // page: which group of 10 we show. page=0 → most recent 10 (excluding today)
   const[page,setPage]=useState(0);
-  const seed=seedForNum(num,poolSize);
+  const SEED_OFFSET={calciodle:0,wordle:100001,hangman:200002,valore2:300011,carriera:0,rosa:0,lista:0,transfer:0};
+  const seed=seedForNum(num,poolSize)+(SEED_OFFSET[gameKey]||0);
   const isToday=num===todayN;
 
   // build chip list for current page (excluding today=todayN)
@@ -1314,7 +1315,7 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function WordleCognome({onHome,isDaily,onArchive}){
-  if(isDaily){const d=DB.length,s=todaySeed();return<WordleGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  if(isDaily){const d=DB.length,s=todaySeed()+100001;return<WordleGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
   return<ArchiveWrapper gameKey="wordle">{({day,seed,isToday,archiveNav,chipBar})=><WordleGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
@@ -1353,7 +1354,7 @@ function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function Hangman({onHome,isDaily,onArchive}){
-  if(isDaily){const d=DB.length,s=todaySeed();return<HangmanGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  if(isDaily){const d=DB.length,s=todaySeed()+200002;return<HangmanGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
   return<ArchiveWrapper gameKey="hangman">{({day,seed,isToday,archiveNav,chipBar})=><HangmanGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
