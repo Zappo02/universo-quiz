@@ -473,7 +473,7 @@ const DB = [
   { name:"Riccardo Sottil", surname:"Sottil", club:"Lecce", league:"Serie A", role:"Ala", nation:"Italia", continent:"Europa", age:26, value:3.5 },
   { name:"Lameck Banda", surname:"Banda", club:"Lecce", league:"Serie A", role:"Ala", nation:"Zambia", continent:"Africa", age:25, value:3 },
   { name:"Luca Pierotti", surname:"Pierotti", club:"Lecce", league:"Serie A", role:"Ala", nation:"Argentina", continent:"Sud America", age:24, value:3.5 },
-  { name:"N'Dri", surname:"N'Dri", club:"Lecce", league:"Serie A", role:"Ala", nation:"Costa d'Avorio", continent:"Africa", age:25, value:1.5 },
+  { name:"N'Dri", surname:"NDri", club:"Lecce", league:"Serie A", role:"Ala", nation:"Costa d'Avorio", continent:"Africa", age:25, value:1.5 },
   { name:"Francesco Camarda", surname:"Camarda", club:"Lecce", league:"Serie A", role:"Attaccante", nation:"Italia", continent:"Europa", age:18, value:15 },
   { name:"Nikola Stulic", surname:"Stulic", club:"Lecce", league:"Serie A", role:"Attaccante", nation:"Serbia", continent:"Europa", age:24, value:4.5 },
   { name:"Walid Cheddira", surname:"Cheddira", club:"Lecce", league:"Serie A", role:"Attaccante", nation:"Marocco", continent:"Africa", age:28, value:2.3 },
@@ -1168,7 +1168,7 @@ function daysAgoForNum(num,poolSize){return poolSize-num;}
 function seedForNum(num,poolSize){return seedForDaysAgo(daysAgoForNum(num,poolSize));}
 
 function shuffle(arr,rng){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function normStr(s){return s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
+function normStr(s){if(!s)return "";return s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
 function normLow(s){return s.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
 function levenshtein(a,b){
   const m=a.length,n=b.length;
@@ -1384,7 +1384,7 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     const pick=notGreen.length>0?notGreen[Math.floor(Math.random()*notGreen.length)]:cols[Math.floor(Math.random()*cols.length)];
     setHintCol(pick);setHintUsed(true);
   }
-  function normSearch(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
+  function normSearch(s){if(!s)return "";return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
   function onI(v){sI(v);if(v.length<2){sSg([]);return;}const q=normSearch(v);const avail=DB.filter(p=>!G.find(x=>x.name===p.name));const bySurname=avail.filter(p=>normSearch(p.surname).includes(q));const byName=avail.filter(p=>normSearch(p.name).includes(q)&&!bySurname.includes(p));sSg([...bySurname,...byName].slice(0,8));}
   function sub(p){
     if(ov)return;
