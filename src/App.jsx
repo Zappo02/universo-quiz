@@ -1231,7 +1231,7 @@ function Confetti({active}){
     size:6+Math.random()*8,
     shape:i%3===0?"50%":"2px"
   }));
-  return(<>{pieces.map(p=><div key={p.id} className="confetti-piece" style={{left:`${p.left}%`,top:"-10px",width:`${p.size}px`,height:`${p.size}px`,background:p.color,borderRadius:p.shape,animationDelay:`${p.delay}s`,animationDuration:`${p.duration}s`}}/>)}</>);
+  return(<div style={{position:"absolute",inset:0,pointerEvents:"none",overflow:"hidden",zIndex:199}}>{pieces.map(p=><div key={p.id} className="confetti-piece" style={{left:`${p.left}%`,top:"-10px",width:`${p.size}px`,height:`${p.size}px`,background:p.color,borderRadius:p.shape,animationDelay:`${p.delay}s`,animationDuration:`${p.duration}s`}}/>)}</div>);
 }
 function useCountdown(){
   const[t,sT]=useState("");
@@ -1421,7 +1421,7 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     <div style={{fontSize:"11px",color:US.muted,marginBottom:"12px"}}>{target.name}</div>
     <ShareButton text={`⚽ Calciodle #${day}\n${s.won?"Trovato in "+s.attempts+"/6":"Non trovato"}\nuniverso-quiz-hmix.vercel.app`}/>
   </>}</DoneScreen></div>);
-  return(<div style={T.app}><Hdr title="Calciodle" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={{...T.app,position:"relative"}}><Hdr title="Calciodle" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={T.body}>
       {/* INPUT PRIMA — sempre visibile su mobile */}
       {!ov&&<div style={{marginBottom:"14px"}}>
@@ -1462,7 +1462,7 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
       const st=loadStats("calciodle");
       const winPct=st.played>0?Math.round(st.won/st.played*100):0;
       const msg=won?(G.length===1?"🤯 Fenomeno! Al primo tentativo!":G.length===2?"🔥 Straordinario! Solo 2 tentativi!":G.length===3?"⚡ Ottimo! Trovato al 3° tentativo":G.length===4?"👍 Ben fatto! Al 4° tentativo":"😅 Ce l'hai fatta!"):"😔 Peccato, ci riproverai!";
-      return(<>{won&&<Confetti active={mo}/>}<div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100,padding:"16px"}} onClick={()=>sMo(false)}><div style={{background:"#fff",borderRadius:"8px",maxWidth:"300px",width:"100%",overflow:"hidden",boxShadow:"0 20px 60px rgba(0,0,0,0.3)"}} onClick={e=>e.stopPropagation()}>
+      return(<>{won&&<Confetti active={mo}/>}<div style={{position:"absolute",inset:0,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100,padding:"16px",minHeight:"100%"}} onClick={()=>sMo(false)}><div style={{background:"#fff",borderRadius:"8px",maxWidth:"300px",width:"100%",overflow:"hidden",boxShadow:"0 20px 60px rgba(0,0,0,0.3)"}} onClick={e=>e.stopPropagation()}>
         <div style={{background:won?"linear-gradient(135deg,#16a34a,#15803d)":"linear-gradient(135deg,#dc2626,#b91c1c)",color:"#fff",padding:"16px",textAlign:"center"}}>
           <div style={{fontSize:"36px",marginBottom:"4px"}}>{won?"🎉":"😔"}</div>
           <div style={{fontSize:"18px",fontWeight:"700",marginBottom:"2px"}}>{won?"Complimenti!":"Game Over"}</div>
@@ -2222,7 +2222,7 @@ export default function App(){
       @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
       .game-enter{animation:fadeSlideIn 0.35s ease forwards;}
       @keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
-      .confetti-piece{position:fixed;width:8px;height:8px;animation:confettiFall linear forwards;pointer-events:none;z-index:200;}
+      .confetti-piece{position:absolute;width:8px;height:8px;animation:confettiFall linear forwards;pointer-events:none;z-index:200;}
     `;
     document.head.appendChild(s);
     return()=>document.head.removeChild(s);
@@ -2243,6 +2243,4 @@ export default function App(){
   if(key==="transfer")return<IndivinaTransferimento onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
   return<Home onSelect={sSc}/>;
 }
-
-
 
