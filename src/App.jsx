@@ -2169,16 +2169,19 @@ function Card({m,onDaily,onArchive}){
   const isBig=m.size==="big";
   const borderColor=played?US.green:hv?US.orange:US.border;
   const accentStyle=m.accent?{borderLeft:`3px solid ${m.accent}`}:{};
-  return(<div style={{background:"#fff",border:`1px solid ${borderColor}`,...accentStyle,borderRadius:"8px",padding:isBig?"14px":"12px",transition:"border-color 0.15s",display:"flex",flexDirection:"column",gap:"4px"}} onMouseEnter={()=>sHv(true)} onMouseLeave={()=>sHv(false)}>
-    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-      <div style={{display:"flex",alignItems:"center",gap:"6px"}}><span style={{fontSize:isBig?"18px":"16px"}}>{m.icon}</span><span style={{fontSize:isBig?"13px":"12px",fontWeight:"700",color:US.black}}>{m.label}</span></div>
-      {played&&<span style={{fontSize:"9px",color:US.green,fontWeight:"700",background:US.greenL,borderRadius:"4px",padding:"2px 6px"}}>✓ fatto</span>}
+  return(<div style={{background:"#fff",border:`1px solid ${borderColor}`,...accentStyle,borderRadius:"8px",padding:"11px",transition:"border-color 0.15s",display:"flex",flexDirection:"column",gap:"3px"}} onMouseEnter={()=>sHv(true)} onMouseLeave={()=>sHv(false)}>
+    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"1px"}}>
+      <div style={{display:"flex",alignItems:"center",gap:"5px"}}>
+        <span style={{fontSize:isBig?"17px":"15px"}}>{m.icon}</span>
+        <span style={{fontSize:isBig?"12px":"11px",fontWeight:"700",color:US.black,lineHeight:1.2}}>{m.label}</span>
+      </div>
+      {played&&<span style={{fontSize:"8px",color:US.green,fontWeight:"700",background:US.greenL,borderRadius:"4px",padding:"1px 5px",flexShrink:0}}>✓</span>}
     </div>
-    <span style={{fontSize:"10px",color:US.muted,lineHeight:1.4}}>{m.desc}</span>
-    {m.badge&&<div style={{marginTop:"2px"}}><span style={{fontSize:"10px",fontWeight:"600",color:m.badgeTx,background:m.badgeBg||"transparent",borderRadius:"4px",padding:m.badgeBg?"3px 7px":"0"}}>{m.badge}</span></div>}
-    <div style={{display:"flex",gap:"4px",marginTop:"4px"}}>
-      <button onClick={()=>onDaily(m.key)} style={{flex:1,background:US.orange,color:US.black,border:"none",borderRadius:"4px",padding:"7px 3px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>🗓 Daily</button>
-      <button onClick={()=>onArchive(m.key)} style={{flex:1,background:US.black,color:"#fff",border:"none",borderRadius:"4px",padding:"7px 3px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>📂 Archivio</button>
+    {isBig&&<span style={{fontSize:"10px",color:US.muted,lineHeight:1.3}}>{m.desc}</span>}
+    {m.badge&&<div><span style={{fontSize:"9px",fontWeight:"600",color:m.badgeTx,background:m.badgeBg||"transparent",borderRadius:"4px",padding:m.badgeBg?"2px 6px":"0"}}>{m.badge}</span></div>}
+    <div style={{display:"flex",gap:"3px",marginTop:"4px"}}>
+      <button onClick={()=>onDaily(m.key)} style={{flex:1,background:US.orange,color:US.black,border:"none",borderRadius:"4px",padding:"6px 2px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>🗓 Daily</button>
+      <button onClick={()=>onArchive(m.key)} style={{flex:1,background:US.black,color:"#fff",border:"none",borderRadius:"4px",padding:"6px 2px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>📂 Arch.</button>
     </div>
   </div>);
 }
@@ -2204,21 +2207,17 @@ function Home({onSelect}){
         </div>
       </div>
     </div>
-    <div style={{padding:"14px 14px 40px",maxWidth:"620px",margin:"0 auto",boxSizing:"border-box"}}>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px",marginBottom:"10px"}}>
+    <div style={{padding:"12px 12px 40px",maxWidth:"620px",margin:"0 auto",boxSizing:"border-box"}}>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"8px"}}>
         {bigModes.map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"10px",marginBottom:"10px"}}>
-        {smallModes.slice(0,3).map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"8px"}}>
+        {smallModes.map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"2fr 1fr",gap:"10px",marginBottom:"12px"}}>
-        <Card m={smallModes[3]} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>
-        <div style={{background:US.black,borderRadius:"8px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",gap:"2px",padding:"12px"}}>
-          <div style={{fontSize:"20px",fontWeight:"700",color:US.orange}}>2.156</div>
-          <div style={{fontSize:"9px",color:"#888",textTransform:"uppercase",letterSpacing:"1px",textAlign:"center"}}>sfide<br/>disponibili</div>
-        </div>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 13px",background:US.black,borderRadius:"8px",marginBottom:"10px"}}>
+        <div><div style={{fontSize:"18px",fontWeight:"700",color:US.orange}}>2.156</div><div style={{fontSize:"9px",color:"#777",textTransform:"uppercase",letterSpacing:"1px"}}>sfide disponibili</div></div>
+        <div style={{fontSize:"9px",color:"#555",textAlign:"right",lineHeight:1.7}}>🗓 <span style={{color:"#fff",fontWeight:"700"}}>Daily</span> — sfida unica al giorno<br/>📂 <span style={{color:"#fff",fontWeight:"700"}}>Archivio</span> — sfide passate con ◀ ▶</div>
       </div>
-      <div style={{padding:"9px 11px",background:"#fff",border:`1px solid ${US.border}`,borderRadius:"6px",fontSize:"9px",color:US.muted,lineHeight:1.6}}>🗓 <strong style={{color:US.black}}>Daily</strong> — sfida unica al giorno &nbsp;·&nbsp; 📂 <strong style={{color:US.black}}>Archivio</strong> — naviga le sfide passate con ◀ ▶</div>
     </div>
   </div>);
 }
