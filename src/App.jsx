@@ -534,6 +534,223 @@ const DB = [
   { name:"David Okereke", surname:"Okereke", club:"Cremonese", league:"Serie A", role:"Attaccante", nation:"Nigeria", continent:"Africa", age:28, value:1.5 },
   { name:"Djuric", surname:"Djuric", club:"Cremonese", league:"Serie A", role:"Attaccante", nation:"Bosnia", continent:"Europa", age:35, value:1 },
   { name:"Jamie Vardy", surname:"Vardy", club:"Cremonese", league:"Serie A", role:"Attaccante", nation:"Inghilterra", continent:"Europa", age:39, value:1 },
+
+  { answer:"Bryan Cristante", clues:[
+    { club:"Milan",          period:"2011–2014", apps:3,   goals:1,  note:"Esordio in Champions League a 16 anni" },
+    { club:"Benfica",        period:"2014–2016", apps:7,   goals:0,  note:"Campionato portoghese vinto nel 2015" },
+    { club:"Palermo",        period:"2016",      apps:4,   goals:0,  note:"Prestito in Serie A" },
+    { club:"Pescara",        period:"2016–2017", apps:16,  goals:0,  note:"Esplode in Serie B" },
+    { club:"Atalanta",       period:"2017–2018", apps:48,  goals:12, note:"9 gol in Serie A sotto Gasperini" },
+    { club:"Roma",           period:"2018–",     apps:262, goals:18, note:"Conference League 2022 con Mourinho" },
+    { club:"Nazionale",      period:"2017–",     apps:48,  goals:2,  note:"Campione d'Europa a Euro 2020" },
+  ]},
+  { answer:"Giovanni Simeone", clues:[
+    { club:"River Plate",    period:"2013–2015", apps:26,  goals:2,  note:"Esordio in Argentina, figlio del Cholo" },
+    { club:"Genoa",          period:"2016–2017", apps:35,  goals:12, note:"Prima stagione in Serie A" },
+    { club:"Fiorentina",     period:"2017–2019", apps:74,  goals:20, note:"Continua a segnare in viola" },
+    { club:"Cagliari",       period:"2019–2021", apps:71,  goals:18, note:"Trascinatore in Sardegna" },
+    { club:"Verona",         period:"2021–2022", apps:35,  goals:17, note:"Capocannoniere rivelazione" },
+    { club:"Napoli",         period:"2022–2025", apps:83,  goals:6,  note:"Scudetto 2023 da comprimario" },
+    { club:"Torino",         period:"2025–",     apps:24,  goals:8,  note:"Nuovo inizio in granata" },
+    { club:"Nazionale",      period:"2018–2023", apps:6,   goals:1,  note:"Poche presenze con l'Albiceleste" },
+  ]},
+  { answer:"Gianluca Scamacca", clues:[
+    { club:"Ascoli",         period:"2019–2020", apps:33,  goals:9,  note:"Prestito decisivo in Serie B" },
+    { club:"Genoa",          period:"2020–2021", apps:26,  goals:8,  note:"Conferma in Serie A" },
+    { club:"Sassuolo",       period:"2021–2022", apps:36,  goals:16, note:"Esplode in Serie A, 16 gol" },
+    { club:"West Ham",       period:"2022–2023", apps:16,  goals:3,  note:"Esperienza in Premier League" },
+    { club:"Atalanta",       period:"2023–",     apps:50,  goals:20, note:"Rinascita con Gasperini" },
+    { club:"Nazionale",      period:"2021–",     apps:22,  goals:1,  note:"Presente in Nazionale maggiore" },
+  ]},
+  { answer:"Keinan Davis", clues:[
+    { club:"Aston Villa",    period:"2016–2022", apps:73,  goals:3,  note:"Cresciuto nel club di Birmingham" },
+    { club:"Nottm Forest",   period:"2022",      apps:15,  goals:5,  note:"Prestito vincente in Premier" },
+    { club:"Watford",        period:"2022–2023", apps:34,  goals:7,  note:"Protagonista in Championship" },
+    { club:"Udinese",        period:"2023–",     apps:57,  goals:13, note:"Sorpresa in Serie A" },
+    { club:"Nazionale",      period:"2017–2018", apps:3,   goals:2,  note:"Inghilterra U-20" },
+  ]},
+  { answer:"Riccardo Orsolini", clues:[
+    { club:"Ascoli",         period:"2015–2017", apps:51,  goals:8,  note:"Trafila in Serie B" },
+    { club:"Atalanta",       period:"2017–2018", apps:8,   goals:0,  note:"Breve parentesi a Bergamo" },
+    { club:"Bologna",        period:"2018–",     apps:267, goals:72, note:"Simbolo del Bologna moderno" },
+    { club:"Nazionale",      period:"2019–",     apps:13,  goals:2,  note:"Presente in Azzurro" },
+  ]},
+  { answer:"Nicola Krstovic", clues:[
+    { club:"Zeta",           period:"2016–2019", apps:92,  goals:37, note:"Trafila in Montenegro" },
+    { club:"Stella Rossa",   period:"2019–2021", apps:21,  goals:2,  note:"Esperienza in Serbia" },
+    { club:"Dunajská Streda",period:"2021–2023", apps:37,  goals:19, note:"Esplode in Slovacchia" },
+    { club:"Lecce",          period:"2023–2025", apps:72,  goals:18, note:"Rivelazione in Serie A" },
+    { club:"Atalanta",       period:"2025–",     apps:27,  goals:9,  note:"Grande salto in Champions" },
+    { club:"Nazionale",      period:"2022–",     apps:34,  goals:8,  note:"Bomber del Montenegro" },
+  ]},
+  { answer:"Domenico Berardi", clues:[
+    { club:"Sassuolo",       period:"2012–",     apps:401, goals:146,note:"Record storico del Sassuolo" },
+    { club:"Nazionale",      period:"2018–2023", apps:28,  goals:8,  note:"Campione d'Europa a Euro 2020" },
+  ]},
+  { answer:"Andrea Pinamonti", clues:[
+    { club:"Frosinone",      period:"2018–2019", apps:27,  goals:5,  note:"Prestito, si afferma in Serie B" },
+    { club:"Genoa",          period:"2019–2020", apps:32,  goals:5,  note:"Primo prestito in Serie A" },
+    { club:"Empoli",         period:"2021–2022", apps:36,  goals:13, note:"Stagione da 13 gol, miglior prestito" },
+    { club:"Sassuolo",       period:"2022–2024", apps:70,  goals:16, note:"Confermato dopo l'Empoli" },
+    { club:"Genoa",          period:"2024–2025", apps:36,  goals:10, note:"Secondo prestito al Genoa" },
+    { club:"Nazionale",      period:"2022",      apps:1,   goals:0,  note:"Esordio in Azzurro" },
+  ]},
+  { answer:"Mateo Pellegrino", clues:[
+    { club:"Platense",       period:"2023–2024", apps:38,  goals:10, note:"Esplode in Argentina" },
+    { club:"Vélez Sarsfield", period:"2021–2025", apps:9,  goals:0,  note:"Club di formazione" },
+    { club:"Parma",          period:"2025–",     apps:43,  goals:11, note:"Sorpresa in Serie A" },
+    { club:"Nazionale",      period:"2019",      apps:0,   goals:0,  note:"Argentina U-19" },
+  ]},
+  { answer:"Nikola Vlasic", clues:[
+    { club:"Hajduk Spalato", period:"2014–2017", apps:86,  goals:11, note:"Talento cresciuto in Croazia" },
+    { club:"Everton",        period:"2017–2018", apps:12,  goals:0,  note:"Esperienza in Premier League" },
+    { club:"CSKA Mosca",     period:"2018–2021", apps:86,  goals:28, note:"Consacrazione in Russia" },
+    { club:"West Ham",       period:"2021–2022", apps:19,  goals:1,  note:"Ritorno in Premier" },
+    { club:"Torino",         period:"2022–",     apps:126, goals:20, note:"Beniamino del Toro" },
+    { club:"Nazionale",      period:"2017–",     apps:61,  goals:10, note:"Pilastro della Croazia" },
+  ]},
+  { answer:"Wesley Franca", clues:[
+    { club:"Flamengo",       period:"2021–2025", apps:78,  goals:2,  note:"Cresciuto nel più grande club brasiliano" },
+    { club:"Roma",           period:"2025–",     apps:26,  goals:4,  note:"Esordio in Europa" },
+    { club:"Nazionale",      period:"2025–",     apps:6,   goals:0,  note:"Esordio con il Brasile" },
+  ]},
+  { answer:"Gift Orban", clues:[
+    { club:"Stabæk",         period:"2021–2022", apps:22,  goals:16, note:"Rivelazione in Norvegia" },
+    { club:"Gent",           period:"2023–2024", apps:27,  goals:12, note:"Protagonista in Belgio" },
+    { club:"Olympique Lione",period:"2024–2025", apps:16,  goals:3,  note:"Esperienza in Ligue 1" },
+    { club:"Verona",         period:"2025–",     apps:21,  goals:7,  note:"Scommessa in Serie A" },
+  ]},
+  { answer:"Andrea Belotti", clues:[
+    { club:"Palermo",        period:"2013–2015", apps:62,  goals:17, note:"Si afferma in Serie A" },
+    { club:"Torino",         period:"2015–2022", apps:232, goals:100,note:"Capitano e leggenda granata" },
+    { club:"Roma",           period:"2022–2024", apps:45,  goals:3,  note:"Esperienza in giallorosso" },
+    { club:"Como",           period:"2024–2025", apps:18,  goals:2,  note:"Nuova avventura in Lombardia" },
+    { club:"Nazionale",      period:"2016–2022", apps:44,  goals:12, note:"Euro 2020 vinto con l'Italia" },
+  ]},
+  { answer:"Yann Bisseck", clues:[
+    { club:"Aarhus",         period:"2021–2023", apps:43,  goals:4,  note:"Si afferma in Danimarca" },
+    { club:"Inter",          period:"2023–",     apps:62,  goals:7,  note:"Difensore rivelazione nerazzurra" },
+    { club:"Nazionale",      period:"2025–",     apps:1,   goals:0,  note:"Esordio con la Germania" },
+  ]},
+  { answer:"Leandro Pavoletti", clues:[
+    { club:"Sassuolo",       period:"2012–2014", apps:33,  goals:11, note:"Prima Serie A" },
+    { club:"Genoa",          period:"2015–2017", apps:45,  goals:23, note:"Bomber rivelazione" },
+    { club:"Napoli",         period:"2017",      apps:6,   goals:0,  note:"Breve esperienza al Napoli" },
+    { club:"Cagliari",       period:"2017–",     apps:214, goals:49, note:"Leggenda della Sardegna" },
+    { club:"Nazionale",      period:"2019",      apps:1,   goals:1,  note:"Un gol all'esordio in Azzurro" },
+  ]},
+  { answer:"Marco Carnesecchi", clues:[
+    { club:"Trapani",        period:"2019–2020", apps:33,  goals:0,  note:"Esordio in C, promosso in B" },
+    { club:"Cremonese",      period:"2021–2023", apps:83,  goals:0,  note:"Porta la Cremo in Serie A" },
+    { club:"Atalanta",       period:"2023–",     apps:92,  goals:0,  note:"Titolare fisso con Gasperini" },
+    { club:"Nazionale",      period:"2019–2023", apps:22,  goals:0,  note:"Portiere titolare U-21" },
+  ]},
+  { answer:"Strahinja Pavlovic", clues:[
+    { club:"Partizan",       period:"2019–2020", apps:37,  goals:1,  note:"Esordio in Serbia" },
+    { club:"Salisburgo",     period:"2022–2024", apps:50,  goals:3,  note:"Si afferma in Austria" },
+    { club:"Milan",          period:"2024–",     apps:50,  goals:6,  note:"Grande acquisto rossonero" },
+    { club:"Nazionale",      period:"2020–",     apps:54,  goals:5,  note:"Titolare fisso con la Serbia" },
+  ]},
+  { answer:"Ademola Lookman", clues:[
+    { club:"Charlton",       period:"2015–2017", apps:45,  goals:10, note:"Esordio in Championship" },
+    { club:"Everton",        period:"2017–2019", apps:36,  goals:1,  note:"Esperienza in Premier" },
+    { club:"RB Lipsia",      period:"2018–2020", apps:22,  goals:5,  note:"Prestiti in Bundesliga" },
+    { club:"Fulham",         period:"2020–2021", apps:34,  goals:4,  note:"Ottima stagione in Championship" },
+    { club:"Atalanta",       period:"2022–2026", apps:104, goals:41, note:"Hat-trick in finale Europa League 2024" },
+    { club:"Atlético Madrid",period:"2026–",     apps:7,   goals:2,  note:"Grande salto in LaLiga" },
+    { club:"Nazionale",      period:"2022–",     apps:43,  goals:11, note:"Scelta la Nigeria all'Inghilterra" },
+  ]},
+  { answer:"Edoardo Bove", clues:[
+    { club:"Roma",           period:"2021–2024", apps:65,  goals:2,  note:"Cresciuto nel settore giovanile giallorosso" },
+    { club:"Fiorentina",     period:"2024–2025", apps:12,  goals:1,  note:"Malore in campo, grande ritorno" },
+    { club:"Watford",        period:"2026–",     apps:6,   goals:1,  note:"Nuova avventura in Championship" },
+  ]},
+  { answer:"N'Golo Kanté", clues:[
+    { club:"Caen",           period:"2013–2015", apps:75,  goals:4,  note:"Si afferma in Ligue 2" },
+    { club:"Leicester City", period:"2015–2016", apps:37,  goals:1,  note:"Premier League con i Foxes" },
+    { club:"Chelsea",        period:"2016–2023", apps:190, goals:11, note:"Champions League 2021, Pallone d'Oro sfiorato" },
+    { club:"Al-Ittihad",     period:"2023–2026", apps:79,  goals:8,  note:"Arabia Saudita" },
+    { club:"Nazionale",      period:"2016–",     apps:67,  goals:2,  note:"Mondiale 2018 con la Francia" },
+  ]},
+  { answer:"Leon Goretzka", clues:[
+    { club:"Bochum",         period:"2012–2013", apps:32,  goals:4,  note:"Esordio in Bundesliga" },
+    { club:"Schalke 04",     period:"2013–2018", apps:116, goals:14, note:"Si afferma come mezzala" },
+    { club:"Bayern Monaco",  period:"2018–",     apps:199, goals:37, note:"Multiplo Bundesliga e Champions 2020" },
+    { club:"Nazionale",      period:"2014–",     apps:69,  goals:15, note:"Mondiale 2018 con la Germania" },
+  ]},
+  { answer:"Antoine Griezmann", clues:[
+    { club:"Real Sociedad",  period:"2009–2014", apps:180, goals:46, note:"Si afferma in LaLiga" },
+    { club:"Atlético Madrid",period:"2014–2019", apps:180, goals:94, note:"Europa League 2018, finalista Champions" },
+    { club:"Barcellona",     period:"2019–2021", apps:74,  goals:22, note:"Esperienza al Camp Nou" },
+    { club:"Atlético Madrid",period:"2021–",     apps:158, goals:48, note:"Ritorno al Wanda, ancora decisivo" },
+    { club:"Nazionale",      period:"2014–2024", apps:137, goals:44, note:"Mondiale 2018, Euro 2016 finalista" },
+  ]},
+  { answer:"Francisco Conceicao", clues:[
+    { club:"Porto",          period:"2021–2024", apps:66,  goals:7,  note:"Figlio di Sérgio, esplode in Portogallo" },
+    { club:"Ajax",           period:"2022–2023", apps:26,  goals:5,  note:"Prestito in Eredivisie" },
+    { club:"Juventus",       period:"2024–",     apps:50,  goals:6,  note:"Gol decisivi in Champions" },
+    { club:"Nazionale",      period:"2024–",     apps:15,  goals:3,  note:"Talento emergente del Portogallo" },
+  ]},
+  { answer:"Fikayo Tomori", clues:[
+    { club:"Chelsea",        period:"2016–2021", apps:17,  goals:1,  note:"Cresciuto nel settore giovanile" },
+    { club:"Derby County",   period:"2018–2019", apps:44,  goals:1,  note:"Prestito rivelazione in Championship" },
+    { club:"Milan",          period:"2021–",     apps:157, goals:6,  note:"Scudetto 2022, titolare inamovibile" },
+    { club:"Nazionale",      period:"2019–",     apps:6,   goals:0,  note:"Sceglie l'Inghilterra" },
+  ]},
+  { answer:"Marten De Roon", clues:[
+    { club:"Heerenveen",     period:"2012–2015", apps:87,  goals:5,  note:"Si afferma in Eredivisie" },
+    { club:"Atalanta",       period:"2015–2016", apps:36,  goals:1,  note:"Prima stagione a Bergamo" },
+    { club:"Middlesbrough",  period:"2016–2017", apps:34,  goals:4,  note:"Esperienza in Premier" },
+    { club:"Atalanta",       period:"2017–",     apps:297, goals:19, note:"Simbolo del progetto Gasperini" },
+    { club:"Nazionale",      period:"2016–2024", apps:42,  goals:1,  note:"Presenze con i Paesi Bassi" },
+  ]},
+  { answer:"Piotr Zielinski", clues:[
+    { club:"Udinese",        period:"2012–2014", apps:19,  goals:0,  note:"Esordio in Serie A" },
+    { club:"Empoli",         period:"2014–2016", apps:63,  goals:5,  note:"Si afferma in prestito" },
+    { club:"Napoli",         period:"2016–2024", apps:281, goals:37, note:"Scudetto 2023, colonna del centrocampo" },
+    { club:"Inter",          period:"2024–",     apps:54,  goals:7,  note:"Parametro zero di lusso" },
+    { club:"Nazionale",      period:"2013–",     apps:107, goals:17, note:"Capitano della Polonia" },
+  ]},
+  { answer:"Alexis Saelemaekers", clues:[
+    { club:"Anderlecht",     period:"2018–2020", apps:40,  goals:2,  note:"Esordio in Belgio" },
+    { club:"Milan",          period:"2020–2025", apps:141, goals:8,  note:"Tuttofare rossonero, Scudetto 2022" },
+    { club:"Bologna",        period:"2023–2024", apps:30,  goals:4,  note:"Prestito, ottima stagione" },
+    { club:"Roma",           period:"2024–2025", apps:22,  goals:7,  note:"Prestito con gol pesanti" },
+    { club:"Nazionale",      period:"2020–",     apps:23,  goals:2,  note:"Presente con il Belgio" },
+  ]},
+  { answer:"Charles De Ketelaere", clues:[
+    { club:"Club Bruges",    period:"2019–2022", apps:90,  goals:18, note:"Rivelazione in Belgio" },
+    { club:"Milan",          period:"2022–2023", apps:32,  goals:0,  note:"Anno difficile in rossonero" },
+    { club:"Atalanta",       period:"2023–",     apps:95,  goals:20, note:"Rinascita totale con Gasperini" },
+    { club:"Nazionale",      period:"2020–",     apps:28,  goals:5,  note:"Talento del Belgio" },
+  ]},
+  { answer:"Pierre Kalulu", clues:[
+    { club:"Olympique Lione 2",period:"2018–2020",apps:36, goals:0,  note:"Cresciuto nel settore giovanile" },
+    { club:"Milan",          period:"2020–2024", apps:84,  goals:3,  note:"Scudetto 2022, difensore affidabile" },
+    { club:"Juventus",       period:"2024–",     apps:59,  goals:3,  note:"Approdo a Torino" },
+    { club:"Nazionale",      period:"2025–",     apps:3,   goals:0,  note:"Esordio con la Francia" },
+  ]},
+  { answer:"Leonardo Spinazzola", clues:[
+    { club:"Atalanta",       period:"2016–2018", apps:48,  goals:0,  note:"Si afferma come terzino" },
+    { club:"Juventus",       period:"2018–2019", apps:10,  goals:0,  note:"Breve esperienza bianconera" },
+    { club:"Roma",           period:"2019–2024", apps:104, goals:5,  note:"Euro 2020 da protagonista prima dell'infortunio" },
+    { club:"Napoli",         period:"2024–",     apps:54,  goals:4,  note:"Nuovo inizio in azzurro" },
+    { club:"Nazionale",      period:"2017–",     apps:27,  goals:0,  note:"Euro 2020 tra i migliori prima dell'infortunio" },
+  ]},
+  { answer:"Ruslan Malinovskyi", clues:[
+    { club:"Genk",           period:"2016–2019", apps:73,  goals:16, note:"Si afferma in Belgio" },
+    { club:"Atalanta",       period:"2019–2023", apps:115, goals:23, note:"Europa League 2024, elemento chiave" },
+    { club:"Olympique Marsiglia",period:"2023",  apps:20,  goals:1,  note:"Breve parentesi in Francia" },
+    { club:"Genoa",          period:"2023–",     apps:66,  goals:9,  note:"Ritorno in Serie A" },
+    { club:"Nazionale",      period:"2015–",     apps:70,  goals:10, note:"Pilastro dell'Ucraina" },
+  ]},
+  { answer:"David Neres", clues:[
+    { club:"Ajax",           period:"2017–2022", apps:121, goals:37, note:"Finalista Champions League 2019" },
+    { club:"Benfica",        period:"2022–2024", apps:55,  goals:11, note:"Protagonista in Portogallo" },
+    { club:"Napoli",         period:"2024–",     apps:44,  goals:5,  note:"Scudetto in arrivo con gli Azzurri" },
+    { club:"Nazionale",      period:"2019–2023", apps:8,   goals:1,  note:"Presente con il Brasile" },
+  ]},
+
 ];
 
 // ── ROSE (25/26) ────────────────────────────────────────────────────────
@@ -983,24 +1200,39 @@ function saveResult(gameKey,data){
     const k=`uq_${gameKey}_${todayKey()}`;
     if(_get(k))return; // already saved today, don't overwrite
     _set(k,JSON.stringify(data));
-    // update streak only on first save of the day across all games
-    const sk="uq_streak";
-    const raw=_get(sk);
-    const streak=raw?JSON.parse(raw):{count:0,lastDate:""};
-    const today=todayKey();
-    if(streak.lastDate===today)return;
-    const yest=(()=>{const d=new Date();d.setDate(d.getDate()-1);return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;})();
-    const newCount=streak.lastDate===yest?streak.count+1:1;
-    _set(sk,JSON.stringify({count:newCount,lastDate:today}));
+    // streak rimossa — troppo inaffidabile in iframe cross-domain
   }catch(e){}
 }
 function loadResult(gameKey){
   try{const k=`uq_${gameKey}_${todayKey()}`;const r=_get(k);return r?JSON.parse(r):null;}catch(e){return null;}
 }
-function loadStreak(){
-  try{const r=_get("uq_streak");return r?JSON.parse(r):{count:0,lastDate:""};}catch(e){return{count:0,lastDate:""};}
+
+function saveStats(gameKey,won){
+  try{
+    const k=`uq_stats_${gameKey}`;
+    const raw=_get(k);
+    const s=raw?JSON.parse(raw):{played:0,won:0};
+    s.played+=1;if(won)s.won+=1;
+    _set(k,JSON.stringify(s));
+  }catch(e){}
+}
+function loadStats(gameKey){
+  try{const r=_get(`uq_stats_${gameKey}`);return r?JSON.parse(r):{played:0,won:0};}catch(e){return{played:0,won:0};}
 }
 
+function Confetti({active}){
+  if(!active)return null;
+  const pieces=Array.from({length:40},(_,i)=>({
+    id:i,
+    left:Math.random()*100,
+    delay:Math.random()*1.5,
+    duration:2+Math.random()*2,
+    color:["#f5e000","#16a34a","#dc2626","#2563eb","#f97316","#a855f7"][i%6],
+    size:6+Math.random()*8,
+    shape:i%3===0?"50%":"2px"
+  }));
+  return(<>{pieces.map(p=><div key={p.id} className="confetti-piece" style={{left:`${p.left}%`,top:"-10px",width:`${p.size}px`,height:`${p.size}px`,background:p.color,borderRadius:p.shape,animationDelay:`${p.delay}s`,animationDuration:`${p.duration}s`}}/>)}</>);
+}
 function useCountdown(){
   const[t,sT]=useState("");
   useEffect(()=>{
@@ -1075,7 +1307,7 @@ function Hdr({title,sub,onHome,archiveNav}){
 }
 
 // ── ARCHIVE WRAPPER ──────────────────────────────────────────────────────
-const POOL_SIZES={calciodle:DB.length,wordle:DB.length,hangman:DB.length,valore2:DB.length,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:12,transfer:15};
+const POOL_SIZES={calciodle:DB.length,wordle:DB.length,hangman:DB.length,valore2:DB.length,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:42};
 
 const PAGE_SIZE=10;
 function ArchiveWrapper({gameKey,children}){
@@ -1141,8 +1373,17 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const target=useMemo(()=>dailyPool[0],[dailyPool]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("calciodle"):null;
-  const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);const[animRows,setAnimRows]=useState(new Set());
-  useEffect(()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows(new Set());},[seed]);
+  const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);const[animRows,setAnimRows]=useState(new Set());const[hintUsed,setHintUsed]=useState(false);const[hintCol,setHintCol]=useState(null);
+  useEffect(()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows(new Set());setHintUsed(false);setHintCol(null);},[seed]);
+  function useHint(){
+    if(hintUsed||ov)return;
+    // Scegli una colonna non ancora verde tra tutte le righe giocate
+    const cols=COLS.map(c=>c.key);
+    // Preferisci colonne ancora sbagliate nelle ultime righe
+    const notGreen=cols.filter(k=>G.length===0||G.some(g=>eC(k,g[k],target[k])!=="green"));
+    const pick=notGreen.length>0?notGreen[Math.floor(Math.random()*notGreen.length)]:cols[Math.floor(Math.random()*cols.length)];
+    setHintCol(pick);setHintUsed(true);
+  }
   function normSearch(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
   function onI(v){sI(v);if(v.length<2){sSg([]);return;}const q=normSearch(v);const avail=DB.filter(p=>!G.find(x=>x.name===p.name));const bySurname=avail.filter(p=>normSearch(p.surname).includes(q));const byName=avail.filter(p=>normSearch(p.name).includes(q)&&!bySurname.includes(p));sSg([...bySurname,...byName].slice(0,8));}
   function sub(p){
@@ -1152,17 +1393,17 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     sG(ng);sI("");sSg([]);
     // trigger flip animation for this row
     setTimeout(()=>setAnimRows(s=>new Set([...s,ri])),50);
-    if(w){sW(true);sO(true);if(isToday)saveResult("calciodle",{won:true,attempts:ng.length});setTimeout(()=>sMo(true),COLS.length*120+600);}
-    else if(o){sO(true);if(isToday)saveResult("calciodle",{won:false,attempts:6});setTimeout(()=>sMo(true),COLS.length*120+600);}
+    if(w){sW(true);sO(true);if(isToday){saveResult("calciodle",{won:true,attempts:ng.length});saveStats("calciodle",true);}setTimeout(()=>sMo(true),COLS.length*120+600);}
+    else if(o){sO(true);if(isToday){saveResult("calciodle",{won:false,attempts:6});saveStats("calciodle",false);}setTimeout(()=>sMo(true),COLS.length*120+600);}
   }
   // Flip cell component
   function FlipCell({value,arrow,color,colIdx,rowIdx}){
     const flipped=animRows.has(rowIdx);
-    const delay=colIdx*150;
+    const delay=colIdx*200;
     const bg=CLR[color]?.bg||"#e0e0e0";
     return(
       <div style={{flex:1,minWidth:0,height:"38px",perspective:"400px"}}>
-        <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.7s ease ${delay}ms`,transform:flipped?"rotateX(180deg)":"rotateX(0deg)"}}>
+        <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 1.0s cubic-bezier(0.4,0,0.2,1) ${delay}ms`,transform:flipped?"rotateX(180deg)":"rotateX(0deg)"}}>
           {/* front — gray placeholder */}
           <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e8e8e8",borderRadius:"3px",display:"flex",alignItems:"center",justifyContent:"center"}}/>
           {/* back — colored result */}
@@ -1184,7 +1425,10 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     <div style={T.body}>
       {/* INPUT PRIMA — sempre visibile su mobile */}
       {!ov&&<div style={{marginBottom:"14px"}}>
-        <span style={T.lb}>Inserisci un giocatore ({G.length}/6)</span>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"4px"}}>
+          <span style={T.lb}>Inserisci un giocatore ({G.length}/6)</span>
+          {!hintUsed?<button onClick={useHint} style={{background:"#eff6ff",border:"1px solid #2563eb",borderRadius:"4px",padding:"3px 8px",fontSize:"9px",cursor:"pointer",color:"#1d4ed8",fontFamily:"inherit"}}>💡 Suggerimento</button>:<span style={{fontSize:"9px",color:"#bbb"}}>💡 Usato</span>}
+        </div>
         <div style={{position:"relative"}}>
           <input style={{...T.ip,width:"100%"}} value={inp} onChange={e=>onI(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&sg.length)sub(sg[0]);}} placeholder="Cerca nome..." autoFocus/>
           {sg.length>0&&<div style={{position:"absolute",top:"100%",left:0,right:0,background:"#fff",border:"1.5px solid #e0e0e0",borderRadius:"2px",zIndex:10,boxShadow:"0 4px 12px rgba(0,0,0,0.1)",marginTop:"2px"}}>
@@ -1194,12 +1438,13 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
           </div>}
         </div>
       </div>}
+      {hintCol&&!ov&&<div style={{marginBottom:"8px",padding:"7px 12px",background:"#eff6ff",border:"1.5px solid #2563eb",borderRadius:"6px",textAlign:"center",fontSize:"11px",color:"#1d4ed8"}}>💡 <strong>{COLS.find(c=>c.key===hintCol)?.label}:</strong> {hintCol==="value"?`€${target[hintCol]}M`:target[hintCol]}</div>}
       {ov&&<div style={{marginBottom:"12px",padding:"9px 12px",background:won?US.greenL:US.redL,borderRadius:"6px",textAlign:"center",fontSize:"12px",fontWeight:"700",color:won?US.green:US.red}}>{won?`✓ Trovato in ${G.length}/6`:`✗ Era ${target.name}`}</div>}
       {/* LEGENDA */}
       <div style={{display:"flex",gap:"10px",marginBottom:"10px"}}>{[[US.green,"Esatto"],[US.yellow,"Vicino"],[US.red,"Sbagliato"]].map(([c,l])=><div key={c} style={{display:"flex",alignItems:"center",gap:"3px",fontSize:"9px",color:"#999"}}><div style={{width:"8px",height:"8px",borderRadius:"2px",background:c}}/>{l}</div>)}</div>
       {/* GRIGLIA — header + righe indovinati */}
       <div style={{width:"100%"}}>
-        <div style={{display:"flex",gap:"3px",marginBottom:"4px",paddingLeft:"52px"}}>{COLS.map(c=><div key={c.key} style={{flex:1,fontSize:"7px",letterSpacing:"1px",textTransform:"uppercase",color:"#bbb",textAlign:"center"}}>{c.label}</div>)}</div>
+        <div style={{display:"flex",gap:"3px",marginBottom:"4px",paddingLeft:"52px"}}>{COLS.map(c=><div key={c.key} style={{flex:1,fontSize:"7px",letterSpacing:"1px",textTransform:"uppercase",color:hintCol===c.key?"#2563eb":"#bbb",textAlign:"center",fontWeight:hintCol===c.key?"700":"400"}}>{c.label}{hintCol===c.key?" ★":""}</div>)}</div>
         {G.map((g,ri)=>(
           <div key={ri} style={{display:"flex",gap:"3px",alignItems:"center",marginBottom:"3px"}}>
             <div style={{width:"50px",fontSize:"8px",color:"#555",textAlign:"right",paddingRight:"5px",flexShrink:0,overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{g.name.split(" ").pop()}</div>
@@ -1213,9 +1458,34 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
         ))}
       </div>
     </div>
-    {mo&&<div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100,padding:"16px"}} onClick={()=>sMo(false)}><div style={{background:"#fff",borderRadius:"4px",maxWidth:"280px",width:"100%",overflow:"hidden"}} onClick={e=>e.stopPropagation()}><div style={{background:US.black,color:"#fff",padding:"11px 16px"}}><div style={{fontSize:"8px",color:"#888",marginBottom:"2px"}}>{won?`Trovato in ${G.length}`:"Game Over"}</div><div style={{fontSize:"16px"}}>{won?"Complimenti!":"Era..."}</div></div><div style={{padding:"12px 16px"}}><div style={{border:"1.5px solid #e8e8e8",borderRadius:"2px",padding:"9px",marginBottom:"9px"}}><div style={{fontWeight:"700",marginBottom:"3px"}}>{target.name}</div>{[["Club",target.club],["Nazione",target.nation],["Valore",`€${target.value}M`]].map(([k,v])=><div key={k} style={{fontSize:"11px",color:"#777"}}><strong>{k}:</strong> {v}</div>)}</div><button onClick={()=>sMo(false)} style={{...T.pb,width:"100%"}}>Chiudi</button>
-              <ShareButton text={`⚽ Calciodle #${day}\n${won?"Trovato in "+G.length+"/6":"Non trovato"}\n${G.map((_,i)=>won&&i===G.length-1?"🟩":"🟥").join("")}\nuniverso-quiz-hmix.vercel.app`}/>{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}
-              {!isToday&&<button onClick={()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows(new Set());}} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>🔀 Rigioca</button>}</div></div></div>}
+    {mo&&(()=>{
+      const st=loadStats("calciodle");
+      const winPct=st.played>0?Math.round(st.won/st.played*100):0;
+      const msg=won?(G.length===1?"🤯 Fenomeno! Al primo tentativo!":G.length===2?"🔥 Straordinario! Solo 2 tentativi!":G.length===3?"⚡ Ottimo! Trovato al 3° tentativo":G.length===4?"👍 Ben fatto! Al 4° tentativo":"😅 Ce l'hai fatta!"):"😔 Peccato, ci riproverai!";
+      return(<>{won&&<Confetti active={mo}/>}<div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100,padding:"16px"}} onClick={()=>sMo(false)}><div style={{background:"#fff",borderRadius:"8px",maxWidth:"300px",width:"100%",overflow:"hidden",boxShadow:"0 20px 60px rgba(0,0,0,0.3)"}} onClick={e=>e.stopPropagation()}>
+        <div style={{background:won?"linear-gradient(135deg,#16a34a,#15803d)":"linear-gradient(135deg,#dc2626,#b91c1c)",color:"#fff",padding:"16px",textAlign:"center"}}>
+          <div style={{fontSize:"36px",marginBottom:"4px"}}>{won?"🎉":"😔"}</div>
+          <div style={{fontSize:"18px",fontWeight:"700",marginBottom:"2px"}}>{won?"Complimenti!":"Game Over"}</div>
+          <div style={{fontSize:"12px",opacity:0.85}}>{msg}</div>
+        </div>
+        <div style={{padding:"14px 16px"}}>
+          <div style={{border:"1.5px solid #e8e8e8",borderRadius:"6px",padding:"10px",marginBottom:"10px"}}>
+            <div style={{fontWeight:"700",fontSize:"14px",marginBottom:"4px"}}>{target.name}</div>
+            {[["Club",target.club],["Nazione",target.nation],["Ruolo",target.role],["Valore",`€${target.value}M`]].map(([k,v])=><div key={k} style={{fontSize:"11px",color:"#777",marginBottom:"1px"}}><strong>{k}:</strong> {v}</div>)}
+          </div>
+          {isToday&&st.played>0&&<div style={{display:"flex",gap:"8px",marginBottom:"10px"}}>
+            {[["Partite",st.played],["Vittorie",st.won],["%Vinte",winPct+"%"]].map(([l,v])=><div key={l} style={{flex:1,textAlign:"center",background:"#f9f9f9",borderRadius:"6px",padding:"8px 4px"}}>
+              <div style={{fontSize:"18px",fontWeight:"700",color:US.black}}>{v}</div>
+              <div style={{fontSize:"8px",color:"#999",textTransform:"uppercase",letterSpacing:"1px"}}>{l}</div>
+            </div>)}
+          </div>}
+          <button onClick={()=>sMo(false)} style={{...T.pb,width:"100%",marginBottom:"6px"}}>Chiudi</button>
+          <ShareButton text={`⚽ Calciodle #${day}\n${won?"Trovato in "+G.length+"/6":"Non trovato"}\n${G.map((_,i)=>won&&i===G.length-1?"🟩":"🟥").join("")}\nuniverso-quiz-hmix.vercel.app`}/>
+          {isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}
+          {!isToday&&<button onClick={()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows(new Set());setHintUsed(false);setHintCol(null);}} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>🔀 Rigioca</button>}
+        </div>
+      </div></div></> );
+    })()}
   </div>);
 }
 function Calciodle({onHome,isDaily,onArchive}){
@@ -1523,8 +1793,8 @@ const LISTA_CATEGORIES = [
     answers:["Di Natale","Ibrahimovic","Cavani","Immobile","Icardi","Toni","Higuain","Dzeko","Icardi","Immobile","Quagliarella","Immobile","Ronaldo","Immobile","Osimhen","Lautaro","Retegui"],
     unique:["Di Natale","Ibrahimovic","Cavani","Immobile","Icardi","Toni","Higuain","Dzeko","Quagliarella","Ronaldo","Osimhen","Lautaro","Retegui"] },
   { id:5, title:"Vincitori Pallone d'Oro dal 2000", desc:"Solo cognomi, un nome per ogni anno",
-    answers:["Figo","Owen","Ronaldo","Nedved","Shevchenko","Ronaldinho","Cannavaro","Kaka","Messi","Messi","Messi","Messi","Ronaldo","Ronaldo","Ronaldo","Ronaldo","Modric","Messi","Messi","Lewandowski","Messi","Benzema","Messi","Messi","Bellingham","Rodri"],
-    unique:["Figo","Owen","Ronaldo","Nedved","Shevchenko","Ronaldinho","Cannavaro","Kaka","Messi","Modric","Benzema","Bellingham","Rodri","Lewandowski"] },
+    answers:["Figo","Owen","Ronaldo","Nedved","Shevchenko","Ronaldinho","Cannavaro","Kaká","Messi","Messi","Messi","Messi","Cristiano Ronaldo","Messi","Cristiano Ronaldo","Messi","Cristiano Ronaldo","Modric","Messi","Messi","Lewandowski","Messi","Benzema","Messi","Rodri","Dembélé"],
+    unique:["Figo","Owen","Ronaldo","Nedved","Shevchenko","Ronaldinho","Cannavaro","Kaká","Messi","Cristiano Ronaldo","Modric","Lewandowski","Benzema","Rodri","Dembélé"] },
   { id:6, title:"Allenatori Scudetto dal 2000", desc:"Chi ha vinto il titolo in panchina?",
     answers:["Eriksson","Lippi","Capello","Ancelotti","Capello","Mancini","Mancini","Mancini","Mourinho","Allegri","Allegri","Allegri","Allegri","Allegri","Sarri","Conte","Pioli","Allegri","Inzaghi","Spalletti","Conte"],
     unique:["Eriksson","Lippi","Capello","Ancelotti","Mancini","Mourinho","Allegri","Sarri","Conte","Pioli","Inzaghi","Spalletti"] },
@@ -1565,6 +1835,85 @@ const LISTA_CATEGORIES = [
     answers:["Buffon","Cannavaro","Maldini","Facchetti","Zoff","Bergomi","Baresi","Donnarumma","Baloncieri","Bonucci","De Vecchi"] },
   { id:24, title:"Top 10 marcatori della Nazionale italiana", desc:"I bomber Azzurri di sempre",
     answers:["Riva","Meazza","Piola","Baggio","Del Piero","Altobelli","Baloncieri","Inzaghi F","Graziani","Vieri"] },
+  { id:25, title:"Top 10 assist in Serie A all-time", desc:"I re dei passaggi decisivi",
+    answers:["Totti","Baggio","Del Piero","Rivera","Cassano","Pirlo","Candreva","Hamsik","Insigne","Pjanic"],
+    unique:["Totti","Baggio","Del Piero","Rivera","Cassano","Pirlo","Candreva","Hamsik","Insigne","Pjanic"] },
+  { id:26, title:"Top 10 imbattibilità portieri in Serie A (minuti)", desc:"Record di minuti senza subire gol",
+    answers:["Buffon","Rossi","Zoff","Da Pozzo","Buffon","Pelizzoli","Pinato","Buffon","Marchegiani","De Sanctis"],
+    unique:["Buffon","Rossi","Zoff","Da Pozzo","Pelizzoli","Pinato","Marchegiani","De Sanctis"] },
+  { id:27, title:"Top 14 cartellini rossi in Serie A all-time", desc:"I più espulsi della storia",
+    answers:["Montero","Di Biagio","Falcone","Ledesma","Muntari","Pinzi","Ambrosini","Bergomi","Biava","Conti","Couto","Dal Bello","Ferrini","Totti"],
+    unique:["Montero","Di Biagio","Falcone","Ledesma","Muntari","Pinzi","Ambrosini","Bergomi","Biava","Conti","Couto","Dal Bello","Ferrini","Totti"] },
+  { id:28, title:"Top 10 cartellini gialli in Serie A all-time", desc:"I più ammoniti della storia",
+    answers:["Pinzi","Conti","De Rossi","Ambrosini","Lucarelli","Cigarini","Totti","Cannavaro","Dal Bello","Di Biagio"],
+    unique:["Pinzi","Conti","De Rossi","Ambrosini","Lucarelli","Cigarini","Totti","Cannavaro","Dal Bello","Di Biagio"] },
+  { id:29, title:"15 più giovani all'esordio in Serie A", desc:"Record di precocità nel massimo campionato",
+    answers:["Camarda","Amey","Amadei","Pellegri","Rivera","Rossi","Campione","Salcedo","Boinov","Pirlo","El Shaarawy","Pafundi","Tassi","Traoré","Okaka"],
+    unique:["Camarda","Amey","Amadei","Pellegri","Rivera","Rossi","Campione","Salcedo","Boinov","Pirlo","El Shaarawy","Pafundi","Tassi","Traoré","Okaka"] },
+  { id:30, title:"15 più anziani all'ultima presenza in Serie A", desc:"Chi ha giocato più a lungo nel massimo campionato",
+    answers:["Ballotta","Buffon","Reina","Antonioli","Pegolo","Fontana","Colombo","Ibrahimović","Zoff","Costacurta","Vierchowod","Maldini","Mirante","Zanetti","Totti"],
+    unique:["Ballotta","Buffon","Reina","Antonioli","Pegolo","Fontana","Colombo","Ibrahimović","Zoff","Costacurta","Vierchowod","Maldini","Mirante","Zanetti","Totti"] },
+  { id:31, title:"Top 15 allenatori per presenze in Serie A", desc:"I tecnici con più panchine nel massimo campionato",
+    answers:["Mazzone","Rocco","Trapattoni","Liedholm","Viani","Gasperini","Bernardini","Spalletti","Guidolin","Allegri","Mazzarri","Ferrero","Pioli","Radice","Ranieri"],
+    unique:["Mazzone","Rocco","Trapattoni","Liedholm","Viani","Gasperini","Bernardini","Spalletti","Guidolin","Allegri","Mazzarri","Ferrero","Pioli","Radice","Ranieri"] },
+  { id:32, title:"Allenatori con più Scudetti in Serie A", desc:"Chi ha vinto più titoli in panchina",
+    answers:["Trapattoni","Allegri","Capello","Conte","Lippi","Carcano","Herrera","Mancini","Parola","Viani","Weisz"],
+    unique:["Trapattoni","Allegri","Capello","Conte","Lippi","Carcano","Herrera","Mancini","Parola","Viani","Weisz"] },
+  { id:33, title:"Vincitori Pallone d'Oro dal 2000 (top 3 ogni anno)", desc:"I podii del Pallone d'Oro dal 2000 ad oggi",
+    answers:["Figo","Zidane","Shevchenko","Owen","Raúl","Kahn","Ronaldo","Roberto Carlos","Kahn","Nedved","Henry","Maldini","Shevchenko","Deco","Ronaldinho","Ronaldinho","Lampard","Gerrard","Cannavaro","Buffon","Henry","Kaká","Cristiano Ronaldo","Messi","Cristiano Ronaldo","Messi","Torres","Messi","Cristiano Ronaldo","Xavi","Messi","Iniesta","Xavi","Messi","Cristiano Ronaldo","Xavi","Messi","Cristiano Ronaldo","Ribéry","Cristiano Ronaldo","Messi","Neuer","Messi","Cristiano Ronaldo","Neymar","Cristiano Ronaldo","Messi","Griezmann","Cristiano Ronaldo","Messi","Griezmann","Modric","Cristiano Ronaldo","Griezmann","Messi","Van Dijk","Cristiano Ronaldo","Messi","Lewandowski","Jorginho","Benzema","Mané","De Bruyne","Messi","Haaland","Mbappé","Rodri","Vinícius","Bellingham","Dembélé","Yamal","Vitinha"],
+    unique:["Figo","Zidane","Shevchenko","Owen","Raúl","Kahn","Ronaldo","Roberto Carlos","Nedved","Henry","Maldini","Deco","Ronaldinho","Lampard","Gerrard","Cannavaro","Buffon","Kaká","Cristiano Ronaldo","Messi","Torres","Xavi","Iniesta","Ribéry","Neuer","Neymar","Griezmann","Modric","Van Dijk","Lewandowski","Jorginho","Benzema","Mané","De Bruyne","Haaland","Mbappé","Rodri","Vinícius","Bellingham","Dembélé","Yamal","Vitinha"] },
+  { id:34, title:"Top 20 presenze in Serie A all-time", desc:"I giocatori con più partite giocate nel massimo campionato",
+    answers:["Maldini","Totti","Zanetti","Pagliuca","Zoff","Handanovic","Vierchowod","Quagliarella","Mancini","Bergomi","Albertosi","Rivera","Bergomi","Gilardino","Consigli","Candreva","Ferrara","Galli","Burgnich"],
+    unique:["Maldini","Totti","Zanetti","Pagliuca","Zoff","Handanovic","Vierchowod","Quagliarella","Mancini","Bergomi","Albertosi","Rivera","Gilardino","Consigli","Candreva","Ferrara","Galli","Burgnich"] },
+  { id:35, title:"Top 10 marcatori in Serie A all-time", desc:"I bomber eterni del campionato italiano",
+    answers:["Piola","Totti","Nordahl","Meazza","Altafini","Di Natale","Baggio","Immobile","Hamrin","Signori"],
+    unique:["Piola","Totti","Nordahl","Meazza","Altafini","Di Natale","Baggio","Immobile","Hamrin","Signori"] },
+
+  { id:36, title:"Top 10 squadre per partecipazioni in Serie A", desc:"Le squadre con più stagioni nel massimo campionato",
+    answers:["Inter","Juventus","Roma","Milan","Fiorentina","Lazio","Torino","Napoli","Bologna","Sampdoria"],
+    unique:["Inter","Juventus","Roma","Milan","Fiorentina","Lazio","Torino","Napoli","Bologna","Sampdoria"] },
+  { id:37, title:"Squadre vincitrici della Coppa Italia", desc:"Quante Coppe Italia ha vinto ogni club?",
+    answers:["Juventus","Roma","Inter","Lazio","Fiorentina","Napoli","Torino","Milan","Sampdoria","Parma","Bologna","Vado","Genoa","Venezia","Atalanta","Vicenza"],
+    unique:["Juventus","Roma","Inter","Lazio","Fiorentina","Napoli","Torino","Milan","Sampdoria","Parma","Bologna","Vado","Genoa","Venezia","Atalanta","Vicenza"] },
+  { id:38, title:"Top 15 squadre per Champions League vinte", desc:"Le squadre con più titoli europei",
+    answers:["Real Madrid","Milan","Bayern Monaco","Liverpool","Barcellona","Ajax","Inter","Manchester Utd","Juventus","Benfica","Chelsea","Nottm Forest","Porto","Borussia Dortmund","Amburgo"],
+    unique:["Real Madrid","Milan","Bayern Monaco","Liverpool","Barcellona","Ajax","Inter","Manchester Utd","Juventus","Benfica","Chelsea","Nottm Forest","Porto","Borussia Dortmund","Amburgo"] },
+  { id:39, title:"Squadre vincitrici di almeno 2 Europa League", desc:"Chi ha vinto più volte l'Europa League",
+    answers:["Siviglia","Inter","Tottenham","Liverpool","Juventus","Atlético Madrid","Borussia M'gladbach","Real Madrid","IFK Göteborg","Parma","Feyenoord","Porto","Chelsea","Eintracht"],
+    unique:["Siviglia","Inter","Tottenham","Liverpool","Juventus","Atlético Madrid","Borussia M'gladbach","Real Madrid","IFK Göteborg","Parma","Feyenoord","Porto","Chelsea","Eintracht"] },
+  { id:40, title:"Nazionali vincitrici di almeno 1 Mondiale", desc:"Quante volte ha vinto ogni nazione?",
+    answers:["Brasile","Germania","Italia","Argentina","Francia","Uruguay","Inghilterra","Spagna"],
+    unique:["Brasile","Germania","Italia","Argentina","Francia","Uruguay","Inghilterra","Spagna"] },
+  { id:41, title:"Capocannonieri dei Mondiali dal 1930", desc:"Un bomber per ogni edizione",
+    answers:["Stábile","Nejedlý","Leônidas","Ademir","Kocsis","Fontaine","Garrincha","Eusébio","Müller","Lato","Kempes","Rossi","Lineker","Schillaci","Stoičkov","Šuker","Ronaldo","Klose","Müller","Rodríguez","Kane","Mbappé"],
+    unique:["Stábile","Nejedlý","Leônidas","Ademir","Kocsis","Fontaine","Garrincha","Eusébio","Müller","Lato","Kempes","Rossi","Lineker","Schillaci","Stoičkov","Šuker","Ronaldo","Klose","Rodríguez","Kane","Mbappé"] },
+  { id:42, title:"Miglior giocatore del Mondiale dal 1978", desc:"Chi ha vinto il Pallone d'Oro al Mondiale?",
+    answers:["Kempes","Rossi","Maradona","Schillaci","Romário","Ronaldo","Kahn","Zidane","Forlán","Messi","Modric","Messi"],
+    unique:["Kempes","Rossi","Maradona","Schillaci","Romário","Ronaldo","Kahn","Zidane","Forlán","Messi","Modric"] },
+  { id:43, title:"Miglior portiere al Mondiale dal 1994", desc:"Il premio al miglior portiere di ogni edizione",
+    answers:["Preud'homme","Barthez","Kahn","Buffon","Casillas","Neuer","Courtois","E. Martínez"],
+    unique:["Preud'homme","Barthez","Kahn","Buffon","Casillas","Neuer","Courtois","E. Martínez"] },
+  { id:44, title:"Capitani vincitori del Mondiale", desc:"Chi ha alzato la coppa da capitano?",
+    answers:["Nasazzi","Combi","Meazza","Varela","Walter","Bellini","Ramos","Moore","Carlos Alberto","Beckenbauer","Passarella","Zoff","Maradona","Matthäus","Dunga","Deschamps","Cafu","Cannavaro","Casillas","Lahm","Lloris","Messi"],
+    unique:["Nasazzi","Combi","Meazza","Varela","Walter","Bellini","Ramos","Moore","Carlos Alberto","Beckenbauer","Passarella","Zoff","Maradona","Matthäus","Dunga","Deschamps","Cafu","Cannavaro","Casillas","Lahm","Lloris","Messi"] },
+  { id:45, title:"Top 10 marcatori ai Mondiali all-time", desc:"I più prolifici nella storia dei Mondiali",
+    answers:["Klose","Ronaldo","Müller G","Fontaine","Messi","Mbappé","Pelé","Kocsis","Klinsmann","Müller T"],
+    unique:["Klose","Ronaldo","Müller G","Fontaine","Messi","Mbappé","Pelé","Kocsis","Klinsmann","Müller T"] },
+  { id:46, title:"Nazionali vincitrici di almeno 1 Europeo", desc:"Chi ha vinto il campionato europeo?",
+    answers:["Spagna","Germania","Italia","Francia","Unione Sovietica","Cecoslovacchia","Portogallo","Paesi Bassi","Danimarca","Grecia"],
+    unique:["Spagna","Germania","Italia","Francia","Unione Sovietica","Cecoslovacchia","Portogallo","Paesi Bassi","Danimarca","Grecia"] },
+  { id:47, title:"Capocannonieri Europei dal 2000", desc:"I bomber di ogni edizione degli Europei",
+    answers:["Kluivert","Baroš","Villa","Cristiano Ronaldo","Griezmann","Cristiano Ronaldo","Gakpo"],
+    unique:["Kluivert","Baroš","Villa","Cristiano Ronaldo","Griezmann","Gakpo"] },
+  { id:48, title:"Miglior giocatore degli Europei dal 1996", desc:"Il premio al miglior giocatore di ogni edizione",
+    answers:["Sammer","Zidane","Zagorakis","Xavi","Iniesta","Griezmann","Donnarumma","Rodri"],
+    unique:["Sammer","Zidane","Zagorakis","Xavi","Iniesta","Griezmann","Donnarumma","Rodri"] },
+  { id:49, title:"Dream Team Pallone d'Oro (2020)", desc:"11 giocatori scelti come i migliori di sempre",
+    answers:["Yashin","Cafu","Beckenbauer","Maldini","Matthäus","Xavi","Pelé","Maradona","Messi","Ronaldo","Cristiano Ronaldo"],
+    unique:["Yashin","Cafu","Beckenbauer","Maldini","Matthäus","Xavi","Pelé","Maradona","Messi","Ronaldo","Cristiano Ronaldo"] },
+  { id:50, title:"Giocatori con almeno 2 Palloni d'Oro", desc:"Chi ha vinto più di una volta il premio individuale più ambito",
+    answers:["Messi","Cristiano Ronaldo","Platini","Cruyff","Van Basten","Beckenbauer","Ronaldo","Di Stéfano","Keegan","Rummenigge"],
+    unique:["Messi","Cristiano Ronaldo","Platini","Cruyff","Van Basten","Beckenbauer","Ronaldo","Di Stéfano","Keegan","Rummenigge"] },
 ];
 
 // Pool size per lista
@@ -1608,6 +1957,7 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   }
   const total=validAnswers.length;
   const pct=Math.round(found.length/total*100);
+  const progressColor=pct===100?US.green:pct>=70?"#2563eb":pct>=40?US.yellow:US.muted;
   if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Lista Quiz" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="lista" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=>{
     const fn=s.foundNames||[];const all=s.allNames||[];const ms=all.filter(p=>!fn.includes(p));
     return (<><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>📋</div><div style={{fontSize:"13px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.title}</div><div style={{fontSize:"12px",color:US.muted,marginBottom:"10px"}}>{s.found}/{s.total} trovati ({Math.round(s.found/s.total*100)}%)</div>{fn.length>0&&(<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.green,marginBottom:"5px",fontWeight:"700"}}>✓ Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{fn.map(p=>(<div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>))}</div></div>)}{ms.length>0&&(<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.red,marginBottom:"5px",fontWeight:"700"}}>✗ Mancati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{ms.map(p=>(<div key={p} style={{background:US.redL,color:US.red,border:"1px solid #fecaca",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>))}</div></div>)}<ShareButton text={`📋 Lista Quiz #${day}\\n${s.title}\\n${s.found}/${s.total} trovati\\nuniverso-quiz-hmix.vercel.app`}/></>);
@@ -1815,8 +2165,12 @@ const MODES=[
 
 function Card({m,onDaily,onArchive}){
   const[hv,sHv]=useState(false);
-  return(<div style={{background:"#fff",border:`1.5px solid ${hv?US.orange:US.border}`,borderRadius:"8px",padding:"11px",transition:"all 0.15s",display:"flex",flexDirection:"column",gap:"4px",boxShadow:hv?"0 2px 8px rgba(0,0,0,0.07)":"none"}} onMouseEnter={()=>sHv(true)} onMouseLeave={()=>sHv(false)}>
-    <div style={{display:"flex",alignItems:"center",gap:"6px"}}><span style={{fontSize:"18px"}}>{m.icon}</span><span style={{fontSize:"12px",fontWeight:"700",color:US.black}}>{m.label}</span></div>
+  const played=loadResult(m.key)!==null;
+  return(<div style={{background:"#fff",border:`1.5px solid ${played?US.green:hv?US.orange:US.border}`,borderRadius:"8px",padding:"11px",transition:"all 0.15s",display:"flex",flexDirection:"column",gap:"4px",boxShadow:hv?"0 2px 8px rgba(0,0,0,0.07)":"none"}} onMouseEnter={()=>sHv(true)} onMouseLeave={()=>sHv(false)}>
+    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+      <div style={{display:"flex",alignItems:"center",gap:"6px"}}><span style={{fontSize:"18px"}}>{m.icon}</span><span style={{fontSize:"12px",fontWeight:"700",color:US.black}}>{m.label}</span></div>
+      {played&&<span style={{fontSize:"9px",color:US.green,fontWeight:"700",background:US.greenL,borderRadius:"4px",padding:"2px 6px"}}>✓ fatto</span>}
+    </div>
     <span style={{fontSize:"9px",color:US.muted,lineHeight:1.4}}>{m.desc}</span>
     <div style={{display:"flex",gap:"4px",marginTop:"3px"}}>
       <button onClick={()=>onDaily(m.key)} style={{flex:1,background:US.orange,color:US.black,border:"none",borderRadius:"4px",padding:"6px 3px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>🗓 Daily</button>
@@ -1828,7 +2182,7 @@ function Card({m,onDaily,onArchive}){
 function Home({onSelect}){
   const today=new Date().toLocaleDateString("it-IT",{weekday:"long",day:"numeric",month:"long"});
   const countdown=useCountdown();
-  const streak=loadStreak();
+  const playedToday=["calciodle","wordle","hangman","valore2","carriera","rosa","lista","transfer"].filter(k=>loadResult(k)!==null).length;
   return(<div style={{...T.app,paddingBottom:"40px"}}>
     <div style={{background:US.black,color:"#fff",padding:"18px 18px 14px",borderBottom:`3px solid ${US.orange}`}}>
       <div style={{fontSize:"8px",letterSpacing:"3px",textTransform:"uppercase",color:US.orange,marginBottom:"2px",fontWeight:"700"}}>Universo Sportivo</div>
@@ -1836,7 +2190,7 @@ function Home({onSelect}){
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"6px"}}>
         <div>
           <div style={{fontSize:"10px",color:"#666",textTransform:"capitalize"}}>{today}</div>
-          {streak.count>0&&<div style={{fontSize:"9px",color:US.orange,marginTop:"2px",fontWeight:"700"}}>🔥 Serie: {streak.count} {streak.count===1?"giorno":"giorni"}</div>}
+          {playedToday>0&&<div style={{fontSize:"9px",color:US.green,marginTop:"2px",fontWeight:"700"}}>✓ {playedToday} {playedToday===1?"modalità completata oggi":"modalità completate oggi"}</div>}
         </div>
         <div style={{display:"flex",alignItems:"center",gap:"5px",background:"rgba(255,255,255,0.07)",borderRadius:"6px",padding:"5px 10px"}}>
           <span style={{fontSize:"9px",color:"#555"}}>🔄 refresh in</span>
@@ -1867,6 +2221,8 @@ export default function App(){
       .flip-back{backface-visibility:hidden;}
       @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
       .game-enter{animation:fadeSlideIn 0.35s ease forwards;}
+      @keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+      .confetti-piece{position:fixed;width:8px;height:8px;animation:confettiFall linear forwards;pointer-events:none;z-index:200;}
     `;
     document.head.appendChild(s);
     return()=>document.head.removeChild(s);
@@ -1887,4 +2243,6 @@ export default function App(){
   if(key==="transfer")return<IndivinaTransferimento onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
   return<Home onSelect={sSc}/>;
 }
+
+
 
