@@ -2153,28 +2153,32 @@ function IndivinaTransferimento({onHome,isDaily,onArchive}){
 
 // ── HOME ──────────────────────────────────────────────────────────────────
 const MODES=[
-  {key:"calciodle", label:"Calciodle",               icon:"🟩", desc:"Indovina il giocatore"},
-  {key:"wordle",    label:"Wordle Cognome",           icon:"🔤", desc:"Indovina il cognome lettera per lettera"},
-  {key:"hangman",   label:"Impiccato",                icon:"🪢", desc:"Indovina il cognome"},
-  {key:"valore2",   label:"Chi Vale di Più?",         icon:"⚖️", desc:"Confronta i valori di mercato"},
-  {key:"carriera",  label:"Indovina la Carriera",     icon:"🔍", desc:"Indovina da club e statistiche"},
-  {key:"rosa",      label:"Rosa Quiz",                icon:"👕", desc:"60 secondi per nominare la rosa"},
-  {key:"lista",     label:"Lista Quiz",               icon:"📋", desc:"Nomina tutti i nomi della categoria"},
-  {key:"transfer",  label:"Indovina il Trasferimento",icon:"💸", desc:"Cifra, squadra e anno del trasferimento"},
+  {key:"calciodle", label:"Calciodle",                icon:"⚽", desc:"Indovina il calciatore in 6 tentativi. Ogni risposta rivela indizi.", badge:"532 giocatori", accent:"#f5e000", badgeBg:"#111", badgeTx:"#f5e000", size:"big"},
+  {key:"wordle",    label:"Wordle Cognome",            icon:"🔤", desc:"Indovina il cognome lettera per lettera in 6 tentativi.", badge:"379 cognomi", accent:"#378ADD", badgeBg:"#E6F1FB", badgeTx:"#185FA5", size:"big"},
+  {key:"hangman",   label:"Impiccato",                 icon:"🪢", desc:"Scopri il cognome prima che il pupazzo sia completato. 8 errori.", badge:"529 cognomi", accent:"#1D9E75", badgeBg:"#E1F5EE", badgeTx:"#0F6E56", size:"big"},
+  {key:"carriera",  label:"Indovina la Carriera",      icon:"🏆", desc:"Indovina il calciatore dai club della sua carriera.", badge:"72 calciatori", accent:"#7F77DD", badgeBg:"#EEEDFE", badgeTx:"#3C3489", size:"big"},
+  {key:"valore2",   label:"Chi Vale di Più?",          icon:"💶", desc:"Confronta due calciatori e indovina chi vale di più.", badge:"Farai 3/3?", accent:"", badgeBg:"", badgeTx:"#888", size:"small"},
+  {key:"rosa",      label:"Indovina la Rosa",          icon:"👕", desc:"Trova tutti i giocatori di una squadra di Serie A.", badge:"20 squadre", accent:"", badgeBg:"", badgeTx:"#888", size:"small"},
+  {key:"lista",     label:"Sfida a Tempo",             icon:"⏱", desc:"Trova tutti i nomi di una lista in 90 secondi.", badge:"50 categorie", accent:"", badgeBg:"", badgeTx:"#888", size:"small"},
+  {key:"transfer",  label:"Indovina il Trasferimento", icon:"🔄", desc:"Da quale club a quale club? Indovina i dettagli del trasferimento.", badge:"42 storici", accent:"", badgeBg:"", badgeTx:"#888", size:"small"},
 ];
 
 function Card({m,onDaily,onArchive}){
   const[hv,sHv]=useState(false);
   const played=loadResult(m.key)!==null;
-  return(<div style={{background:"#fff",border:`1.5px solid ${played?US.green:hv?US.orange:US.border}`,borderRadius:"8px",padding:"11px",transition:"all 0.15s",display:"flex",flexDirection:"column",gap:"4px",boxShadow:hv?"0 2px 8px rgba(0,0,0,0.07)":"none"}} onMouseEnter={()=>sHv(true)} onMouseLeave={()=>sHv(false)}>
+  const isBig=m.size==="big";
+  const borderColor=played?US.green:hv?US.orange:US.border;
+  const accentStyle=m.accent?{borderLeft:`3px solid ${m.accent}`}:{};
+  return(<div style={{background:"#fff",border:`1px solid ${borderColor}`,...accentStyle,borderRadius:"8px",padding:isBig?"14px":"12px",transition:"border-color 0.15s",display:"flex",flexDirection:"column",gap:"4px"}} onMouseEnter={()=>sHv(true)} onMouseLeave={()=>sHv(false)}>
     <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-      <div style={{display:"flex",alignItems:"center",gap:"6px"}}><span style={{fontSize:"18px"}}>{m.icon}</span><span style={{fontSize:"12px",fontWeight:"700",color:US.black}}>{m.label}</span></div>
+      <div style={{display:"flex",alignItems:"center",gap:"6px"}}><span style={{fontSize:isBig?"18px":"16px"}}>{m.icon}</span><span style={{fontSize:isBig?"13px":"12px",fontWeight:"700",color:US.black}}>{m.label}</span></div>
       {played&&<span style={{fontSize:"9px",color:US.green,fontWeight:"700",background:US.greenL,borderRadius:"4px",padding:"2px 6px"}}>✓ fatto</span>}
     </div>
-    <span style={{fontSize:"9px",color:US.muted,lineHeight:1.4}}>{m.desc}</span>
-    <div style={{display:"flex",gap:"4px",marginTop:"3px"}}>
-      <button onClick={()=>onDaily(m.key)} style={{flex:1,background:US.orange,color:US.black,border:"none",borderRadius:"4px",padding:"6px 3px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>🗓 Daily</button>
-      <button onClick={()=>onArchive(m.key)} style={{flex:1,background:US.black,color:"#fff",border:"none",borderRadius:"4px",padding:"6px 3px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>📂 Archivio</button>
+    <span style={{fontSize:"10px",color:US.muted,lineHeight:1.4}}>{m.desc}</span>
+    {m.badge&&<div style={{marginTop:"2px"}}><span style={{fontSize:"10px",fontWeight:"600",color:m.badgeTx,background:m.badgeBg||"transparent",borderRadius:"4px",padding:m.badgeBg?"3px 7px":"0"}}>{m.badge}</span></div>}
+    <div style={{display:"flex",gap:"4px",marginTop:"4px"}}>
+      <button onClick={()=>onDaily(m.key)} style={{flex:1,background:US.orange,color:US.black,border:"none",borderRadius:"4px",padding:"7px 3px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>🗓 Daily</button>
+      <button onClick={()=>onArchive(m.key)} style={{flex:1,background:US.black,color:"#fff",border:"none",borderRadius:"4px",padding:"7px 3px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>📂 Archivio</button>
     </div>
   </div>);
 }
@@ -2183,6 +2187,8 @@ function Home({onSelect}){
   const today=new Date().toLocaleDateString("it-IT",{weekday:"long",day:"numeric",month:"long"});
   const countdown=useCountdown();
   const playedToday=["calciodle","wordle","hangman","valore2","carriera","rosa","lista","transfer"].filter(k=>loadResult(k)!==null).length;
+  const bigModes=MODES.filter(m=>m.size==="big");
+  const smallModes=MODES.filter(m=>m.size==="small");
   return(<div style={{...T.app,paddingBottom:"40px"}}>
     <div style={{background:US.black,color:"#fff",padding:"18px 18px 14px",borderBottom:`3px solid ${US.orange}`}}>
       <div style={{fontSize:"8px",letterSpacing:"3px",textTransform:"uppercase",color:US.orange,marginBottom:"2px",fontWeight:"700"}}>Universo Sportivo</div>
@@ -2199,11 +2205,20 @@ function Home({onSelect}){
       </div>
     </div>
     <div style={{padding:"14px 14px 40px",maxWidth:"620px",margin:"0 auto",boxSizing:"border-box"}}>
-      <div style={{display:"flex",alignItems:"center",gap:"6px",marginBottom:"10px"}}><div style={{width:"3px",height:"13px",background:US.orange,borderRadius:"2px"}}/><span style={{fontSize:"9px",fontWeight:"700",letterSpacing:"1.5px",textTransform:"uppercase",color:US.muted}}>Modalità</span></div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
-        {MODES.map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px",marginBottom:"10px"}}>
+        {bigModes.map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
       </div>
-      <div style={{marginTop:"12px",padding:"9px 11px",background:"#fff",border:`1px solid ${US.border}`,borderRadius:"6px",fontSize:"9px",color:US.muted,lineHeight:1.6}}>🗓 <strong style={{color:US.black}}>Daily</strong> — sfida unica al giorno &nbsp;·&nbsp; 📂 <strong style={{color:US.black}}>Archivio</strong> — naviga le sfide passate con ◀ ▶</div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"10px",marginBottom:"10px"}}>
+        {smallModes.slice(0,3).map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"2fr 1fr",gap:"10px",marginBottom:"12px"}}>
+        <Card m={smallModes[3]} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>
+        <div style={{background:US.black,borderRadius:"8px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",gap:"2px",padding:"12px"}}>
+          <div style={{fontSize:"20px",fontWeight:"700",color:US.orange}}>2.156</div>
+          <div style={{fontSize:"9px",color:"#888",textTransform:"uppercase",letterSpacing:"1px",textAlign:"center"}}>sfide<br/>disponibili</div>
+        </div>
+      </div>
+      <div style={{padding:"9px 11px",background:"#fff",border:`1px solid ${US.border}`,borderRadius:"6px",fontSize:"9px",color:US.muted,lineHeight:1.6}}>🗓 <strong style={{color:US.black}}>Daily</strong> — sfida unica al giorno &nbsp;·&nbsp; 📂 <strong style={{color:US.black}}>Archivio</strong> — naviga le sfide passate con ◀ ▶</div>
     </div>
   </div>);
 }
