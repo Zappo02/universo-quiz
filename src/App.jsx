@@ -1527,7 +1527,7 @@ const CAREERS = [
     { club:"Benfica",        period:"2022–2024", apps:55,  goals:11, note:"Protagonista in Portogallo" },
     { club:"Napoli",         period:"2024–",     apps:44,  goals:5,  note:"Scudetto in arrivo con gli Azzurri" },
     { club:"Nazionale",      period:"2019–2023", apps:8,   goals:1,  note:"Presente con il Brasile" },
-  ]},\
+  ]},
 ];
 
 
