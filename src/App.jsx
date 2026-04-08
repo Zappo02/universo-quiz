@@ -1775,7 +1775,8 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("calciodle"):null;
   const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);const[animRows,setAnimRows]=useState([]);const[hintUsed,setHintUsed]=useState(false);
-  const[hintResult,setHintResult]=useState(null);const[hintCol,setHintCol]=useState(null);
+  
+  const[hintCol,setHintCol]=useState(null);
   useEffect(()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows([]);setHintUsed(false);setHintCol(null);},[seed]);
   function useHint(){
     if(hintUsed||ov)return;
@@ -2653,6 +2654,7 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
   const[lastResult,setLastResult]=useState(null);
   const[confettiShow,setConfettiShow]=useState(false);
   const[hintUsed,setHintUsed]=useState(false);
+  const[hintResult,setHintResult]=useState(null);
   const MAX_ERRORS=4;
 
   useEffect(()=>{setSelected([]);setSolved([]);setHintUsed(false);setHintResult(null);setErrors(0);setShake(false);setWon(false);setDone(false);setLastResult(null);setConfettiShow(false);},[seed]);
