@@ -1484,7 +1484,8 @@ function Hdr({title,sub,onHome,archiveNav}){
 }
 
 // ── ARCHIVE WRAPPER ──────────────────────────────────────────────────────
-const POOL_SIZES={calciodle:692,wordle:692,hangman:692,valore2:692,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:65};
+const DB_SERIE_A=DB.filter(p=>p.league==="Serie A");
+const POOL_SIZES={calciodle:532,wordle:532,hangman:532,valore2:692,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:65};
 
 const PAGE_SIZE=10;
 function ArchiveWrapper({gameKey,children}){
@@ -1546,7 +1547,7 @@ function aD(k,g,t){if(k!=="age"&&k!=="value")return null;return g===t?null:g<t?"
 function cS(c){return{flex:1,minWidth:0,borderRadius:"2px",background:CLR[c]?.bg||"#fff",border:`1.5px solid ${CLR[c]?.bg||"#e8e8e8"}`,color:CLR[c]?.tx||"#ccc",fontSize:"8px",textAlign:"center",padding:"4px 2px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",minHeight:"32px",overflow:"hidden"};}
 
 function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
-  const dailyPool=useMemo(()=>shuffle([...DB],seedRandom(seed)),[seed]);
+  const dailyPool=useMemo(()=>shuffle([...DB_SERIE_A],seedRandom(seed)),[seed]);
   const target=useMemo(()=>dailyPool[0],[dailyPool]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("calciodle"):null;
@@ -1562,7 +1563,7 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     setHintCol(pick);setHintUsed(true);
   }
   function normSearch(s){if(!s)return "";return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
-  function onI(v){sI(v);if(v.length<2){sSg([]);return;}const q=normSearch(v);const avail=DB.filter(p=>!G.find(x=>x.name===p.name));const bySurname=avail.filter(p=>normSearch(p.surname).includes(q));const byName=avail.filter(p=>normSearch(p.name).includes(q)&&!bySurname.includes(p));sSg([...bySurname,...byName].slice(0,8));}
+  function onI(v){sI(v);if(v.length<2){sSg([]);return;}const q=normSearch(v);const avail=DB_SERIE_A.filter(p=>!G.find(x=>x.name===p.name));const bySurname=avail.filter(p=>normSearch(p.surname).includes(q));const byName=avail.filter(p=>normSearch(p.name).includes(q)&&!bySurname.includes(p));sSg([...bySurname,...byName].slice(0,8));}
   function sub(p){
     if(ov)return;
     const ri=G.length;
@@ -1673,7 +1674,7 @@ function Calciodle({onHome,isDaily,onArchive}){
 // ── WORDLE COGNOME ───────────────────────────────────────────────────────
 function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const ROUNDS=5,MAX_ATT=6;
-  const pool=useMemo(()=>{const daily=shuffle([...DB],seedRandom(seed));return daily.filter(p=>normStr(p.surname).length>=4&&normStr(p.surname).length<=8).slice(1);},[seed]);
+  const pool=useMemo(()=>{const daily=shuffle([...DB_SERIE_A],seedRandom(seed));return daily.filter(p=>normStr(p.surname).length>=4&&normStr(p.surname).length<=8).slice(1);},[seed]);
   const player=pool[0];
   const word=normStr(player.surname);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
@@ -1734,7 +1735,7 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
               const bd=filled?"transparent":isActive&&disp[ci].trim()?`2px solid ${US.black}`:"2px solid #d0d0d0";
               if(filled){
                 return(<div key={ci} className="flip-cell" style={{width:"42px",height:"42px"}}>
-                  <div className={`flip-inner flipped`} style={{transitionDelay:`${ci*130}ms`}}>
+                  <div className={`flip-inner flipped`} style={{transitionDelay:`${ci*130}ms`,transition:`transform 1.0s cubic-bezier(0.4,0,0.2,1) ${ci*130}ms`}}>
                     <div className="flip-back" style={{background:colBg[filled.s]||"#e0e0e0",color:"#fff",fontSize:"16px"}}>{filled.c}</div>
                   </div>
                 </div>);
@@ -1769,7 +1770,7 @@ function WordleCognome({onHome,isDaily,onArchive}){
 // ── IMPICCATO (senza indizi) ─────────────────────────────────────────────
 function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const M=7;
-  const pool=useMemo(()=>{const daily=shuffle([...DB],seedRandom(seed));return daily.filter(p=>normStr(p.surname).length>=4).slice(2);},[seed]);
+  const pool=useMemo(()=>{const daily=shuffle([...DB_SERIE_A],seedRandom(seed));return daily.filter(p=>normStr(p.surname).length>=4).slice(2);},[seed]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("hangman"):null;
   const[gu,sGu]=useState(new Set());const[st,sSt]=useState("p");
@@ -2415,7 +2416,7 @@ function Home({onSelect}){
         {smallModes.map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
       </div>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 13px",background:US.black,borderRadius:"8px",marginBottom:"10px"}}>
-        <div><div style={{fontSize:"18px",fontWeight:"700",color:US.orange}}>2.156</div><div style={{fontSize:"9px",color:"#777",textTransform:"uppercase",letterSpacing:"1px"}}>sfide disponibili</div></div>
+        <div><div style={{fontSize:"18px",fontWeight:"700",color:US.orange}}>2.954</div><div style={{fontSize:"9px",color:"#777",textTransform:"uppercase",letterSpacing:"1px"}}>sfide disponibili</div></div>
         <div style={{fontSize:"9px",color:"#555",textAlign:"right",lineHeight:1.7}}>🗓 <span style={{color:"#fff",fontWeight:"700"}}>Daily</span> — sfida unica al giorno<br/>📂 <span style={{color:"#fff",fontWeight:"700"}}>Archivio</span> — sfide passate con ◀ ▶</div>
       </div>
     </div>
@@ -2430,12 +2431,12 @@ export default function App(){
       input,select,textarea{font-size:16px !important;}
       .flip-cell{perspective:300px;}
       .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.65s ease;}
-      .flip-inner.flipped{transform:rotateX(360deg);}
+      .flip-inner.flipped{transform:rotateX(180deg);}
       .flip-front,.flip-back{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:3px;font-weight:700;}
-      .flip-back{backface-visibility:hidden;}
+      .flip-back{backface-visibility:hidden;transform:rotateX(180deg);}
       @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
       .game-enter{animation:fadeSlideIn 0.35s ease forwards;}
-      @keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+      @keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(800px) rotate(720deg);opacity:0;}}
       .confetti-piece{position:absolute;width:8px;height:8px;animation:confettiFall linear forwards;pointer-events:none;z-index:200;}
     `;
     document.head.appendChild(s);
