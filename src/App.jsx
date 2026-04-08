@@ -2819,13 +2819,14 @@ function fgGetRanks(tgt){
 }
 
 function FootGuesserGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
-  const[target,setTarget]=useState(()=>FG_DB[(day-1)%FG_DB.length]);
-  const[ranks,setRanks]=useState(()=>fgGetRanks(FG_DB[(day-1)%FG_DB.length]));
+  const target=useMemo(()=>FG_DB[(day-1)%FG_DB.length],[day]);
+  const ranks=useMemo(()=>fgGetRanks(FG_DB[(day-1)%FG_DB.length]),[day]);
   const[query,setQuery]=useState('');
   const[guesses,setGuesses]=useState([]);
   const[seen,setSeen]=useState(new Set());
   const[won,setWon]=useState(false);
   const[fgConfetti,setFgConfetti]=useState(false);
+  useEffect(()=>{setQuery('');setGuesses([]);setSeen(new Set());setWon(false);setFgConfetti(false);setHintUsed(false);setHintPlayer(null);setDdOpen(false);},[day]);
   const[hintUsed,setHintUsed]=useState(false);
   const[hintPlayer,setHintPlayer]=useState(null);
   const[showHelp,setShowHelp]=useState(false);
@@ -2958,6 +2959,17 @@ function FootGuesserGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
       {/* Contatore */}
       {guesses.length>0&&<div style={{fontSize:'12px',color:US.muted,marginBottom:'6px'}}>
         {guesses.length} tentativ{guesses.length===1?'o':'i'}
+      </div>}
+
+      {/* Tasto mostra risposta dopo 8 tentativi */}
+      {!won&&guesses.length>=8&&<div style={{marginBottom:'8px'}}>
+        <button onClick={()=>{
+          setGuesses(g=>[{p:target,rank:1,isWin:true},...g]);
+          setWon(true);
+          setFgConfetti(true);
+        }} style={{...T.sb,width:'100%',color:US.red,fontSize:'12px',borderColor:US.red}}>
+          🏳 Mostra la risposta
+        </button>
       </div>}
 
       {/* Messaggio vittoria */}
