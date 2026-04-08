@@ -3348,5 +3348,4 @@ export default function App(){
   return<Home onSelect={sSc}/>;
 }
 
-export default App;
 
