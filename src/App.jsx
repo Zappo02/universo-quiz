@@ -1716,8 +1716,7 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   attempts.flat().forEach(({c,s})=>{if(!used[c]||used[c]==="gray"||(used[c]==="yellow"&&s==="green"))used[c]=s;});
   const colBg={green:US.green,yellow:US.yellow,gray:"#9ca3af"};
 
-  const[hint,setHint]=useState(false);const[showConfetti,setShowConfetti]=useState(false);
-  useEffect(()=>{if(status==="won"&&!showConfetti)setTimeout(()=>setShowConfetti(true),word.length*130+400);},[status]);
+  const[hint,setHint]=useState(false);
   if(savedToday)return(<div style={T.app}><Hdr title="Wordle Cognome" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/><DoneScreen gameKey="wordle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
     <div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.won?`Trovato in ${s.attempts}/6`:"Non trovato"}</div>
@@ -1785,8 +1784,7 @@ function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   function g(c){if(st!=="p"||gu.has(c))return;sGu(x=>new Set([...x,c]));} 
   const bodyParts=[<circle key="h" cx="50" cy="19" r="8" stroke="#333" strokeWidth="2.5" fill="none"/>,<line key="b" x1="50" y1="27" x2="50" y2="58" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="la" x1="50" y1="37" x2="35" y2="49" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="ra" x1="50" y1="37" x2="65" y2="49" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="ll" x1="50" y1="58" x2="37" y2="75" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="rl" x1="50" y1="58" x2="63" y2="75" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="rp" x1="50" y1="6" x2="50" y2="11" stroke="#333" strokeWidth="2.5"/>];
 
-  const[hint,setHint]=useState(false);const[wMo,setWMo]=useState(false);
-  useEffect(()=>{if(status==="won"&&!wMo)setTimeout(()=>setWMo(true),word.length*130+400);},[status]);
+  const[hint,setHint]=useState(false);
   if(savedToday)return(<div style={T.app}><Hdr title="Impiccato" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/><DoneScreen gameKey="hangman" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
     <div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.won?"Trovato!":"Non trovato"}</div>
