@@ -1774,7 +1774,8 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const target=useMemo(()=>dailyPool[0],[dailyPool]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("calciodle"):null;
-  const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);const[animRows,setAnimRows]=useState([]);const[hintUsed,setHintUsed]=useState(false);const[hintCol,setHintCol]=useState(null);
+  const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);const[animRows,setAnimRows]=useState([]);const[hintUsed,setHintUsed]=useState(false);
+  const[hintResult,setHintResult]=useState(null);const[hintCol,setHintCol]=useState(null);
   useEffect(()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows([]);setHintUsed(false);setHintCol(null);},[seed]);
   function useHint(){
     if(hintUsed||ov)return;
@@ -2654,7 +2655,7 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
   const[hintUsed,setHintUsed]=useState(false);
   const MAX_ERRORS=4;
 
-  useEffect(()=>{setSelected([]);setSolved([]);setHintUsed(false);setErrors(0);setShake(false);setWon(false);setDone(false);setLastResult(null);setConfettiShow(false);},[seed]);
+  useEffect(()=>{setSelected([]);setSolved([]);setHintUsed(false);setHintResult(null);setErrors(0);setShake(false);setWon(false);setDone(false);setLastResult(null);setConfettiShow(false);},[seed]);
 
   function toggleSelect(name){
     if(done)return;
@@ -2739,10 +2740,14 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
       </div>}
 
       {/* Messaggio feedback */}
+      {hintResult&&!done&&<div style={{textAlign:"center",padding:"8px",marginBottom:"8px",borderRadius:"6px",
+        background:"#EEF2FF",color:"#4338CA",fontSize:"11px",fontWeight:"700"}}>
+        💡 Indizio: una categoria è &ldquo;{hintResult.label}&rdquo;
+      </div>}
       {lastResult&&<div style={{textAlign:"center",padding:"8px",marginBottom:"8px",borderRadius:"6px",
-        background:lastResult.type==="correct"?US.greenL:lastResult.type==="hint"?"#EEF2FF":US.redL,
-        color:lastResult.type==="correct"?US.green:lastResult.type==="hint"?"#4338CA":US.red,fontSize:"11px",fontWeight:"700"}}>
-        {lastResult.type==="correct"?"✅ Corretto!":lastResult.type==="hint"?`💡 Indizio: una categoria è "${lastResult.label}"`:lastResult.almost?`❌ Sbagliato — quasi! 3/4 in "${lastResult.almost}"`:"❌ Sbagliato — riprova"}
+        background:lastResult.type==="correct"?US.greenL:US.redL,
+        color:lastResult.type==="correct"?US.green:US.red,fontSize:"11px",fontWeight:"700"}}>
+        {lastResult.type==="correct"?"✅ Corretto!":lastResult.almost?`❌ Sbagliato — quasi! 3/4 in "${lastResult.almost}"`:"❌ Sbagliato — riprova"}
       </div>}
 
       {/* Errori */}
@@ -2755,20 +2760,20 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
       </div>
 
       {/* Tasto indizio dopo 3 errori */}
-      {!done&&!hintUsed&&errors>=2&&solved.length<4&&<div style={{marginBottom:"8px"}}>
+      {!done&&errors>=3&&solved.length<4&&<div style={{marginBottom:"8px"}}>
         <button onClick={()=>{
+          if(hintUsed)return;
           const unsolvedGroups=puzzle.groups.filter(g=>!solved.some(s=>s.label===g.label));
           if(unsolvedGroups.length>0){
             const pick=unsolvedGroups[Math.floor(Math.random()*unsolvedGroups.length)];
-            setLastResult({type:"hint",label:pick.label,color:pick.color});
-            setTimeout(()=>setLastResult(null),4000);
+            setHintResult({label:pick.label,color:pick.color});
             setHintUsed(true);
           }
-        }} style={{...T.sb,width:"100%",color:US.black,fontSize:"12px"}}>
-          💡 Indizio — rivela una categoria ({3-errors>0?`disponibile dopo ${3-errors} errori`:"disponibile"})
+        }} disabled={hintUsed} style={{...T.sb,width:"100%",color:hintUsed?US.muted:US.black,fontSize:"12px",opacity:hintUsed?0.5:1}}>
+          💡 {hintUsed?"Indizio già usato":"Indizio — rivela una categoria"}
         </button>
       </div>}
-      {!done&&!hintUsed&&errors<2&&<div style={{marginBottom:"8px"}}>
+      {!done&&errors<3&&<div style={{marginBottom:"8px"}}>
         <div style={{fontSize:"11px",color:US.muted,textAlign:"center",padding:"4px 0"}}>
           💡 Indizio disponibile dopo {3-errors} {3-errors===1?"errore":"errori"}
         </div>
