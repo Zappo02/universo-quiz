@@ -1690,7 +1690,7 @@ function Hdr({title,sub,onHome,archiveNav}){
 
 // ── ARCHIVE WRAPPER ──────────────────────────────────────────────────────
 const DB_SERIE_A=DB.filter(p=>p.league==="Serie A");
-const POOL_SIZES={calciodle:532,wordle:532,hangman:532,valore2:692,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:65,connections:50};
+const POOL_SIZES={calciodle:532,wordle:532,hangman:532,valore2:692,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:65,connections:50,footguessr:287};
 
 const PAGE_SIZE=10;
 function ArchiveWrapper({gameKey,children}){
@@ -1778,12 +1778,11 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   useEffect(()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows([]);setHintUsed(false);setHintCol(null);},[seed]);
   function useHint(){
     if(hintUsed||ov)return;
-    // Scegli una colonna non ancora verde tra tutte le righe giocate
     const cols=COLS.map(c=>c.key);
-    // Preferisci colonne ancora sbagliate nelle ultime righe
-    const notGreen=cols.filter(k=>G.length===0||G.some(g=>eC(k,g[k],target[k])!=="green"));
-    const pick=notGreen.length>0?notGreen[Math.floor(Math.random()*notGreen.length)]:cols[Math.floor(Math.random()*cols.length)];
-    setHintCol(pick);setHintUsed(true);
+    // Colonne mai diventate verdi in nessuna riga
+    const neverGreen=cols.filter(k=>G.length===0||G.every(g=>eC(k,g[k],target[k])!=="green"));
+    const pick=neverGreen.length>0?neverGreen[Math.floor(Math.random()*neverGreen.length)]:null;
+    if(pick){setHintCol(pick);setHintUsed(true);}
   }
   function normSearch(s){if(!s)return "";return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
   function onI(v){sI(v);if(v.length<2){sSg([]);return;}const q=normSearch(v);const avail=DB_SERIE_A.filter(p=>!G.find(x=>x.name===p.name));const bySurname=avail.filter(p=>normSearch(p.surname).includes(q));const byName=avail.filter(p=>normSearch(p.name).includes(q)&&!bySurname.includes(p));sSg([...bySurname,...byName].slice(0,8));}
@@ -3070,7 +3069,7 @@ function fgGetRanks(tgt){
   return rk;
 }
 
-function FootGuesserGame({day,seed,isToday,onHome}){
+function FootGuesserGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const[target,setTarget]=useState(()=>FG_DB[(day-1)%FG_DB.length]);
   const[ranks,setRanks]=useState(()=>fgGetRanks(FG_DB[(day-1)%FG_DB.length]));
   const[query,setQuery]=useState('');
@@ -3078,6 +3077,8 @@ function FootGuesserGame({day,seed,isToday,onHome}){
   const[seen,setSeen]=useState(new Set());
   const[won,setWon]=useState(false);
   const[fgConfetti,setFgConfetti]=useState(false);
+  const[hintUsed,setHintUsed]=useState(false);
+  const[hintPlayer,setHintPlayer]=useState(null);
   const[showHelp,setShowHelp]=useState(false);
   const[ddOpen,setDdOpen]=useState(false);
   const[hiIdx,setHiIdx]=useState(-1);
@@ -3112,7 +3113,7 @@ function FootGuesserGame({day,seed,isToday,onHome}){
 
   return(<div style={{...T.app,position:'relative'}}>
     {fgConfetti&&<Confetti active={fgConfetti}/>}
-    <Hdr title="FootGuessr" sub="🗓 Giornaliero" onHome={onHome}/>
+    <Hdr title="FootGuessr" sub={`${isToday?"🗓 Giornaliero":"📂 Archivio"} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={T.body}>
 
       {/* Pulsante come funziona */}
@@ -3157,6 +3158,29 @@ function FootGuesserGame({day,seed,isToday,onHome}){
           </div>
         ))}
       </div>
+
+      {/* Pulsante indizio */}
+      {!won&&guesses.length>0&&!hintUsed&&<div style={{marginBottom:'8px'}}>
+        <button onClick={()=>{
+          const bestRank=Math.min(...guesses.map(g=>g.rank));
+          const candidates=Object.entries(ranks)
+            .filter(([n,r])=>r>1&&r<bestRank&&!seen.has(n))
+            .sort((a,b)=>a[1]-b[1])
+            .slice(0,20);
+          if(candidates.length>0){
+            const pick=candidates[Math.floor(Math.random()*Math.min(5,candidates.length))];
+            setHintPlayer(pick[0]);
+            setHintUsed(true);
+          }
+        }} style={{...T.sb,width:'100%',color:US.black,fontSize:'12px'}}>
+          💡 Mostra un indizio (rank migliore del tuo {Math.min(...guesses.map(g=>g.rank))}°)
+        </button>
+      </div>}
+      {hintPlayer&&<div style={{fontSize:'12px',color:US.muted,padding:'6px 10px',
+        background:US.surface,borderRadius:'6px',marginBottom:'8px',
+        border:`0.5px solid ${US.border}`}}>
+        💡 Indizio: prova <strong style={{color:US.black}}>{hintPlayer}</strong>
+      </div>}
 
       {/* Input ricerca */}
       {!won&&<div style={{position:'relative',marginBottom:'8px'}}>
@@ -3237,8 +3261,557 @@ function FootGuesserGame({day,seed,isToday,onHome}){
 }
 
 function FootGuessr({onHome,isDaily,onArchive}){
-  if(isDaily){const d=(dayIndex()+7)%FG_DB.length+1,s=todaySeed()+777;return<FootGuesserGame day={d} seed={s} isToday onHome={onHome}/>;} 
-  return<FootGuesserGame day={1} seed={todaySeed()+777} isToday onHome={onHome}/>;
+  if(isDaily){const d=(dayIndex()+7)%FG_DB.length+1,s=todaySeed()+777;return<FootGuesserGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="footguessr">{({day,seed,isToday,archiveNav,chipBar})=><FootGuesserGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
+}
+
+const MODES=[
+  {key:"calciodle",   label:"Calciodle",                icon:"⚽", desc:"Indovina il calciatore in 6 tentativi. Ogni risposta rivela indizi.", badge:"532 giocatori",  accent:"#f5e000", badgeBg:"#111",     badgeTx:"#f5e000", size:"big"},
+  {key:"wordle",      label:"Wordle Cognome",            icon:"🔤", desc:"Indovina il cognome lettera per lettera in 6 tentativi.",            badge:"379 cognomi",    accent:"#378ADD", badgeBg:"#E6F1FB", badgeTx:"#185FA5", size:"big"},
+  {key:"hangman",     label:"Impiccato",                 icon:"🪢", desc:"Scopri il cognome prima che il pupazzo sia completato. 8 errori.",   badge:"529 cognomi",    accent:"#1D9E75", badgeBg:"#E1F5EE", badgeTx:"#0F6E56", size:"big"},
+  {key:"carriera",    label:"Indovina la Carriera",      icon:"🏆", desc:"Indovina il calciatore dai club della sua carriera.",                badge:"103 calciatori", accent:"#7F77DD", badgeBg:"#EEEDFE", badgeTx:"#3C3489", size:"big"},
+  {key:"connections", label:"Connections",              icon:"🔗", desc:"Trova i 4 gruppi nascosti tra 16 calciatori.",                       badge:"50 puzzle",      accent:"#16a34a", badgeBg:"#dcfce7", badgeTx:"#15803d", size:"small"},
+  {key:"footguessr",  label:"FootGuessr",                icon:"🔎", desc:"Indovina il calciatore segreto dalla similarità dei tuoi guess.", badge:"287 giocatori",  accent:"#7F77DD", badgeBg:"#EEEDFE", badgeTx:"#3C3489", size:"small"},
+  {key:"valore2",   label:"Chi Vale di Più?",          icon:"💶", desc:"Confronta valori di mercato.", badge:"Farai 3/3?",      accent:"#D85A30", badgeBg:"#FAECE7", badgeTx:"#993C1D", size:"small"},
+  {key:"lista",     label:"Sfida a Tempo",             icon:"⏱", desc:"Trova i nomi in 90 secondi.",  badge:"50 categorie",   accent:"#E91E8C", badgeBg:"#FBEAF0", badgeTx:"#993556", size:"small"},
+  {key:"transfer",  label:"Indovina il Trasferimento", icon:"🔄", desc:"Indovina cifra, club e anno.", badge:"65 trasferimenti",accent:"#888780", badgeBg:"#F1EFE8", badgeTx:"#5F5E5A", size:"small"},
+  {key:"rosa",      label:"Indovina la Rosa",          icon:"👕", desc:"Nomina tutta la rosa in 60s.", badge:"31 squadre",     accent:"#BA7517", badgeBg:"#FAEEDA", badgeTx:"#854F0B", size:"small"},
+];
+
+function Card({m,onDaily,onArchive}){
+  const[hv,sHv]=useState(false);
+  const played=loadResult(m.key)!==null;
+  const isBig=m.size==="big";
+  const borderColor=played?US.green:hv?US.orange:US.border;
+  const accentStyle=m.accent?{borderLeft:`3px solid ${m.accent}`}:{};
+  return(<div style={{background:"#fff",border:`1px solid ${borderColor}`,...accentStyle,borderRadius:"8px",padding:"11px",transition:"border-color 0.15s",display:"flex",flexDirection:"column",gap:"3px"}} onMouseEnter={()=>sHv(true)} onMouseLeave={()=>sHv(false)}>
+    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"1px"}}>
+      <div style={{display:"flex",alignItems:"center",gap:"5px"}}>
+        <span style={{fontSize:isBig?"17px":"15px"}}>{m.icon}</span>
+        <span style={{fontSize:isBig?"12px":"11px",fontWeight:"700",color:US.black,lineHeight:1.2}}>{m.label}</span>
+      </div>
+      {played&&<span style={{fontSize:"8px",color:US.green,fontWeight:"700",background:US.greenL,borderRadius:"4px",padding:"1px 5px",flexShrink:0}}>✓</span>}
+    </div>
+    <span style={{fontSize:"10px",color:US.muted,lineHeight:1.3}}>{m.desc}</span>
+    {m.badge&&<div><span style={{fontSize:"9px",fontWeight:"600",color:m.badgeTx,background:m.badgeBg||"transparent",borderRadius:"4px",padding:m.badgeBg?"2px 6px":"0"}}>{m.badge}</span></div>}
+    <div style={{display:"flex",gap:"3px",marginTop:"4px"}}>
+      <button onClick={()=>onDaily(m.key)} style={{flex:1,background:US.orange,color:US.black,border:"none",borderRadius:"4px",padding:"6px 2px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>🗓 Daily</button>
+      <button onClick={()=>onArchive(m.key)} style={{flex:1,background:US.black,color:"#fff",border:"none",borderRadius:"4px",padding:"6px 2px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>📂 Arch.</button>
+    </div>
+  </div>);
+}
+
+function Home({onSelect}){
+  const today=new Date().toLocaleDateString("it-IT",{weekday:"long",day:"numeric",month:"long"});
+  const countdown=useCountdown();
+  const playedToday=["calciodle","wordle","hangman","valore2","carriera","rosa","lista","transfer","connections","footguessr"].filter(k=>loadResult(k)!==null).length;
+  const bigModes=MODES.filter(m=>m.size==="big");
+  const smallModes=MODES.filter(m=>m.size==="small");
+  return(<div style={{...T.app,paddingBottom:"40px"}}>
+    <div style={{background:US.black,color:"#fff",padding:"18px 18px 14px",borderBottom:`3px solid ${US.orange}`}}>
+      <div style={{fontSize:"8px",letterSpacing:"3px",textTransform:"uppercase",color:US.orange,marginBottom:"2px",fontWeight:"700"}}>Universo Sportivo</div>
+      <div style={{fontSize:"21px",fontWeight:"700",letterSpacing:"-0.5px",marginBottom:"7px"}}>Quiz Calcio</div>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"6px"}}>
+        <div>
+          <div style={{fontSize:"10px",color:"#666",textTransform:"capitalize"}}>{today}</div>
+          {playedToday>0&&<div style={{fontSize:"9px",color:US.green,marginTop:"2px",fontWeight:"700"}}>✓ {playedToday} {playedToday===1?"modalità completata oggi":"modalità completate oggi"}</div>}
+        </div>
+        <div style={{display:"flex",alignItems:"center",gap:"5px",background:"rgba(255,255,255,0.07)",borderRadius:"6px",padding:"5px 10px"}}>
+          <span style={{fontSize:"9px",color:"#555"}}>🔄 refresh in</span>
+          <span style={{fontSize:"13px",fontWeight:"700",color:US.orange,fontVariantNumeric:"tabular-nums",letterSpacing:"0.5px"}}>{countdown}</span>
+        </div>
+      </div>
+    </div>
+    <div style={{padding:"12px 12px 40px",maxWidth:"620px",margin:"0 auto",boxSizing:"border-box"}}>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"8px"}}>
+        {bigModes.map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"8px"}}>
+        {smallModes.map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
+      </div>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 13px",background:US.black,borderRadius:"8px",marginBottom:"10px"}}>
+        <div><div style={{fontSize:"18px",fontWeight:"700",color:US.orange}}>2.508</div><div style={{fontSize:"9px",color:"#777",textTransform:"uppercase",letterSpacing:"1px"}}>sfide disponibili</div></div>
+        <div style={{fontSize:"9px",color:"#555",textAlign:"right",lineHeight:1.7}}>🗓 <span style={{color:"#fff",fontWeight:"700"}}>Daily</span> — sfida unica al giorno<br/>📂 <span style={{color:"#fff",fontWeight:"700"}}>Archivio</span> — sfide passate con ◀ ▶</div>
+      </div>
+    </div>
+  </div>);
+}
+
+// ── ROOT ──────────────────────────────────────────────────────────────────
+export default function App(){
+  useEffect(()=>{
+    const s=document.createElement("style");
+    s.innerHTML=`
+      input,select,textarea{font-size:16px !important;}
+      .flip-reveal{animation:flipReveal 0.5s ease forwards;}
+      @keyframes flipReveal{0%{transform:scaleY(1);background:#e0e0e0;}49%{transform:scaleY(0);background:#e0e0e0;}50%{transform:scaleY(0);}100%{transform:scaleY(1);}}
+      @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+      .game-enter{animation:fadeSlideIn 0.35s ease forwards;}
+      @keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+      .confetti-piece{position:absolute;width:8px;height:8px;animation:confettiFall linear forwards;pointer-events:none;}
+      @keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-5px);}40%,80%{transform:translateX(5px);}}
+    `;
+    document.head.appendChild(s);
+    return()=>document.head.removeChild(s);
+  },[]);
+  const[sc,sSc]=useState("home");
+  const home=()=>sSc("home");
+  const isDaily=sc.endsWith("_daily");
+  const key=sc.replace("_daily","").replace("_archive","");
+  if(sc==="home")return<Home onSelect={sSc}/>;
+  const goArchive=()=>sSc(key+"_archive");
+  if(key==="calciodle")return<Calciodle onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="wordle")return<WordleCognome onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="hangman")return<Hangman onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="valore2")return<ChiValeDiPiu onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="carriera")return<Carriera onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="rosa")return<RosaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="lista")return<ListaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="transfer")return<IndivinaTransferimento onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="connections")return<Connections onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="footguessr")return<FootGuessr onHome={home}/>;
+  return<Home onSelect={sSc}/>;
+}
+const CONNECTIONS_PUZZLES=[
+  {id:1,title:"Quattro squadre #1",groups:[{label:"Inter",color:"green",players:["Lautaro Martínez","Nicolò Barella","Federico Dimarco","Alessandro Bastoni"]},{label:"Milan",color:"yellow",players:["Mike Maignan","Leao","Christian Pulisic","Fikayo Tomori"]},{label:"Napoli",color:"orange",players:["Kevin De Bruyne","Scott McTominay","Rasmus Højlund","Alessandro Buongiorno"]},{label:"Juventus",color:"red",players:["Dušan Vlahović","Kenan Yıldız","Andrea Cambiaso","Teun Koopmeiners"]}]},
+  {id:2,title:"Quattro nazionalità #1",groups:[{label:"Calciatori italiani",color:"green",players:["Lautaro Martínez","Nicolò Barella","Federico Dimarco","Alessandro Bastoni"]},{label:"Calciatori francesi",color:"yellow",players:["Marcus Thuram","Mike Maignan","Youssouf Fofana","Adrien Rabiot"]},{label:"Calciatori argentini",color:"orange",players:["Paulo Dybala","Matías Soulé","Santiago Castro","Andrea Cambiaso"]},{label:"Calciatori scozzesi",color:"red",players:["Scott McTominay","Billy Gilmour","Lewis Ferguson","Ché Adams"]}]},
+  {id:3,title:"Quattro ruoli #1",groups:[{label:"Portieri",color:"green",players:["Alex Meret","Marco Carnesecchi","Michele Di Gregorio","Ivan Provedel"]},{label:"Terzini",color:"yellow",players:["Federico Dimarco","Andrea Cambiaso","Leonardo Spinazzola","Raoul Bellanova"]},{label:"Difensori",color:"orange",players:["Alessandro Bastoni","Gleison Bremer","Giorgio Scalvini","Alessandro Buongiorno"]},{label:"Attaccanti",color:"red",players:["Lautaro Martínez","Moise Kean","Dušan Vlahović","Rasmus Højlund"]}]},
+  {id:4,title:"Fasce di valore #1",groups:[{label:"Valore sopra 40M€",color:"red",players:["Lautaro Martínez","Nicolò Barella","Leao","Kenan Yıldız"]},{label:"Valore tra 20M e 39M€",color:"orange",players:["Teun Koopmeiners","Gleison Bremer","Moise Kean","Scott McTominay"]},{label:"Valore tra 8M e 19M€",color:"yellow",players:["Marten de Roon","Alexis Saelemaekers","Mattia Zaccagni","Riccardo Orsolini"]},{label:"Valore tra 5M e 7M€",color:"green",players:["Arkadiusz Milik","Domenico Berardi","Pedro","Niclas Füllkrug"]}]},
+  {id:5,title:"Fasce d'età #1",groups:[{label:"Under 22",color:"green",players:["Francesco Camarda","Giorgio Scalvini","Niccolò Pisilli","Davide Bartesaghi"]},{label:"Tra 22 e 25 anni",color:"yellow",players:["Kenan Yıldız","Petar Sučić","Andrea Cambiaso","Santiago Castro"]},{label:"Tra 26 e 29 anni",color:"orange",players:["Lautaro Martínez","Nicolò Barella","Federico Dimarco","Alessandro Bastoni"]},{label:"Over 30",color:"red",players:["Luka Modrić","Kevin De Bruyne","Romelu Lukaku","Pedro"]}]},
+  {id:6,title:"Quattro squadre #2",groups:[{label:"Roma",color:"green",players:["Paulo Dybala","Lorenzo Pellegrini","Mile Svilar","Artem Dovbyk"]},{label:"Lazio",color:"yellow",players:["Mattia Zaccagni","Ivan Provedel","Alessio Romagnoli","Nicolò Rovella"]},{label:"Atalanta",color:"orange",players:["Marco Carnesecchi","Ademola Lookman","Gianluca Scamacca","Charles De Ketelaere"]},{label:"Fiorentina",color:"red",players:["Moise Kean","Albert Gudmundsson","Niccolò Fagioli","Robin Gosens"]}]},
+  {id:7,title:"Quattro nazionalità #2",groups:[{label:"Calciatori italiani",color:"green",players:["Moise Kean","Giacomo Raspadori","Mattia Zaccagni","Lorenzo Pellegrini"]},{label:"Calciatori olandesi",color:"yellow",players:["Stefan de Vrij","Denzel Dumfries","Teun Koopmeiners","Donyell Malen"]},{label:"Calciatori serbi",color:"orange",players:["Strahinja Pavlović","Dušan Vlahović","Mile Svilar","Vanja Milinković-Savić"]},{label:"Calciatori belgi",color:"red",players:["Kevin De Bruyne","Romelu Lukaku","Loïs Openda","Alexis Saelemaekers"]}]},
+  {id:8,title:"Quattro ruoli #2",groups:[{label:"Portieri",color:"green",players:["Mike Maignan","Yann Sommer","Vanja Milinković-Savić","Mile Svilar"]},{label:"Difensori",color:"yellow",players:["Strahinja Pavlović","Evan Ndicka","Odilon Kossounou","Sam Beukema"]},{label:"Centrocampisti",color:"orange",players:["Nicolò Barella","Teun Koopmeiners","Scott McTominay","Frank Anguissa"]},{label:"Ali",color:"red",players:["Leao","Christian Pulisic","Ademola Lookman","David Neres"]}]},
+  {id:9,title:"Fasce di valore #2",groups:[{label:"Valore sopra 40M€",color:"red",players:["Federico Dimarco","Rasmus Højlund","Marcus Thuram","Alessandro Bastoni"]},{label:"Valore tra 20M e 39M€",color:"orange",players:["Éderson","Khéphren Thuram","Matías Soulé","Giorgio Scalvini"]},{label:"Valore tra 8M e 19M€",color:"yellow",players:["Odgaard","Lewis Ferguson","Nicolò Rovella","Nuno Tavares"]},{label:"Valore tra 5M e 7M€",color:"green",players:["Rolando Mandragora","Sead Kolasinac","Berat Djimsiti","Alessio Romagnoli"]}]},
+  {id:10,title:"Fasce d'età #2",groups:[{label:"Under 22",color:"green",players:["Pio Esposito","Vasilije Adžić","Sebastiano Esposito","Davide Bartesaghi"]},{label:"Tra 22 e 25 anni",color:"yellow",players:["Raoul Bellanova","Yann Bisseck","Pierre Kalulu","Ardon Jashari"]},{label:"Tra 26 e 29 anni",color:"orange",players:["Mike Maignan","Leao","Christian Pulisic","Strahinja Pavlović"]},{label:"Over 30",color:"red",players:["Adrien Rabiot","Stefan de Vrij","Matteo Darmian","Calhanoglu"]}]},
+  {id:11,title:"Quattro squadre #3",groups:[{label:"Bologna",color:"green",players:["Riccardo Orsolini","Lewis Ferguson","Santiago Castro","Lucumi"]},{label:"Torino",color:"yellow",players:["Nikola Vlašić","Ivan Ilić","Giovanni Simeone","Cesare Casadei"]},{label:"Sassuolo",color:"orange",players:["Domenico Berardi","Andrea Pinamonti","Kristian Thorstvedt","Cristian Volpato"]},{label:"Genoa",color:"red",players:["Morten Frendrup","Ruslan Malinovskyi","Tommaso Baldanzi","Leo Østigård"]}]},
+  {id:12,title:"Quattro nazionalità #3",groups:[{label:"Calciatori italiani",color:"green",players:["Marco Carnesecchi","Federico Gatti","Gianluca Mancini","Davide Frattesi"]},{label:"Calciatori spagnoli",color:"yellow",players:["Mario Gila","Angeliño","Álvaro Morata","Adrián Bernabé"]},{label:"Calciatori brasiliani",color:"orange",players:["Gleison Bremer","Carlos Augusto","Éderson","Dodô"]},{label:"Calciatori croati",color:"red",players:["Luka Modrić","Mario Pašalić","Nikola Vlašić","Ivan Ilić"]}]},
+  {id:13,title:"Quattro ruoli #3",groups:[{label:"Portieri",color:"green",players:["Elia Caprile","Maduka Okoye","Zion Suzuki","Muric"]},{label:"Terzini",color:"yellow",players:["Denzel Dumfries","Carlos Augusto","Mathías Olivera","Dodô"]},{label:"Centrocampisti",color:"orange",players:["Calhanoglu","Stanislav Lobotka","Piotr Zielinski","Manuel Locatelli"]},{label:"Attaccanti",color:"red",players:["Romelu Lukaku","Santiago Gimenez","Jonathan David","Loïs Openda"]}]},
+  {id:14,title:"Fasce di valore #3",groups:[{label:"Valore sopra 40M€",color:"red",players:["Andrea Cambiaso","Santiago Castro","Davide Frattesi","Nico Paz"]},{label:"Valore tra 20M e 39M€",color:"orange",players:["Nikola Vlašić","Conceicao","Pierre Kalulu","Ardon Jashari"]},{label:"Valore tra 8M e 19M€",color:"yellow",players:["Nicolò Cambiaghi","Adrián Bernabé","Keita","Kristian Thorstvedt"]},{label:"Valore tra 5M e 7M€",color:"green",players:["Robin Gosens","Mario Pašalić","Fabiano Parisi","Sandi Lovrić"]}]},
+  {id:15,title:"Fasce d'età #3",groups:[{label:"Under 22",color:"green",players:["Niccolò Fortini","Honest Ahanor","Mert Kılıčsoy","Marco Palestra"]},{label:"Tra 22 e 25 anni",color:"yellow",players:["Giorgio Scalvini","Billy Gilmour","Javi Gutiérrez","Sam Beukema"]},{label:"Tra 26 e 29 anni",color:"orange",players:["Mile Svilar","Evan Ndicka","Manu Koné","Scott McTominay"]},{label:"Over 30",color:"red",players:["Yann Sommer","Francesco Acerbi","Giovanni Di Lorenzo","Stanislav Lobotka"]}]},
+  {id:16,title:"Quattro squadre #4",groups:[{label:"Inter",color:"green",players:["Marcus Thuram","Calhanoglu","Denzel Dumfries","Davide Frattesi"]},{label:"Roma",color:"yellow",players:["Gianluca Mancini","Evan Ndicka","Manu Koné","Matías Soulé"]},{label:"Milan",color:"orange",players:["Strahinja Pavlović","Youssouf Fofana","Alexis Saelemaekers","Santiago Gimenez"]},{label:"Bologna",color:"red",players:["Thijs Dallinga","Riccardo Orsolini","Mads Heggem","Odgaard"]}]},
+  {id:17,title:"Quattro nazionalità #4",groups:[{label:"Calciatori italiani",color:"green",players:["Alex Meret","Michele Di Gregorio","Nicolò Rovella","Manuel Locatelli"]},{label:"Calciatori danesi",color:"yellow",players:["Rasmus Højlund","Odgaard","Oliver Christensen","Gustav Isaksen"]},{label:"Calciatori polacchi",color:"orange",players:["Piotr Zielinski","Arkadiusz Milik","Nicola Zalewski","Kacper Przyborek"]},{label:"Calciatori portoghesi",color:"red",players:["Leao","Conceicao","Joao Mario","Nuno Tavares"]}]},
+  {id:18,title:"Quattro ruoli #4",groups:[{label:"Portieri",color:"green",players:["Marco Sportiello","Wladimiro Falcone","Oliver Christensen","Gioele Nunziante"]},{label:"Difensori",color:"yellow",players:["Federico Gatti","Pierre Kalulu","Lloyd Kelly","Stefan de Vrij"]},{label:"Ali",color:"orange",players:["Kenan Yıldız","Conceicao","Kamaldeen Sulemana","Assane Diao"]},{label:"Centrocampisti",color:"red",players:["Davide Frattesi","Khéphren Thuram","Manu Koné","Lewis Ferguson"]}]},
+  {id:19,title:"Fasce di valore #4",groups:[{label:"Valore sopra 40M€",color:"red",players:["Loïs Openda","Jonathan David","Manu Koné","Sam Beukema"]},{label:"Valore tra 20M e 39M€",color:"orange",players:["Mile Svilar","Evan Ndicka","Juan Cabal","Mario Gila"]},{label:"Valore tra 8M e 19M€",color:"yellow",players:["Zion Suzuki","Alex Meret","Stanislav Lobotka","Billy Gilmour"]},{label:"Valore tra 5M e 7M€",color:"green",players:["Fisayo Dele-Bashiru","Bryan Cristante","Gvidas Gineitis","Omar Al-Musrati"]}]},
+  {id:20,title:"Fasce d'età #4",groups:[{label:"Under 22",color:"green",players:["Pio Esposito","Francesco Camarda","Niccolò Pisilli","Niccolò Fortini"]},{label:"Tra 22 e 25 anni",color:"yellow",players:["Gleison Bremer","Alessandro Buongiorno","Matteo Gabbia","Samuele Ricci"]},{label:"Tra 26 e 29 anni",color:"orange",players:["Marco Carnesecchi","Isak Hien","Odilon Kossounou","Éderson"]},{label:"Over 30",color:"red",players:["Amir Rrahmani","Sead Kolasinac","Berat Djimsiti","Mario Pašalić"]}]},
+  {id:21,title:"Quattro squadre #5",groups:[{label:"Napoli",color:"green",players:["Romelu Lukaku","Frank Anguissa","David Neres","Stanislav Lobotka"]},{label:"Juventus",color:"yellow",players:["Gleison Bremer","Khéphren Thuram","Jonathan David","Loïs Openda"]},{label:"Lazio",color:"orange",players:["Pedro","Boulaye Dia","Gustav Isaksen","Reda Belahyane"]},{label:"Como",color:"red",players:["Nico Paz","Álvaro Morata","Máximo Perrone","Assane Diao"]}]},
+  {id:22,title:"Quattro nazionalità #5",groups:[{label:"Calciatori italiani",color:"green",players:["Raoul Bellanova","Andrea Cambiaso","Leonardo Spinazzola","Niccolò Pisilli"]},{label:"Calciatori tedeschi",color:"yellow",players:["Yann Bisseck","Niclas Füllkrug","Robin Gosens","Ardon Jashari"]},{label:"Calciatori svizzeri",color:"orange",players:["Yann Sommer","Manuel Akanji","Sohm","Remo Freuler"]},{label:"Calciatori turchi",color:"red",players:["Calhanoglu","Kenan Yıldız","Zeki Çelik","Mert Kılıčsoy"]}]},
+  {id:23,title:"Quattro ruoli #5",groups:[{label:"Portieri",color:"green",players:["Mattia Perin","Alex Meret","Ivan Provedel","Elia Caprile"]},{label:"Terzini",color:"yellow",players:["Juan Cabal","Emil Holm","Nuno Tavares","Robin Gosens"]},{label:"Ali",color:"orange",players:["Riccardo Orsolini","Mattia Zaccagni","Alexis Saelemaekers","Armand Laurienté"]},{label:"Attaccanti",color:"red",players:["Paulo Dybala","Giacomo Raspadori","Albert Gudmundsson","Giovanni Simeone"]}]},
+  {id:24,title:"Fasce di valore #5",groups:[{label:"Valore sopra 40M€",color:"red",players:["Alessandro Buongiorno","Yann Bisseck","Petar Sučić","Wesley"]},{label:"Valore tra 20M e 39M€",color:"orange",players:["Oumar Solet","Morten Frendrup","Brooke Norton-Cuffy","Lucumi"]},{label:"Valore tra 8M e 19M€",color:"yellow",players:["Samuele Ricci","Niccolò Fagioli","Elia Caprile","Marco Palestra"]},{label:"Valore tra 5M e 7M€",color:"green",players:["Luca Ranieri","Mattia Boloca","Dossena","Gvidas Gineitis"]}]},
+  {id:25,title:"Fasce d'età #5",groups:[{label:"Under 22",color:"green",players:["Vasilije Adžić","Assane Diao","Honest Ahanor","Mert Kılıčsoy"]},{label:"Tra 22 e 25 anni",color:"yellow",players:["Conceicao","Edon Zhegrova","Kamaldeen Sulemana","Lazar Samardžić"]},{label:"Tra 26 e 29 anni",color:"orange",players:["Charles De Ketelaere","Ademola Lookman","Gianluca Scamacca","Nikola Krstović"]},{label:"Over 30",color:"red",players:["Pedro","Niclas Füllkrug","Arkadiusz Milik","Álvaro Morata"]}]},
+  {id:26,title:"Quattro squadre #6",groups:[{label:"Atalanta",color:"green",players:["Isak Hien","Giorgio Scalvini","Éderson","Kamaldeen Sulemana"]},{label:"Fiorentina",color:"yellow",players:["Pietro Comuzzo","Dodô","Jacopo Fazzini","Roberto Piccoli"]},{label:"Parma",color:"orange",players:["Zion Suzuki","Adrián Bernabé","Keita","Ondrejka"]},{label:"Udinese",color:"red",players:["Maduka Okoye","Oumar Solet","Nicolò Zaniolo","Rasmus Kristensen"]}]},
+  {id:27,title:"Quattro nazionalità #6",groups:[{label:"Calciatori italiani",color:"green",players:["Giorgio Scalvini","Pietro Comuzzo","Cesare Casadei","Jacopo Fazzini"]},{label:"Calciatori inglesi",color:"yellow",players:["Fikayo Tomori","Ruben Loftus-Cheek","Lloyd Kelly","Jack Harrison"]},{label:"Calciatori ivoriani",color:"orange",players:["Evan Ndicka","Odilon Kossounou","Kamaldeen Sulemana","Jérémie Boga"]},{label:"Calciatori nigeriani",color:"red",players:["Maduka Okoye","Honest Ahanor","Fisayo Dele-Bashiru","Gift Orban"]}]},
+  {id:28,title:"Quattro ruoli #6",groups:[{label:"Terzini",color:"green",players:["Giovanni Di Lorenzo","Devyne Rensch","Angeliño","Wesley"]},{label:"Difensori",color:"yellow",players:["Yann Bisseck","Manuel Akanji","Lucumi","Isak Hien"]},{label:"Centrocampisti",color:"orange",players:["Éderson","Marten de Roon","Mario Pašalić","Kristian Thorstvedt"]},{label:"Ali",color:"red",players:["Edon Zhegrova","Nicola Zalewski","Gustav Isaksen","Jérémie Boga"]}]},
+  {id:29,title:"Fasce di valore #6",groups:[{label:"Valore sopra 40M€",color:"red",players:["Kevin De Bruyne","Romelu Lukaku","Frank Anguissa","Amir Rrahmani"]},{label:"Valore tra 20M e 39M€",color:"orange",players:["Strahinja Pavlović","Koni De Winter","Vanja Milinković-Savić","Mario Gila"]},{label:"Valore tra 8M e 19M€",color:"yellow",players:["Matteo Politano","Ruben Loftus-Cheek","Zielinski","Giovanni Di Lorenzo"]},{label:"Valore tra 5M e 7M€",color:"green",players:["Saúl Coco","Tomas Suslov","Nassim Belghali","Marco Prati"]}]},
+  {id:30,title:"Fasce d'età #6",groups:[{label:"Under 22",color:"green",players:["Cesare Casadei","Jacopo Fazzini","Cristian Volpato","Sebastiano Esposito"]},{label:"Tra 22 e 25 anni",color:"yellow",players:["Niccolò Fagioli","Lewis Ferguson","Odgaard","Nicolò Cambiaghi"]},{label:"Tra 26 e 29 anni",color:"orange",players:["Teun Koopmeiners","Davide Frattesi","Khéphren Thuram","Manu Koné"]},{label:"Over 30",color:"red",players:["Henrikh Mkhitaryan","Juan Cuadrado","Matteo Darmian","Alessio Romagnoli"]}]},
+  {id:31,title:"Quattro squadre #7",groups:[{label:"Inter",color:"green",players:["Yann Sommer","Yann Bisseck","Manuel Akanji","Piotr Zielinski"]},{label:"Atalanta",color:"yellow",players:["Odilon Kossounou","Sead Kolasinac","Marten de Roon","Lazar Samardžić"]},{label:"Roma",color:"orange",players:["Angeliño","Wesley","Neil El Aynaoui","Niccolò Pisilli"]},{label:"Lazio",color:"red",players:["Mario Gila","Nuno Tavares","Kenneth Taylor","Daniel Maldini"]}]},
+  {id:32,title:"Quattro nazionalità #7",groups:[{label:"Calciatori italiani",color:"green",players:["Elia Caprile","Nicolò Fagioli","Marco Brescianini","Nicolò Cambiaghi"]},{label:"Calciatori norvegesi",color:"yellow",players:["Mads Heggem","Kristian Thorstvedt","Marcus Pedersen","Leo Østigård"]},{label:"Calciatori svedesi",color:"orange",players:["Isak Hien","Emil Holm","Nadir Zortea","Armand Laurienté"]},{label:"Calciatori colombiani",color:"red",players:["Juan Cabal","Lucumi","Duvan Zapata","Vasquez"]}]},
+  {id:33,title:"Quattro ruoli #7",groups:[{label:"Portieri",color:"green",players:["Vanja Milinković-Savić","Marco Carnesecchi","Zion Suzuki","Maduka Okoye"]},{label:"Difensori",color:"yellow",players:["Koni De Winter","Matteo Gabbia","Marin Pongracic","Aleks Muharemović"]},{label:"Centrocampisti",color:"orange",players:["Nicolò Rovella","Reda Belahyane","Kenneth Taylor","Billy Gilmour"]},{label:"Attaccanti",color:"red",players:["Artem Dovbyk","Evan Ferguson","Donyell Malen","Nikola Krstović"]}]},
+  {id:34,title:"Fasce di valore #7",groups:[{label:"Valore sopra 40M€",color:"red",players:["Pio Esposito","Ange-Yoan Bonny","Luis Henrique","Kamaldeen Sulemana"]},{label:"Valore tra 20M e 39M€",color:"orange",players:["Raoul Bellanova","Honest Ahanor","Odilon Kossounou","Assane Diao"]},{label:"Valore tra 8M e 19M€",color:"yellow",players:["Mads Heggem","Cesare Casadei","Naouirou Ahamada","Thijs Rowe"]},{label:"Valore tra 5M e 7M€",color:"green",players:["Ardian Ismajli","Muric","Nikola Krstović","Maxwel Cornet"]}]},
+  {id:35,title:"Fasce d'età #7",groups:[{label:"Under 22",color:"green",players:["Kenan Yıldız","Mert Kılıčsoy","Pio Esposito","Davide Bartesaghi"]},{label:"Tra 22 e 25 anni",color:"yellow",players:["Matteo Gabbia","Samuele Ricci","Billy Gilmour","Juan Cabal"]},{label:"Tra 26 e 29 anni",color:"orange",players:["Leao","Strahinja Pavlović","Youssouf Fofana","Artem Dovbyk"]},{label:"Over 30",color:"red",players:["Luka Modrić","Matteo Politano","Vanja Milinković-Savić","Calhanoglu"]}]},
+  {id:36,title:"Quattro squadre #8",groups:[{label:"Milan",color:"green",players:["Ardon Jashari","Samuele Ricci","Adrien Rabiot","Christopher Nkunku"]},{label:"Napoli",color:"yellow",players:["Mathías Olivera","Billy Gilmour","Elif Elmas","Matteo Politano"]},{label:"Juventus",color:"orange",players:["Federico Gatti","Pierre Kalulu","Manuel Locatelli","Weston McKennie"]},{label:"Fiorentina",color:"red",players:["Marin Pongracic","Rolando Mandragora","Marco Brescianini","Jack Harrison"]}]},
+  {id:37,title:"Quattro nazionalità #8",groups:[{label:"Calciatori italiani",color:"green",players:["Samuele Ricci","Matteo Gabbia","Roberto Piccoli","Tommaso Pobega"]},{label:"Calciatori marocchini",color:"yellow",players:["Neil El Aynaoui","Reda Belahyane","Zakaria Aboukhlal","Walid Cheddira"]},{label:"Calciatori albanesi",color:"orange",players:["Berat Djimsiti","Elseid Hysaj","Ardian Ismajli","Ylber Berisha"]},{label:"Calciatori senegalesi",color:"red",players:["Assane Diao","Boulaye Dia","Fisayo Dele-Bashiru","Faye"]}]},
+  {id:38,title:"Quattro ruoli #8",groups:[{label:"Terzini",color:"green",players:["Raoul Bellanova","Davide Bartesaghi","Marco Palestra","Niccolò Fortini"]},{label:"Difensori",color:"yellow",players:["Pietro Comuzzo","Daniele Ghilardi","Saúl Coco","Ardian Ismajli"]},{label:"Ali",color:"orange",players:["Kamaldeen Sulemana","Lazar Samardžić","Cristian Volpato","Nicolò Cambiaghi"]},{label:"Centrocampisti",color:"red",players:["Cesare Casadei","Jacopo Fazzini","Marco Brescianini","Niccolò Pisilli"]}]},
+  {id:39,title:"Fasce di valore #8",groups:[{label:"Valore sopra 40M€",color:"red",players:["Leao","Federico Dimarco","Rasmus Højlund","Marcus Thuram"]},{label:"Valore tra 20M e 39M€",color:"orange",players:["Dodô","Kenneth Taylor","Lazar Samardžić","Gleison Bremer"]},{label:"Valore tra 8M e 19M€",color:"yellow",players:["Tommaso Baldanzi","Morten Frendrup","Atta","Lewis Ferguson"]},{label:"Valore tra 5M e 7M€",color:"green",players:["Vitinha","Christian Ekhator","Lorenzo Colombo","Gift Orban"]}]},
+  {id:40,title:"Fasce d'età #8",groups:[{label:"Under 22",color:"green",players:["Giorgio Scalvini","Pietro Comuzzo","Niccolò Pisilli","Honest Ahanor"]},{label:"Tra 22 e 25 anni",color:"yellow",players:["Raoul Bellanova","Niccolò Fagioli","Andrea Cambiaso","Marco Carnesecchi"]},{label:"Tra 26 e 29 anni",color:"orange",players:["Nicolò Barella","Marcus Thuram","Scott McTominay","Gianluca Scamacca"]},{label:"Over 30",color:"red",players:["Ivan Provedel","Alessio Romagnoli","Mattia Zaccagni","Bryan Cristante"]}]},
+  {id:41,title:"Quattro squadre #9",groups:[{label:"Bologna",color:"green",players:["Tommaso Pobega","Sohm","Nicolò Cambiaghi","Santiago Castro"]},{label:"Torino",color:"yellow",players:["Saúl Coco","Ardian Ismajli","Zakaria Aboukhlal","Ché Adams"]},{label:"Genoa",color:"orange",players:["Vasquez","Brooke Norton-Cuffy","Mattia Masini","Christian Ekhator"]},{label:"Cagliari",color:"red",players:["Elia Caprile","Marco Palestra","Sebastiano Esposito","Mert Kılıčsoy"]}]},
+  {id:42,title:"Quattro nazionalità #9",groups:[{label:"Calciatori italiani",color:"green",players:["Ivan Provedel","Alessio Romagnoli","Bryan Cristante","Mattia Zaccagni"]},{label:"Calciatori francesi",color:"yellow",players:["Pierre Kalulu","Khéphren Thuram","Manu Koné","Oumar Solet"]},{label:"Calciatori argentini",color:"orange",players:["Lautaro Martínez","Máximo Perrone","Dominguez","Santiago Castro"]},{label:"Calciatori kosovari",color:"red",players:["Amir Rrahmani","Edon Zhegrova","Mergim Vojvoda","Muric"]}]},
+  {id:43,title:"Quattro ruoli #9",groups:[{label:"Portieri",color:"green",players:["Mike Maignan","Yann Sommer","Marco Carnesecchi","Elia Caprile"]},{label:"Terzini",color:"yellow",players:["Federico Dimarco","Mathías Olivera","Carlos Augusto","Denzel Dumfries"]},{label:"Difensori",color:"orange",players:["Alessandro Bastoni","Gleison Bremer","Strahinja Pavlović","Evan Ndicka"]},{label:"Ali",color:"red",players:["Leao","David Neres","Kenan Yıldız","Conceicao"]}]},
+  {id:44,title:"Fasce di valore #9",groups:[{label:"Valore sopra 40M€",color:"red",players:["Dušan Vlahović","Moise Kean","Alessandro Buongiorno","Teun Koopmeiners"]},{label:"Valore tra 20M e 39M€",color:"orange",players:["Gianluca Scamacca","Giacomo Raspadori","Roberto Piccoli","Isak Hien"]},{label:"Valore tra 8M e 19M€",color:"yellow",players:["Weston McKennie","Miretti","Matteo Gabbia","Lloyd Kelly"]},{label:"Valore tra 5M e 7M€",color:"green",players:["Filip Kostić","Jérémie Boga","Alessio Romagnoli","Sead Kolasinac"]}]},
+  {id:45,title:"Fasce d'età #9",groups:[{label:"Under 22",color:"green",players:["Vasilije Adžić","Sebastiano Esposito","Jacopo Fazzini","Niccolò Fortini"]},{label:"Tra 22 e 25 anni",color:"yellow",players:["Nico Paz","Khéphren Thuram","Cesare Casadei","Kristian Thorstvedt"]},{label:"Tra 26 e 29 anni",color:"orange",players:["Matteo Gabbia","Denzel Dumfries","Ruben Loftus-Cheek","Lewis Ferguson"]},{label:"Over 30",color:"red",players:["Arkadiusz Milik","Fikayo Tomori","Adrien Rabiot","Stefan de Vrij"]}]},
+  {id:46,title:"Quattro squadre #10",groups:[{label:"Como",color:"green",players:["Diego Carlos","Valle","Maxence Caqueret","Georgios Douvikas"]},{label:"Parma",color:"yellow",players:["Simon Circati","Enrico Delprato","Pontus Almqvist","Casper Sørensen"]},{label:"Sassuolo",color:"orange",players:["Jay Idzes","Naouirou Ahamada","Armand Laurienté","M'Bala Nzola"]},{label:"Verona",color:"red",players:["Nelsson","Armel Bella-Kotchap","Sandi Lovrić","Gift Orban"]}]},
+  {id:47,title:"Quattro nazionalità #10",groups:[{label:"Calciatori italiani",color:"green",players:["Davide Bartesaghi","Niccolò Fortini","Marco Palestra","Daniele Ghilardi"]},{label:"Calciatori spagnoli",color:"yellow",players:["Javi Gutiérrez","Miranda","Ramon","Valle"]},{label:"Calciatori ghanesi",color:"orange",players:["Kamaldeen Sulemana","Lamptey","Ibrahim Sulemana","Ebenezer Akinsanmiro"]},{label:"Calciatori serbi",color:"red",players:["Lazar Samardžić","Ivan Ilić","Strahinja Pavlović","Nikola Krstović"]}]},
+  {id:48,title:"Quattro ruoli #10",groups:[{label:"Portieri",color:"green",players:["Ivan Provedel","Michele Di Gregorio","Mile Svilar","Alex Meret"]},{label:"Terzini",color:"yellow",players:["Andrea Cambiaso","Leonardo Spinazzola","Nuno Tavares","Angeliño"]},{label:"Centrocampisti",color:"orange",players:["Teun Koopmeiners","Kevin De Bruyne","Calhanoglu","Piotr Zielinski"]},{label:"Attaccanti",color:"red",players:["Lautaro Martínez","Moise Kean","Romelu Lukaku","Dušan Vlahović"]}]},
+  {id:49,title:"Fasce di valore #10",groups:[{label:"Valore sopra 40M€",color:"red",players:["Loïs Openda","Jonathan David","Nico Paz","Andrea Cambiaso"]},{label:"Valore tra 20M e 39M€",color:"orange",players:["Ardon Jashari","Petar Sučić","Carlos Augusto","Juan Cabal"]},{label:"Valore tra 8M e 19M€",color:"yellow",players:["Alex Meret","Stanislav Lobotka","Elif Elmas","Nuno Tavares"]},{label:"Valore tra 5M e 7M€",color:"green",players:["Rolando Mandragora","Berat Djimsiti","Paulo Dybala","Sead Kolasinac"]}]},
+  {id:50,title:"Fasce d'età #10",groups:[{label:"Under 22",color:"green",players:["Francesco Camarda","Davide Bartesaghi","Niccolò Pisilli","Marco Palestra"]},{label:"Tra 22 e 25 anni",color:"yellow",players:["Gleison Bremer","Sam Beukema","Alessandro Buongiorno","Javi Gutiérrez"]},{label:"Tra 26 e 29 anni",color:"orange",players:["Kevin De Bruyne","Frank Anguissa","David Neres","Artem Dovbyk"]},{label:"Over 30",color:"red",players:["Romelu Lukaku","Stanislav Lobotka","Pedro","Yann Sommer"]}]}
+];
+
+const CONN_COLORS={
+  green: {bg:"#6aaa64",light:"#d4edda",tx:"#fff"},
+  yellow:{bg:"#c9b458",light:"#fff3cd",tx:"#fff"},
+  orange:{bg:"#f0883e",light:"#ffe5cc",tx:"#fff"},
+  red:   {bg:"#c9414a",light:"#f8d7da",tx:"#fff"},
+};
+
+function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
+  const puzzle=CONNECTIONS_PUZZLES[(day-1)%CONNECTIONS_PUZZLES.length];
+  const label=isToday?"🗓 Giornaliero":"📂 Archivio";
+  const savedToday=isToday?loadResult("connections"):null;
+
+  // Mescola i 16 nomi con seed
+  const allPlayers=useMemo(()=>{
+    const players=puzzle.groups.flatMap(g=>g.players.map(p=>({name:p,group:g.label,color:g.color})));
+    return shuffle(players,seedRandom(seed));
+  },[puzzle,seed]);
+
+  const[selected,setSelected]=useState([]);
+  const[solved,setSolved]=useState([]);
+  const[errors,setErrors]=useState(0);
+  const[shake,setShake]=useState(false);
+  const[won,setWon]=useState(false);
+  const[done,setDone]=useState(false);
+  const[lastResult,setLastResult]=useState(null);
+  const[confettiShow,setConfettiShow]=useState(false);
+  const MAX_ERRORS=4;
+
+  useEffect(()=>{setSelected([]);setSolved([]);setErrors(0);setShake(false);setWon(false);setDone(false);setLastResult(null);setConfettiShow(false);},[seed]);
+
+  function toggleSelect(name){
+    if(done)return;
+    if(solved.some(s=>s.players.includes(name)))return;
+    if(selected.includes(name)){setSelected(s=>s.filter(x=>x!==name));}
+    else if(selected.length<4){setSelected(s=>[...s,name]);}
+  }
+
+  function submit(){
+    if(selected.length!==4||done)return;
+    // Controlla se i 4 selezionati appartengono tutti allo stesso gruppo
+    const match=puzzle.groups.find(g=>selected.every(s=>g.players.includes(s)));
+    if(match){
+      const newSolved=[...solved,match];
+      setSolved(newSolved);
+      setSelected([]);
+      setLastResult({type:"correct",label:match.label,color:match.color});
+      setTimeout(()=>setLastResult(null),2000);
+      if(newSolved.length===4){
+        setWon(true);setDone(true);
+        if(isToday)saveResult("connections",{won:true,errors,groups:newSolved.map(g=>g.label)});
+        setTimeout(()=>setConfettiShow(true),400);
+      }
+    } else {
+      // Controlla se è quasi giusto (3 su 4 dello stesso gruppo)
+      const almost=puzzle.groups.find(g=>selected.filter(s=>g.players.includes(s)).length===3);
+      const newErrors=errors+1;
+      setErrors(newErrors);
+      setShake(true);
+      setTimeout(()=>setShake(false),600);
+      setLastResult({type:"wrong",almost:almost?.label});
+      setTimeout(()=>setLastResult(null),2000);
+      if(newErrors>=MAX_ERRORS){
+        setDone(true);
+        if(isToday)saveResult("connections",{won:false,errors:newErrors,groups:[]});
+      }
+    }
+  }
+
+  const remaining=allPlayers.filter(p=>!solved.some(s=>s.players.includes(p.name)));
+
+  if(savedToday)return(
+    <div style={T.app}><Hdr title="Connections" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/>
+    <DoneScreen gameKey="connections" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+      <div style={{fontSize:"36px",marginBottom:"6px"}}>{s.won?"🎉":"😔"}</div>
+      <div style={{fontSize:"14px",fontWeight:"700",color:US.black,marginBottom:"4px"}}>{s.won?"Completato!":"Non completato"}</div>
+      <div style={{fontSize:"11px",color:US.muted,marginBottom:"12px"}}>Errori: {s.errors}/{MAX_ERRORS}</div>
+      <ShareButton text={`🔗 Connections #${day}\n${s.won?"Completato":"Non completato"} (${s.errors} errori)\nuniverso-quiz-hmix.vercel.app`}/>
+    </>}</DoneScreen></div>
+  );
+
+  return(<div style={{...T.app,position:"relative"}}>
+    {confettiShow&&<Confetti active={confettiShow}/>}
+    <Hdr title="Connections" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+    <div style={{...T.body,maxWidth:"520px"}}>
+      <div style={{fontSize:"11px",color:US.muted,textAlign:"center",marginBottom:"10px"}}>Trova i 4 gruppi da 4 calciatori</div>
+
+      {/* Gruppi risolti */}
+      {solved.map(g=>(
+        <div key={g.label} style={{background:CONN_COLORS[g.color].bg,borderRadius:"6px",padding:"10px 14px",marginBottom:"6px",textAlign:"center"}}>
+          <div style={{fontSize:"10px",fontWeight:"700",color:"#fff",letterSpacing:"1px",textTransform:"uppercase",marginBottom:"3px"}}>{g.label}</div>
+          <div style={{fontSize:"12px",color:"rgba(255,255,255,0.9)"}}>{g.players.join(", ")}</div>
+        </div>
+      ))}
+
+      {/* Griglia 4x4 */}
+      {!done&&<div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"6px",marginBottom:"12px"}}>
+        {remaining.map(p=>{
+          const isSel=selected.includes(p.name);
+          return(
+            <div key={p.name} onClick={()=>toggleSelect(p.name)}
+              style={{background:isSel?US.black:"#fff",color:isSel?"#fff":US.black,
+                border:`2px solid ${isSel?US.black:US.border}`,borderRadius:"6px",
+                padding:"8px 4px",textAlign:"center",cursor:"pointer",
+                fontSize:"10px",fontWeight:"700",lineHeight:1.3,
+                minHeight:"48px",display:"flex",alignItems:"center",justifyContent:"center",
+                transition:"all 0.1s",
+                animation:shake&&isSel?"shake 0.6s ease":"none",
+              }}>{p.name}</div>
+          );
+        })}
+      </div>}
+
+      {/* Messaggio feedback */}
+      {lastResult&&<div style={{textAlign:"center",padding:"8px",marginBottom:"8px",borderRadius:"6px",
+        background:lastResult.type==="correct"?US.greenL:US.redL,
+        color:lastResult.type==="correct"?US.green:US.red,fontSize:"11px",fontWeight:"700"}}>
+        {lastResult.type==="correct"?"✅ Corretto!":lastResult.almost?`❌ Sbagliato — quasi! 3/4 in "${lastResult.almost}"`:"❌ Sbagliato — riprova"}
+      </div>}
+
+      {/* Errori */}
+      <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"6px",marginBottom:"12px"}}>
+        <span style={{fontSize:"10px",color:US.muted}}>Tentativi rimasti:</span>
+        {Array.from({length:MAX_ERRORS}).map((_,i)=>(
+          <div key={i} style={{width:"12px",height:"12px",borderRadius:"50%",
+            background:i<(MAX_ERRORS-errors)?US.black:"#ddd"}}/>
+        ))}
+      </div>
+
+      {/* Bottone conferma */}
+      {!done&&<div style={{display:"flex",gap:"8px"}}>
+        <button onClick={()=>setSelected([])} disabled={!selected.length}
+          style={{...T.sb,flex:1,opacity:selected.length?1:0.4}}>Deseleziona</button>
+        <button onClick={submit} disabled={selected.length!==4}
+          style={{...T.pb,flex:1,opacity:selected.length===4?1:0.4}}>
+          Conferma ({selected.length}/4)
+        </button>
+      </div>}
+
+      {/* Fine partita */}
+      {done&&<div style={{textAlign:"center",marginTop:"8px"}}>
+        {/* Mostra gruppi non risolti */}
+        {puzzle.groups.filter(g=>!solved.some(s=>s.label===g.label)).map(g=>(
+          <div key={g.label} style={{background:CONN_COLORS[g.color].light,border:`2px solid ${CONN_COLORS[g.color].bg}`,borderRadius:"6px",padding:"8px 12px",marginBottom:"6px",textAlign:"center"}}>
+            <div style={{fontSize:"10px",fontWeight:"700",color:CONN_COLORS[g.color].bg,textTransform:"uppercase",marginBottom:"2px"}}>{g.label}</div>
+            <div style={{fontSize:"11px",color:"#555"}}>{g.players.join(", ")}</div>
+          </div>
+        ))}
+        <div style={{padding:"10px",background:won?US.greenL:US.redL,borderRadius:"6px",marginBottom:"10px",color:won?US.green:US.red}}>
+          <div style={{fontSize:"14px",fontWeight:"700",marginBottom:"3px"}}>{won?"🎉 Perfetto!":"😔 Game Over"}</div>
+          <div style={{fontSize:"11px"}}>Errori: {errors}/{MAX_ERRORS}</div>
+        </div>
+        <ShareButton text={`🔗 Connections #${day}\n${puzzle.title}\n${won?"Completato":"Non completato"} (${errors} errori)\nuniverso-quiz-hmix.vercel.app`}/>
+        {isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Archivio</button>}
+        <button onClick={onHome} style={{...T.pb,marginTop:"8px",width:"100%"}}>Home</button>
+      </div>}
+    </div>
+  </div>);
+}
+
+function Connections({onHome,isDaily,onArchive}){
+  if(isDaily){const d=(dayIndex()+5)%CONNECTIONS_PUZZLES.length+1,s=todaySeed()+400013;return<ConnectionsGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="connections">{({day,seed,isToday,archiveNav,chipBar})=><ConnectionsGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
+}
+
+
+// ── FOOTGUESSR ───────────────────────────────────────────────────────────────
+
+const FG_DB=DB_SERIE_A.filter(p=>p.value>=5).map(p=>({n:p.name,c:p.club,r:p.role,nat:p.nation,cont:p.continent,a:p.age,v:p.value}));
+
+function fgRoleFam(r){
+  if(['Ala','Trequartista','Attaccante','Seconda punta'].includes(r))return'att';
+  if(['Centrocampista','Trequartista'].includes(r))return'mid';
+  if(['Difensore','Terzino'].includes(r))return'def';
+  return r;
+}
+function fgSim(a,b){
+  let s=0;
+  if(a.nat===b.nat)s+=40;else if(a.cont===b.cont)s+=20;
+  if(a.c===b.c)s+=30;
+  if(a.r===b.r)s+=25;else if(fgRoleFam(a.r)===fgRoleFam(b.r))s+=12;
+  const d=Math.abs(a.a-b.a);
+  if(d<=2)s+=15;else if(d<=5)s+=8;
+  if(a.v>0&&b.v>0){const r=Math.min(a.v,b.v)/Math.max(a.v,b.v);if(r>=0.7)s+=10;else if(r>=0.4)s+=5;}
+  return s;
+}
+function fgGetRanks(tgt){
+  const sc=FG_DB.filter(p=>p.n!==tgt.n).map(p=>({p,s:fgSim(tgt,p)}));
+  sc.sort((a,b)=>b.s-a.s||(a.p.n>b.p.n?1:-1));
+  const rk={[tgt.n]:1};
+  sc.forEach((x,i)=>rk[x.p.n]=i+2);
+  return rk;
+}
+
+function FootGuesserGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
+  const[target,setTarget]=useState(()=>FG_DB[(day-1)%FG_DB.length]);
+  const[ranks,setRanks]=useState(()=>fgGetRanks(FG_DB[(day-1)%FG_DB.length]));
+  const[query,setQuery]=useState('');
+  const[guesses,setGuesses]=useState([]);
+  const[seen,setSeen]=useState(new Set());
+  const[won,setWon]=useState(false);
+  const[fgConfetti,setFgConfetti]=useState(false);
+  const[hintUsed,setHintUsed]=useState(false);
+  const[hintPlayer,setHintPlayer]=useState(null);
+  const[showHelp,setShowHelp]=useState(false);
+  const[ddOpen,setDdOpen]=useState(false);
+  const[hiIdx,setHiIdx]=useState(-1);
+
+  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+
+  const matches=useMemo(()=>{
+    if(!query)return[];
+    const q=norm(query);
+    return FG_DB.filter(p=>!seen.has(p.n)&&norm(p.n).includes(q)).slice(0,7);
+  },[query,seen]);
+
+  function doGuess(name){
+    const p=FG_DB.find(x=>x.n===name);
+    if(!p||seen.has(name))return;
+    const newSeen=new Set(seen);newSeen.add(name);setSeen(newSeen);
+    const rank=ranks[name];
+    const isWin=name===target.n;
+    setGuesses(g=>[{p,rank,isWin},...g]);
+    setQuery('');setDdOpen(false);setHiIdx(-1);
+    if(isWin){setWon(true);setTimeout(()=>setFgConfetti(true),400);}
+  }
+
+  function handleKey(e){
+    if(e.key==='ArrowDown'){e.preventDefault();setHiIdx(i=>Math.min(i+1,matches.length-1));}
+    else if(e.key==='ArrowUp'){e.preventDefault();setHiIdx(i=>Math.max(i-1,0));}
+    else if(e.key==='Enter'){const m=hiIdx>=0?matches[hiIdx]:matches[0];if(m)doGuess(m.n);}
+    else if(e.key==='Escape'){setDdOpen(false);}
+  }
+
+  const tot=FG_DB.length;
+
+  return(<div style={{...T.app,position:'relative'}}>
+    {fgConfetti&&<Confetti active={fgConfetti}/>}
+    <Hdr title="FootGuessr" sub={`${isToday?"🗓 Giornaliero":"📂 Archivio"} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+    <div style={T.body}>
+
+      {/* Pulsante come funziona */}
+      <div onClick={()=>setShowHelp(h=>!h)}
+        style={{fontSize:'12px',color:US.muted,cursor:'pointer',padding:'6px 10px',
+          background:US.surface,borderRadius:'6px',display:'inline-flex',alignItems:'center',
+          gap:'5px',marginBottom:'10px',border:`0.5px solid ${US.border}`,userSelect:'none'}}>
+        <span style={{fontSize:'10px'}}>{showHelp?'▼':'▶'}</span> Come funziona il rank?
+      </div>
+
+      {/* Pannello spiegazione */}
+      {showHelp&&<div style={{background:US.surface,borderRadius:'8px',padding:'10px 12px',
+        marginBottom:'12px',border:`0.5px solid ${US.border}`}}>
+        {[
+          {col:'#E24B4A',label:'Stessa nazionalità',pts:'+40 pt'},
+          {col:'#f0883e',label:'Stesso club',pts:'+30 pt'},
+          {col:'#7F77DD',label:'Stesso ruolo esatto',pts:'+25 pt'},
+          {col:'#BA7517',label:'Stesso continente (nazione diversa)',pts:'+20 pt'},
+          {col:'#1D9E75',label:'Età simile (±2 anni)',pts:'+15 pt'},
+          {col:'#378ADD',label:'Ruolo simile (stesso reparto)',pts:'+12 pt'},
+          {col:'#888780',label:'Età vicina (±3–5 anni)',pts:'+8 pt'},
+          {col:'#888780',label:'Valore di mercato simile',pts:'+5/10 pt'},
+        ].map(({col,label,pts})=>(
+          <div key={label} style={{display:'grid',gridTemplateColumns:'10px 1fr auto',gap:'0 8px',
+            alignItems:'center',padding:'4px 0',borderBottom:`0.5px solid ${US.border}`}}>
+            <div style={{width:'10px',height:'10px',borderRadius:'50%',background:col}}/>
+            <div style={{fontSize:'12px',color:US.black}}>{label}</div>
+            <div style={{fontSize:'12px',fontWeight:'500',color:US.muted}}>{pts}</div>
+          </div>
+        ))}
+        <div style={{fontSize:'11px',color:US.muted,marginTop:'8px',lineHeight:1.5}}>
+          Il <strong>rank</strong> ordina i {tot} giocatori dal più simile (rank 2) al meno simile (rank {tot}). Rank 1 = trovato.
+        </div>
+      </div>}
+
+      {/* Legenda colori rank */}
+      <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'8px',fontSize:'11px',color:US.muted,alignItems:'center'}}>
+        {[{col:'#E24B4A',label:'rank ≤15 — vicino'},{col:'#BA7517',label:'rank 16–60'},{col:'#378ADD',label:'rank >60 — lontano'}].map(({col,label})=>(
+          <div key={label} style={{display:'flex',alignItems:'center',gap:'4px'}}>
+            <div style={{width:'8px',height:'8px',borderRadius:'50%',background:col}}/>
+            <span>{label}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Pulsante indizio */}
+      {!won&&guesses.length>0&&!hintUsed&&<div style={{marginBottom:'8px'}}>
+        <button onClick={()=>{
+          const bestRank=Math.min(...guesses.map(g=>g.rank));
+          const candidates=Object.entries(ranks)
+            .filter(([n,r])=>r>1&&r<bestRank&&!seen.has(n))
+            .sort((a,b)=>a[1]-b[1])
+            .slice(0,20);
+          if(candidates.length>0){
+            const pick=candidates[Math.floor(Math.random()*Math.min(5,candidates.length))];
+            setHintPlayer(pick[0]);
+            setHintUsed(true);
+          }
+        }} style={{...T.sb,width:'100%',color:US.black,fontSize:'12px'}}>
+          💡 Mostra un indizio (rank migliore del tuo {Math.min(...guesses.map(g=>g.rank))}°)
+        </button>
+      </div>}
+      {hintPlayer&&<div style={{fontSize:'12px',color:US.muted,padding:'6px 10px',
+        background:US.surface,borderRadius:'6px',marginBottom:'8px',
+        border:`0.5px solid ${US.border}`}}>
+        💡 Indizio: prova <strong style={{color:US.black}}>{hintPlayer}</strong>
+      </div>}
+
+      {/* Input ricerca */}
+      {!won&&<div style={{position:'relative',marginBottom:'8px'}}>
+        <input value={query} onChange={e=>{setQuery(e.target.value);setDdOpen(true);setHiIdx(-1);}}
+          onKeyDown={handleKey} onFocus={()=>setDdOpen(true)}
+          placeholder="Cerca calciatore..." disabled={won}
+          style={{width:'100%',padding:'9px 12px',border:`0.5px solid ${US.border}`,
+            borderRadius:'6px',fontSize:'14px',fontFamily:'inherit',
+            background:US.bg,color:US.black,outline:'none',boxSizing:'border-box'}}/>
+        {ddOpen&&matches.length>0&&<div style={{position:'absolute',top:'calc(100% + 3px)',left:0,right:0,
+          background:US.bg,border:`0.5px solid ${US.border}`,borderRadius:'6px',zIndex:20,overflow:'hidden'}}>
+          {matches.map((p,i)=>(
+            <div key={p.n} onClick={()=>doGuess(p.n)}
+              style={{padding:'8px 12px',fontSize:'13px',cursor:'pointer',
+                color:US.black,borderBottom:`0.5px solid ${US.border}`,
+                background:i===hiIdx?US.surface:'transparent',
+                display:'flex',justifyContent:'space-between',alignItems:'center'}}
+              onMouseEnter={()=>setHiIdx(i)}>
+              <span>{p.n}</span>
+              <span style={{fontSize:'11px',color:US.muted}}>{p.c} · {p.r}</span>
+            </div>
+          ))}
+        </div>}
+      </div>}
+
+      {/* Contatore */}
+      {guesses.length>0&&<div style={{fontSize:'12px',color:US.muted,marginBottom:'6px'}}>
+        {guesses.length} tentativ{guesses.length===1?'o':'i'}
+      </div>}
+
+      {/* Messaggio vittoria */}
+      {won&&<div style={{textAlign:'center',padding:'14px',background:'#f0fdf4',
+        borderRadius:'8px',border:'0.5px solid #86efac',marginBottom:'10px'}}>
+        <div style={{fontSize:'14px',fontWeight:'500',color:'#166534',marginBottom:'4px'}}>
+          Trovato! Era {target.n}
+        </div>
+        <div style={{fontSize:'12px',color:US.muted}}>
+          {target.c} · {target.r} · {target.nat} · {target.a} anni · €{target.v}M
+        </div>
+        <div style={{fontSize:'12px',color:US.muted,marginTop:'2px'}}>
+          {guesses.length} tentativ{guesses.length===1?'o':'i'}
+        </div>
+        <ShareButton text={`🔎 FootGuessr #${Math.floor(todaySeed()%1000)}\nTrovato in ${guesses.length} tentativ${guesses.length===1?'o':'i'}\nuniverso-quiz-hmix.vercel.app`}/>
+        <button onClick={onHome} style={{...T.pb,marginTop:'8px',width:'100%'}}>Home</button>
+      </div>}
+
+      {/* Lista guesses */}
+      <div style={{display:'flex',flexDirection:'column',gap:'5px'}}>
+        {guesses.map(({p,rank,isWin},idx)=>{
+          const pct=isWin?100:Math.max(2,Math.round((1-(rank-1)/(tot-1))*100));
+          const barCol=isWin?'#639922':rank<=15?'#E24B4A':rank<=60?'#BA7517':'#378ADD';
+          const badgeBg=isWin?'#EAF3DE':rank<=15?'#FCEBEB':rank<=60?'#FAEEDA':'#E6F1FB';
+          const badgeTx=isWin?'#3B6D11':rank<=15?'#A32D2D':rank<=60?'#854F0B':'#0C447C';
+          return(
+            <div key={idx} style={{display:'grid',gridTemplateColumns:'1fr auto',gap:'8px',
+              alignItems:'center',padding:'8px 12px',borderRadius:'6px',
+              border:`0.5px solid ${isWin?'#86efac':US.border}`,
+              background:isWin?'#f0fdf4':US.bg}}>
+              <div>
+                <div style={{fontSize:'13px',fontWeight:'500',color:US.black}}>{p.n}</div>
+                <div style={{fontSize:'11px',color:US.muted,marginTop:'2px'}}>
+                  {p.c} · {p.r} · {p.nat} · {p.a} anni · €{p.v}M
+                </div>
+                <div style={{height:'3px',borderRadius:'2px',marginTop:'5px',
+                  width:`${pct}%`,background:barCol,maxWidth:'100%'}}/>
+              </div>
+              <div style={{fontSize:'13px',fontWeight:'500',padding:'4px 10px',
+                borderRadius:'6px',minWidth:'44px',textAlign:'center',
+                background:badgeBg,color:badgeTx}}>
+                {isWin?'#1':'#'+rank}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>);
+}
+
+function FootGuessr({onHome,isDaily,onArchive}){
+  if(isDaily){const d=(dayIndex()+7)%FG_DB.length+1,s=todaySeed()+777;return<FootGuesserGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="footguessr">{({day,seed,isToday,archiveNav,chipBar})=><FootGuesserGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 const MODES=[
