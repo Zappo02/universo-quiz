@@ -1699,7 +1699,7 @@ function ArchiveWrapper({gameKey,children}){
   const[num,setNum]=useState(Math.max(1,todayN-1));
   // page: which group of 10 we show. page=0 → most recent 10 (excluding today)
   const[page,setPage]=useState(0);
-  const SEED_OFFSET={calciodle:0,wordle:100001,hangman:200002,valore2:300011,carriera:0,rosa:0,lista:0,transfer:0};
+  const SEED_OFFSET={calciodle:0,wordle:100001,hangman:200002,valore2:300011,carriera:0,rosa:0,lista:0,transfer:0,connections:400013,footguessr:500017};
   const seed=seedForNum(num,poolSize)+(SEED_OFFSET[gameKey]||0);
   const isToday=num===todayN;
 
@@ -2048,7 +2048,7 @@ function ChiValeDiPiu({onHome,isDaily,onArchive}){
 
 // ── CARRIERA ─────────────────────────────────────────────────────────────
 function CarreiraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
-  const player=CAREERS[((dayIndex()+3)%CAREERS.length)];
+  const player=CAREERS[(day-1)%CAREERS.length];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("carriera"):null;
   const maxC=player.clues.length;
@@ -2090,7 +2090,7 @@ function CarreiraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function Carriera({onHome,isDaily,onArchive}){
-  if(isDaily){const d=CAREERS.length,s=todaySeed();return<CarreiraGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  if(isDaily){const d=(dayIndex()+3)%CAREERS.length+1,s=todaySeed();return<CarreiraGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
   return<ArchiveWrapper gameKey="carriera">{({day,seed,isToday,archiveNav,chipBar})=><CarreiraGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
@@ -2104,7 +2104,7 @@ function TimerRing({seconds,total}){
 
 function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const TOTAL=60;
-  const squadra=ROSE_LIST[((dayIndex()+10)%ROSE_LIST.length)];
+  const squadra=ROSE_LIST[(day-1)%ROSE_LIST.length];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("rosa"):null;
   const BONUS=5;
@@ -2167,7 +2167,7 @@ function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function RosaQuiz({onHome,isDaily,onArchive}){
-  if(isDaily){const d=ROSE_LIST.length,s=todaySeed();return<RosaQuizGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  if(isDaily){const d=(dayIndex()+10)%ROSE_LIST.length+1,s=todaySeed();return<RosaQuizGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
   return<ArchiveWrapper gameKey="rosa">{({day,seed,isToday,archiveNav,chipBar})=><RosaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
@@ -2313,7 +2313,7 @@ const LISTA_POOL = LISTA_CATEGORIES.length;
 
 function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const TOTAL=90,BONUS=5;
-  const cat=LISTA_CATEGORIES[((dayIndex()+40)%LISTA_POOL)];
+  const cat=LISTA_CATEGORIES[(day-1)%LISTA_POOL];
   // use unique answers if defined (for categories with repeated winners)
   const validAnswers=cat.unique||cat.answers;
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
@@ -2406,7 +2406,7 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function ListaQuiz({onHome,isDaily,onArchive}){
-  if(isDaily){const d=LISTA_POOL,s=todaySeed();return<ListaQuizGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  if(isDaily){const d=(dayIndex()+40)%LISTA_POOL+1,s=todaySeed();return<ListaQuizGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
   return<ArchiveWrapper gameKey="lista">{({day,seed,isToday,archiveNav,chipBar})=><ListaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
@@ -2480,7 +2480,7 @@ const TRANSFERS = [
 ];
 
 function TransferGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
-  const tr=TRANSFERS[((dayIndex()+4)%TRANSFERS.length)];
+  const tr=TRANSFERS[(day-1)%TRANSFERS.length];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("transfer"):null;
   // 3 fields to guess: fee (±5M), from, year
@@ -2565,7 +2565,7 @@ function TransferGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function IndivinaTransferimento({onHome,isDaily,onArchive}){
-  if(isDaily){const d=TRANSFERS.length,s=todaySeed();return<TransferGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  if(isDaily){const d=(dayIndex()+4)%TRANSFERS.length+1,s=todaySeed();return<TransferGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
   return<ArchiveWrapper gameKey="transfer">{({day,seed,isToday,archiveNav,chipBar})=><TransferGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
@@ -2885,7 +2885,7 @@ const CONN_COLORS={
 };
 
 function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
-  const puzzle=CONNECTIONS_PUZZLES[(dayIndex()%CONNECTIONS_PUZZLES.length)];
+  const puzzle=CONNECTIONS_PUZZLES[(day-1)%CONNECTIONS_PUZZLES.length];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("connections"):null;
 
@@ -3037,7 +3037,7 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
 }
 
 function Connections({onHome,isDaily,onArchive}){
-  if(isDaily){const d=CONNECTIONS_PUZZLES.length,s=todaySeed()+400013;return<ConnectionsGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  if(isDaily){const d=(dayIndex()+5)%CONNECTIONS_PUZZLES.length+1,s=todaySeed()+400013;return<ConnectionsGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
   return<ArchiveWrapper gameKey="connections">{({day,seed,isToday,archiveNav,chipBar})=><ConnectionsGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
@@ -3070,9 +3070,9 @@ function fgGetRanks(tgt){
   return rk;
 }
 
-function FootGuesserGame({onHome}){
-  const[target,setTarget]=useState(()=>FG_DB[Math.floor(seedRandom(todaySeed()+777)*FG_DB.length)]);
-  const[ranks,setRanks]=useState(()=>fgGetRanks(FG_DB[Math.floor(seedRandom(todaySeed()+777)*FG_DB.length)]));
+function FootGuesserGame({day,seed,isToday,onHome}){
+  const[target,setTarget]=useState(()=>FG_DB[(day-1)%FG_DB.length]);
+  const[ranks,setRanks]=useState(()=>fgGetRanks(FG_DB[(day-1)%FG_DB.length]));
   const[query,setQuery]=useState('');
   const[guesses,setGuesses]=useState([]);
   const[seen,setSeen]=useState(new Set());
@@ -3236,8 +3236,9 @@ function FootGuesserGame({onHome}){
   </div>);
 }
 
-function FootGuessr({onHome}){
-  return <FootGuesserGame onHome={onHome}/>;
+function FootGuessr({onHome,isDaily,onArchive}){
+  if(isDaily){const d=(dayIndex()+7)%FG_DB.length+1,s=todaySeed()+777;return<FootGuesserGame day={d} seed={s} isToday onHome={onHome}/>;} 
+  return<FootGuesserGame day={1} seed={todaySeed()+777} isToday onHome={onHome}/>;
 }
 
 const MODES=[
