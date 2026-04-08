@@ -1546,13 +1546,28 @@ function eC(k,g,t){if(k==="age"){const d=Math.abs(g-t);return d===0?"green":d<=3
 function aD(k,g,t){if(k!=="age"&&k!=="value")return null;return g===t?null:g<t?"▲":"▼";}
 function cS(c){return{flex:1,minWidth:0,borderRadius:"2px",background:CLR[c]?.bg||"#fff",border:`1.5px solid ${CLR[c]?.bg||"#e8e8e8"}`,color:CLR[c]?.tx||"#ccc",fontSize:"8px",textAlign:"center",padding:"4px 2px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",minHeight:"32px",overflow:"hidden"};}
 
+function CalciodleFlipCell({value,arrow,color,flipped,colIdx}){
+  const delay=colIdx*200;
+  const bg=CLR[color]?.bg||"#e0e0e0";
+  return(
+    <div style={{flex:1,minWidth:0,height:"38px",perspective:"400px"}}>
+      <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.8s ease ${delay}ms`,transform:flipped?"rotateX(180deg)":"rotateX(0deg)"}}>
+        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e8e8e8",borderRadius:"3px"}}/>
+        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateX(180deg)",background:bg,borderRadius:"3px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",overflow:"hidden"}}>
+          <span style={{fontWeight:"700",fontSize:"8px",color:"#fff",lineHeight:1.2,textAlign:"center",padding:"0 2px"}}>{value}</span>
+          {arrow&&<span style={{fontSize:"7px",color:"rgba(255,255,255,0.85)"}}>{arrow}</span>}
+        </div>
+      </div>
+    </div>
+  );
+}
 function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const dailyPool=useMemo(()=>shuffle([...DB_SERIE_A],seedRandom(seed)),[seed]);
   const target=useMemo(()=>dailyPool[0],[dailyPool]);
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("calciodle"):null;
-  const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);const[animRows,setAnimRows]=useState(new Set());const[hintUsed,setHintUsed]=useState(false);const[hintCol,setHintCol]=useState(null);
-  useEffect(()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows(new Set());setHintUsed(false);setHintCol(null);},[seed]);
+  const[G,sG]=useState([]);const[inp,sI]=useState("");const[sg,sSg]=useState([]);const[ov,sO]=useState(false);const[won,sW]=useState(false);const[mo,sMo]=useState(false);const[animRows,setAnimRows]=useState([]);const[hintUsed,setHintUsed]=useState(false);const[hintCol,setHintCol]=useState(null);
+  useEffect(()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows([]);setHintUsed(false);setHintCol(null);},[seed]);
   function useHint(){
     if(hintUsed||ov)return;
     // Scegli una colonna non ancora verde tra tutte le righe giocate
@@ -1570,29 +1585,12 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     const ng=[...G,p];const w=p.name===target.name,o=ng.length>=6;
     sG(ng);sI("");sSg([]);
     // trigger flip animation for this row
-    setTimeout(()=>setAnimRows(s=>new Set([...s,ri])),50);
+    setTimeout(()=>setAnimRows(s=>[...s,ri]),50);
     if(w){sW(true);sO(true);if(isToday){saveResult("calciodle",{won:true,attempts:ng.length});saveStats("calciodle",true);}setTimeout(()=>sMo(true),COLS.length*120+600);}
     else if(o){sO(true);if(isToday){saveResult("calciodle",{won:false,attempts:6});saveStats("calciodle",false);}setTimeout(()=>sMo(true),COLS.length*120+600);}
   }
   // Flip cell component
-  function FlipCell({value,arrow,color,colIdx,rowIdx}){
-    const flipped=animRows.has(rowIdx);
-    const delay=colIdx*200;
-    const bg=CLR[color]?.bg||"#e0e0e0";
-    return(
-      <div style={{flex:1,minWidth:0,height:"38px",perspective:"400px"}}>
-        <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 1.0s cubic-bezier(0.4,0,0.2,1) ${delay}ms`,transform:flipped?"rotateX(180deg)":"rotateX(0deg)"}}>
-          {/* front — gray placeholder */}
-          <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e8e8e8",borderRadius:"3px",display:"flex",alignItems:"center",justifyContent:"center"}}/>
-          {/* back — colored result */}
-          <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateX(180deg)",background:bg,borderRadius:"3px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",overflow:"hidden"}}>
-            <span style={{fontWeight:"700",fontSize:"8px",color:"#fff",lineHeight:1.2,textAlign:"center",padding:"0 2px"}}>{value}</span>
-            {arrow&&<span style={{fontSize:"7px",color:"rgba(255,255,255,0.85)"}}>{arrow}</span>}
-          </div>
-        </div>
-      </div>
-    );
-  }
+
   if(savedToday)return(<div style={T.app}><Hdr title="Calciodle" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/><DoneScreen gameKey="calciodle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
     <div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.won?`Trovato in ${s.attempts}/6`:"Non trovato"}</div>
@@ -1630,7 +1628,7 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
               const cl=eC(c.key,g[c.key],target[c.key]);
               const ar=aD(c.key,g[c.key],target[c.key]);
               const val=`${g[c.key]}${c.key==="value"?"M":""}`;
-              return<FlipCell key={c.key} value={val} arrow={ar} color={cl} colIdx={ci} rowIdx={ri}/>;
+              return<CalciodleFlipCell key={c.key} value={val} arrow={ar} color={cl} colIdx={ci} flipped={animRows.includes(ri)}/>;
             })}
           </div>
         ))}
@@ -1640,7 +1638,7 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
       const st=loadStats("calciodle");
       const winPct=st.played>0?Math.round(st.won/st.played*100):0;
       const msg=won?(G.length===1?"🤯 Fenomeno! Al primo tentativo!":G.length===2?"🔥 Straordinario! Solo 2 tentativi!":G.length===3?"⚡ Ottimo! Trovato al 3° tentativo":G.length===4?"👍 Ben fatto! Al 4° tentativo":"😅 Ce l'hai fatta!"):"😔 Peccato, ci riproverai!";
-      return(<>{won&&<Confetti active={mo}/>}<div style={{position:"absolute",inset:0,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100,padding:"16px",minHeight:"100%"}} onClick={()=>sMo(false)}><div style={{background:"#fff",borderRadius:"8px",maxWidth:"300px",width:"100%",overflow:"hidden",boxShadow:"0 20px 60px rgba(0,0,0,0.3)"}} onClick={e=>e.stopPropagation()}>
+      return(<>{won&&<Confetti active={mo}/>}<div style={{position:"absolute",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100,padding:"16px",minHeight:"100%"}} onClick={()=>sMo(false)}><div style={{background:"#fff",borderRadius:"8px",maxWidth:"300px",width:"100%",overflow:"hidden",boxShadow:"0 20px 60px rgba(0,0,0,0.3)"}} onClick={e=>e.stopPropagation()}>
         <div style={{background:won?"linear-gradient(135deg,#16a34a,#15803d)":"linear-gradient(135deg,#dc2626,#b91c1c)",color:"#fff",padding:"16px",textAlign:"center"}}>
           <div style={{fontSize:"36px",marginBottom:"4px"}}>{won?"🎉":"😔"}</div>
           <div style={{fontSize:"18px",fontWeight:"700",marginBottom:"2px"}}>{won?"Complimenti!":"Game Over"}</div>
@@ -1660,7 +1658,7 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
           <button onClick={()=>sMo(false)} style={{...T.pb,width:"100%",marginBottom:"6px"}}>Chiudi</button>
           <ShareButton text={`⚽ Calciodle #${day}\n${won?"Trovato in "+G.length+"/6":"Non trovato"}\n${G.map((_,i)=>won&&i===G.length-1?"🟩":"🟥").join("")}\nuniverso-quiz-hmix.vercel.app`}/>
           {isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}
-          {!isToday&&<button onClick={()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows(new Set());setHintUsed(false);setHintCol(null);}} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>🔀 Rigioca</button>}
+          {!isToday&&<button onClick={()=>{sG([]);sI("");sSg([]);sO(false);sW(false);sMo(false);setAnimRows([]);setHintUsed(false);setHintCol(null);}} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>🔀 Rigioca</button>}
         </div>
       </div></div></> );
     })()}
@@ -2179,13 +2177,16 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
         <div style={{fontSize:"13px",fontWeight:"700",color:"#fff"}}>{cat.title}</div>
         <div style={{fontSize:"10px",color:"#888",marginTop:"2px"}}>{cat.desc}</div>
       </div>
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"14px"}}>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
         <TimerRing seconds={seconds} total={TOTAL}/>
         <div style={{textAlign:"center"}}>
           <div style={{fontSize:"36px",fontWeight:"300",color:US.black,lineHeight:1}}>{found.length}<span style={{fontSize:"16px",color:US.muted}}>/{total}</span></div>
           <div style={{fontSize:"9px",color:US.yellow,marginTop:"2px"}}>+{BONUS}s per risposta ✓</div>
           <button onClick={()=>setDone(true)} style={{marginTop:"6px",background:"none",border:`1px solid ${US.border}`,borderRadius:"4px",padding:"3px 10px",fontSize:"9px",color:US.muted,cursor:"pointer",fontFamily:"inherit"}}>⏹ Termina</button>
         </div>
+      </div>
+      <div style={{height:"6px",background:"#e8e8e8",borderRadius:"3px",marginBottom:"12px",overflow:"hidden"}}>
+        <div style={{height:"100%",borderRadius:"3px",background:pct===100?US.green:pct>=70?"#2563eb":pct>=40?US.yellow:US.muted,width:`${pct}%`,transition:"width 0.4s ease"}}/>
       </div>
       <div style={{marginBottom:"12px"}}>
         <input ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} onFocus={e=>setTimeout(()=>e.target.scrollIntoView({behavior:"smooth",block:"center"}),300)} placeholder="Scrivi un nome..." style={{width:"100%",boxSizing:"border-box",border:`2px solid ${wrong?US.red:lastFound?US.green:US.border}`,borderRadius:"6px",padding:"11px 13px",fontSize:"14px",fontFamily:"inherit",outline:"none",color:US.black,background:wrong?US.redL:lastFound?US.greenL:"#fff",transition:"all 0.2s"}}/>
