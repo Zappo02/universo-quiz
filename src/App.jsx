@@ -2055,7 +2055,7 @@ function CarreiraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   useEffect(()=>{sRev(1);sGu("");sSt("p");sSc(0);sFin(false);sShownNotes(new Set());},[seed]);
   const pts=Math.max(1,maxC+1-rev);
   function sub(){
-    const g=gu.trim().toLowerCase(),a=player.answer.toLowerCase();
+    const g=normLow(gu.trim()),a=normLow(player.answer);
     const ok=g===a||a.split(" ").some(p=>p.length>3&&g===p)||(g.length>4&&a.includes(g));
     if(ok){sSc(x=>x+pts);sSt("c");}
     else{if(rev<maxC){sRev(x=>x+1);sSt("w");setTimeout(()=>sSt("p"),900);}else sSt("r");}
@@ -2651,9 +2651,10 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
   const[done,setDone]=useState(false);
   const[lastResult,setLastResult]=useState(null);
   const[confettiShow,setConfettiShow]=useState(false);
+  const[hintUsed,setHintUsed]=useState(false);
   const MAX_ERRORS=4;
 
-  useEffect(()=>{setSelected([]);setSolved([]);setErrors(0);setShake(false);setWon(false);setDone(false);setLastResult(null);setConfettiShow(false);},[seed]);
+  useEffect(()=>{setSelected([]);setSolved([]);setHintUsed(false));setErrors(0);setShake(false);setWon(false);setDone(false);setLastResult(null);setConfettiShow(false);},[seed]);
 
   function toggleSelect(name){
     if(done)return;
@@ -2739,9 +2740,9 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
 
       {/* Messaggio feedback */}
       {lastResult&&<div style={{textAlign:"center",padding:"8px",marginBottom:"8px",borderRadius:"6px",
-        background:lastResult.type==="correct"?US.greenL:US.redL,
-        color:lastResult.type==="correct"?US.green:US.red,fontSize:"11px",fontWeight:"700"}}>
-        {lastResult.type==="correct"?"✅ Corretto!":lastResult.almost?`❌ Sbagliato — quasi! 3/4 in "${lastResult.almost}"`:"❌ Sbagliato — riprova"}
+        background:lastResult.type==="correct"?US.greenL:lastResult.type==="hint"?"#EEF2FF":US.redL,
+        color:lastResult.type==="correct"?US.green:lastResult.type==="hint"?"#4338CA":US.red,fontSize:"11px",fontWeight:"700"}}>
+        {lastResult.type==="correct"?"✅ Corretto!":lastResult.type==="hint"?`💡 Indizio: una categoria è "${lastResult.label}"`:lastResult.almost?`❌ Sbagliato — quasi! 3/4 in "${lastResult.almost}"`:"❌ Sbagliato — riprova"}
       </div>}
 
       {/* Errori */}
@@ -2752,6 +2753,26 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
             background:i<(MAX_ERRORS-errors)?US.black:"#ddd"}}/>
         ))}
       </div>
+
+      {/* Tasto indizio dopo 3 errori */}
+      {!done&&!hintUsed&&errors>=2&&solved.length<4&&<div style={{marginBottom:"8px"}}>
+        <button onClick={()=>{
+          const unsolvedGroups=puzzle.groups.filter(g=>!solved.some(s=>s.label===g.label));
+          if(unsolvedGroups.length>0){
+            const pick=unsolvedGroups[Math.floor(Math.random()*unsolvedGroups.length)];
+            setLastResult({type:"hint",label:pick.label,color:pick.color});
+            setTimeout(()=>setLastResult(null),4000);
+            setHintUsed(true);
+          }
+        }} style={{...T.sb,width:"100%",color:US.black,fontSize:"12px"}}>
+          💡 Indizio — rivela una categoria ({3-errors>0?`disponibile dopo ${3-errors} errori`:"disponibile"})
+        </button>
+      </div>}
+      {!done&&!hintUsed&&errors<2&&<div style={{marginBottom:"8px"}}>
+        <div style={{fontSize:"11px",color:US.muted,textAlign:"center",padding:"4px 0"}}>
+          💡 Indizio disponibile dopo {3-errors} {3-errors===1?"errore":"errori"}
+        </div>
+      </div>}
 
       {/* Bottone conferma */}
       {!done&&<div style={{display:"flex",gap:"8px"}}>
@@ -2766,12 +2787,13 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
       {/* Fine partita */}
       {done&&<div style={{textAlign:"center",marginTop:"8px"}}>
         {/* Mostra gruppi non risolti */}
-        {puzzle.groups.filter(g=>!solved.some(s=>s.label===g.label)).map(g=>(
-          <div key={g.label} style={{background:CONN_COLORS[g.color].light,border:`2px solid ${CONN_COLORS[g.color].bg}`,borderRadius:"6px",padding:"8px 12px",marginBottom:"6px",textAlign:"center"}}>
-            <div style={{fontSize:"10px",fontWeight:"700",color:CONN_COLORS[g.color].bg,textTransform:"uppercase",marginBottom:"2px"}}>{g.label}</div>
-            <div style={{fontSize:"11px",color:"#555"}}>{g.players.join(", ")}</div>
-          </div>
-        ))}
+        {puzzle.groups.map(g=>{
+          const ws=solved.some(s=>s.label===g.label);
+          return(<div key={g.label} style={{background:ws?CONN_COLORS[g.color].bg:CONN_COLORS[g.color].light,border:`2px solid ${CONN_COLORS[g.color].bg}`,borderRadius:"6px",padding:"8px 12px",marginBottom:"6px",textAlign:"center"}}>
+            <div style={{fontSize:"10px",fontWeight:"700",color:ws?"#fff":CONN_COLORS[g.color].bg,textTransform:"uppercase",marginBottom:"2px"}}>{g.label}</div>
+            <div style={{fontSize:"11px",color:ws?"rgba(255,255,255,0.9)":"#555"}}>{g.players.join(", ")}</div>
+          </div>);
+        })}
         <div style={{padding:"10px",background:won?US.greenL:US.redL,borderRadius:"6px",marginBottom:"10px",color:won?US.green:US.red}}>
           <div style={{fontSize:"14px",fontWeight:"700",marginBottom:"3px"}}>{won?"🎉 Perfetto!":"😔 Game Over"}</div>
           <div style={{fontSize:"11px"}}>Errori: {errors}/{MAX_ERRORS}</div>
