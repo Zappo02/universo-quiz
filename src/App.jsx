@@ -835,7 +835,7 @@ const ROSE_LIST = [
 ];
 
 // ── CARRIERE ────────────────────────────────────────────────────────────
-const CAREERS = [
+const CAREERS=[
   { answer:"Francesco Totti", clues:[
     { club:"Roma Primavera", period:"1989–1993", apps:60,  goals:28,  note:"Debutto in prima squadra a 16 anni" },
     { club:"AS Roma",         period:"1993–2017", apps:619, goals:307, note:"1 Scudetto, 2 Coppe Italia, Capitano eterno" },
@@ -1102,7 +1102,6 @@ const CAREERS = [
     { club:"Milan",          period:"2025–",     apps:30,  goals:7,  note:"Acquistato per 35M, primo grande club europeo" },
     { club:"Nazionale",      period:"2021–",     apps:46,  goals:6,  note:"Titolare con El Tri" },
   ]},
-,
   { answer:"Didier Drogba", clues:[
     { club:"Guingamp",        period:"2003–2004", apps:34,  goals:17, note:"Esplode in Ligue 1" },
     { club:"Olympique Marsiglia", period:"2004",  apps:11,  goals:3,  note:"Breve parentesi" },
@@ -1321,7 +1320,6 @@ const CAREERS = [
     { club:"Burnley",         period:"2022–2023", apps:42,  goals:0,  note:"Promozione in Premier da allenatore-giocatore" },
     { club:"Nazionale",       period:"2004–2018", apps:89,  goals:4,  note:"Capitano Belgio, Mondiale 2018 terzo posto" },
   ]},
-,
   { answer:"Giovanni Simeone", clues:[
     { club:"River Plate",    period:"2013–2015", apps:26,  goals:2,  note:"Esordio in Argentina, figlio del Cholo" },
     { club:"Genoa",          period:"2016–2017", apps:35,  goals:12, note:"Prima stagione in Serie A" },
@@ -1527,7 +1525,7 @@ const CAREERS = [
     { club:"Benfica",        period:"2022–2024", apps:55,  goals:11, note:"Protagonista in Portogallo" },
     { club:"Napoli",         period:"2024–",     apps:44,  goals:5,  note:"Scudetto in arrivo con gli Azzurri" },
     { club:"Nazionale",      period:"2019–2023", apps:8,   goals:1,  note:"Presente con il Brasile" },
-  ]},
+  ]}
 ];
 
 
@@ -3348,220 +3346,7 @@ export default function App(){
   if(key==="connections")return<Connections onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
   if(key==="footguessr")return<FootGuessr onHome={home}/>;
   return<Home onSelect={sSc}/>;
-}  { answer:"Bryan Cristante", clues:[
-    { club:"Milan",          period:"2011–2014", apps:3,   goals:1,  note:"Esordio in Champions League a 16 anni" },
-    { club:"Benfica",        period:"2014–2016", apps:7,   goals:0,  note:"Campionato portoghese vinto nel 2015" },
-    { club:"Palermo",        period:"2016",      apps:4,   goals:0,  note:"Prestito in Serie A" },
-    { club:"Pescara",        period:"2016–2017", apps:16,  goals:0,  note:"Esplode in Serie B" },
-    { club:"Atalanta",       period:"2017–2018", apps:48,  goals:12, note:"9 gol in Serie A sotto Gasperini" },
-    { club:"Roma",           period:"2018–",     apps:262, goals:18, note:"Conference League 2022 con Mourinho" },
-    { club:"Nazionale",      period:"2017–",     apps:48,  goals:2,  note:"Campione d'Europa a Euro 2020" },
-  ]},
-  { answer:"Giovanni Simeone", clues:[
-    { club:"River Plate",    period:"2013–2015", apps:26,  goals:2,  note:"Esordio in Argentina, figlio del Cholo" },
-    { club:"Genoa",          period:"2016–2017", apps:35,  goals:12, note:"Prima stagione in Serie A" },
-    { club:"Fiorentina",     period:"2017–2019", apps:74,  goals:20, note:"Continua a segnare in viola" },
-    { club:"Cagliari",       period:"2019–2021", apps:71,  goals:18, note:"Trascinatore in Sardegna" },
-    { club:"Verona",         period:"2021–2022", apps:35,  goals:17, note:"Capocannoniere rivelazione" },
-    { club:"Napoli",         period:"2022–2025", apps:83,  goals:6,  note:"Scudetto 2023 da comprimario" },
-    { club:"Torino",         period:"2025–",     apps:24,  goals:8,  note:"Nuovo inizio in granata" },
-    { club:"Nazionale",      period:"2018–2023", apps:6,   goals:1,  note:"Poche presenze con l'Albiceleste" },
-  ]},
-  { answer:"Gianluca Scamacca", clues:[
-    { club:"Ascoli",         period:"2019–2020", apps:33,  goals:9,  note:"Prestito decisivo in Serie B" },
-    { club:"Genoa",          period:"2020–2021", apps:26,  goals:8,  note:"Conferma in Serie A" },
-    { club:"Sassuolo",       period:"2021–2022", apps:36,  goals:16, note:"Esplode in Serie A, 16 gol" },
-    { club:"West Ham",       period:"2022–2023", apps:16,  goals:3,  note:"Esperienza in Premier League" },
-    { club:"Atalanta",       period:"2023–",     apps:50,  goals:20, note:"Rinascita con Gasperini" },
-    { club:"Nazionale",      period:"2021–",     apps:22,  goals:1,  note:"Presente in Nazionale maggiore" },
-  ]},
-  { answer:"Keinan Davis", clues:[
-    { club:"Aston Villa",    period:"2016–2022", apps:73,  goals:3,  note:"Cresciuto nel club di Birmingham" },
-    { club:"Nottm Forest",   period:"2022",      apps:15,  goals:5,  note:"Prestito vincente in Premier" },
-    { club:"Watford",        period:"2022–2023", apps:34,  goals:7,  note:"Protagonista in Championship" },
-    { club:"Udinese",        period:"2023–",     apps:57,  goals:13, note:"Sorpresa in Serie A" },
-    { club:"Nazionale",      period:"2017–2018", apps:3,   goals:2,  note:"Inghilterra U-20" },
-  ]},
-  { answer:"Riccardo Orsolini", clues:[
-    { club:"Ascoli",         period:"2015–2017", apps:51,  goals:8,  note:"Trafila in Serie B" },
-    { club:"Atalanta",       period:"2017–2018", apps:8,   goals:0,  note:"Breve parentesi a Bergamo" },
-    { club:"Bologna",        period:"2018–",     apps:267, goals:72, note:"Simbolo del Bologna moderno" },
-    { club:"Nazionale",      period:"2019–",     apps:13,  goals:2,  note:"Presente in Azzurro" },
-  ]},
-  { answer:"Nicola Krstovic", clues:[
-    { club:"Zeta",           period:"2016–2019", apps:92,  goals:37, note:"Trafila in Montenegro" },
-    { club:"Stella Rossa",   period:"2019–2021", apps:21,  goals:2,  note:"Esperienza in Serbia" },
-    { club:"Dunajská Streda",period:"2021–2023", apps:37,  goals:19, note:"Esplode in Slovacchia" },
-    { club:"Lecce",          period:"2023–2025", apps:72,  goals:18, note:"Rivelazione in Serie A" },
-    { club:"Atalanta",       period:"2025–",     apps:27,  goals:9,  note:"Grande salto in Champions" },
-    { club:"Nazionale",      period:"2022–",     apps:34,  goals:8,  note:"Bomber del Montenegro" },
-  ]},
-  { answer:"Domenico Berardi", clues:[
-    { club:"Sassuolo",       period:"2012–",     apps:401, goals:146,note:"Record storico del Sassuolo" },
-    { club:"Nazionale",      period:"2018–2023", apps:28,  goals:8,  note:"Campione d'Europa a Euro 2020" },
-  ]},
-  { answer:"Andrea Pinamonti", clues:[
-    { club:"Frosinone",      period:"2018–2019", apps:27,  goals:5,  note:"Prestito, si afferma in Serie B" },
-    { club:"Genoa",          period:"2019–2020", apps:32,  goals:5,  note:"Primo prestito in Serie A" },
-    { club:"Empoli",         period:"2021–2022", apps:36,  goals:13, note:"Stagione da 13 gol, miglior prestito" },
-    { club:"Sassuolo",       period:"2022–2024", apps:70,  goals:16, note:"Confermato dopo l'Empoli" },
-    { club:"Genoa",          period:"2024–2025", apps:36,  goals:10, note:"Secondo prestito al Genoa" },
-    { club:"Nazionale",      period:"2022",      apps:1,   goals:0,  note:"Esordio in Azzurro" },
-  ]},
-  { answer:"Mateo Pellegrino", clues:[
-    { club:"Platense",       period:"2023–2024", apps:38,  goals:10, note:"Esplode in Argentina" },
-    { club:"Vélez Sarsfield", period:"2021–2025", apps:9,  goals:0,  note:"Club di formazione" },
-    { club:"Parma",          period:"2025–",     apps:43,  goals:11, note:"Sorpresa in Serie A" },
-    { club:"Nazionale",      period:"2019",      apps:0,   goals:0,  note:"Argentina U-19" },
-  ]},
-  { answer:"Nikola Vlasic", clues:[
-    { club:"Hajduk Spalato", period:"2014–2017", apps:86,  goals:11, note:"Talento cresciuto in Croazia" },
-    { club:"Everton",        period:"2017–2018", apps:12,  goals:0,  note:"Esperienza in Premier League" },
-    { club:"CSKA Mosca",     period:"2018–2021", apps:86,  goals:28, note:"Consacrazione in Russia" },
-    { club:"West Ham",       period:"2021–2022", apps:19,  goals:1,  note:"Ritorno in Premier" },
-    { club:"Torino",         period:"2022–",     apps:126, goals:20, note:"Beniamino del Toro" },
-    { club:"Nazionale",      period:"2017–",     apps:61,  goals:10, note:"Pilastro della Croazia" },
-  ]},
-  { answer:"Wesley Franca", clues:[
-    { club:"Flamengo",       period:"2021–2025", apps:78,  goals:2,  note:"Cresciuto nel più grande club brasiliano" },
-    { club:"Roma",           period:"2025–",     apps:26,  goals:4,  note:"Esordio in Europa" },
-    { club:"Nazionale",      period:"2025–",     apps:6,   goals:0,  note:"Esordio con il Brasile" },
-  ]},
-  { answer:"Gift Orban", clues:[
-    { club:"Stabæk",         period:"2021–2022", apps:22,  goals:16, note:"Rivelazione in Norvegia" },
-    { club:"Gent",           period:"2023–2024", apps:27,  goals:12, note:"Protagonista in Belgio" },
-    { club:"Olympique Lione",period:"2024–2025", apps:16,  goals:3,  note:"Esperienza in Ligue 1" },
-    { club:"Verona",         period:"2025–",     apps:21,  goals:7,  note:"Scommessa in Serie A" },
-  ]},
-  { answer:"Andrea Belotti", clues:[
-    { club:"Palermo",        period:"2013–2015", apps:62,  goals:17, note:"Si afferma in Serie A" },
-    { club:"Torino",         period:"2015–2022", apps:232, goals:100,note:"Capitano e leggenda granata" },
-    { club:"Roma",           period:"2022–2024", apps:45,  goals:3,  note:"Esperienza in giallorosso" },
-    { club:"Como",           period:"2024–2025", apps:18,  goals:2,  note:"Nuova avventura in Lombardia" },
-    { club:"Nazionale",      period:"2016–2022", apps:44,  goals:12, note:"Euro 2020 vinto con l'Italia" },
-  ]},
-  { answer:"Yann Bisseck", clues:[
-    { club:"Aarhus",         period:"2021–2023", apps:43,  goals:4,  note:"Si afferma in Danimarca" },
-    { club:"Inter",          period:"2023–",     apps:62,  goals:7,  note:"Difensore rivelazione nerazzurra" },
-    { club:"Nazionale",      period:"2025–",     apps:1,   goals:0,  note:"Esordio con la Germania" },
-  ]},
-  { answer:"Leandro Pavoletti", clues:[
-    { club:"Sassuolo",       period:"2012–2014", apps:33,  goals:11, note:"Prima Serie A" },
-    { club:"Genoa",          period:"2015–2017", apps:45,  goals:23, note:"Bomber rivelazione" },
-    { club:"Napoli",         period:"2017",      apps:6,   goals:0,  note:"Breve esperienza al Napoli" },
-    { club:"Cagliari",       period:"2017–",     apps:214, goals:49, note:"Leggenda della Sardegna" },
-    { club:"Nazionale",      period:"2019",      apps:1,   goals:1,  note:"Un gol all'esordio in Azzurro" },
-  ]},
-  { answer:"Marco Carnesecchi", clues:[
-    { club:"Trapani",        period:"2019–2020", apps:33,  goals:0,  note:"Esordio in C, promosso in B" },
-    { club:"Cremonese",      period:"2021–2023", apps:83,  goals:0,  note:"Porta la Cremo in Serie A" },
-    { club:"Atalanta",       period:"2023–",     apps:92,  goals:0,  note:"Titolare fisso con Gasperini" },
-    { club:"Nazionale",      period:"2019–2023", apps:22,  goals:0,  note:"Portiere titolare U-21" },
-  ]},
-  { answer:"Strahinja Pavlovic", clues:[
-    { club:"Partizan",       period:"2019–2020", apps:37,  goals:1,  note:"Esordio in Serbia" },
-    { club:"Salisburgo",     period:"2022–2024", apps:50,  goals:3,  note:"Si afferma in Austria" },
-    { club:"Milan",          period:"2024–",     apps:50,  goals:6,  note:"Grande acquisto rossonero" },
-    { club:"Nazionale",      period:"2020–",     apps:54,  goals:5,  note:"Titolare fisso con la Serbia" },
-  ]},
-  { answer:"Ademola Lookman", clues:[
-    { club:"Charlton",       period:"2015–2017", apps:45,  goals:10, note:"Esordio in Championship" },
-    { club:"Everton",        period:"2017–2019", apps:36,  goals:1,  note:"Esperienza in Premier" },
-    { club:"RB Lipsia",      period:"2018–2020", apps:22,  goals:5,  note:"Prestiti in Bundesliga" },
-    { club:"Fulham",         period:"2020–2021", apps:34,  goals:4,  note:"Ottima stagione in Championship" },
-    { club:"Atalanta",       period:"2022–2026", apps:104, goals:41, note:"Hat-trick in finale Europa League 2024" },
-    { club:"Atlético Madrid",period:"2026–",     apps:7,   goals:2,  note:"Grande salto in LaLiga" },
-    { club:"Nazionale",      period:"2022–",     apps:43,  goals:11, note:"Scelta la Nigeria all'Inghilterra" },
-  ]},
-  { answer:"Edoardo Bove", clues:[
-    { club:"Roma",           period:"2021–2024", apps:65,  goals:2,  note:"Cresciuto nel settore giovanile giallorosso" },
-    { club:"Fiorentina",     period:"2024–2025", apps:12,  goals:1,  note:"Malore in campo, grande ritorno" },
-    { club:"Watford",        period:"2026–",     apps:6,   goals:1,  note:"Nuova avventura in Championship" },
-  ]},
-  { answer:"N'Golo Kanté", clues:[
-    { club:"Caen",           period:"2013–2015", apps:75,  goals:4,  note:"Si afferma in Ligue 2" },
-    { club:"Leicester City", period:"2015–2016", apps:37,  goals:1,  note:"Premier League con i Foxes" },
-    { club:"Chelsea",        period:"2016–2023", apps:190, goals:11, note:"Champions League 2021, Pallone d'Oro sfiorato" },
-    { club:"Al-Ittihad",     period:"2023–2026", apps:79,  goals:8,  note:"Arabia Saudita" },
-    { club:"Nazionale",      period:"2016–",     apps:67,  goals:2,  note:"Mondiale 2018 con la Francia" },
-  ]},
-  { answer:"Leon Goretzka", clues:[
-    { club:"Bochum",         period:"2012–2013", apps:32,  goals:4,  note:"Esordio in Bundesliga" },
-    { club:"Schalke 04",     period:"2013–2018", apps:116, goals:14, note:"Si afferma come mezzala" },
-    { club:"Bayern Monaco",  period:"2018–",     apps:199, goals:37, note:"Multiplo Bundesliga e Champions 2020" },
-    { club:"Nazionale",      period:"2014–",     apps:69,  goals:15, note:"Mondiale 2018 con la Germania" },
-  ]},
-  { answer:"Antoine Griezmann", clues:[
-    { club:"Real Sociedad",  period:"2009–2014", apps:180, goals:46, note:"Si afferma in LaLiga" },
-    { club:"Atlético Madrid",period:"2014–2019", apps:180, goals:94, note:"Europa League 2018, finalista Champions" },
-    { club:"Barcellona",     period:"2019–2021", apps:74,  goals:22, note:"Esperienza al Camp Nou" },
-    { club:"Atlético Madrid",period:"2021–",     apps:158, goals:48, note:"Ritorno al Wanda, ancora decisivo" },
-    { club:"Nazionale",      period:"2014–2024", apps:137, goals:44, note:"Mondiale 2018, Euro 2016 finalista" },
-  ]},
-  { answer:"Francisco Conceicao", clues:[
-    { club:"Porto",          period:"2021–2024", apps:66,  goals:7,  note:"Figlio di Sérgio, esplode in Portogallo" },
-    { club:"Ajax",           period:"2022–2023", apps:26,  goals:5,  note:"Prestito in Eredivisie" },
-    { club:"Juventus",       period:"2024–",     apps:50,  goals:6,  note:"Gol decisivi in Champions" },
-    { club:"Nazionale",      period:"2024–",     apps:15,  goals:3,  note:"Talento emergente del Portogallo" },
-  ]},
-  { answer:"Fikayo Tomori", clues:[
-    { club:"Chelsea",        period:"2016–2021", apps:17,  goals:1,  note:"Cresciuto nel settore giovanile" },
-    { club:"Derby County",   period:"2018–2019", apps:44,  goals:1,  note:"Prestito rivelazione in Championship" },
-    { club:"Milan",          period:"2021–",     apps:157, goals:6,  note:"Scudetto 2022, titolare inamovibile" },
-    { club:"Nazionale",      period:"2019–",     apps:6,   goals:0,  note:"Sceglie l'Inghilterra" },
-  ]},
-  { answer:"Marten De Roon", clues:[
-    { club:"Heerenveen",     period:"2012–2015", apps:87,  goals:5,  note:"Si afferma in Eredivisie" },
-    { club:"Atalanta",       period:"2015–2016", apps:36,  goals:1,  note:"Prima stagione a Bergamo" },
-    { club:"Middlesbrough",  period:"2016–2017", apps:34,  goals:4,  note:"Esperienza in Premier" },
-    { club:"Atalanta",       period:"2017–",     apps:297, goals:19, note:"Simbolo del progetto Gasperini" },
-    { club:"Nazionale",      period:"2016–2024", apps:42,  goals:1,  note:"Presenze con i Paesi Bassi" },
-  ]},
-  { answer:"Piotr Zielinski", clues:[
-    { club:"Udinese",        period:"2012–2014", apps:19,  goals:0,  note:"Esordio in Serie A" },
-    { club:"Empoli",         period:"2014–2016", apps:63,  goals:5,  note:"Si afferma in prestito" },
-    { club:"Napoli",         period:"2016–2024", apps:281, goals:37, note:"Scudetto 2023, colonna del centrocampo" },
-    { club:"Inter",          period:"2024–",     apps:54,  goals:7,  note:"Parametro zero di lusso" },
-    { club:"Nazionale",      period:"2013–",     apps:107, goals:17, note:"Capitano della Polonia" },
-  ]},
-  { answer:"Alexis Saelemaekers", clues:[
-    { club:"Anderlecht",     period:"2018–2020", apps:40,  goals:2,  note:"Esordio in Belgio" },
-    { club:"Milan",          period:"2020–2025", apps:141, goals:8,  note:"Tuttofare rossonero, Scudetto 2022" },
-    { club:"Bologna",        period:"2023–2024", apps:30,  goals:4,  note:"Prestito, ottima stagione" },
-    { club:"Roma",           period:"2024–2025", apps:22,  goals:7,  note:"Prestito con gol pesanti" },
-    { club:"Nazionale",      period:"2020–",     apps:23,  goals:2,  note:"Presente con il Belgio" },
-  ]},
-  { answer:"Charles De Ketelaere", clues:[
-    { club:"Club Bruges",    period:"2019–2022", apps:90,  goals:18, note:"Rivelazione in Belgio" },
-    { club:"Milan",          period:"2022–2023", apps:32,  goals:0,  note:"Anno difficile in rossonero" },
-    { club:"Atalanta",       period:"2023–",     apps:95,  goals:20, note:"Rinascita totale con Gasperini" },
-    { club:"Nazionale",      period:"2020–",     apps:28,  goals:5,  note:"Talento del Belgio" },
-  ]},
-  { answer:"Pierre Kalulu", clues:[
-    { club:"Olympique Lione 2",period:"2018–2020",apps:36, goals:0,  note:"Cresciuto nel settore giovanile" },
-    { club:"Milan",          period:"2020–2024", apps:84,  goals:3,  note:"Scudetto 2022, difensore affidabile" },
-    { club:"Juventus",       period:"2024–",     apps:59,  goals:3,  note:"Approdo a Torino" },
-    { club:"Nazionale",      period:"2025–",     apps:3,   goals:0,  note:"Esordio con la Francia" },
-  ]},
-  { answer:"Leonardo Spinazzola", clues:[
-    { club:"Atalanta",       period:"2016–2018", apps:48,  goals:0,  note:"Si afferma come terzino" },
-    { club:"Juventus",       period:"2018–2019", apps:10,  goals:0,  note:"Breve esperienza bianconera" },
-    { club:"Roma",           period:"2019–2024", apps:104, goals:5,  note:"Euro 2020 da protagonista prima dell'infortunio" },
-    { club:"Napoli",         period:"2024–",     apps:54,  goals:4,  note:"Nuovo inizio in azzurro" },
-    { club:"Nazionale",      period:"2017–",     apps:27,  goals:0,  note:"Euro 2020 tra i migliori prima dell'infortunio" },
-  ]},
-  { answer:"Ruslan Malinovskyi", clues:[
-    { club:"Genk",           period:"2016–2019", apps:73,  goals:16, note:"Si afferma in Belgio" },
-    { club:"Atalanta",       period:"2019–2023", apps:115, goals:23, note:"Europa League 2024, elemento chiave" },
-    { club:"Olympique Marsiglia",period:"2023",  apps:20,  goals:1,  note:"Breve parentesi in Francia" },
-    { club:"Genoa",          period:"2023–",     apps:66,  goals:9,  note:"Ritorno in Serie A" },
-    { club:"Nazionale",      period:"2015–",     apps:70,  goals:10, note:"Pilastro dell'Ucraina" },
-  ]},
-  { answer:"David Neres", clues:[
-    { club:"Ajax",           period:"2017–2022", apps:121, goals:37, note:"Finalista Champions League 2019" },
-    { club:"Benfica",        period:"2022–2024", apps:55,  goals:11, note:"Protagonista in Portogallo" },
-    { club:"Napoli",         period:"2024–",     apps:44,  goals:5,  note:"Scudetto in arrivo con gli Azzurri" },
-    { club:"Nazionale",      period:"2019–2023", apps:8,   goals:1,  note:"Presente con il Brasile" },
-  ]},
+}
 
+export default App;
 
