@@ -697,221 +697,6 @@ const DB = [
   { name:"Erling Haaland", surname:"Haaland", club:"Manchester City", league:"Champions League", role:"Attaccante", nation:"Norvegia", continent:"Europa", age:25, value:200 },
   { name:"Omar Marmoush", surname:"Marmoush", club:"Manchester City", league:"Champions League", role:"Attaccante", nation:"Egitto", continent:"Africa", age:27, value:60 },
 
-  { answer:"Bryan Cristante", clues:[
-    { club:"Milan",          period:"2011–2014", apps:3,   goals:1,  note:"Esordio in Champions League a 16 anni" },
-    { club:"Benfica",        period:"2014–2016", apps:7,   goals:0,  note:"Campionato portoghese vinto nel 2015" },
-    { club:"Palermo",        period:"2016",      apps:4,   goals:0,  note:"Prestito in Serie A" },
-    { club:"Pescara",        period:"2016–2017", apps:16,  goals:0,  note:"Esplode in Serie B" },
-    { club:"Atalanta",       period:"2017–2018", apps:48,  goals:12, note:"9 gol in Serie A sotto Gasperini" },
-    { club:"Roma",           period:"2018–",     apps:262, goals:18, note:"Conference League 2022 con Mourinho" },
-    { club:"Nazionale",      period:"2017–",     apps:48,  goals:2,  note:"Campione d'Europa a Euro 2020" },
-  ]},
-  { answer:"Giovanni Simeone", clues:[
-    { club:"River Plate",    period:"2013–2015", apps:26,  goals:2,  note:"Esordio in Argentina, figlio del Cholo" },
-    { club:"Genoa",          period:"2016–2017", apps:35,  goals:12, note:"Prima stagione in Serie A" },
-    { club:"Fiorentina",     period:"2017–2019", apps:74,  goals:20, note:"Continua a segnare in viola" },
-    { club:"Cagliari",       period:"2019–2021", apps:71,  goals:18, note:"Trascinatore in Sardegna" },
-    { club:"Verona",         period:"2021–2022", apps:35,  goals:17, note:"Capocannoniere rivelazione" },
-    { club:"Napoli",         period:"2022–2025", apps:83,  goals:6,  note:"Scudetto 2023 da comprimario" },
-    { club:"Torino",         period:"2025–",     apps:24,  goals:8,  note:"Nuovo inizio in granata" },
-    { club:"Nazionale",      period:"2018–2023", apps:6,   goals:1,  note:"Poche presenze con l'Albiceleste" },
-  ]},
-  { answer:"Gianluca Scamacca", clues:[
-    { club:"Ascoli",         period:"2019–2020", apps:33,  goals:9,  note:"Prestito decisivo in Serie B" },
-    { club:"Genoa",          period:"2020–2021", apps:26,  goals:8,  note:"Conferma in Serie A" },
-    { club:"Sassuolo",       period:"2021–2022", apps:36,  goals:16, note:"Esplode in Serie A, 16 gol" },
-    { club:"West Ham",       period:"2022–2023", apps:16,  goals:3,  note:"Esperienza in Premier League" },
-    { club:"Atalanta",       period:"2023–",     apps:50,  goals:20, note:"Rinascita con Gasperini" },
-    { club:"Nazionale",      period:"2021–",     apps:22,  goals:1,  note:"Presente in Nazionale maggiore" },
-  ]},
-  { answer:"Keinan Davis", clues:[
-    { club:"Aston Villa",    period:"2016–2022", apps:73,  goals:3,  note:"Cresciuto nel club di Birmingham" },
-    { club:"Nottm Forest",   period:"2022",      apps:15,  goals:5,  note:"Prestito vincente in Premier" },
-    { club:"Watford",        period:"2022–2023", apps:34,  goals:7,  note:"Protagonista in Championship" },
-    { club:"Udinese",        period:"2023–",     apps:57,  goals:13, note:"Sorpresa in Serie A" },
-    { club:"Nazionale",      period:"2017–2018", apps:3,   goals:2,  note:"Inghilterra U-20" },
-  ]},
-  { answer:"Riccardo Orsolini", clues:[
-    { club:"Ascoli",         period:"2015–2017", apps:51,  goals:8,  note:"Trafila in Serie B" },
-    { club:"Atalanta",       period:"2017–2018", apps:8,   goals:0,  note:"Breve parentesi a Bergamo" },
-    { club:"Bologna",        period:"2018–",     apps:267, goals:72, note:"Simbolo del Bologna moderno" },
-    { club:"Nazionale",      period:"2019–",     apps:13,  goals:2,  note:"Presente in Azzurro" },
-  ]},
-  { answer:"Nicola Krstovic", clues:[
-    { club:"Zeta",           period:"2016–2019", apps:92,  goals:37, note:"Trafila in Montenegro" },
-    { club:"Stella Rossa",   period:"2019–2021", apps:21,  goals:2,  note:"Esperienza in Serbia" },
-    { club:"Dunajská Streda",period:"2021–2023", apps:37,  goals:19, note:"Esplode in Slovacchia" },
-    { club:"Lecce",          period:"2023–2025", apps:72,  goals:18, note:"Rivelazione in Serie A" },
-    { club:"Atalanta",       period:"2025–",     apps:27,  goals:9,  note:"Grande salto in Champions" },
-    { club:"Nazionale",      period:"2022–",     apps:34,  goals:8,  note:"Bomber del Montenegro" },
-  ]},
-  { answer:"Domenico Berardi", clues:[
-    { club:"Sassuolo",       period:"2012–",     apps:401, goals:146,note:"Record storico del Sassuolo" },
-    { club:"Nazionale",      period:"2018–2023", apps:28,  goals:8,  note:"Campione d'Europa a Euro 2020" },
-  ]},
-  { answer:"Andrea Pinamonti", clues:[
-    { club:"Frosinone",      period:"2018–2019", apps:27,  goals:5,  note:"Prestito, si afferma in Serie B" },
-    { club:"Genoa",          period:"2019–2020", apps:32,  goals:5,  note:"Primo prestito in Serie A" },
-    { club:"Empoli",         period:"2021–2022", apps:36,  goals:13, note:"Stagione da 13 gol, miglior prestito" },
-    { club:"Sassuolo",       period:"2022–2024", apps:70,  goals:16, note:"Confermato dopo l'Empoli" },
-    { club:"Genoa",          period:"2024–2025", apps:36,  goals:10, note:"Secondo prestito al Genoa" },
-    { club:"Nazionale",      period:"2022",      apps:1,   goals:0,  note:"Esordio in Azzurro" },
-  ]},
-  { answer:"Mateo Pellegrino", clues:[
-    { club:"Platense",       period:"2023–2024", apps:38,  goals:10, note:"Esplode in Argentina" },
-    { club:"Vélez Sarsfield", period:"2021–2025", apps:9,  goals:0,  note:"Club di formazione" },
-    { club:"Parma",          period:"2025–",     apps:43,  goals:11, note:"Sorpresa in Serie A" },
-    { club:"Nazionale",      period:"2019",      apps:0,   goals:0,  note:"Argentina U-19" },
-  ]},
-  { answer:"Nikola Vlasic", clues:[
-    { club:"Hajduk Spalato", period:"2014–2017", apps:86,  goals:11, note:"Talento cresciuto in Croazia" },
-    { club:"Everton",        period:"2017–2018", apps:12,  goals:0,  note:"Esperienza in Premier League" },
-    { club:"CSKA Mosca",     period:"2018–2021", apps:86,  goals:28, note:"Consacrazione in Russia" },
-    { club:"West Ham",       period:"2021–2022", apps:19,  goals:1,  note:"Ritorno in Premier" },
-    { club:"Torino",         period:"2022–",     apps:126, goals:20, note:"Beniamino del Toro" },
-    { club:"Nazionale",      period:"2017–",     apps:61,  goals:10, note:"Pilastro della Croazia" },
-  ]},
-  { answer:"Wesley Franca", clues:[
-    { club:"Flamengo",       period:"2021–2025", apps:78,  goals:2,  note:"Cresciuto nel più grande club brasiliano" },
-    { club:"Roma",           period:"2025–",     apps:26,  goals:4,  note:"Esordio in Europa" },
-    { club:"Nazionale",      period:"2025–",     apps:6,   goals:0,  note:"Esordio con il Brasile" },
-  ]},
-  { answer:"Gift Orban", clues:[
-    { club:"Stabæk",         period:"2021–2022", apps:22,  goals:16, note:"Rivelazione in Norvegia" },
-    { club:"Gent",           period:"2023–2024", apps:27,  goals:12, note:"Protagonista in Belgio" },
-    { club:"Olympique Lione",period:"2024–2025", apps:16,  goals:3,  note:"Esperienza in Ligue 1" },
-    { club:"Verona",         period:"2025–",     apps:21,  goals:7,  note:"Scommessa in Serie A" },
-  ]},
-  { answer:"Andrea Belotti", clues:[
-    { club:"Palermo",        period:"2013–2015", apps:62,  goals:17, note:"Si afferma in Serie A" },
-    { club:"Torino",         period:"2015–2022", apps:232, goals:100,note:"Capitano e leggenda granata" },
-    { club:"Roma",           period:"2022–2024", apps:45,  goals:3,  note:"Esperienza in giallorosso" },
-    { club:"Como",           period:"2024–2025", apps:18,  goals:2,  note:"Nuova avventura in Lombardia" },
-    { club:"Nazionale",      period:"2016–2022", apps:44,  goals:12, note:"Euro 2020 vinto con l'Italia" },
-  ]},
-  { answer:"Yann Bisseck", clues:[
-    { club:"Aarhus",         period:"2021–2023", apps:43,  goals:4,  note:"Si afferma in Danimarca" },
-    { club:"Inter",          period:"2023–",     apps:62,  goals:7,  note:"Difensore rivelazione nerazzurra" },
-    { club:"Nazionale",      period:"2025–",     apps:1,   goals:0,  note:"Esordio con la Germania" },
-  ]},
-  { answer:"Leandro Pavoletti", clues:[
-    { club:"Sassuolo",       period:"2012–2014", apps:33,  goals:11, note:"Prima Serie A" },
-    { club:"Genoa",          period:"2015–2017", apps:45,  goals:23, note:"Bomber rivelazione" },
-    { club:"Napoli",         period:"2017",      apps:6,   goals:0,  note:"Breve esperienza al Napoli" },
-    { club:"Cagliari",       period:"2017–",     apps:214, goals:49, note:"Leggenda della Sardegna" },
-    { club:"Nazionale",      period:"2019",      apps:1,   goals:1,  note:"Un gol all'esordio in Azzurro" },
-  ]},
-  { answer:"Marco Carnesecchi", clues:[
-    { club:"Trapani",        period:"2019–2020", apps:33,  goals:0,  note:"Esordio in C, promosso in B" },
-    { club:"Cremonese",      period:"2021–2023", apps:83,  goals:0,  note:"Porta la Cremo in Serie A" },
-    { club:"Atalanta",       period:"2023–",     apps:92,  goals:0,  note:"Titolare fisso con Gasperini" },
-    { club:"Nazionale",      period:"2019–2023", apps:22,  goals:0,  note:"Portiere titolare U-21" },
-  ]},
-  { answer:"Strahinja Pavlovic", clues:[
-    { club:"Partizan",       period:"2019–2020", apps:37,  goals:1,  note:"Esordio in Serbia" },
-    { club:"Salisburgo",     period:"2022–2024", apps:50,  goals:3,  note:"Si afferma in Austria" },
-    { club:"Milan",          period:"2024–",     apps:50,  goals:6,  note:"Grande acquisto rossonero" },
-    { club:"Nazionale",      period:"2020–",     apps:54,  goals:5,  note:"Titolare fisso con la Serbia" },
-  ]},
-  { answer:"Ademola Lookman", clues:[
-    { club:"Charlton",       period:"2015–2017", apps:45,  goals:10, note:"Esordio in Championship" },
-    { club:"Everton",        period:"2017–2019", apps:36,  goals:1,  note:"Esperienza in Premier" },
-    { club:"RB Lipsia",      period:"2018–2020", apps:22,  goals:5,  note:"Prestiti in Bundesliga" },
-    { club:"Fulham",         period:"2020–2021", apps:34,  goals:4,  note:"Ottima stagione in Championship" },
-    { club:"Atalanta",       period:"2022–2026", apps:104, goals:41, note:"Hat-trick in finale Europa League 2024" },
-    { club:"Atlético Madrid",period:"2026–",     apps:7,   goals:2,  note:"Grande salto in LaLiga" },
-    { club:"Nazionale",      period:"2022–",     apps:43,  goals:11, note:"Scelta la Nigeria all'Inghilterra" },
-  ]},
-  { answer:"Edoardo Bove", clues:[
-    { club:"Roma",           period:"2021–2024", apps:65,  goals:2,  note:"Cresciuto nel settore giovanile giallorosso" },
-    { club:"Fiorentina",     period:"2024–2025", apps:12,  goals:1,  note:"Malore in campo, grande ritorno" },
-    { club:"Watford",        period:"2026–",     apps:6,   goals:1,  note:"Nuova avventura in Championship" },
-  ]},
-  { answer:"N'Golo Kanté", clues:[
-    { club:"Caen",           period:"2013–2015", apps:75,  goals:4,  note:"Si afferma in Ligue 2" },
-    { club:"Leicester City", period:"2015–2016", apps:37,  goals:1,  note:"Premier League con i Foxes" },
-    { club:"Chelsea",        period:"2016–2023", apps:190, goals:11, note:"Champions League 2021, Pallone d'Oro sfiorato" },
-    { club:"Al-Ittihad",     period:"2023–2026", apps:79,  goals:8,  note:"Arabia Saudita" },
-    { club:"Nazionale",      period:"2016–",     apps:67,  goals:2,  note:"Mondiale 2018 con la Francia" },
-  ]},
-  { answer:"Leon Goretzka", clues:[
-    { club:"Bochum",         period:"2012–2013", apps:32,  goals:4,  note:"Esordio in Bundesliga" },
-    { club:"Schalke 04",     period:"2013–2018", apps:116, goals:14, note:"Si afferma come mezzala" },
-    { club:"Bayern Monaco",  period:"2018–",     apps:199, goals:37, note:"Multiplo Bundesliga e Champions 2020" },
-    { club:"Nazionale",      period:"2014–",     apps:69,  goals:15, note:"Mondiale 2018 con la Germania" },
-  ]},
-  { answer:"Antoine Griezmann", clues:[
-    { club:"Real Sociedad",  period:"2009–2014", apps:180, goals:46, note:"Si afferma in LaLiga" },
-    { club:"Atlético Madrid",period:"2014–2019", apps:180, goals:94, note:"Europa League 2018, finalista Champions" },
-    { club:"Barcellona",     period:"2019–2021", apps:74,  goals:22, note:"Esperienza al Camp Nou" },
-    { club:"Atlético Madrid",period:"2021–",     apps:158, goals:48, note:"Ritorno al Wanda, ancora decisivo" },
-    { club:"Nazionale",      period:"2014–2024", apps:137, goals:44, note:"Mondiale 2018, Euro 2016 finalista" },
-  ]},
-  { answer:"Francisco Conceicao", clues:[
-    { club:"Porto",          period:"2021–2024", apps:66,  goals:7,  note:"Figlio di Sérgio, esplode in Portogallo" },
-    { club:"Ajax",           period:"2022–2023", apps:26,  goals:5,  note:"Prestito in Eredivisie" },
-    { club:"Juventus",       period:"2024–",     apps:50,  goals:6,  note:"Gol decisivi in Champions" },
-    { club:"Nazionale",      period:"2024–",     apps:15,  goals:3,  note:"Talento emergente del Portogallo" },
-  ]},
-  { answer:"Fikayo Tomori", clues:[
-    { club:"Chelsea",        period:"2016–2021", apps:17,  goals:1,  note:"Cresciuto nel settore giovanile" },
-    { club:"Derby County",   period:"2018–2019", apps:44,  goals:1,  note:"Prestito rivelazione in Championship" },
-    { club:"Milan",          period:"2021–",     apps:157, goals:6,  note:"Scudetto 2022, titolare inamovibile" },
-    { club:"Nazionale",      period:"2019–",     apps:6,   goals:0,  note:"Sceglie l'Inghilterra" },
-  ]},
-  { answer:"Marten De Roon", clues:[
-    { club:"Heerenveen",     period:"2012–2015", apps:87,  goals:5,  note:"Si afferma in Eredivisie" },
-    { club:"Atalanta",       period:"2015–2016", apps:36,  goals:1,  note:"Prima stagione a Bergamo" },
-    { club:"Middlesbrough",  period:"2016–2017", apps:34,  goals:4,  note:"Esperienza in Premier" },
-    { club:"Atalanta",       period:"2017–",     apps:297, goals:19, note:"Simbolo del progetto Gasperini" },
-    { club:"Nazionale",      period:"2016–2024", apps:42,  goals:1,  note:"Presenze con i Paesi Bassi" },
-  ]},
-  { answer:"Piotr Zielinski", clues:[
-    { club:"Udinese",        period:"2012–2014", apps:19,  goals:0,  note:"Esordio in Serie A" },
-    { club:"Empoli",         period:"2014–2016", apps:63,  goals:5,  note:"Si afferma in prestito" },
-    { club:"Napoli",         period:"2016–2024", apps:281, goals:37, note:"Scudetto 2023, colonna del centrocampo" },
-    { club:"Inter",          period:"2024–",     apps:54,  goals:7,  note:"Parametro zero di lusso" },
-    { club:"Nazionale",      period:"2013–",     apps:107, goals:17, note:"Capitano della Polonia" },
-  ]},
-  { answer:"Alexis Saelemaekers", clues:[
-    { club:"Anderlecht",     period:"2018–2020", apps:40,  goals:2,  note:"Esordio in Belgio" },
-    { club:"Milan",          period:"2020–2025", apps:141, goals:8,  note:"Tuttofare rossonero, Scudetto 2022" },
-    { club:"Bologna",        period:"2023–2024", apps:30,  goals:4,  note:"Prestito, ottima stagione" },
-    { club:"Roma",           period:"2024–2025", apps:22,  goals:7,  note:"Prestito con gol pesanti" },
-    { club:"Nazionale",      period:"2020–",     apps:23,  goals:2,  note:"Presente con il Belgio" },
-  ]},
-  { answer:"Charles De Ketelaere", clues:[
-    { club:"Club Bruges",    period:"2019–2022", apps:90,  goals:18, note:"Rivelazione in Belgio" },
-    { club:"Milan",          period:"2022–2023", apps:32,  goals:0,  note:"Anno difficile in rossonero" },
-    { club:"Atalanta",       period:"2023–",     apps:95,  goals:20, note:"Rinascita totale con Gasperini" },
-    { club:"Nazionale",      period:"2020–",     apps:28,  goals:5,  note:"Talento del Belgio" },
-  ]},
-  { answer:"Pierre Kalulu", clues:[
-    { club:"Olympique Lione 2",period:"2018–2020",apps:36, goals:0,  note:"Cresciuto nel settore giovanile" },
-    { club:"Milan",          period:"2020–2024", apps:84,  goals:3,  note:"Scudetto 2022, difensore affidabile" },
-    { club:"Juventus",       period:"2024–",     apps:59,  goals:3,  note:"Approdo a Torino" },
-    { club:"Nazionale",      period:"2025–",     apps:3,   goals:0,  note:"Esordio con la Francia" },
-  ]},
-  { answer:"Leonardo Spinazzola", clues:[
-    { club:"Atalanta",       period:"2016–2018", apps:48,  goals:0,  note:"Si afferma come terzino" },
-    { club:"Juventus",       period:"2018–2019", apps:10,  goals:0,  note:"Breve esperienza bianconera" },
-    { club:"Roma",           period:"2019–2024", apps:104, goals:5,  note:"Euro 2020 da protagonista prima dell'infortunio" },
-    { club:"Napoli",         period:"2024–",     apps:54,  goals:4,  note:"Nuovo inizio in azzurro" },
-    { club:"Nazionale",      period:"2017–",     apps:27,  goals:0,  note:"Euro 2020 tra i migliori prima dell'infortunio" },
-  ]},
-  { answer:"Ruslan Malinovskyi", clues:[
-    { club:"Genk",           period:"2016–2019", apps:73,  goals:16, note:"Si afferma in Belgio" },
-    { club:"Atalanta",       period:"2019–2023", apps:115, goals:23, note:"Europa League 2024, elemento chiave" },
-    { club:"Olympique Marsiglia",period:"2023",  apps:20,  goals:1,  note:"Breve parentesi in Francia" },
-    { club:"Genoa",          period:"2023–",     apps:66,  goals:9,  note:"Ritorno in Serie A" },
-    { club:"Nazionale",      period:"2015–",     apps:70,  goals:10, note:"Pilastro dell'Ucraina" },
-  ]},
-  { answer:"David Neres", clues:[
-    { club:"Ajax",           period:"2017–2022", apps:121, goals:37, note:"Finalista Champions League 2019" },
-    { club:"Benfica",        period:"2022–2024", apps:55,  goals:11, note:"Protagonista in Portogallo" },
-    { club:"Napoli",         period:"2024–",     apps:44,  goals:5,  note:"Scudetto in arrivo con gli Azzurri" },
-    { club:"Nazionale",      period:"2019–2023", apps:8,   goals:1,  note:"Presente con il Brasile" },
-  ]},
 
 ];
 
@@ -1317,6 +1102,432 @@ const CAREERS = [
     { club:"Milan",          period:"2025–",     apps:30,  goals:7,  note:"Acquistato per 35M, primo grande club europeo" },
     { club:"Nazionale",      period:"2021–",     apps:46,  goals:6,  note:"Titolare con El Tri" },
   ]},
+,
+  { answer:"Didier Drogba", clues:[
+    { club:"Guingamp",        period:"2003–2004", apps:34,  goals:17, note:"Esplode in Ligue 1" },
+    { club:"Olympique Marsiglia", period:"2004",  apps:11,  goals:3,  note:"Breve parentesi" },
+    { club:"Chelsea",         period:"2004–2012", apps:254, goals:157, note:"4 Premier League, Champions 2012" },
+    { club:"Galatasaray",     period:"2013–2014", apps:22,  goals:9,  note:"Europa League 2013" },
+    { club:"Chelsea",         period:"2014–2015", apps:33,  goals:9,  note:"Ritorno vincente, Premier 2015" },
+    { club:"Nazionale",       period:"2002–2014", apps:105, goals:65, note:"Coppa d'Africa 2015 con Costa d'Avorio" },
+  ]},
+  { answer:"Samuel Eto'o", clues:[
+    { club:"Mallorca",        period:"2000–2004", apps:139, goals:54, note:"Si afferma in Liga" },
+    { club:"Barcellona",      period:"2004–2009", apps:145, goals:108, note:"2 Champions League, 3 Liga" },
+    { club:"Inter",           period:"2009–2011", apps:102, goals:53, note:"Triplete 2010 con Mourinho" },
+    { club:"Anzhi",           period:"2011–2013", apps:44,  goals:19, note:"Russia, il più pagato al mondo" },
+    { club:"Chelsea",         period:"2013–2014", apps:20,  goals:9,  note:"Premier League" },
+    { club:"Nazionale",       period:"1997–2014", apps:118, goals:56, note:"Coppa d'Africa 2000, 2002 con Camerun" },
+  ]},
+  { answer:"Sergio Ramos", clues:[
+    { club:"Siviglia",        period:"2004–2005", apps:41,  goals:4,  note:"Esordio in Liga a 18 anni" },
+    { club:"Real Madrid",     period:"2005–2021", apps:671, goals:101, note:"4 Champions League, 5 Liga, capitano storico" },
+    { club:"PSG",             period:"2021–2023", apps:33,  goals:4,  note:"Ligue 1" },
+    { club:"Siviglia",        period:"2023–2024", apps:19,  goals:0,  note:"Ritorno alle origini" },
+    { club:"Nazionale",       period:"2005–2021", apps:180, goals:23, note:"Mondiale 2010, Euro 2008 e 2012 con la Spagna" },
+  ]},
+  { answer:"Philipp Lahm", clues:[
+    { club:"Bayern Monaco",   period:"2002–2017", apps:502, goals:17, note:"8 Bundesliga, Champions 2013, capitano storico" },
+    { club:"Stoccarda",       period:"2003–2005", apps:56,  goals:2,  note:"Prestito, si afferma in Bundesliga" },
+    { club:"Nazionale",       period:"2004–2014", apps:113, goals:5,  note:"Mondiale 2014, capitano campione del mondo" },
+  ]},
+  { answer:"Franck Ribéry", clues:[
+    { club:"Marsiglia",       period:"2005–2007", apps:60,  goals:13, note:"Si afferma in Ligue 1" },
+    { club:"Bayern Monaco",   period:"2007–2019", apps:425, goals:124, note:"8 Bundesliga, Champions 2013, Pallone d'Oro 2013 sfiorato" },
+    { club:"Fiorentina",      period:"2019–2021", apps:40,  goals:5,  note:"Serie A a 36 anni" },
+    { club:"Nazionale",       period:"2006–2014", apps:81,  goals:16, note:"Finale Mondiale 2006 con la Francia" },
+  ]},
+  { answer:"Arjen Robben", clues:[
+    { club:"PSV",             period:"2002–2004", apps:56,  goals:19, note:"Eredivisie" },
+    { club:"Chelsea",         period:"2004–2007", apps:67,  goals:15, note:"2 Premier League" },
+    { club:"Real Madrid",     period:"2007–2009", apps:65,  goals:14, note:"Liga" },
+    { club:"Bayern Monaco",   period:"2009–2019", apps:309, goals:144, note:"8 Bundesliga, Champions 2013, gol in finale" },
+    { club:"Nazionale",       period:"2003–2017", apps:96,  goals:37, note:"Finale Mondiale 2010 con l'Olanda" },
+  ]},
+  { answer:"Pepe", clues:[
+    { club:"Marítimo",        period:"2004–2007", apps:81,  goals:6,  note:"Cresciuto in Portogallo" },
+    { club:"Real Madrid",     period:"2007–2017", apps:334, goals:22, note:"3 Champions League, 2 Liga" },
+    { club:"Besiktas",        period:"2017–2019", apps:63,  goals:2,  note:"Turchia" },
+    { club:"Porto",           period:"2019–2024", apps:142, goals:5,  note:"4 Primeira Liga" },
+    { club:"Nazionale",       period:"2007–2024", apps:141, goals:7,  note:"Euro 2016, Nations League 2019 con il Portogallo" },
+  ]},
+  { answer:"David Silva", clues:[
+    { club:"Valencia",        period:"2004–2010", apps:168, goals:24, note:"Si afferma in Liga" },
+    { club:"Manchester City", period:"2010–2020", apps:436, goals:77, note:"4 Premier League, giocatore della decade" },
+    { club:"Real Sociedad",   period:"2020–2022", apps:50,  goals:10, note:"Europa League" },
+    { club:"Nazionale",       period:"2006–2021", apps:125, goals:35, note:"Mondiale 2010, Euro 2008 e 2012 con la Spagna" },
+  ]},
+  { answer:"Cesc Fàbregas", clues:[
+    { club:"Arsenal",         period:"2003–2011", apps:303, goals:68, note:"Debutto a 16 anni, capitano storico" },
+    { club:"Barcellona",      period:"2011–2014", apps:151, goals:42, note:"Copa del Rey, Liga" },
+    { club:"Chelsea",         period:"2014–2019", apps:198, goals:22, note:"2 Premier League" },
+    { club:"Monaco",          period:"2019–2022", apps:88,  goals:14, note:"Ligue 1" },
+    { club:"Como",            period:"2022–2025", apps:45,  goals:7,  note:"Promozione in Serie A da allenatore-giocatore" },
+    { club:"Nazionale",       period:"2006–2016", apps:110, goals:33, note:"Mondiale 2010, Euro 2008 e 2012 con la Spagna" },
+  ]},
+  { answer:"Gennaro Gattuso", clues:[
+    { club:"Glasgow Rangers", period:"1997–1999", apps:44,  goals:1,  note:"Esordio in Scozia" },
+    { club:"Salernitana",     period:"1999–2000", apps:34,  goals:1,  note:"Serie B" },
+    { club:"Milan",           period:"2000–2012", apps:407, goals:14, note:"2 Champions, 2 Scudetti, cuore del centrocampo" },
+    { club:"Sion",            period:"2012–2013", apps:14,  goals:0,  note:"Svizzera" },
+    { club:"Nazionale",       period:"1998–2009", apps:73,  goals:1,  note:"Mondiale 2006, Euro 2000 con l'Italia" },
+  ]},
+  { answer:"Romelu Lukaku", clues:[
+    { club:"Anderlecht",      period:"2009–2011", apps:63,  goals:41, note:"Esplode in Belgio a 16 anni" },
+    { club:"West Brom",       period:"2012–2013", apps:35,  goals:17, note:"Premier in prestito" },
+    { club:"Everton",         period:"2013–2017", apps:166, goals:87, note:"Si afferma definitivamente" },
+    { club:"Manchester Utd",  period:"2017–2019", apps:96,  goals:42, note:"Europa League 2017" },
+    { club:"Inter",           period:"2019–2022", apps:131, goals:95, note:"Scudetto 2021, bomber devastante" },
+    { club:"Napoli",          period:"2024–",     apps:42,  goals:14, note:"Serie A" },
+    { club:"Nazionale",       period:"2010–",     apps:118, goals:78, note:"Miglior marcatore belga di sempre" },
+  ]},
+  { answer:"Fernando Torres", clues:[
+    { club:"Atlético Madrid", period:"2001–2007", apps:214, goals:91, note:"Leggenda dei Colchoneros" },
+    { club:"Liverpool",       period:"2007–2011", apps:142, goals:81, note:"Uno dei migliori attaccanti al mondo" },
+    { club:"Chelsea",         period:"2011–2015", apps:172, goals:45, note:"Champions League 2012, Europa League 2013" },
+    { club:"Milan",           period:"2014–2015", apps:18,  goals:1,  note:"Prestito in Serie A" },
+    { club:"Nazionale",       period:"2003–2014", apps:110, goals:38, note:"Mondiale 2010, Euro 2008 e 2012 con la Spagna" },
+  ]},
+  { answer:"Iker Casillas", clues:[
+    { club:"Real Madrid",     period:"1999–2015", apps:725, goals:0,  note:"5 Liga, 3 Champions, portiere leggendario" },
+    { club:"Porto",           period:"2015–2019", apps:112, goals:0,  note:"Primeira Liga" },
+    { club:"Nazionale",       period:"2000–2016", apps:167, goals:0,  note:"Mondiale 2010, Euro 2008 e 2012 con la Spagna" },
+  ]},
+  { answer:"Wayne Rooney", clues:[
+    { club:"Everton",         period:"2002–2004", apps:77,  goals:17, note:"Esordio a 16 anni, fenomeno precoce" },
+    { club:"Manchester Utd",  period:"2004–2017", apps:559, goals:253, note:"5 Premier League, Champions 2008, record gol club" },
+    { club:"Everton",         period:"2017–2018", apps:40,  goals:12, note:"Ritorno alle origini" },
+    { club:"DC United",       period:"2018–2020", apps:52,  goals:25, note:"MLS" },
+    { club:"Nazionale",       period:"2003–2018", apps:120, goals:53, note:"Record gol Inghilterra" },
+  ]},
+  { answer:"Steven Gerrard", clues:[
+    { club:"Liverpool",       period:"1998–2015", apps:710, goals:186, note:"Coppa UEFA 2001, Champions 2005, capitano storico" },
+    { club:"LA Galaxy",       period:"2015–2016", apps:34,  goals:5,  note:"MLS" },
+    { club:"Nazionale",       period:"2000–2014", apps:114, goals:21, note:"Capitano dell'Inghilterra" },
+  ]},
+  { answer:"Frank Lampard", clues:[
+    { club:"West Ham",        period:"1995–2001", apps:148, goals:24, note:"Cresciuto nel settore giovanile" },
+    { club:"Chelsea",         period:"2001–2014", apps:648, goals:211, note:"3 Premier, Champions 2012, leggenda assoluta" },
+    { club:"Manchester City", period:"2014–2015", apps:38,  goals:6,  note:"Premier League" },
+    { club:"Nazionale",       period:"1999–2014", apps:106, goals:29, note:"Uno dei migliori centrocampisti inglesi" },
+  ]},
+  { answer:"Patrick Vieira", clues:[
+    { club:"Milan",           period:"1995–1996", apps:2,   goals:0,  note:"Breve parentesi" },
+    { club:"Arsenal",         period:"1996–2005", apps:406, goals:33, note:"3 Premier League, capitano Invincibili 2004" },
+    { club:"Juventus",        period:"2005–2006", apps:18,  goals:0,  note:"Scudetto poi revocato" },
+    { club:"Inter",           period:"2006–2010", apps:92,  goals:4,  note:"3 scudetti" },
+    { club:"Manchester City", period:"2010–2011", apps:13,  goals:0,  note:"Premier League" },
+    { club:"Nazionale",       period:"1997–2009", apps:107, goals:6,  note:"Mondiale 1998, Euro 2000 con la Francia" },
+  ]},
+  { answer:"Carlos Tevez", clues:[
+    { club:"Corinthians",     period:"2005–2006", apps:38,  goals:19, note:"Esplode in Brasile" },
+    { club:"West Ham",        period:"2006–2007", apps:26,  goals:7,  note:"Premier League" },
+    { club:"Manchester Utd",  period:"2007–2009", apps:99,  goals:34, note:"Premier League, Champions 2008" },
+    { club:"Manchester City", period:"2009–2013", apps:148, goals:73, note:"Premier League 2012" },
+    { club:"Juventus",        period:"2013–2015", apps:101, goals:50, note:"2 Scudetti, bomber devastante" },
+    { club:"Nazionale",       period:"2004–2015", apps:76,  goals:13, note:"Copa América 2004 con l'Argentina" },
+  ]},
+  { answer:"Edinson Cavani", clues:[
+    { club:"Palermo",         period:"2007–2010", apps:101, goals:34, note:"Si afferma in Serie A" },
+    { club:"Napoli",          period:"2010–2013", apps:138, goals:104, note:"Capocannoniere Serie A 2012-13" },
+    { club:"PSG",             period:"2013–2021", apps:301, goals:200, note:"Miglior marcatore PSG di sempre" },
+    { club:"Manchester Utd",  period:"2020–2021", apps:39,  goals:17, note:"Premier League" },
+    { club:"Nazionale",       period:"2008–2022", apps:136, goals:58, note:"Record gol Uruguay" },
+  ]},
+  { answer:"Luis Suárez", clues:[
+    { club:"Ajax",            period:"2007–2011", apps:159, goals:111, note:"Eredivisie, capocannoniere assoluto" },
+    { club:"Liverpool",       period:"2011–2014", apps:133, goals:82, note:"Capocannoniere Premier, PFA Player of the Year" },
+    { club:"Barcellona",      period:"2014–2020", apps:283, goals:198, note:"Champions 2015, 4 Liga, tridente MSN" },
+    { club:"Atlético Madrid", period:"2020–2022", apps:87,  goals:34, note:"Liga 2021" },
+    { club:"Nazionale",       period:"2007–2022", apps:136, goals:68, note:"Copa América 2011 con l'Uruguay" },
+  ]},
+  { answer:"Ivan Rakitić", clues:[
+    { club:"Schalke 04",      period:"2007–2011", apps:87,  goals:14, note:"Bundesliga" },
+    { club:"Siviglia",        period:"2011–2014", apps:107, goals:23, note:"Europa League 2014" },
+    { club:"Barcellona",      period:"2014–2020", apps:310, goals:38, note:"Champions 2015, 4 Liga, gol in finale UCL" },
+    { club:"Siviglia",        period:"2020–2022", apps:70,  goals:7,  note:"Ritorno in Spagna" },
+    { club:"Nazionale",       period:"2007–2021", apps:106, goals:15, note:"Finale Mondiale 2018 con la Croazia" },
+  ]},
+  { answer:"Giorgio Chiellini", clues:[
+    { club:"Livorno",         period:"2004–2005", apps:34,  goals:2,  note:"Prima stagione in Serie A" },
+    { club:"Fiorentina",      period:"2005–2006", apps:23,  goals:2,  note:"Prestito in viola" },
+    { club:"Juventus",        period:"2006–2022", apps:559, goals:36, note:"9 Scudetti, leader difensivo assoluto" },
+    { club:"LA FC",           period:"2022–2023", apps:25,  goals:1,  note:"MLS" },
+    { club:"Nazionale",       period:"2004–2021", apps:117, goals:8,  note:"Campione d'Europa 2020" },
+  ]},
+  { answer:"Leonardo Bonucci", clues:[
+    { club:"Inter",           period:"2005–2009", apps:35,  goals:2,  note:"Crescita tra B e A" },
+    { club:"Bari",            period:"2009–2010", apps:37,  goals:4,  note:"Promozione in Serie A" },
+    { club:"Juventus",        period:"2010–2017", apps:291, goals:18, note:"6 Scudetti, 2 finali Champions" },
+    { club:"Milan",           period:"2017–2018", apps:33,  goals:3,  note:"Anno al Milan da capitano" },
+    { club:"Juventus",        period:"2018–2023", apps:164, goals:12, note:"5 Scudetti" },
+    { club:"Nazionale",       period:"2010–2023", apps:121, goals:8,  note:"Campione d'Europa 2020" },
+  ]},
+  { answer:"Toni Kroos", clues:[
+    { club:"Bayern Monaco",   period:"2007–2014", apps:147, goals:23, note:"3 Bundesliga, Champions 2013" },
+    { club:"Bayer Leverkusen",period:"2009–2010", apps:31,  goals:6,  note:"Prestito in Bundesliga" },
+    { club:"Real Madrid",     period:"2014–2024", apps:465, goals:28, note:"5 Champions League, 3 Liga" },
+    { club:"Nazionale",       period:"2010–2024", apps:114, goals:17, note:"Mondiale 2014 con la Germania" },
+  ]},
+  { answer:"Thomas Müller", clues:[
+    { club:"Bayern Monaco",   period:"2008–",     apps:750, goals:250, note:"10 Bundesliga, 2 Champions, recordman assoluto" },
+    { club:"Nazionale",       period:"2010–2024", apps:131, goals:45, note:"Mondiale 2014, 10 gol al Mondiale 2010" },
+  ]},
+  { answer:"Manuel Neuer", clues:[
+    { club:"Schalke 04",      period:"2005–2011", apps:203, goals:0,  note:"Esordio e crescita in Bundesliga" },
+    { club:"Bayern Monaco",   period:"2011–",     apps:500, goals:0,  note:"10 Bundesliga, 2 Champions, rivoluziona il ruolo" },
+    { club:"Nazionale",       period:"2009–2023", apps:124, goals:0,  note:"Mondiale 2014, miglior portiere al mondo" },
+  ]},
+  { answer:"Ilkay Gündogan", clues:[
+    { club:"Borussia Dortmund", period:"2011–2016", apps:99, goals:16, note:"Bundesliga" },
+    { club:"Manchester City", period:"2016–2023", apps:304, goals:60, note:"5 Premier League, Champions 2023" },
+    { club:"Barcellona",      period:"2023–2024", apps:31,  goals:5,  note:"Liga" },
+    { club:"Manchester City", period:"2024–",     apps:20,  goals:3,  note:"Ritorno in Premier" },
+    { club:"Nazionale",       period:"2011–2024", apps:82,  goals:18, note:"Capitano della Germania" },
+  ]},
+  { answer:"Luca Toni", clues:[
+    { club:"Palermo",         period:"2003–2005", apps:72,  goals:33, note:"Esplode in Serie A" },
+    { club:"Fiorentina",      period:"2005–2007", apps:73,  goals:47, note:"Capocannoniere Serie A 2006, 31 gol" },
+    { club:"Bayern Monaco",   period:"2007–2009", apps:84,  goals:38, note:"Bundesliga" },
+    { club:"Roma",            period:"2009–2011", apps:46,  goals:20, note:"Serie A" },
+    { club:"Verona",          period:"2013–2016", apps:87,  goals:42, note:"Capocannoniere Serie A 2015 a 37 anni" },
+    { club:"Nazionale",       period:"2004–2010", apps:47,  goals:16, note:"Mondiale 2006 con l'Italia" },
+  ]},
+  { answer:"Álvaro Morata", clues:[
+    { club:"Real Madrid",     period:"2010–2014", apps:36,  goals:7,  note:"Cresciuto nel settore giovanile" },
+    { club:"Juventus",        period:"2014–2016", apps:93,  goals:27, note:"2 Scudetti" },
+    { club:"Chelsea",         period:"2017–2019", apps:72,  goals:24, note:"Premier League" },
+    { club:"Atlético Madrid", period:"2019–2024", apps:176, goals:70, note:"Liga" },
+    { club:"Como",            period:"2024–",     apps:24,  goals:6,  note:"Serie A" },
+    { club:"Nazionale",       period:"2014–",     apps:78,  goals:37, note:"Euro 2020 con la Spagna" },
+  ]},
+  { answer:"Gianluigi Donnarumma", clues:[
+    { club:"Milan",           period:"2015–2021", apps:251, goals:0,  note:"Esordio a 16 anni, portiere più giovane in A" },
+    { club:"PSG",             period:"2021–",     apps:190, goals:0,  note:"Miglior portiere Euro 2020" },
+    { club:"Nazionale",       period:"2016–",     apps:80,  goals:0,  note:"Campione d'Europa 2020, MVP del torneo" },
+  ]},
+  { answer:"Radamel Falcao", clues:[
+    { club:"River Plate",     period:"2007–2009", apps:71,  goals:29, note:"Esordio in Argentina" },
+    { club:"Porto",           period:"2009–2011", apps:87,  goals:72, note:"Europa League 2011" },
+    { club:"Atlético Madrid", period:"2011–2013", apps:91,  goals:70, note:"Europa League 2012, Copa del Rey" },
+    { club:"Monaco",          period:"2013–2019", apps:148, goals:88, note:"Ligue 1 2017" },
+    { club:"Nazionale",       period:"2007–2022", apps:109, goals:36, note:"El Tigre, Colombia" },
+  ]},
+  { answer:"Vincent Kompany", clues:[
+    { club:"Anderlecht",      period:"2003–2006", apps:72,  goals:5,  note:"Cresciuto in Belgio" },
+    { club:"Amburgo",         period:"2006–2008", apps:52,  goals:4,  note:"Bundesliga" },
+    { club:"Manchester City", period:"2008–2019", apps:360, goals:20, note:"4 Premier League, capitano storico" },
+    { club:"Anderlecht",      period:"2019–2022", apps:55,  goals:3,  note:"Anche allenatore" },
+    { club:"Burnley",         period:"2022–2023", apps:42,  goals:0,  note:"Promozione in Premier da allenatore-giocatore" },
+    { club:"Nazionale",       period:"2004–2018", apps:89,  goals:4,  note:"Capitano Belgio, Mondiale 2018 terzo posto" },
+  ]},
+,
+  { answer:"Giovanni Simeone", clues:[
+    { club:"River Plate",    period:"2013–2015", apps:26,  goals:2,  note:"Esordio in Argentina, figlio del Cholo" },
+    { club:"Genoa",          period:"2016–2017", apps:35,  goals:12, note:"Prima stagione in Serie A" },
+    { club:"Fiorentina",     period:"2017–2019", apps:74,  goals:20, note:"Continua a segnare in viola" },
+    { club:"Cagliari",       period:"2019–2021", apps:71,  goals:18, note:"Trascinatore in Sardegna" },
+    { club:"Verona",         period:"2021–2022", apps:35,  goals:17, note:"Capocannoniere rivelazione" },
+    { club:"Napoli",         period:"2022–2025", apps:83,  goals:6,  note:"Scudetto 2023 da comprimario" },
+    { club:"Torino",         period:"2025–",     apps:24,  goals:8,  note:"Nuovo inizio in granata" },
+    { club:"Nazionale",      period:"2018–2023", apps:6,   goals:1,  note:"Poche presenze con l'Albiceleste" },
+  ]},
+  { answer:"Gianluca Scamacca", clues:[
+    { club:"Ascoli",         period:"2019–2020", apps:33,  goals:9,  note:"Prestito decisivo in Serie B" },
+    { club:"Genoa",          period:"2020–2021", apps:26,  goals:8,  note:"Conferma in Serie A" },
+    { club:"Sassuolo",       period:"2021–2022", apps:36,  goals:16, note:"Esplode in Serie A, 16 gol" },
+    { club:"West Ham",       period:"2022–2023", apps:16,  goals:3,  note:"Esperienza in Premier League" },
+    { club:"Atalanta",       period:"2023–",     apps:50,  goals:20, note:"Rinascita con Gasperini" },
+    { club:"Nazionale",      period:"2021–",     apps:22,  goals:1,  note:"Presente in Nazionale maggiore" },
+  ]},
+  { answer:"Keinan Davis", clues:[
+    { club:"Aston Villa",    period:"2016–2022", apps:73,  goals:3,  note:"Cresciuto nel club di Birmingham" },
+    { club:"Nottm Forest",   period:"2022",      apps:15,  goals:5,  note:"Prestito vincente in Premier" },
+    { club:"Watford",        period:"2022–2023", apps:34,  goals:7,  note:"Protagonista in Championship" },
+    { club:"Udinese",        period:"2023–",     apps:57,  goals:13, note:"Sorpresa in Serie A" },
+    { club:"Nazionale",      period:"2017–2018", apps:3,   goals:2,  note:"Inghilterra U-20" },
+  ]},
+  { answer:"Riccardo Orsolini", clues:[
+    { club:"Ascoli",         period:"2015–2017", apps:51,  goals:8,  note:"Trafila in Serie B" },
+    { club:"Atalanta",       period:"2017–2018", apps:8,   goals:0,  note:"Breve parentesi a Bergamo" },
+    { club:"Bologna",        period:"2018–",     apps:267, goals:72, note:"Simbolo del Bologna moderno" },
+    { club:"Nazionale",      period:"2019–",     apps:13,  goals:2,  note:"Presente in Azzurro" },
+  ]},
+  { answer:"Nicola Krstovic", clues:[
+    { club:"Zeta",           period:"2016–2019", apps:92,  goals:37, note:"Trafila in Montenegro" },
+    { club:"Stella Rossa",   period:"2019–2021", apps:21,  goals:2,  note:"Esperienza in Serbia" },
+    { club:"Dunajsk\u00e1 Streda",period:"2021–2023", apps:37,  goals:19, note:"Esplode in Slovacchia" },
+    { club:"Lecce",          period:"2023–2025", apps:72,  goals:18, note:"Rivelazione in Serie A" },
+    { club:"Atalanta",       period:"2025–",     apps:27,  goals:9,  note:"Grande salto in Champions" },
+    { club:"Nazionale",      period:"2022–",     apps:34,  goals:8,  note:"Bomber del Montenegro" },
+  ]},
+  { answer:"Domenico Berardi", clues:[
+    { club:"Sassuolo",       period:"2012–",     apps:401, goals:146,note:"Record storico del Sassuolo" },
+    { club:"Nazionale",      period:"2018–2023", apps:28,  goals:8,  note:"Campione d'Europa a Euro 2020" },
+  ]},
+  { answer:"Andrea Pinamonti", clues:[
+    { club:"Frosinone",      period:"2018–2019", apps:27,  goals:5,  note:"Prestito, si afferma in Serie B" },
+    { club:"Genoa",          period:"2019–2020", apps:32,  goals:5,  note:"Primo prestito in Serie A" },
+    { club:"Empoli",         period:"2021–2022", apps:36,  goals:13, note:"Stagione da 13 gol, miglior prestito" },
+    { club:"Sassuolo",       period:"2022–2024", apps:70,  goals:16, note:"Confermato dopo l'Empoli" },
+    { club:"Genoa",          period:"2024–2025", apps:36,  goals:10, note:"Secondo prestito al Genoa" },
+    { club:"Nazionale",      period:"2022",      apps:1,   goals:0,  note:"Esordio in Azzurro" },
+  ]},
+  { answer:"Mateo Pellegrino", clues:[
+    { club:"Platense",       period:"2023–2024", apps:38,  goals:10, note:"Esplode in Argentina" },
+    { club:"Vélez Sarsfield", period:"2021–2025", apps:9,  goals:0,  note:"Club di formazione" },
+    { club:"Parma",          period:"2025–",     apps:43,  goals:11, note:"Sorpresa in Serie A" },
+    { club:"Nazionale",      period:"2019",      apps:0,   goals:0,  note:"Argentina U-19" },
+  ]},
+  { answer:"Nikola Vlasic", clues:[
+    { club:"Hajduk Spalato", period:"2014–2017", apps:86,  goals:11, note:"Talento cresciuto in Croazia" },
+    { club:"Everton",        period:"2017–2018", apps:12,  goals:0,  note:"Esperienza in Premier League" },
+    { club:"CSKA Mosca",     period:"2018–2021", apps:86,  goals:28, note:"Consacrazione in Russia" },
+    { club:"West Ham",       period:"2021–2022", apps:19,  goals:1,  note:"Ritorno in Premier" },
+    { club:"Torino",         period:"2022–",     apps:126, goals:20, note:"Beniamino del Toro" },
+    { club:"Nazionale",      period:"2017–",     apps:61,  goals:10, note:"Pilastro della Croazia" },
+  ]},
+  { answer:"Wesley Franca", clues:[
+    { club:"Flamengo",       period:"2021–2025", apps:78,  goals:2,  note:"Cresciuto nel pi\u00f9 grande club brasiliano" },
+    { club:"Roma",           period:"2025–",     apps:26,  goals:4,  note:"Esordio in Europa" },
+    { club:"Nazionale",      period:"2025–",     apps:6,   goals:0,  note:"Esordio con il Brasile" },
+  ]},
+  { answer:"Gift Orban", clues:[
+    { club:"Stab\u00e6k",         period:"2021–2022", apps:22,  goals:16, note:"Rivelazione in Norvegia" },
+    { club:"Gent",           period:"2023–2024", apps:27,  goals:12, note:"Protagonista in Belgio" },
+    { club:"Olympique Lione",period:"2024–2025", apps:16,  goals:3,  note:"Esperienza in Ligue 1" },
+    { club:"Verona",         period:"2025–",     apps:21,  goals:7,  note:"Scommessa in Serie A" },
+  ]},
+  { answer:"Andrea Belotti", clues:[
+    { club:"Palermo",        period:"2013–2015", apps:62,  goals:17, note:"Si afferma in Serie A" },
+    { club:"Torino",         period:"2015–2022", apps:232, goals:100,note:"Capitano e leggenda granata" },
+    { club:"Roma",           period:"2022–2024", apps:45,  goals:3,  note:"Esperienza in giallorosso" },
+    { club:"Como",           period:"2024–2025", apps:18,  goals:2,  note:"Nuova avventura in Lombardia" },
+    { club:"Nazionale",      period:"2016–2022", apps:44,  goals:12, note:"Euro 2020 vinto con l'Italia" },
+  ]},
+  { answer:"Yann Bisseck", clues:[
+    { club:"Aarhus",         period:"2021–2023", apps:43,  goals:4,  note:"Si afferma in Danimarca" },
+    { club:"Inter",          period:"2023–",     apps:62,  goals:7,  note:"Difensore rivelazione nerazzurra" },
+    { club:"Nazionale",      period:"2025–",     apps:1,   goals:0,  note:"Esordio con la Germania" },
+  ]},
+  { answer:"Leandro Pavoletti", clues:[
+    { club:"Sassuolo",       period:"2012–2014", apps:33,  goals:11, note:"Prima Serie A" },
+    { club:"Genoa",          period:"2015–2017", apps:45,  goals:23, note:"Bomber rivelazione" },
+    { club:"Napoli",         period:"2017",      apps:6,   goals:0,  note:"Breve esperienza al Napoli" },
+    { club:"Cagliari",       period:"2017–",     apps:214, goals:49, note:"Leggenda della Sardegna" },
+    { club:"Nazionale",      period:"2019",      apps:1,   goals:1,  note:"Un gol all'esordio in Azzurro" },
+  ]},
+  { answer:"Marco Carnesecchi", clues:[
+    { club:"Trapani",        period:"2019–2020", apps:33,  goals:0,  note:"Esordio in C, promosso in B" },
+    { club:"Cremonese",      period:"2021–2023", apps:83,  goals:0,  note:"Porta la Cremo in Serie A" },
+    { club:"Atalanta",       period:"2023–",     apps:92,  goals:0,  note:"Titolare fisso con Gasperini" },
+    { club:"Nazionale",      period:"2019–2023", apps:22,  goals:0,  note:"Portiere titolare U-21" },
+  ]},
+  { answer:"Strahinja Pavlovic", clues:[
+    { club:"Partizan",       period:"2019–2020", apps:37,  goals:1,  note:"Esordio in Serbia" },
+    { club:"Salisburgo",     period:"2022–2024", apps:50,  goals:3,  note:"Si afferma in Austria" },
+    { club:"Milan",          period:"2024–",     apps:50,  goals:6,  note:"Grande acquisto rossonero" },
+    { club:"Nazionale",      period:"2020–",     apps:54,  goals:5,  note:"Titolare fisso con la Serbia" },
+  ]},
+  { answer:"Ademola Lookman", clues:[
+    { club:"Charlton",       period:"2015–2017", apps:45,  goals:10, note:"Esordio in Championship" },
+    { club:"Everton",        period:"2017–2019", apps:36,  goals:1,  note:"Esperienza in Premier" },
+    { club:"RB Lipsia",      period:"2018–2020", apps:22,  goals:5,  note:"Prestiti in Bundesliga" },
+    { club:"Fulham",         period:"2020–2021", apps:34,  goals:4,  note:"Ottima stagione in Championship" },
+    { club:"Atalanta",       period:"2022–2026", apps:104, goals:41, note:"Hat-trick in finale Europa League 2024" },
+    { club:"Atlético Madrid",period:"2026–",     apps:7,   goals:2,  note:"Grande salto in LaLiga" },
+    { club:"Nazionale",      period:"2022–",     apps:43,  goals:11, note:"Scelta la Nigeria all'Inghilterra" },
+  ]},
+  { answer:"Edoardo Bove", clues:[
+    { club:"Roma",           period:"2021–2024", apps:65,  goals:2,  note:"Cresciuto nel settore giovanile giallorosso" },
+    { club:"Fiorentina",     period:"2024–2025", apps:12,  goals:1,  note:"Malore in campo, grande ritorno" },
+    { club:"Watford",        period:"2026–",     apps:6,   goals:1,  note:"Nuova avventura in Championship" },
+  ]},
+  { answer:"N'Golo Kanté", clues:[
+    { club:"Caen",           period:"2013–2015", apps:75,  goals:4,  note:"Si afferma in Ligue 2" },
+    { club:"Leicester City", period:"2015–2016", apps:37,  goals:1,  note:"Premier League con i Foxes" },
+    { club:"Chelsea",        period:"2016–2023", apps:190, goals:11, note:"Champions League 2021, Pallone d'Oro sfiorato" },
+    { club:"Al-Ittihad",     period:"2023–2026", apps:79,  goals:8,  note:"Arabia Saudita" },
+    { club:"Nazionale",      period:"2016–",     apps:67,  goals:2,  note:"Mondiale 2018 con la Francia" },
+  ]},
+  { answer:"Leon Goretzka", clues:[
+    { club:"Bochum",         period:"2012–2013", apps:32,  goals:4,  note:"Esordio in Bundesliga" },
+    { club:"Schalke 04",     period:"2013–2018", apps:116, goals:14, note:"Si afferma come mezzala" },
+    { club:"Bayern Monaco",  period:"2018–",     apps:199, goals:37, note:"Multiplo Bundesliga e Champions 2020" },
+    { club:"Nazionale",      period:"2014–",     apps:69,  goals:15, note:"Mondiale 2018 con la Germania" },
+  ]},
+  { answer:"Antoine Griezmann", clues:[
+    { club:"Real Sociedad",  period:"2009–2014", apps:180, goals:46, note:"Si afferma in LaLiga" },
+    { club:"Atlético Madrid",period:"2014–2019", apps:180, goals:94, note:"Europa League 2018, finalista Champions" },
+    { club:"Barcellona",     period:"2019–2021", apps:74,  goals:22, note:"Esperienza al Camp Nou" },
+    { club:"Atlético Madrid",period:"2021–",     apps:158, goals:48, note:"Ritorno al Wanda, ancora decisivo" },
+    { club:"Nazionale",      period:"2014–2024", apps:137, goals:44, note:"Mondiale 2018, Euro 2016 finalista" },
+  ]},
+  { answer:"Francisco Conceicao", clues:[
+    { club:"Porto",          period:"2021–2024", apps:66,  goals:7,  note:"Figlio di Sérgio, esplode in Portogallo" },
+    { club:"Ajax",           period:"2022–2023", apps:26,  goals:5,  note:"Prestito in Eredivisie" },
+    { club:"Juventus",       period:"2024–",     apps:50,  goals:6,  note:"Gol decisivi in Champions" },
+    { club:"Nazionale",      period:"2024–",     apps:15,  goals:3,  note:"Talento emergente del Portogallo" },
+  ]},
+  { answer:"Fikayo Tomori", clues:[
+    { club:"Chelsea",        period:"2016–2021", apps:17,  goals:1,  note:"Cresciuto nel settore giovanile" },
+    { club:"Derby County",   period:"2018–2019", apps:44,  goals:1,  note:"Prestito rivelazione in Championship" },
+    { club:"Milan",          period:"2021–",     apps:157, goals:6,  note:"Scudetto 2022, titolare inamovibile" },
+    { club:"Nazionale",      period:"2019–",     apps:6,   goals:0,  note:"Sceglie l'Inghilterra" },
+  ]},
+  { answer:"Marten De Roon", clues:[
+    { club:"Heerenveen",     period:"2012–2015", apps:87,  goals:5,  note:"Si afferma in Eredivisie" },
+    { club:"Atalanta",       period:"2015–2016", apps:36,  goals:1,  note:"Prima stagione a Bergamo" },
+    { club:"Middlesbrough",  period:"2016–2017", apps:34,  goals:4,  note:"Esperienza in Premier" },
+    { club:"Atalanta",       period:"2017–",     apps:297, goals:19, note:"Simbolo del progetto Gasperini" },
+    { club:"Nazionale",      period:"2016–2024", apps:42,  goals:1,  note:"Presenze con i Paesi Bassi" },
+  ]},
+  { answer:"Piotr Zielinski", clues:[
+    { club:"Udinese",        period:"2012–2014", apps:19,  goals:0,  note:"Esordio in Serie A" },
+    { club:"Empoli",         period:"2014–2016", apps:63,  goals:5,  note:"Si afferma in prestito" },
+    { club:"Napoli",         period:"2016–2024", apps:281, goals:37, note:"Scudetto 2023, colonna del centrocampo" },
+    { club:"Inter",          period:"2024–",     apps:54,  goals:7,  note:"Parametro zero di lusso" },
+    { club:"Nazionale",      period:"2013–",     apps:107, goals:17, note:"Capitano della Polonia" },
+  ]},
+  { answer:"Alexis Saelemaekers", clues:[
+    { club:"Anderlecht",     period:"2018–2020", apps:40,  goals:2,  note:"Esordio in Belgio" },
+    { club:"Milan",          period:"2020–2025", apps:141, goals:8,  note:"Tuttofare rossonero, Scudetto 2022" },
+    { club:"Bologna",        period:"2023–2024", apps:30,  goals:4,  note:"Prestito, ottima stagione" },
+    { club:"Roma",           period:"2024–2025", apps:22,  goals:7,  note:"Prestito con gol pesanti" },
+    { club:"Nazionale",      period:"2020–",     apps:23,  goals:2,  note:"Presente con il Belgio" },
+  ]},
+  { answer:"Charles De Ketelaere", clues:[
+    { club:"Club Bruges",    period:"2019–2022", apps:90,  goals:18, note:"Rivelazione in Belgio" },
+    { club:"Milan",          period:"2022–2023", apps:32,  goals:0,  note:"Anno difficile in rossonero" },
+    { club:"Atalanta",       period:"2023–",     apps:95,  goals:20, note:"Rinascita totale con Gasperini" },
+    { club:"Nazionale",      period:"2020–",     apps:28,  goals:5,  note:"Talento del Belgio" },
+  ]},
+  { answer:"Pierre Kalulu", clues:[
+    { club:"Olympique Lione 2",period:"2018–2020",apps:36, goals:0,  note:"Cresciuto nel settore giovanile" },
+    { club:"Milan",          period:"2020–2024", apps:84,  goals:3,  note:"Scudetto 2022, difensore affidabile" },
+    { club:"Juventus",       period:"2024–",     apps:59,  goals:3,  note:"Approdo a Torino" },
+    { club:"Nazionale",      period:"2025–",     apps:3,   goals:0,  note:"Esordio con la Francia" },
+  ]},
+  { answer:"Leonardo Spinazzola", clues:[
+    { club:"Atalanta",       period:"2016–2018", apps:48,  goals:0,  note:"Si afferma come terzino" },
+    { club:"Juventus",       period:"2018–2019", apps:10,  goals:0,  note:"Breve esperienza bianconera" },
+    { club:"Roma",           period:"2019–2024", apps:104, goals:5,  note:"Euro 2020 da protagonista prima dell'infortunio" },
+    { club:"Napoli",         period:"2024–",     apps:54,  goals:4,  note:"Nuovo inizio in azzurro" },
+    { club:"Nazionale",      period:"2017–",     apps:27,  goals:0,  note:"Euro 2020 tra i migliori prima dell'infortunio" },
+  ]},
+  { answer:"Ruslan Malinovskyi", clues:[
+    { club:"Genk",           period:"2016–2019", apps:73,  goals:16, note:"Si afferma in Belgio" },
+    { club:"Atalanta",       period:"2019–2023", apps:115, goals:23, note:"Europa League 2024, elemento chiave" },
+    { club:"Olympique Marsiglia",period:"2023",  apps:20,  goals:1,  note:"Breve parentesi in Francia" },
+    { club:"Genoa",          period:"2023–",     apps:66,  goals:9,  note:"Ritorno in Serie A" },
+    { club:"Nazionale",      period:"2015–",     apps:70,  goals:10, note:"Pilastro dell'Ucraina" },
+  ]},
+  { answer:"David Neres", clues:[
+    { club:"Ajax",           period:"2017–2022", apps:121, goals:37, note:"Finalista Champions League 2019" },
+    { club:"Benfica",        period:"2022–2024", apps:55,  goals:11, note:"Protagonista in Portogallo" },
+    { club:"Napoli",         period:"2024–",     apps:44,  goals:5,  note:"Scudetto in arrivo con gli Azzurri" },
+    { club:"Nazionale",      period:"2019–2023", apps:8,   goals:1,  note:"Presente con il Brasile" },
+  ]},\
 ];
 
 
@@ -1404,7 +1615,7 @@ function Confetti({active}){
     color:["#f5e000","#16a34a","#dc2626","#2563eb","#f97316","#a855f7"][i%6],
     size:6+Math.random()*8,shape:i%3===0?"50%":"2px"
   }));
-  return(<div style={{position:"fixed",top:0,left:0,width:"100%",height:"100%",pointerEvents:"none",zIndex:9999,overflow:"hidden"}}>{pieces.map(p=><div key={p.id} className="confetti-piece" style={{left:`${p.left}%`,top:"-10px",width:`${p.size}px`,height:`${p.size}px`,background:p.color,borderRadius:p.shape,animationDelay:`${p.delay}s`,animationDuration:`${p.duration}s`}}/>)}</div>);
+  return(<div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:199,overflow:"visible"}}>{pieces.map(p=><div key={p.id} className="confetti-piece" style={{left:`${p.left}%`,top:"-10px",width:`${p.size}px`,height:`${p.size}px`,background:p.color,borderRadius:p.shape,animationDelay:`${p.delay}s`,animationDuration:`${p.duration}s`}}/>)}</div>);
 }
 function useCountdown(){
   const[t,sT]=useState("");
@@ -1481,7 +1692,7 @@ function Hdr({title,sub,onHome,archiveNav}){
 
 // ── ARCHIVE WRAPPER ──────────────────────────────────────────────────────
 const DB_SERIE_A=DB.filter(p=>p.league==="Serie A");
-const POOL_SIZES={calciodle:532,wordle:532,hangman:532,valore2:692,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:65};
+const POOL_SIZES={calciodle:532,wordle:532,hangman:532,valore2:692,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:65,connections:CONNECTIONS_PUZZLES.length};
 
 const PAGE_SIZE=10;
 function ArchiveWrapper({gameKey,children}){
@@ -1550,7 +1761,7 @@ function CalciodleFlipCell({value,arrow,color,flipped,colIdx}){
   useEffect(()=>{if(flipped){const t=setTimeout(()=>setIsFlipped(true),delay);return()=>clearTimeout(t);}},[flipped]);
   return(
     <div style={{flex:1,minWidth:0,height:"38px",perspective:"400px"}}>
-      <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.6s ease`,transform:isFlipped?"rotateX(180deg)":"rotateX(0deg)"}}>
+      <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.9s ease`,transform:isFlipped?"rotateX(180deg)":"rotateX(0deg)"}}>
         <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e8e8e8",borderRadius:"3px"}}/>
         <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateX(180deg)",background:bg,borderRadius:"3px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",overflow:"hidden"}}>
           <span style={{fontWeight:"700",fontSize:"8px",color:"#fff",lineHeight:1.2,textAlign:"center",padding:"0 2px"}}>{value}</span>
@@ -1784,14 +1995,15 @@ function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   function g(c){if(st!=="p"||gu.has(c))return;sGu(x=>new Set([...x,c]));} 
   const bodyParts=[<circle key="h" cx="50" cy="19" r="8" stroke="#333" strokeWidth="2.5" fill="none"/>,<line key="b" x1="50" y1="27" x2="50" y2="58" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="la" x1="50" y1="37" x2="35" y2="49" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="ra" x1="50" y1="37" x2="65" y2="49" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="ll" x1="50" y1="58" x2="37" y2="75" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="rl" x1="50" y1="58" x2="63" y2="75" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="rp" x1="50" y1="6" x2="50" y2="11" stroke="#333" strokeWidth="2.5"/>];
 
-  const[hint,setHint]=useState(false);
+  const[hint,setHint]=useState(false);const[hgConfetti,setHgConfetti]=useState(false);
+  useEffect(()=>{if(st==="w"&&!hgConfetti)setTimeout(()=>setHgConfetti(true),500);},[st]);
   if(savedToday)return(<div style={T.app}><Hdr title="Impiccato" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/><DoneScreen gameKey="hangman" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
     <div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.won?"Trovato!":"Non trovato"}</div>
     <div style={{fontSize:"11px",color:US.muted,marginBottom:"12px"}}>{s.word}</div>
     <ShareButton text={`🪢 Impiccato #${day}\n${s.won?"Trovato":"Non trovato"}: ${s.word}\nuniverso-quiz-hmix.vercel.app`}/>
   </>}</DoneScreen></div>);
-  return(<div style={T.app}><Hdr title="Impiccato" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={{...T.app,position:"relative"}}>{hgConfetti&&<Confetti active={hgConfetti}/>}<Hdr title="Impiccato" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"400px"}}>
       <div style={{display:"flex",justifyContent:"flex-end",marginBottom:"6px"}}>
         <button onClick={()=>setHint(h=>!h)} style={{background:"none",border:`1px solid ${hint?US.yellow:"#ddd"}`,borderRadius:"4px",padding:"3px 9px",fontSize:"9px",color:hint?US.yellow:"#aaa",cursor:"pointer",fontFamily:"inherit"}}>💡 {hint?"Nascondi":"Indizio"}</button>
@@ -1838,7 +2050,7 @@ function ChiValeDiPiu({onHome,isDaily,onArchive}){
 
 // ── CARRIERA ─────────────────────────────────────────────────────────────
 function CarreiraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
-  const player=CAREERS[((dayIndex()+55)%CAREERS.length)];
+  const player=CAREERS[((dayIndex()+3)%CAREERS.length)];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("carriera"):null;
   const maxC=player.clues.length;
@@ -1916,7 +2128,7 @@ function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     else{setWrong(input);setInput("");setTimeout(()=>setWrong(null),800);}
     inputRef.current?.focus();
   }
-  if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Rosa Quiz" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="rosa" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=>{
+  if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Indovina la Rosa" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="rosa" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=>{
     const fn=s.foundNames||[];const all=s.allNames||[];const ms=all.filter(p=>!fn.includes(p));
     return (<><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>👕</div><div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.nome}</div><div style={{fontSize:"12px",color:US.muted,marginBottom:"10px"}}>{s.found}/{s.total} trovati ({Math.round(s.found/s.total*100)}%)</div>{fn.length>0&&(<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.green,marginBottom:"5px",fontWeight:"700"}}>✓ Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{fn.map(p=>(<div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>))}</div></div>)}{ms.length>0&&(<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.red,marginBottom:"5px",fontWeight:"700"}}>✗ Mancati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{ms.map(p=>(<div key={p} style={{background:US.redL,color:US.red,border:"1px solid #fecaca",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>))}</div></div>)}<ShareButton text={`👕 Rosa Quiz #${day} — ${s.nome}\\n${s.found}/${s.total} trovati\\nuniverso-quiz-hmix.vercel.app`}/></>);
   }}</DoneScreen></div>);
@@ -2140,14 +2352,14 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const total=validAnswers.length;
   const pct=Math.round(found.length/total*100);
   const progressColor=pct===100?US.green:pct>=70?"#2563eb":pct>=40?US.yellow:US.muted;
-  if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Lista Quiz" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="lista" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=>{
+  if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Sfida a Tempo" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="lista" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=>{
     const fn=s.foundNames||[];const all=s.allNames||[];const ms=all.filter(p=>!fn.includes(p));
     return (<><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>📋</div><div style={{fontSize:"13px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.title}</div><div style={{fontSize:"12px",color:US.muted,marginBottom:"10px"}}>{s.found}/{s.total} trovati ({Math.round(s.found/s.total*100)}%)</div>{fn.length>0&&(<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.green,marginBottom:"5px",fontWeight:"700"}}>✓ Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{fn.map(p=>(<div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>))}</div></div>)}{ms.length>0&&(<div style={{marginBottom:"10px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.red,marginBottom:"5px",fontWeight:"700"}}>✗ Mancati</div><div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>{ms.map(p=>(<div key={p} style={{background:US.redL,color:US.red,border:"1px solid #fecaca",borderRadius:"4px",padding:"2px 7px",fontSize:"11px",fontWeight:"600"}}>{p}</div>))}</div></div>)}<ShareButton text={`📋 Lista Quiz #${day}\\n${s.title}\\n${s.found}/${s.total} trovati\\nuniverso-quiz-hmix.vercel.app`}/></>);
   }}</DoneScreen></div>);
   if(done){
     const missed=validAnswers.filter(p=>!found.includes(p));
     const emoji=pct===100?"🏆":pct>=70?"🥇":pct>=40?"👍":"📚";
-    return(<div style={T.app}><Hdr title="Lista Quiz" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+    return(<div style={T.app}><Hdr title="Sfida a Tempo" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
       <div style={T.body}>
         <div style={{marginBottom:"14px",padding:"10px 13px",background:US.black,borderRadius:"6px"}}>
           <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"2px"}}>Categoria</div>
@@ -2168,7 +2380,7 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
       </div>
     </div>);
   }
-  return(<div style={T.app}><Hdr title="Lista Quiz" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={T.app}><Hdr title="Sfida a Tempo" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={T.body}>
       <div style={{marginBottom:"12px",padding:"10px 13px",background:US.black,borderRadius:"6px"}}>
         <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"2px"}}>Categoria di oggi</div>
@@ -2360,15 +2572,687 @@ function IndivinaTransferimento({onHome,isDaily,onArchive}){
 }
 
 // ── HOME ──────────────────────────────────────────────────────────────────
+
+// ── CONNECTIONS ──────────────────────────────────────────────────────────────
+// ── CONNECTIONS ──────────────────────────────────────────────────────────────
+
+const CONNECTIONS_PUZZLES = [
+  {id:1,title:"Inter vs Milan vs Napoli vs Juve",groups:[
+    {label:"Giocatori dell'Inter",color:"green",players:["Lautaro Martínez","Nicolò Barella","Federico Dimarco","Alessandro Bastoni"]},
+    {label:"Giocatori del Milan",color:"yellow",players:["Mike Maignan","Leao","Christian Pulisic","Fikayo Tomori"]},
+    {label:"Giocatori del Napoli",color:"orange",players:["Kevin De Bruyne","Scott McTominay","Romelu Lukaku","David Neres"]},
+    {label:"Giocatori della Juventus",color:"red",players:["Dušan Vlahović","Kenan Yıldız","Andrea Cambiaso","Teun Koopmeiners"]},
+  ]},
+  {id:2,title:"Francia, Argentina, Scozia, Croazia",groups:[
+    {label:"Calciatori francesi",color:"green",players:["Marcus Thuram","Mike Maignan","Youssouf Fofana","Adrien Rabiot"]},
+    {label:"Calciatori argentini",color:"yellow",players:["Lautaro Martínez","Paulo Dybala","Matías Soulé","Juan Cabal"]},
+    {label:"Calciatori scozzesi",color:"orange",players:["Scott McTominay","Billy Gilmour","Lewis Ferguson","Ché Adams"]},
+    {label:"Calciatori croati",color:"red",players:["Luka Modrić","Petar Sučić","Mario Pašalić","Ivan Ilić"]},
+  ]},
+  {id:3,title:"Portieri, terzini, trequartisti, attaccanti",groups:[
+    {label:"Portieri italiani",color:"green",players:["Alex Meret","Marco Carnesecchi","Michele Di Gregorio","Ivan Provedel"]},
+    {label:"Terzini italiani",color:"yellow",players:["Federico Dimarco","Andrea Cambiaso","Leonardo Spinazzola","Raoul Bellanova"]},
+    {label:"Trequartisti di Serie A",color:"orange",players:["Kevin De Bruyne","Teun Koopmeiners","Charles De Ketelaere","Piotr Zielinski"]},
+    {label:"Attaccanti top di Serie A",color:"red",players:["Romelu Lukaku","Dušan Vlahović","Rasmus Højlund","Moise Kean"]},
+  ]},
+  {id:4,title:"Sudamerica in Serie A",groups:[
+    {label:"Calciatori brasiliani",color:"green",players:["Carlos Augusto","Gleison Bremer","Éderson","Dodô"]},
+    {label:"Calciatori argentini (altro)",color:"yellow",players:["Paulo Dybala","Matías Soulé","Santiago Castro","Artem Dovbyk"]},
+    {label:"Calciatori colombiani",color:"orange",players:["Juan Cabal","Lucumi","Duvan Zapata","Vasquez"]},
+    {label:"Attaccanti sudamericani",color:"red",players:["Santiago Gimenez","Giovanni Simeone","Lautaro Martínez","Andrea Cambiaso"]},
+  ]},
+  {id:5,title:"Roma, Lazio, Atalanta, Fiorentina",groups:[
+    {label:"Giocatori della Roma",color:"green",players:["Paulo Dybala","Lorenzo Pellegrini","Mile Svilar","Artem Dovbyk"]},
+    {label:"Giocatori della Lazio",color:"yellow",players:["Mattia Zaccagni","Ivan Provedel","Alessio Romagnoli","Pedro"]},
+    {label:"Giocatori dell'Atalanta",color:"orange",players:["Marco Carnesecchi","Ademola Lookman","Gianluca Scamacca","Charles De Ketelaere"]},
+    {label:"Giocatori della Fiorentina",color:"red",players:["Moise Kean","Albert Gudmundsson","Niccolò Fagioli","Robin Gosens"]},
+  ]},
+  {id:6,title:"Talenti Under 22",groups:[
+    {label:"Italiani Under 22",color:"green",players:["Francesco Camarda","Giorgio Scalvini","Niccolò Pisilli","Davide Bartesaghi"]},
+    {label:"Stranieri Under 22 in Serie A",color:"yellow",players:["Vasilije Adžić","Petar Sučić","Ramon","Assane Diao"]},
+    {label:"Under 22 di alto valore",color:"orange",players:["Kenan Yıldız","Marc Bernal","Pau Cubarsí","Lamine Yamal"]},
+    {label:"Attaccanti Under 22",color:"red",players:["Sebastiano Esposito","Santiago Castro","Pio Esposito","Maximilian Beier"]},
+  ]},
+  {id:7,title:"Africa in Serie A",groups:[
+    {label:"Calciatori africani delle big",color:"green",players:["Evan Ndicka","Odilon Kossounou","Boulaye Dia","Kamaldeen Sulemana"]},
+    {label:"Costa d'Avorio in Serie A",color:"yellow",players:["Jérémie Boga","Lamptey","Seko Fofana","Edoardo Bove"]},
+    {label:"Centrocampisti africani",color:"orange",players:["Frank Anguissa","Manu Koné","Yunus Musah","Reda Belahyane"]},
+    {label:"Nigeriani in Serie A",color:"red",players:["Maduka Okoye","Honest Ahanor","Fisayo Dele-Bashiru","Ebenezer Akinsanmiro"]},
+  ]},
+  {id:8,title:"Valore di mercato",groups:[
+    {label:"Valore sopra 60M€",color:"green",players:["Lautaro Martínez","Nicolò Barella","Kenan Yıldız","Alessandro Bastoni"]},
+    {label:"Valore tra 30M e 50M€",color:"yellow",players:["Teun Koopmeiners","Gleison Bremer","Moise Kean","Scott McTominay"]},
+    {label:"Valore tra 10M e 20M€",color:"orange",players:["Marten de Roon","Alexis Saelemaekers","Mattia Zaccagni","Riccardo Orsolini"]},
+    {label:"Valore sopra 80M€",color:"red",players:["Leao","Federico Dimarco","Rasmus Højlund","Marcus Thuram"]},
+  ]},
+  {id:9,title:"Olanda, Serbia, Belgio, Portogallo",groups:[
+    {label:"Calciatori olandesi",color:"green",players:["Stefan de Vrij","Denzel Dumfries","Teun Koopmeiners","Donyell Malen"]},
+    {label:"Calciatori serbi",color:"yellow",players:["Strahinja Pavlović","Vanja Milinković-Savić","Dušan Vlahović","Mile Svilar"]},
+    {label:"Calciatori belgi",color:"orange",players:["Kevin De Bruyne","Romelu Lukaku","Loïs Openda","Alexis Saelemaekers"]},
+    {label:"Calciatori portoghesi",color:"red",players:["Leao","Conceicao","Joao Mario","Nuno Tavares"]},
+  ]},
+  {id:10,title:"Bologna, Torino, Sassuolo, Genoa",groups:[
+    {label:"Giocatori del Bologna",color:"green",players:["Riccardo Orsolini","Lewis Ferguson","Santiago Castro","Lucumi"]},
+    {label:"Giocatori del Torino",color:"yellow",players:["Nikola Vlašić","Ivan Ilić","Giovanni Simeone","Cesare Casadei"]},
+    {label:"Giocatori del Sassuolo",color:"orange",players:["Domenico Berardi","Andrea Pinamonti","Kristian Thorstvedt","Cristian Volpato"]},
+    {label:"Giocatori del Genoa",color:"red",players:["Morten Frendrup","Ruslan Malinovskyi","Tommaso Baldanzi","Leo Østigård"]},
+  ]},
+  {id:11,title:"Inglesi, turchi, polacchi, danesi",groups:[
+    {label:"Calciatori inglesi",color:"green",players:["Fikayo Tomori","Ruben Loftus-Cheek","Lloyd Kelly","Jacob Iling-Junior"]},
+    {label:"Calciatori turchi",color:"yellow",players:["Calhanoglu","Kenan Yıldız","Zeki Çelik","Mert Kılıčsoy"]},
+    {label:"Calciatori polacchi",color:"orange",players:["Piotr Zielinski","Arkadiusz Milik","Nicola Zalewski","Nicola Krstović"]},
+    {label:"Calciatori danesi",color:"red",players:["Rasmus Højlund","Odgaard","Oliver Christensen","Gustav Isaksen"]},
+  ]},
+  {id:12,title:"Difensori centrali di Serie A",groups:[
+    {label:"Difensori italiani",color:"green",players:["Alessandro Bastoni","Federico Gatti","Gianluca Mancini","Gleison Bremer"]},
+    {label:"Difensori stranieri top",color:"yellow",players:["Strahinja Pavlović","Evan Ndicka","Odilon Kossounou","Sam Beukema"]},
+    {label:"Difensori over 30",color:"orange",players:["Francesco Acerbi","Stefan de Vrij","Alessio Romagnoli","Sead Kolasinac"]},
+    {label:"Difensori Under 24",color:"red",players:["Giorgio Scalvini","Pierre Kalulu","Koni De Winter","Alessandro Buongiorno"]},
+  ]},
+  {id:13,title:"Inter: chi gioca dove",groups:[
+    {label:"Difensori dell'Inter",color:"green",players:["Alessandro Bastoni","Yann Bisseck","Manuel Akanji","Stefan de Vrij"]},
+    {label:"Centrocampisti dell'Inter",color:"yellow",players:["Nicolò Barella","Calhanoglu","Davide Frattesi","Piotr Zielinski"]},
+    {label:"Terzini dell'Inter",color:"orange",players:["Federico Dimarco","Carlos Augusto","Denzel Dumfries","Matteo Darmian"]},
+    {label:"Attaccanti dell'Inter",color:"red",players:["Lautaro Martínez","Marcus Thuram","Ange-Yoan Bonny","Pio Esposito"]},
+  ]},
+  {id:14,title:"Napoli: chi gioca dove",groups:[
+    {label:"Difensori del Napoli",color:"green",players:["Alessandro Buongiorno","Sam Beukema","Amir Rrahmani","Giovanni Di Lorenzo"]},
+    {label:"Centrocampisti del Napoli",color:"yellow",players:["Stanislav Lobotka","Scott McTominay","Frank Anguissa","Billy Gilmour"]},
+    {label:"Ali e trequartisti del Napoli",color:"orange",players:["Kevin De Bruyne","Elif Elmas","David Neres","Matteo Politano"]},
+    {label:"Terzini e attaccanti del Napoli",color:"red",players:["Romelu Lukaku","Rasmus Højlund","Leonardo Spinazzola","Mathías Olivera"]},
+  ]},
+  {id:15,title:"Over 33 ancora in campo",groups:[
+    {label:"Leggende over 33 in Serie A",color:"green",players:["Luka Modrić","Juan Cuadrado","Henrikh Mkhitaryan","Adrien Rabiot"]},
+    {label:"Portieri over 33",color:"yellow",players:["Yann Sommer","Ivan Provedel","Mattia Perin","Marco Sportiello"]},
+    {label:"Difensori over 33",color:"orange",players:["Francesco Acerbi","Stefan de Vrij","Sead Kolasinac","Raúl Albiol"]},
+    {label:"Attaccanti over 33",color:"red",players:["Pedro","Niclas Füllkrug","Arkadiusz Milik","Álvaro Morata"]},
+  ]},
+  {id:16,title:"Milan: chi gioca dove",groups:[
+    {label:"Difensori del Milan",color:"green",players:["Strahinja Pavlović","Fikayo Tomori","Koni De Winter","Matteo Gabbia"]},
+    {label:"Centrocampisti del Milan",color:"yellow",players:["Youssouf Fofana","Samuele Ricci","Ardon Jashari","Luka Modrić"]},
+    {label:"Ali del Milan",color:"orange",players:["Leao","Christian Pulisic","Alexis Saelemaekers","Christopher Nkunku"]},
+    {label:"Attaccanti del Milan",color:"red",players:["Santiago Gimenez","Niclas Füllkrug","Adrien Rabiot","Ruben Loftus-Cheek"]},
+  ]},
+  {id:17,title:"Germania, Svizzera, Norvegia, Danimarca",groups:[
+    {label:"Calciatori tedeschi",color:"green",players:["Yann Bisseck","Niclas Füllkrug","Robin Gosens","Ardon Jashari"]},
+    {label:"Calciatori svizzeri",color:"yellow",players:["Yann Sommer","Manuel Akanji","Sohm","Remo Freuler"]},
+    {label:"Calciatori norvegesi",color:"orange",players:["Mads Heggem","Kristian Thorstvedt","Marcus Pedersen","Leo Østigård"]},
+    {label:"Calciatori danesi",color:"red",players:["Rasmus Højlund","Odgaard","Oliver Christensen","Gustav Isaksen"]},
+  ]},
+  {id:18,title:"Juventus: chi gioca dove",groups:[
+    {label:"Difensori della Juventus",color:"green",players:["Federico Gatti","Pierre Kalulu","Gleison Bremer","Lloyd Kelly"]},
+    {label:"Centrocampisti della Juventus",color:"yellow",players:["Manuel Locatelli","Teun Koopmeiners","Khéphren Thuram","Weston McKennie"]},
+    {label:"Ali e terzini della Juventus",color:"orange",players:["Andrea Cambiaso","Conceicao","Edon Zhegrova","Filip Kostić"]},
+    {label:"Attaccanti della Juventus",color:"red",players:["Dušan Vlahović","Jonathan David","Loïs Openda","Kenan Yıldız"]},
+  ]},
+  {id:19,title:"Centrocampisti di classe",groups:[
+    {label:"Registi di Serie A",color:"green",players:["Calhanoglu","Stanislav Lobotka","Manuel Locatelli","Nicolò Rovella"]},
+    {label:"Mezzali di qualità",color:"yellow",players:["Nicolò Barella","Davide Frattesi","Teun Koopmeiners","Scott McTominay"]},
+    {label:"Centrocampisti stranieri top",color:"orange",players:["Kevin De Bruyne","Piotr Zielinski","Frank Anguissa","Manu Koné"]},
+    {label:"Centrocampisti italiani U26",color:"red",players:["Niccolò Fagioli","Niccolò Pisilli","Cesare Casadei","Jacopo Fazzini"]},
+  ]},
+  {id:20,title:"Roma: chi gioca dove",groups:[
+    {label:"Difensori della Roma",color:"green",players:["Gianluca Mancini","Evan Ndicka","Wesley","Daniele Ghilardi"]},
+    {label:"Centrocampisti della Roma",color:"yellow",players:["Bryan Cristante","Manu Koné","Niccolò Pisilli","Lorenzo Pellegrini"]},
+    {label:"Ali della Roma",color:"orange",players:["Stephan El Shaarawy","Matías Soulé","Ignacio Zaragoza","Zeki Çelik"]},
+    {label:"Attaccanti della Roma",color:"red",players:["Paulo Dybala","Artem Dovbyk","Donyell Malen","Evan Ferguson"]},
+  ]},
+  {id:21,title:"Nordamerica e Colombia in Serie A",groups:[
+    {label:"Calciatori americani (USA)",color:"green",players:["Christian Pulisic","Weston McKennie","Yunus Musah","Ché Adams"]},
+    {label:"Calciatori canadesi",color:"yellow",players:["Jonathan David","Alphonso Davies","Conor Bradley","Naouirou Ahamada"]},
+    {label:"Calciatori colombiani",color:"orange",players:["Juan Cabal","Lucumi","Duvan Zapata","Vasquez"]},
+    {label:"Attaccanti non europei",color:"red",players:["Santiago Gimenez","Lautaro Martínez","Romelu Lukaku","Frank Anguissa"]},
+  ]},
+  {id:22,title:"Fiorentina e Lazio nel dettaglio",groups:[
+    {label:"Giocatori della Fiorentina",color:"green",players:["Moise Kean","Albert Gudmundsson","Niccolò Fagioli","Dodô"]},
+    {label:"Giocatori della Lazio",color:"yellow",players:["Mattia Zaccagni","Alessio Romagnoli","Gustav Isaksen","Pedro"]},
+    {label:"Difensori della Fiorentina",color:"orange",players:["Pietro Comuzzo","Marin Pongracic","Robin Gosens","Niccolò Fortini"]},
+    {label:"Centrocampisti della Lazio",color:"red",players:["Nicolò Rovella","Reda Belahyane","Kenneth Taylor","Daniel Maldini"]},
+  ]},
+  {id:23,title:"Ali e fantasisti di Serie A",groups:[
+    {label:"Ali titolari delle big",color:"green",players:["Leao","Christian Pulisic","Ademola Lookman","David Neres"]},
+    {label:"Trequartisti di qualità",color:"yellow",players:["Charles De Ketelaere","Nico Paz","Teun Koopmeiners","Piotr Zielinski"]},
+    {label:"Ali Under 24",color:"orange",players:["Kenan Yıldız","Conceicao","Kamaldeen Sulemana","Assane Diao"]},
+    {label:"Fantasisti italiani",color:"red",players:["Lorenzo Pellegrini","Mattia Zaccagni","Giacomo Raspadori","Niccolò Fagioli"]},
+  ]},
+  {id:24,title:"Brasile in Serie A",groups:[
+    {label:"Difensori brasiliani",color:"green",players:["Gleison Bremer","Carlos Augusto","Dodô","Juan Jesus"]},
+    {label:"Centrocampisti brasiliani",color:"yellow",players:["Éderson","Joao Mario","Sohm","Remo Freuler"]},
+    {label:"Attaccanti brasiliani",color:"orange",players:["David Neres","Luis Henrique","Giovane","Wesley"]},
+    {label:"Brasiliani delle big",color:"red",players:["Marcus Thuram","Alisson Santos","Lucumi","Naouirou Ahamada"]},
+  ]},
+  {id:25,title:"Como, Parma, Udinese, Cagliari",groups:[
+    {label:"Giocatori del Como",color:"green",players:["Nico Paz","Álvaro Morata","Máximo Perrone","Assane Diao"]},
+    {label:"Giocatori del Parma",color:"yellow",players:["Zion Suzuki","Adrián Bernabé","Keita","Ondrejka"]},
+    {label:"Giocatori dell'Udinese",color:"orange",players:["Maduka Okoye","Oumar Solet","Nicolò Zaniolo","Rasmus Kristensen"]},
+    {label:"Giocatori del Cagliari",color:"red",players:["Elia Caprile","Marco Palestra","Mert Kılıčsoy","Andrea Belotti"]},
+  ]},
+  {id:26,title:"Balcani in Serie A",groups:[
+    {label:"Calciatori albanesi",color:"green",players:["Berat Djimsiti","Elseid Hysaj","Ardian Ismajli","Ylber Ramadani"]},
+    {label:"Calciatori kosovari",color:"yellow",players:["Amir Rrahmani","Edon Zhegrova","Mergim Vojvoda","Muric"]},
+    {label:"Calciatori montenegrini",color:"orange",players:["Nikola Krstović","Vasilije Adžić","Adam Marusic","Stefan de Vrij"]},
+    {label:"Calciatori croati",color:"red",players:["Luka Modrić","Petar Sučić","Mario Pašalić","Ivan Ilić"]},
+  ]},
+  {id:27,title:"Atalanta nel dettaglio",groups:[
+    {label:"Difensori dell'Atalanta",color:"green",players:["Isak Hien","Giorgio Scalvini","Odilon Kossounou","Sead Kolasinac"]},
+    {label:"Centrocampisti dell'Atalanta",color:"yellow",players:["Marten de Roon","Éderson","Yunus Musah","Mario Pašalić"]},
+    {label:"Ali e trequartisti dell'Atalanta",color:"orange",players:["Charles De Ketelaere","Ademola Lookman","Lazar Samardžić","Kamaldeen Sulemana"]},
+    {label:"Attaccanti dell'Atalanta",color:"red",players:["Gianluca Scamacca","Nikola Krstović","Giacomo Raspadori","Nicola Zalewski"]},
+  ]},
+  {id:28,title:"Ex Premier League in Serie A",groups:[
+    {label:"Ex Man City in Serie A",color:"green",players:["Kevin De Bruyne","Manuel Akanji","Remo Freuler","Rodri"]},
+    {label:"Ex Chelsea in Serie A",color:"yellow",players:["Fikayo Tomori","Ruben Loftus-Cheek","Artem Dovbyk","Niclas Füllkrug"]},
+    {label:"Ex Man United in Serie A",color:"orange",players:["Romelu Lukaku","Henrikh Mkhitaryan","Bryan Cristante","Christian Eriksen"]},
+    {label:"Ex Liverpool/Arsenal in Serie A",color:"red",players:["Alexis Saelemaekers","Nuno Tavares","Riccardo Calafiori","Federico Chiesa"]},
+  ]},
+  {id:29,title:"Senegal, Ghana, Camerun, Nigeria",groups:[
+    {label:"Calciatori senegalesi",color:"green",players:["Assane Diao","Boulaye Dia","Fisayo Dele-Bashiru","Idrissa Gueye Jr"]},
+    {label:"Calciatori ghanesi",color:"yellow",players:["Kamaldeen Sulemana","Lamptey","Caleb Ekuban","Ibrahim Sulemana"]},
+    {label:"Calciatori camerunensi",color:"orange",players:["Frank Anguissa","Saúl Coco","Onana","Moumbagna"]},
+    {label:"Calciatori nigeriani",color:"red",players:["Maduka Okoye","Honest Ahanor","Ebenezer Akinsanmiro","Gift Orban"]},
+  ]},
+  {id:30,title:"Bologna e Sassuolo nel dettaglio",groups:[
+    {label:"Attaccanti del Bologna",color:"green",players:["Riccardo Orsolini","Santiago Castro","Thijs Dallinga","Nicolò Cambiaghi"]},
+    {label:"Centrocampisti del Bologna",color:"yellow",players:["Lewis Ferguson","Tommaso Pobega","Remo Freuler","Sohm"]},
+    {label:"Attaccanti del Sassuolo",color:"orange",players:["Domenico Berardi","Andrea Pinamonti","Armand Laurienté","Cristian Volpato"]},
+    {label:"Difensori e centrocampisti Sassuolo",color:"red",players:["Kristian Thorstvedt","Naouirou Ahamada","Jay Idzes","Aleks Muharemović"]},
+  ]},
+  {id:31,title:"Capitani e leader",groups:[
+    {label:"Capitani delle big di Serie A",color:"green",players:["Lautaro Martínez","Lorenzo Pellegrini","Giovanni Di Lorenzo","Manuel Locatelli"]},
+    {label:"Leader over 30",color:"yellow",players:["Stefan de Vrij","Henrikh Mkhitaryan","Bryan Cristante","Marten de Roon"]},
+    {label:"Capitani di Nazionale",color:"orange",players:["Luka Modrić","Scott McTominay","Piotr Zielinski","Frank Anguissa"]},
+    {label:"Icone tornate in Serie A",color:"red",players:["Kevin De Bruyne","Romelu Lukaku","Domenico Berardi","Pedro"]},
+  ]},
+  {id:32,title:"Svezia, Slovenia, Slovacchia, Danimarca",groups:[
+    {label:"Calciatori svedesi",color:"green",players:["Isak Hien","Emil Holm","Nadir Zortea","Armand Laurienté"]},
+    {label:"Calciatori danesi",color:"yellow",players:["Rasmus Højlund","Odgaard","Oliver Christensen","Mads Heggem"]},
+    {label:"Calciatori sloveni",color:"orange",players:["Sandi Lovrić","Tomas Suslov","Petar Sučić","Berat Djimsiti"]},
+    {label:"Calciatori slovacchi",color:"red",players:["Stanislav Lobotka","Adam Obert","Ondrejka","Marcus Pedersen"]},
+  ]},
+  {id:33,title:"Terzini sinistri vs destri",groups:[
+    {label:"Terzini sinistri titolari",color:"green",players:["Federico Dimarco","Leonardo Spinazzola","Mathías Olivera","Robin Gosens"]},
+    {label:"Terzini destri titolari",color:"yellow",players:["Andrea Cambiaso","Denzel Dumfries","Raoul Bellanova","Giovanni Di Lorenzo"]},
+    {label:"Terzini Under 24",color:"orange",players:["Davide Bartesaghi","Juan Cabal","Emil Holm","Devyne Rensch"]},
+    {label:"Terzini stranieri delle big",color:"red",players:["Carlos Augusto","Nuno Tavares","Wesley","Sam Beukema"]},
+  ]},
+  {id:34,title:"Turchia, Albania, Serbia, Polonia",groups:[
+    {label:"Calciatori turchi",color:"green",players:["Calhanoglu","Kenan Yıldız","Zeki Çelik","Mert Kılıčsoy"]},
+    {label:"Calciatori albanesi",color:"yellow",players:["Berat Djimsiti","Elseid Hysaj","Ardian Ismajli","Ylber Ramadani"]},
+    {label:"Calciatori serbi",color:"orange",players:["Strahinja Pavlović","Dušan Vlahović","Mile Svilar","Vanja Milinković-Savić"]},
+    {label:"Calciatori polacchi",color:"red",players:["Piotr Zielinski","Arkadiusz Milik","Nicola Zalewski","Kacper Przyborek"]},
+  ]},
+  {id:35,title:"Ex Juventus ora altrove",groups:[
+    {label:"Ex Juve ora nell'Inter",color:"green",players:["Piotr Zielinski","Carlos Augusto","Nicolò Barella","Davide Frattesi"]},
+    {label:"Ex Juve ora nel Milan",color:"yellow",players:["Alexis Saelemaekers","Pierre Kalulu","Strahinja Pavlović","Koni De Winter"]},
+    {label:"Ex Juve ora nella Roma",color:"orange",players:["Paulo Dybala","Stephan El Shaarawy","Gianluca Mancini","Bryan Cristante"]},
+    {label:"Ex Juve ora nel Napoli",color:"red",players:["Stanislav Lobotka","Mathías Olivera","Amir Rrahmani","Leonardo Spinazzola"]},
+  ]},
+  {id:36,title:"Attaccanti puri di Serie A",groups:[
+    {label:"Bomber da doppia cifra",color:"green",players:["Lautaro Martínez","Romelu Lukaku","Dušan Vlahović","Moise Kean"]},
+    {label:"Seconde punte di qualità",color:"yellow",players:["Paulo Dybala","Giacomo Raspadori","Albert Gudmundsson","Giovanni Simeone"]},
+    {label:"Attaccanti di movimento",color:"orange",players:["Ademola Lookman","David Neres","Gianluca Scamacca","Santiago Gimenez"]},
+    {label:"Attaccanti italiani",color:"red",players:["Andrea Belotti","Federico Gatti","Riccardo Orsolini","Andrea Pinamonti"]},
+  ]},
+  {id:37,title:"UK in Serie A",groups:[
+    {label:"Calciatori inglesi",color:"green",players:["Fikayo Tomori","Ruben Loftus-Cheek","Lloyd Kelly","Jack Harrison"]},
+    {label:"Calciatori scozzesi",color:"yellow",players:["Scott McTominay","Billy Gilmour","Lewis Ferguson","Ché Adams"]},
+    {label:"Difensori UK e stranieri",color:"orange",players:["Koni De Winter","Gleison Bremer","Sam Beukema","Marin Pongracic"]},
+    {label:"Attaccanti e ali",color:"red",players:["Jacob Iling-Junior","Christian Pulisic","Ademola Lookman","Kamaldeen Sulemana"]},
+  ]},
+  {id:38,title:"Lazio nel dettaglio",groups:[
+    {label:"Difensori della Lazio",color:"green",players:["Mario Gila","Alessio Romagnoli","Nuno Tavares","Adam Marusic"]},
+    {label:"Centrocampisti della Lazio",color:"yellow",players:["Nicolò Rovella","Reda Belahyane","Kenneth Taylor","Fisayo Dele-Bashiru"]},
+    {label:"Ali e trequartisti della Lazio",color:"orange",players:["Mattia Zaccagni","Gustav Isaksen","Pedro","Boulaye Dia"]},
+    {label:"Terzini e portieri della Lazio",color:"red",players:["Ivan Provedel","Elseid Hysaj","Manuel Lazzari","Luca Pellegrini"]},
+  ]},
+  {id:39,title:"Nordafrica e Africa occidentale",groups:[
+    {label:"Calciatori marocchini",color:"green",players:["Neil El Aynaoui","Reda Belahyane","Zakaria Aboukhlal","Walid Cheddira"]},
+    {label:"Calciatori algerini",color:"yellow",players:["Armand Laurienté","Ramy Bensebaini","Jérémy Léris","Nadir Zortea"]},
+    {label:"Calciatori senegalesi",color:"orange",players:["Assane Diao","Boulaye Dia","Fisayo Dele-Bashiru","Idrissa Gueye Jr"]},
+    {label:"Africa Occidentale",color:"red",players:["Kamaldeen Sulemana","Maduka Okoye","Frank Anguissa","Serhou Guirassy"]},
+  ]},
+  {id:40,title:"Ex Premier League in Serie A (vol.2)",groups:[
+    {label:"Ex Man City in Serie A",color:"green",players:["Kevin De Bruyne","Manuel Akanji","Remo Freuler","Bernardo Silva"]},
+    {label:"Ex Chelsea in Serie A",color:"yellow",players:["Fikayo Tomori","Ruben Loftus-Cheek","Romelu Lukaku","Niclas Füllkrug"]},
+    {label:"Ex Arsenal in Serie A",color:"orange",players:["Alexis Saelemaekers","Sead Kolasinac","Nuno Tavares","Robin Gosens"]},
+    {label:"Ex Liverpool in Serie A",color:"red",players:["Federico Chiesa","Loïs Openda","Davide Frattesi","Artem Dovbyk"]},
+  ]},
+  {id:41,title:"Genoa, Udinese, Pisa, Lecce",groups:[
+    {label:"Giocatori del Genoa",color:"green",players:["Morten Frendrup","Ruslan Malinovskyi","Tommaso Baldanzi","Leo Østigård"]},
+    {label:"Giocatori dell'Udinese",color:"yellow",players:["Maduka Okoye","Oumar Solet","Nicolò Zaniolo","Rasmus Kristensen"]},
+    {label:"Giocatori del Pisa",color:"orange",players:["Raúl Albiol","Juan Cuadrado","Jacob Iling-Junior","Loyola"]},
+    {label:"Giocatori del Lecce",color:"red",players:["Wladimiro Falcone","Tiago Gabriel","Francesco Camarda","Ylber Berisha"]},
+  ]},
+  {id:42,title:"Argentini in Serie A",groups:[
+    {label:"Argentini della Juventus",color:"green",players:["Juan Cabal","Vasilije Adžić","Loïs Openda","Weston McKennie"]},
+    {label:"Argentini dell'Inter",color:"yellow",players:["Lautaro Martínez","Carlos Augusto","Andy Diouf","Pio Esposito"]},
+    {label:"Argentini della Roma",color:"orange",players:["Paulo Dybala","Alexis Saelemaekers","Angeliño","Artem Dovbyk"]},
+    {label:"Argentini sopra 20M",color:"red",players:["Andrea Cambiaso","Santiago Castro","Gleison Bremer","Matías Soulé"]},
+  ]},
+  {id:43,title:"Centrocampisti italiani",groups:[
+    {label:"Registi italiani",color:"green",players:["Manuel Locatelli","Bryan Cristante","Nicolò Rovella","Luca Pellegrini"]},
+    {label:"Mezzali italiane",color:"yellow",players:["Nicolò Barella","Davide Frattesi","Marco Brescianini","Tommaso Pobega"]},
+    {label:"Trequartisti italiani",color:"orange",players:["Lorenzo Pellegrini","Mattia Zaccagni","Giacomo Raspadori","Niccolò Fagioli"]},
+    {label:"Under 24 italiani a centrocampo",color:"red",players:["Niccolò Pisilli","Cesare Casadei","Jacopo Fazzini","Miretti"]},
+  ]},
+  {id:44,title:"Verona, Cremonese, Cagliari, Parma",groups:[
+    {label:"Giocatori del Verona",color:"green",players:["Sandi Lovrić","Armel Bella-Kotchap","Gift Orban","Omar Al-Musrati"]},
+    {label:"Giocatori della Cremonese",color:"yellow",players:["Warren Bondo","Martin Payero","Federico Baschirotto","Sebastiano Luperto"]},
+    {label:"Giocatori del Cagliari",color:"orange",players:["Elia Caprile","Marco Palestra","Mert Kılıčsoy","Andrea Belotti"]},
+    {label:"Giocatori del Parma",color:"red",players:["Zion Suzuki","Adrián Bernabé","Keita","Pontus Almqvist"]},
+  ]},
+  {id:45,title:"Est Europa: Ucraina, Croazia, Serbia, Polonia",groups:[
+    {label:"Calciatori ucraini in Serie A",color:"green",players:["Ruslan Malinovskyi","Artem Dovbyk","Nikola Vlašić","Ivan Ilić"]},
+    {label:"Calciatori cechi/slovacchi",color:"yellow",players:["Stanislav Lobotka","Ondrejka","Sandi Lovrić","Adam Obert"]},
+    {label:"Calciatori croati/serbi",color:"orange",players:["Strahinja Pavlović","Dušan Vlahović","Mile Svilar","Vanja Milinković-Savić"]},
+    {label:"Calciatori polacchi/armeni",color:"red",players:["Piotr Zielinski","Arkadiusz Milik","Henrikh Mkhitaryan","Nicola Zalewski"]},
+  ]},
+  {id:46,title:"Terzini di Serie A",groups:[
+    {label:"Terzini sinistri",color:"green",players:["Federico Dimarco","Leonardo Spinazzola","Mathías Olivera","Robin Gosens"]},
+    {label:"Terzini destri",color:"yellow",players:["Denzel Dumfries","Raoul Bellanova","Giovanni Di Lorenzo","Davide Bartesaghi"]},
+    {label:"Terzini italiani",color:"orange",players:["Andrea Cambiaso","Nicola Zalewski","Emil Holm","Juan Cabal"]},
+    {label:"Terzini stranieri delle big",color:"red",players:["Carlos Augusto","Nuno Tavares","Devyne Rensch","Wesley"]},
+  ]},
+  {id:47,title:"Serie A: chi vale di più",groups:[
+    {label:"I 4 più costosi di Serie A",color:"green",players:["Lautaro Martínez","Nicolò Barella","Leao","Kenan Yıldız"]},
+    {label:"Tra 40M e 70M di valore",color:"yellow",players:["Federico Dimarco","Marcus Thuram","Alessandro Bastoni","Rasmus Højlund"]},
+    {label:"Gioielli Under 24 sopra 20M",color:"orange",players:["Giorgio Scalvini","Santiago Castro","Andrea Cambiaso","Davide Frattesi"]},
+    {label:"Stranieri sopra 50M",color:"red",players:["Kevin De Bruyne","Scott McTominay","Romelu Lukaku","Loïs Openda"]},
+  ]},
+  {id:48,title:"Scozia, Norvegia, Svezia, Danimarca",groups:[
+    {label:"Calciatori scozzesi",color:"green",players:["Scott McTominay","Billy Gilmour","Lewis Ferguson","Ché Adams"]},
+    {label:"Calciatori danesi",color:"yellow",players:["Rasmus Højlund","Odgaard","Oliver Christensen","Mads Heggem"]},
+    {label:"Calciatori svedesi",color:"orange",players:["Isak Hien","Emil Holm","Nadir Zortea","Armand Laurienté"]},
+    {label:"Calciatori norvegesi",color:"red",players:["Marcus Pedersen","Kristian Thorstvedt","Aleksander Helland","Leo Østigård"]},
+  ]},
+  {id:49,title:"Portieri di fascia alta",groups:[
+    {label:"Portieri italiani titolari",color:"green",players:["Alex Meret","Michele Di Gregorio","Ivan Provedel","Elia Caprile"]},
+    {label:"Portieri stranieri delle big",color:"yellow",players:["Mike Maignan","Yann Sommer","Vanja Milinković-Savić","Mile Svilar"]},
+    {label:"Portieri Under 27",color:"orange",players:["Marco Carnesecchi","Zion Suzuki","Gioele Nunziante","Josep Martínez"]},
+    {label:"Portieri esperti",color:"red",players:["Wladimiro Falcone","Mattia Perin","Marco Sportiello","David Raya"]},
+  ]},
+  {id:50,title:"Ruoli: portieri e difensori stranieri",groups:[
+    {label:"Portieri non italiani delle big",color:"green",players:["Mike Maignan","Yann Sommer","Vanja Milinković-Savić","Mile Svilar"]},
+    {label:"Difensori olandesi e svizzeri",color:"yellow",players:["Stefan de Vrij","Denzel Dumfries","Manuel Akanji","Sam Beukema"]},
+    {label:"Difensori africani di Serie A",color:"orange",players:["Evan Ndicka","Odilon Kossounou","Maduka Okoye","Honest Ahanor"]},
+    {label:"Terzini sudamericani delle big",color:"red",players:["Carlos Augusto","Mathías Olivera","Dodô","Juan Cabal"]},
+  ]},
+];
+
+const CONN_COLORS={
+  green: {bg:"#6aaa64",light:"#d4edda",tx:"#fff"},
+  yellow:{bg:"#c9b458",light:"#fff3cd",tx:"#fff"},
+  orange:{bg:"#f0883e",light:"#ffe5cc",tx:"#fff"},
+  red:   {bg:"#c9414a",light:"#f8d7da",tx:"#fff"},
+};
+
+function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
+  const puzzle=CONNECTIONS_PUZZLES[(dayIndex()%CONNECTIONS_PUZZLES.length)];
+  const label=isToday?"🗓 Giornaliero":"📂 Archivio";
+  const savedToday=isToday?loadResult("connections"):null;
+
+  // Mescola i 16 nomi con seed
+  const allPlayers=useMemo(()=>{
+    const players=puzzle.groups.flatMap(g=>g.players.map(p=>({name:p,group:g.label,color:g.color})));
+    return shuffle(players,seedRandom(seed));
+  },[puzzle,seed]);
+
+  const[selected,setSelected]=useState([]);
+  const[solved,setSolved]=useState([]);
+  const[errors,setErrors]=useState(0);
+  const[shake,setShake]=useState(false);
+  const[won,setWon]=useState(false);
+  const[done,setDone]=useState(false);
+  const[lastResult,setLastResult]=useState(null);
+  const[confettiShow,setConfettiShow]=useState(false);
+  const MAX_ERRORS=4;
+
+  useEffect(()=>{setSelected([]);setSolved([]);setErrors(0);setShake(false);setWon(false);setDone(false);setLastResult(null);setConfettiShow(false);},[seed]);
+
+  function toggleSelect(name){
+    if(done)return;
+    if(solved.some(s=>s.players.includes(name)))return;
+    if(selected.includes(name)){setSelected(s=>s.filter(x=>x!==name));}
+    else if(selected.length<4){setSelected(s=>[...s,name]);}
+  }
+
+  function submit(){
+    if(selected.length!==4||done)return;
+    // Controlla se i 4 selezionati appartengono tutti allo stesso gruppo
+    const match=puzzle.groups.find(g=>selected.every(s=>g.players.includes(s)));
+    if(match){
+      const newSolved=[...solved,match];
+      setSolved(newSolved);
+      setSelected([]);
+      setLastResult({type:"correct",label:match.label,color:match.color});
+      setTimeout(()=>setLastResult(null),2000);
+      if(newSolved.length===4){
+        setWon(true);setDone(true);
+        if(isToday)saveResult("connections",{won:true,errors,groups:newSolved.map(g=>g.label)});
+        setTimeout(()=>setConfettiShow(true),400);
+      }
+    } else {
+      // Controlla se è quasi giusto (3 su 4 dello stesso gruppo)
+      const almost=puzzle.groups.find(g=>selected.filter(s=>g.players.includes(s)).length===3);
+      const newErrors=errors+1;
+      setErrors(newErrors);
+      setShake(true);
+      setTimeout(()=>setShake(false),600);
+      setLastResult({type:"wrong",almost:almost?.label});
+      setTimeout(()=>setLastResult(null),2000);
+      if(newErrors>=MAX_ERRORS){
+        setDone(true);
+        if(isToday)saveResult("connections",{won:false,errors:newErrors,groups:[]});
+      }
+    }
+  }
+
+  const remaining=allPlayers.filter(p=>!solved.some(s=>s.players.includes(p.name)));
+
+  if(savedToday)return(
+    <div style={T.app}><Hdr title="Connections" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/>
+    <DoneScreen gameKey="connections" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+      <div style={{fontSize:"36px",marginBottom:"6px"}}>{s.won?"🎉":"😔"}</div>
+      <div style={{fontSize:"14px",fontWeight:"700",color:US.black,marginBottom:"4px"}}>{s.won?"Completato!":"Non completato"}</div>
+      <div style={{fontSize:"11px",color:US.muted,marginBottom:"12px"}}>Errori: {s.errors}/{MAX_ERRORS}</div>
+      <ShareButton text={`🔗 Connections #${day}\n${s.won?"Completato":"Non completato"} (${s.errors} errori)\nuniverso-quiz-hmix.vercel.app`}/>
+    </>}</DoneScreen></div>
+  );
+
+  return(<div style={{...T.app,position:"relative"}}>
+    {confettiShow&&<Confetti active={confettiShow}/>}
+    <Hdr title="Connections" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+    <div style={{...T.body,maxWidth:"520px"}}>
+      <div style={{fontSize:"11px",color:US.muted,textAlign:"center",marginBottom:"10px"}}>Trova i 4 gruppi da 4 calciatori</div>
+
+      {/* Gruppi risolti */}
+      {solved.map(g=>(
+        <div key={g.label} style={{background:CONN_COLORS[g.color].bg,borderRadius:"6px",padding:"10px 14px",marginBottom:"6px",textAlign:"center"}}>
+          <div style={{fontSize:"10px",fontWeight:"700",color:"#fff",letterSpacing:"1px",textTransform:"uppercase",marginBottom:"3px"}}>{g.label}</div>
+          <div style={{fontSize:"12px",color:"rgba(255,255,255,0.9)"}}>{g.players.join(", ")}</div>
+        </div>
+      ))}
+
+      {/* Griglia 4x4 */}
+      {!done&&<div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"6px",marginBottom:"12px"}}>
+        {remaining.map(p=>{
+          const isSel=selected.includes(p.name);
+          return(
+            <div key={p.name} onClick={()=>toggleSelect(p.name)}
+              style={{background:isSel?US.black:"#fff",color:isSel?"#fff":US.black,
+                border:`2px solid ${isSel?US.black:US.border}`,borderRadius:"6px",
+                padding:"8px 4px",textAlign:"center",cursor:"pointer",
+                fontSize:"10px",fontWeight:"700",lineHeight:1.3,
+                minHeight:"48px",display:"flex",alignItems:"center",justifyContent:"center",
+                transition:"all 0.1s",
+                animation:shake&&isSel?"shake 0.6s ease":"none",
+              }}>{p.name}</div>
+          );
+        })}
+      </div>}
+
+      {/* Messaggio feedback */}
+      {lastResult&&<div style={{textAlign:"center",padding:"8px",marginBottom:"8px",borderRadius:"6px",
+        background:lastResult.type==="correct"?US.greenL:US.redL,
+        color:lastResult.type==="correct"?US.green:US.red,fontSize:"11px",fontWeight:"700"}}>
+        {lastResult.type==="correct"?"✅ Corretto!":lastResult.almost?`❌ Sbagliato — quasi! 3/4 in "${lastResult.almost}"`:"❌ Sbagliato — riprova"}
+      </div>}
+
+      {/* Errori */}
+      <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"6px",marginBottom:"12px"}}>
+        <span style={{fontSize:"10px",color:US.muted}}>Tentativi rimasti:</span>
+        {Array.from({length:MAX_ERRORS}).map((_,i)=>(
+          <div key={i} style={{width:"12px",height:"12px",borderRadius:"50%",
+            background:i<(MAX_ERRORS-errors)?US.black:"#ddd"}}/>
+        ))}
+      </div>
+
+      {/* Bottone conferma */}
+      {!done&&<div style={{display:"flex",gap:"8px"}}>
+        <button onClick={()=>setSelected([])} disabled={!selected.length}
+          style={{...T.sb,flex:1,opacity:selected.length?1:0.4}}>Deseleziona</button>
+        <button onClick={submit} disabled={selected.length!==4}
+          style={{...T.pb,flex:1,opacity:selected.length===4?1:0.4}}>
+          Conferma ({selected.length}/4)
+        </button>
+      </div>}
+
+      {/* Fine partita */}
+      {done&&<div style={{textAlign:"center",marginTop:"8px"}}>
+        {/* Mostra gruppi non risolti */}
+        {puzzle.groups.filter(g=>!solved.some(s=>s.label===g.label)).map(g=>(
+          <div key={g.label} style={{background:CONN_COLORS[g.color].light,border:`2px solid ${CONN_COLORS[g.color].bg}`,borderRadius:"6px",padding:"8px 12px",marginBottom:"6px",textAlign:"center"}}>
+            <div style={{fontSize:"10px",fontWeight:"700",color:CONN_COLORS[g.color].bg,textTransform:"uppercase",marginBottom:"2px"}}>{g.label}</div>
+            <div style={{fontSize:"11px",color:"#555"}}>{g.players.join(", ")}</div>
+          </div>
+        ))}
+        <div style={{padding:"10px",background:won?US.greenL:US.redL,borderRadius:"6px",marginBottom:"10px",color:won?US.green:US.red}}>
+          <div style={{fontSize:"14px",fontWeight:"700",marginBottom:"3px"}}>{won?"🎉 Perfetto!":"😔 Game Over"}</div>
+          <div style={{fontSize:"11px"}}>Errori: {errors}/{MAX_ERRORS}</div>
+        </div>
+        <ShareButton text={`🔗 Connections #${day}\n${puzzle.title}\n${won?"Completato":"Non completato"} (${errors} errori)\nuniverso-quiz-hmix.vercel.app`}/>
+        {isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Archivio</button>}
+        <button onClick={onHome} style={{...T.pb,marginTop:"8px",width:"100%"}}>Home</button>
+      </div>}
+    </div>
+  </div>);
+}
+
+function Connections({onHome,isDaily,onArchive}){
+  if(isDaily){const d=CONNECTIONS_PUZZLES.length,s=todaySeed()+400013;return<ConnectionsGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="connections">{({day,seed,isToday,archiveNav,chipBar})=><ConnectionsGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
+}
+
+
+// ── FOOTGUESSR ───────────────────────────────────────────────────────────────
+
+const FG_DB=DB_SERIE_A.filter(p=>p.value>=5).map(p=>({n:p.name,c:p.club,r:p.role,nat:p.nation,cont:p.continent,a:p.age,v:p.value}));
+
+function fgRoleFam(r){
+  if(['Ala','Trequartista','Attaccante','Seconda punta'].includes(r))return'att';
+  if(['Centrocampista','Trequartista'].includes(r))return'mid';
+  if(['Difensore','Terzino'].includes(r))return'def';
+  return r;
+}
+function fgSim(a,b){
+  let s=0;
+  if(a.nat===b.nat)s+=40;else if(a.cont===b.cont)s+=20;
+  if(a.c===b.c)s+=30;
+  if(a.r===b.r)s+=25;else if(fgRoleFam(a.r)===fgRoleFam(b.r))s+=12;
+  const d=Math.abs(a.a-b.a);
+  if(d<=2)s+=15;else if(d<=5)s+=8;
+  if(a.v>0&&b.v>0){const r=Math.min(a.v,b.v)/Math.max(a.v,b.v);if(r>=0.7)s+=10;else if(r>=0.4)s+=5;}
+  return s;
+}
+function fgGetRanks(tgt){
+  const sc=FG_DB.filter(p=>p.n!==tgt.n).map(p=>({p,s:fgSim(tgt,p)}));
+  sc.sort((a,b)=>b.s-a.s||(a.p.n>b.p.n?1:-1));
+  const rk={[tgt.n]:1};
+  sc.forEach((x,i)=>rk[x.p.n]=i+2);
+  return rk;
+}
+
+function FootGuesserGame({onHome}){
+  const[target,setTarget]=useState(()=>FG_DB[Math.floor(seedRandom(todaySeed()+777)*FG_DB.length)]);
+  const[ranks,setRanks]=useState(()=>fgGetRanks(FG_DB[Math.floor(seedRandom(todaySeed()+777)*FG_DB.length)]));
+  const[query,setQuery]=useState('');
+  const[guesses,setGuesses]=useState([]);
+  const[seen,setSeen]=useState(new Set());
+  const[won,setWon]=useState(false);
+  const[fgConfetti,setFgConfetti]=useState(false);
+  const[showHelp,setShowHelp]=useState(false);
+  const[ddOpen,setDdOpen]=useState(false);
+  const[hiIdx,setHiIdx]=useState(-1);
+
+  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+
+  const matches=useMemo(()=>{
+    if(!query)return[];
+    const q=norm(query);
+    return FG_DB.filter(p=>!seen.has(p.n)&&norm(p.n).includes(q)).slice(0,7);
+  },[query,seen]);
+
+  function doGuess(name){
+    const p=FG_DB.find(x=>x.n===name);
+    if(!p||seen.has(name))return;
+    const newSeen=new Set(seen);newSeen.add(name);setSeen(newSeen);
+    const rank=ranks[name];
+    const isWin=name===target.n;
+    setGuesses(g=>[{p,rank,isWin},...g]);
+    setQuery('');setDdOpen(false);setHiIdx(-1);
+    if(isWin){setWon(true);setTimeout(()=>setFgConfetti(true),400);}
+  }
+
+  function handleKey(e){
+    if(e.key==='ArrowDown'){e.preventDefault();setHiIdx(i=>Math.min(i+1,matches.length-1));}
+    else if(e.key==='ArrowUp'){e.preventDefault();setHiIdx(i=>Math.max(i-1,0));}
+    else if(e.key==='Enter'){const m=hiIdx>=0?matches[hiIdx]:matches[0];if(m)doGuess(m.n);}
+    else if(e.key==='Escape'){setDdOpen(false);}
+  }
+
+  const tot=FG_DB.length;
+
+  return(<div style={{...T.app,position:'relative'}}>
+    {fgConfetti&&<Confetti active={fgConfetti}/>}
+    <Hdr title="FootGuessr" sub="🗓 Giornaliero" onHome={onHome}/>
+    <div style={T.body}>
+
+      {/* Pulsante come funziona */}
+      <div onClick={()=>setShowHelp(h=>!h)}
+        style={{fontSize:'12px',color:US.muted,cursor:'pointer',padding:'6px 10px',
+          background:US.surface,borderRadius:'6px',display:'inline-flex',alignItems:'center',
+          gap:'5px',marginBottom:'10px',border:`0.5px solid ${US.border}`,userSelect:'none'}}>
+        <span style={{fontSize:'10px'}}>{showHelp?'▼':'▶'}</span> Come funziona il rank?
+      </div>
+
+      {/* Pannello spiegazione */}
+      {showHelp&&<div style={{background:US.surface,borderRadius:'8px',padding:'10px 12px',
+        marginBottom:'12px',border:`0.5px solid ${US.border}`}}>
+        {[
+          {col:'#E24B4A',label:'Stessa nazionalità',pts:'+40 pt'},
+          {col:'#f0883e',label:'Stesso club',pts:'+30 pt'},
+          {col:'#7F77DD',label:'Stesso ruolo esatto',pts:'+25 pt'},
+          {col:'#BA7517',label:'Stesso continente (nazione diversa)',pts:'+20 pt'},
+          {col:'#1D9E75',label:'Età simile (±2 anni)',pts:'+15 pt'},
+          {col:'#378ADD',label:'Ruolo simile (stesso reparto)',pts:'+12 pt'},
+          {col:'#888780',label:'Età vicina (±3–5 anni)',pts:'+8 pt'},
+          {col:'#888780',label:'Valore di mercato simile',pts:'+5/10 pt'},
+        ].map(({col,label,pts})=>(
+          <div key={label} style={{display:'grid',gridTemplateColumns:'10px 1fr auto',gap:'0 8px',
+            alignItems:'center',padding:'4px 0',borderBottom:`0.5px solid ${US.border}`}}>
+            <div style={{width:'10px',height:'10px',borderRadius:'50%',background:col}}/>
+            <div style={{fontSize:'12px',color:US.black}}>{label}</div>
+            <div style={{fontSize:'12px',fontWeight:'500',color:US.muted}}>{pts}</div>
+          </div>
+        ))}
+        <div style={{fontSize:'11px',color:US.muted,marginTop:'8px',lineHeight:1.5}}>
+          Il <strong>rank</strong> ordina i {tot} giocatori dal più simile (rank 2) al meno simile (rank {tot}). Rank 1 = trovato.
+        </div>
+      </div>}
+
+      {/* Legenda colori rank */}
+      <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'8px',fontSize:'11px',color:US.muted,alignItems:'center'}}>
+        {[{col:'#E24B4A',label:'rank ≤15 — vicino'},{col:'#BA7517',label:'rank 16–60'},{col:'#378ADD',label:'rank >60 — lontano'}].map(({col,label})=>(
+          <div key={label} style={{display:'flex',alignItems:'center',gap:'4px'}}>
+            <div style={{width:'8px',height:'8px',borderRadius:'50%',background:col}}/>
+            <span>{label}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Input ricerca */}
+      {!won&&<div style={{position:'relative',marginBottom:'8px'}}>
+        <input value={query} onChange={e=>{setQuery(e.target.value);setDdOpen(true);setHiIdx(-1);}}
+          onKeyDown={handleKey} onFocus={()=>setDdOpen(true)}
+          placeholder="Cerca calciatore..." disabled={won}
+          style={{width:'100%',padding:'9px 12px',border:`0.5px solid ${US.border}`,
+            borderRadius:'6px',fontSize:'14px',fontFamily:'inherit',
+            background:US.bg,color:US.black,outline:'none',boxSizing:'border-box'}}/>
+        {ddOpen&&matches.length>0&&<div style={{position:'absolute',top:'calc(100% + 3px)',left:0,right:0,
+          background:US.bg,border:`0.5px solid ${US.border}`,borderRadius:'6px',zIndex:20,overflow:'hidden'}}>
+          {matches.map((p,i)=>(
+            <div key={p.n} onClick={()=>doGuess(p.n)}
+              style={{padding:'8px 12px',fontSize:'13px',cursor:'pointer',
+                color:US.black,borderBottom:`0.5px solid ${US.border}`,
+                background:i===hiIdx?US.surface:'transparent',
+                display:'flex',justifyContent:'space-between',alignItems:'center'}}
+              onMouseEnter={()=>setHiIdx(i)}>
+              <span>{p.n}</span>
+              <span style={{fontSize:'11px',color:US.muted}}>{p.c} · {p.r}</span>
+            </div>
+          ))}
+        </div>}
+      </div>}
+
+      {/* Contatore */}
+      {guesses.length>0&&<div style={{fontSize:'12px',color:US.muted,marginBottom:'6px'}}>
+        {guesses.length} tentativ{guesses.length===1?'o':'i'}
+      </div>}
+
+      {/* Messaggio vittoria */}
+      {won&&<div style={{textAlign:'center',padding:'14px',background:'#f0fdf4',
+        borderRadius:'8px',border:'0.5px solid #86efac',marginBottom:'10px'}}>
+        <div style={{fontSize:'14px',fontWeight:'500',color:'#166534',marginBottom:'4px'}}>
+          Trovato! Era {target.n}
+        </div>
+        <div style={{fontSize:'12px',color:US.muted}}>
+          {target.c} · {target.r} · {target.nat} · {target.a} anni · €{target.v}M
+        </div>
+        <div style={{fontSize:'12px',color:US.muted,marginTop:'2px'}}>
+          {guesses.length} tentativ{guesses.length===1?'o':'i'}
+        </div>
+        <ShareButton text={`🔎 FootGuessr #${Math.floor(todaySeed()%1000)}\nTrovato in ${guesses.length} tentativ${guesses.length===1?'o':'i'}\nuniverso-quiz-hmix.vercel.app`}/>
+        <button onClick={onHome} style={{...T.pb,marginTop:'8px',width:'100%'}}>Home</button>
+      </div>}
+
+      {/* Lista guesses */}
+      <div style={{display:'flex',flexDirection:'column',gap:'5px'}}>
+        {guesses.map(({p,rank,isWin},idx)=>{
+          const pct=isWin?100:Math.max(2,Math.round((1-(rank-1)/(tot-1))*100));
+          const barCol=isWin?'#639922':rank<=15?'#E24B4A':rank<=60?'#BA7517':'#378ADD';
+          const badgeBg=isWin?'#EAF3DE':rank<=15?'#FCEBEB':rank<=60?'#FAEEDA':'#E6F1FB';
+          const badgeTx=isWin?'#3B6D11':rank<=15?'#A32D2D':rank<=60?'#854F0B':'#0C447C';
+          return(
+            <div key={idx} style={{display:'grid',gridTemplateColumns:'1fr auto',gap:'8px',
+              alignItems:'center',padding:'8px 12px',borderRadius:'6px',
+              border:`0.5px solid ${isWin?'#86efac':US.border}`,
+              background:isWin?'#f0fdf4':US.bg}}>
+              <div>
+                <div style={{fontSize:'13px',fontWeight:'500',color:US.black}}>{p.n}</div>
+                <div style={{fontSize:'11px',color:US.muted,marginTop:'2px'}}>
+                  {p.c} · {p.r} · {p.nat} · {p.a} anni · €{p.v}M
+                </div>
+                <div style={{height:'3px',borderRadius:'2px',marginTop:'5px',
+                  width:`${pct}%`,background:barCol,maxWidth:'100%'}}/>
+              </div>
+              <div style={{fontSize:'13px',fontWeight:'500',padding:'4px 10px',
+                borderRadius:'6px',minWidth:'44px',textAlign:'center',
+                background:badgeBg,color:badgeTx}}>
+                {isWin?'#1':'#'+rank}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>);
+}
+
+function FootGuessr({onHome}){
+  return <FootGuesserGame onHome={onHome}/>;
+}
+
 const MODES=[
-  {key:"calciodle", label:"Calciodle",                icon:"⚽", desc:"Indovina il calciatore in 6 tentativi. Ogni risposta rivela indizi.", badge:"532 giocatori", accent:"#f5e000", badgeBg:"#111",     badgeTx:"#f5e000", size:"big"},
-  {key:"wordle",    label:"Wordle Cognome",            icon:"🔤", desc:"Indovina il cognome lettera per lettera in 6 tentativi.",            badge:"379 cognomi",  accent:"#378ADD", badgeBg:"#E6F1FB", badgeTx:"#185FA5", size:"big"},
-  {key:"hangman",   label:"Impiccato",                 icon:"🪢", desc:"Scopri il cognome prima che il pupazzo sia completato. 8 errori.",   badge:"529 cognomi",  accent:"#1D9E75", badgeBg:"#E1F5EE", badgeTx:"#0F6E56", size:"big"},
-  {key:"carriera",  label:"Indovina la Carriera",      icon:"🏆", desc:"Indovina il calciatore dai club della sua carriera.",                badge:"72 calciatori",accent:"#7F77DD", badgeBg:"#EEEDFE", badgeTx:"#3C3489", size:"big"},
+  {key:"calciodle",   label:"Calciodle",                icon:"⚽", desc:"Indovina il calciatore in 6 tentativi. Ogni risposta rivela indizi.", badge:"532 giocatori",  accent:"#f5e000", badgeBg:"#111",     badgeTx:"#f5e000", size:"big"},
+  {key:"wordle",      label:"Wordle Cognome",            icon:"🔤", desc:"Indovina il cognome lettera per lettera in 6 tentativi.",            badge:"379 cognomi",    accent:"#378ADD", badgeBg:"#E6F1FB", badgeTx:"#185FA5", size:"big"},
+  {key:"hangman",     label:"Impiccato",                 icon:"🪢", desc:"Scopri il cognome prima che il pupazzo sia completato. 8 errori.",   badge:"529 cognomi",    accent:"#1D9E75", badgeBg:"#E1F5EE", badgeTx:"#0F6E56", size:"big"},
+  {key:"carriera",    label:"Indovina la Carriera",      icon:"🏆", desc:"Indovina il calciatore dai club della sua carriera.",                badge:"103 calciatori", accent:"#7F77DD", badgeBg:"#EEEDFE", badgeTx:"#3C3489", size:"big"},
+  {key:"connections", label:"Connections",              icon:"🔗", desc:"Trova i 4 gruppi nascosti tra 16 calciatori.",                       badge:"50 puzzle",      accent:"#16a34a", badgeBg:"#dcfce7", badgeTx:"#15803d", size:"small"},
+  {key:"footguessr",  label:"FootGuessr",                icon:"🔎", desc:"Indovina il calciatore segreto dalla similarità dei tuoi guess.", badge:"287 giocatori",  accent:"#7F77DD", badgeBg:"#EEEDFE", badgeTx:"#3C3489", size:"small"},
   {key:"valore2",   label:"Chi Vale di Più?",          icon:"💶", desc:"Confronta valori di mercato.", badge:"Farai 3/3?",      accent:"#D85A30", badgeBg:"#FAECE7", badgeTx:"#993C1D", size:"small"},
   {key:"lista",     label:"Sfida a Tempo",             icon:"⏱", desc:"Trova i nomi in 90 secondi.",  badge:"50 categorie",   accent:"#E91E8C", badgeBg:"#FBEAF0", badgeTx:"#993556", size:"small"},
-  {key:"transfer",  label:"Indovina il Trasferimento", icon:"🔄", desc:"Indovina cifra, club e anno.", badge:"42 trasferimenti",accent:"#888780", badgeBg:"#F1EFE8", badgeTx:"#5F5E5A", size:"small"},
-  {key:"rosa",      label:"Indovina la Rosa",          icon:"👕", desc:"Nomina tutta la rosa in 60s.", badge:"20 squadre",     accent:"#BA7517", badgeBg:"#FAEEDA", badgeTx:"#854F0B", size:"small"},
+  {key:"transfer",  label:"Indovina il Trasferimento", icon:"🔄", desc:"Indovina cifra, club e anno.", badge:"65 trasferimenti",accent:"#888780", badgeBg:"#F1EFE8", badgeTx:"#5F5E5A", size:"small"},
+  {key:"rosa",      label:"Indovina la Rosa",          icon:"👕", desc:"Nomina tutta la rosa in 60s.", badge:"31 squadre",     accent:"#BA7517", badgeBg:"#FAEEDA", badgeTx:"#854F0B", size:"small"},
 ];
 
 function Card({m,onDaily,onArchive}){
@@ -2397,7 +3281,7 @@ function Card({m,onDaily,onArchive}){
 function Home({onSelect}){
   const today=new Date().toLocaleDateString("it-IT",{weekday:"long",day:"numeric",month:"long"});
   const countdown=useCountdown();
-  const playedToday=["calciodle","wordle","hangman","valore2","carriera","rosa","lista","transfer"].filter(k=>loadResult(k)!==null).length;
+  const playedToday=["calciodle","wordle","hangman","valore2","carriera","rosa","lista","transfer","connections","footguessr"].filter(k=>loadResult(k)!==null).length;
   const bigModes=MODES.filter(m=>m.size==="big");
   const smallModes=MODES.filter(m=>m.size==="small");
   return(<div style={{...T.app,paddingBottom:"40px"}}>
@@ -2423,7 +3307,7 @@ function Home({onSelect}){
         {smallModes.map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
       </div>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 13px",background:US.black,borderRadius:"8px",marginBottom:"10px"}}>
-        <div><div style={{fontSize:"18px",fontWeight:"700",color:US.orange}}>2.954</div><div style={{fontSize:"9px",color:"#777",textTransform:"uppercase",letterSpacing:"1px"}}>sfide disponibili</div></div>
+        <div><div style={{fontSize:"18px",fontWeight:"700",color:US.orange}}>2.508</div><div style={{fontSize:"9px",color:"#777",textTransform:"uppercase",letterSpacing:"1px"}}>sfide disponibili</div></div>
         <div style={{fontSize:"9px",color:"#555",textAlign:"right",lineHeight:1.7}}>🗓 <span style={{color:"#fff",fontWeight:"700"}}>Daily</span> — sfida unica al giorno<br/>📂 <span style={{color:"#fff",fontWeight:"700"}}>Archivio</span> — sfide passate con ◀ ▶</div>
       </div>
     </div>
@@ -2442,6 +3326,7 @@ export default function App(){
       .game-enter{animation:fadeSlideIn 0.35s ease forwards;}
       @keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
       .confetti-piece{position:absolute;width:8px;height:8px;animation:confettiFall linear forwards;pointer-events:none;}
+      @keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-5px);}40%,80%{transform:translateX(5px);}}
     `;
     document.head.appendChild(s);
     return()=>document.head.removeChild(s);
@@ -2460,6 +3345,223 @@ export default function App(){
   if(key==="rosa")return<RosaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
   if(key==="lista")return<ListaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
   if(key==="transfer")return<IndivinaTransferimento onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="connections")return<Connections onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
+  if(key==="footguessr")return<FootGuessr onHome={home}/>;
   return<Home onSelect={sSc}/>;
-}
+}  { answer:"Bryan Cristante", clues:[
+    { club:"Milan",          period:"2011–2014", apps:3,   goals:1,  note:"Esordio in Champions League a 16 anni" },
+    { club:"Benfica",        period:"2014–2016", apps:7,   goals:0,  note:"Campionato portoghese vinto nel 2015" },
+    { club:"Palermo",        period:"2016",      apps:4,   goals:0,  note:"Prestito in Serie A" },
+    { club:"Pescara",        period:"2016–2017", apps:16,  goals:0,  note:"Esplode in Serie B" },
+    { club:"Atalanta",       period:"2017–2018", apps:48,  goals:12, note:"9 gol in Serie A sotto Gasperini" },
+    { club:"Roma",           period:"2018–",     apps:262, goals:18, note:"Conference League 2022 con Mourinho" },
+    { club:"Nazionale",      period:"2017–",     apps:48,  goals:2,  note:"Campione d'Europa a Euro 2020" },
+  ]},
+  { answer:"Giovanni Simeone", clues:[
+    { club:"River Plate",    period:"2013–2015", apps:26,  goals:2,  note:"Esordio in Argentina, figlio del Cholo" },
+    { club:"Genoa",          period:"2016–2017", apps:35,  goals:12, note:"Prima stagione in Serie A" },
+    { club:"Fiorentina",     period:"2017–2019", apps:74,  goals:20, note:"Continua a segnare in viola" },
+    { club:"Cagliari",       period:"2019–2021", apps:71,  goals:18, note:"Trascinatore in Sardegna" },
+    { club:"Verona",         period:"2021–2022", apps:35,  goals:17, note:"Capocannoniere rivelazione" },
+    { club:"Napoli",         period:"2022–2025", apps:83,  goals:6,  note:"Scudetto 2023 da comprimario" },
+    { club:"Torino",         period:"2025–",     apps:24,  goals:8,  note:"Nuovo inizio in granata" },
+    { club:"Nazionale",      period:"2018–2023", apps:6,   goals:1,  note:"Poche presenze con l'Albiceleste" },
+  ]},
+  { answer:"Gianluca Scamacca", clues:[
+    { club:"Ascoli",         period:"2019–2020", apps:33,  goals:9,  note:"Prestito decisivo in Serie B" },
+    { club:"Genoa",          period:"2020–2021", apps:26,  goals:8,  note:"Conferma in Serie A" },
+    { club:"Sassuolo",       period:"2021–2022", apps:36,  goals:16, note:"Esplode in Serie A, 16 gol" },
+    { club:"West Ham",       period:"2022–2023", apps:16,  goals:3,  note:"Esperienza in Premier League" },
+    { club:"Atalanta",       period:"2023–",     apps:50,  goals:20, note:"Rinascita con Gasperini" },
+    { club:"Nazionale",      period:"2021–",     apps:22,  goals:1,  note:"Presente in Nazionale maggiore" },
+  ]},
+  { answer:"Keinan Davis", clues:[
+    { club:"Aston Villa",    period:"2016–2022", apps:73,  goals:3,  note:"Cresciuto nel club di Birmingham" },
+    { club:"Nottm Forest",   period:"2022",      apps:15,  goals:5,  note:"Prestito vincente in Premier" },
+    { club:"Watford",        period:"2022–2023", apps:34,  goals:7,  note:"Protagonista in Championship" },
+    { club:"Udinese",        period:"2023–",     apps:57,  goals:13, note:"Sorpresa in Serie A" },
+    { club:"Nazionale",      period:"2017–2018", apps:3,   goals:2,  note:"Inghilterra U-20" },
+  ]},
+  { answer:"Riccardo Orsolini", clues:[
+    { club:"Ascoli",         period:"2015–2017", apps:51,  goals:8,  note:"Trafila in Serie B" },
+    { club:"Atalanta",       period:"2017–2018", apps:8,   goals:0,  note:"Breve parentesi a Bergamo" },
+    { club:"Bologna",        period:"2018–",     apps:267, goals:72, note:"Simbolo del Bologna moderno" },
+    { club:"Nazionale",      period:"2019–",     apps:13,  goals:2,  note:"Presente in Azzurro" },
+  ]},
+  { answer:"Nicola Krstovic", clues:[
+    { club:"Zeta",           period:"2016–2019", apps:92,  goals:37, note:"Trafila in Montenegro" },
+    { club:"Stella Rossa",   period:"2019–2021", apps:21,  goals:2,  note:"Esperienza in Serbia" },
+    { club:"Dunajská Streda",period:"2021–2023", apps:37,  goals:19, note:"Esplode in Slovacchia" },
+    { club:"Lecce",          period:"2023–2025", apps:72,  goals:18, note:"Rivelazione in Serie A" },
+    { club:"Atalanta",       period:"2025–",     apps:27,  goals:9,  note:"Grande salto in Champions" },
+    { club:"Nazionale",      period:"2022–",     apps:34,  goals:8,  note:"Bomber del Montenegro" },
+  ]},
+  { answer:"Domenico Berardi", clues:[
+    { club:"Sassuolo",       period:"2012–",     apps:401, goals:146,note:"Record storico del Sassuolo" },
+    { club:"Nazionale",      period:"2018–2023", apps:28,  goals:8,  note:"Campione d'Europa a Euro 2020" },
+  ]},
+  { answer:"Andrea Pinamonti", clues:[
+    { club:"Frosinone",      period:"2018–2019", apps:27,  goals:5,  note:"Prestito, si afferma in Serie B" },
+    { club:"Genoa",          period:"2019–2020", apps:32,  goals:5,  note:"Primo prestito in Serie A" },
+    { club:"Empoli",         period:"2021–2022", apps:36,  goals:13, note:"Stagione da 13 gol, miglior prestito" },
+    { club:"Sassuolo",       period:"2022–2024", apps:70,  goals:16, note:"Confermato dopo l'Empoli" },
+    { club:"Genoa",          period:"2024–2025", apps:36,  goals:10, note:"Secondo prestito al Genoa" },
+    { club:"Nazionale",      period:"2022",      apps:1,   goals:0,  note:"Esordio in Azzurro" },
+  ]},
+  { answer:"Mateo Pellegrino", clues:[
+    { club:"Platense",       period:"2023–2024", apps:38,  goals:10, note:"Esplode in Argentina" },
+    { club:"Vélez Sarsfield", period:"2021–2025", apps:9,  goals:0,  note:"Club di formazione" },
+    { club:"Parma",          period:"2025–",     apps:43,  goals:11, note:"Sorpresa in Serie A" },
+    { club:"Nazionale",      period:"2019",      apps:0,   goals:0,  note:"Argentina U-19" },
+  ]},
+  { answer:"Nikola Vlasic", clues:[
+    { club:"Hajduk Spalato", period:"2014–2017", apps:86,  goals:11, note:"Talento cresciuto in Croazia" },
+    { club:"Everton",        period:"2017–2018", apps:12,  goals:0,  note:"Esperienza in Premier League" },
+    { club:"CSKA Mosca",     period:"2018–2021", apps:86,  goals:28, note:"Consacrazione in Russia" },
+    { club:"West Ham",       period:"2021–2022", apps:19,  goals:1,  note:"Ritorno in Premier" },
+    { club:"Torino",         period:"2022–",     apps:126, goals:20, note:"Beniamino del Toro" },
+    { club:"Nazionale",      period:"2017–",     apps:61,  goals:10, note:"Pilastro della Croazia" },
+  ]},
+  { answer:"Wesley Franca", clues:[
+    { club:"Flamengo",       period:"2021–2025", apps:78,  goals:2,  note:"Cresciuto nel più grande club brasiliano" },
+    { club:"Roma",           period:"2025–",     apps:26,  goals:4,  note:"Esordio in Europa" },
+    { club:"Nazionale",      period:"2025–",     apps:6,   goals:0,  note:"Esordio con il Brasile" },
+  ]},
+  { answer:"Gift Orban", clues:[
+    { club:"Stabæk",         period:"2021–2022", apps:22,  goals:16, note:"Rivelazione in Norvegia" },
+    { club:"Gent",           period:"2023–2024", apps:27,  goals:12, note:"Protagonista in Belgio" },
+    { club:"Olympique Lione",period:"2024–2025", apps:16,  goals:3,  note:"Esperienza in Ligue 1" },
+    { club:"Verona",         period:"2025–",     apps:21,  goals:7,  note:"Scommessa in Serie A" },
+  ]},
+  { answer:"Andrea Belotti", clues:[
+    { club:"Palermo",        period:"2013–2015", apps:62,  goals:17, note:"Si afferma in Serie A" },
+    { club:"Torino",         period:"2015–2022", apps:232, goals:100,note:"Capitano e leggenda granata" },
+    { club:"Roma",           period:"2022–2024", apps:45,  goals:3,  note:"Esperienza in giallorosso" },
+    { club:"Como",           period:"2024–2025", apps:18,  goals:2,  note:"Nuova avventura in Lombardia" },
+    { club:"Nazionale",      period:"2016–2022", apps:44,  goals:12, note:"Euro 2020 vinto con l'Italia" },
+  ]},
+  { answer:"Yann Bisseck", clues:[
+    { club:"Aarhus",         period:"2021–2023", apps:43,  goals:4,  note:"Si afferma in Danimarca" },
+    { club:"Inter",          period:"2023–",     apps:62,  goals:7,  note:"Difensore rivelazione nerazzurra" },
+    { club:"Nazionale",      period:"2025–",     apps:1,   goals:0,  note:"Esordio con la Germania" },
+  ]},
+  { answer:"Leandro Pavoletti", clues:[
+    { club:"Sassuolo",       period:"2012–2014", apps:33,  goals:11, note:"Prima Serie A" },
+    { club:"Genoa",          period:"2015–2017", apps:45,  goals:23, note:"Bomber rivelazione" },
+    { club:"Napoli",         period:"2017",      apps:6,   goals:0,  note:"Breve esperienza al Napoli" },
+    { club:"Cagliari",       period:"2017–",     apps:214, goals:49, note:"Leggenda della Sardegna" },
+    { club:"Nazionale",      period:"2019",      apps:1,   goals:1,  note:"Un gol all'esordio in Azzurro" },
+  ]},
+  { answer:"Marco Carnesecchi", clues:[
+    { club:"Trapani",        period:"2019–2020", apps:33,  goals:0,  note:"Esordio in C, promosso in B" },
+    { club:"Cremonese",      period:"2021–2023", apps:83,  goals:0,  note:"Porta la Cremo in Serie A" },
+    { club:"Atalanta",       period:"2023–",     apps:92,  goals:0,  note:"Titolare fisso con Gasperini" },
+    { club:"Nazionale",      period:"2019–2023", apps:22,  goals:0,  note:"Portiere titolare U-21" },
+  ]},
+  { answer:"Strahinja Pavlovic", clues:[
+    { club:"Partizan",       period:"2019–2020", apps:37,  goals:1,  note:"Esordio in Serbia" },
+    { club:"Salisburgo",     period:"2022–2024", apps:50,  goals:3,  note:"Si afferma in Austria" },
+    { club:"Milan",          period:"2024–",     apps:50,  goals:6,  note:"Grande acquisto rossonero" },
+    { club:"Nazionale",      period:"2020–",     apps:54,  goals:5,  note:"Titolare fisso con la Serbia" },
+  ]},
+  { answer:"Ademola Lookman", clues:[
+    { club:"Charlton",       period:"2015–2017", apps:45,  goals:10, note:"Esordio in Championship" },
+    { club:"Everton",        period:"2017–2019", apps:36,  goals:1,  note:"Esperienza in Premier" },
+    { club:"RB Lipsia",      period:"2018–2020", apps:22,  goals:5,  note:"Prestiti in Bundesliga" },
+    { club:"Fulham",         period:"2020–2021", apps:34,  goals:4,  note:"Ottima stagione in Championship" },
+    { club:"Atalanta",       period:"2022–2026", apps:104, goals:41, note:"Hat-trick in finale Europa League 2024" },
+    { club:"Atlético Madrid",period:"2026–",     apps:7,   goals:2,  note:"Grande salto in LaLiga" },
+    { club:"Nazionale",      period:"2022–",     apps:43,  goals:11, note:"Scelta la Nigeria all'Inghilterra" },
+  ]},
+  { answer:"Edoardo Bove", clues:[
+    { club:"Roma",           period:"2021–2024", apps:65,  goals:2,  note:"Cresciuto nel settore giovanile giallorosso" },
+    { club:"Fiorentina",     period:"2024–2025", apps:12,  goals:1,  note:"Malore in campo, grande ritorno" },
+    { club:"Watford",        period:"2026–",     apps:6,   goals:1,  note:"Nuova avventura in Championship" },
+  ]},
+  { answer:"N'Golo Kanté", clues:[
+    { club:"Caen",           period:"2013–2015", apps:75,  goals:4,  note:"Si afferma in Ligue 2" },
+    { club:"Leicester City", period:"2015–2016", apps:37,  goals:1,  note:"Premier League con i Foxes" },
+    { club:"Chelsea",        period:"2016–2023", apps:190, goals:11, note:"Champions League 2021, Pallone d'Oro sfiorato" },
+    { club:"Al-Ittihad",     period:"2023–2026", apps:79,  goals:8,  note:"Arabia Saudita" },
+    { club:"Nazionale",      period:"2016–",     apps:67,  goals:2,  note:"Mondiale 2018 con la Francia" },
+  ]},
+  { answer:"Leon Goretzka", clues:[
+    { club:"Bochum",         period:"2012–2013", apps:32,  goals:4,  note:"Esordio in Bundesliga" },
+    { club:"Schalke 04",     period:"2013–2018", apps:116, goals:14, note:"Si afferma come mezzala" },
+    { club:"Bayern Monaco",  period:"2018–",     apps:199, goals:37, note:"Multiplo Bundesliga e Champions 2020" },
+    { club:"Nazionale",      period:"2014–",     apps:69,  goals:15, note:"Mondiale 2018 con la Germania" },
+  ]},
+  { answer:"Antoine Griezmann", clues:[
+    { club:"Real Sociedad",  period:"2009–2014", apps:180, goals:46, note:"Si afferma in LaLiga" },
+    { club:"Atlético Madrid",period:"2014–2019", apps:180, goals:94, note:"Europa League 2018, finalista Champions" },
+    { club:"Barcellona",     period:"2019–2021", apps:74,  goals:22, note:"Esperienza al Camp Nou" },
+    { club:"Atlético Madrid",period:"2021–",     apps:158, goals:48, note:"Ritorno al Wanda, ancora decisivo" },
+    { club:"Nazionale",      period:"2014–2024", apps:137, goals:44, note:"Mondiale 2018, Euro 2016 finalista" },
+  ]},
+  { answer:"Francisco Conceicao", clues:[
+    { club:"Porto",          period:"2021–2024", apps:66,  goals:7,  note:"Figlio di Sérgio, esplode in Portogallo" },
+    { club:"Ajax",           period:"2022–2023", apps:26,  goals:5,  note:"Prestito in Eredivisie" },
+    { club:"Juventus",       period:"2024–",     apps:50,  goals:6,  note:"Gol decisivi in Champions" },
+    { club:"Nazionale",      period:"2024–",     apps:15,  goals:3,  note:"Talento emergente del Portogallo" },
+  ]},
+  { answer:"Fikayo Tomori", clues:[
+    { club:"Chelsea",        period:"2016–2021", apps:17,  goals:1,  note:"Cresciuto nel settore giovanile" },
+    { club:"Derby County",   period:"2018–2019", apps:44,  goals:1,  note:"Prestito rivelazione in Championship" },
+    { club:"Milan",          period:"2021–",     apps:157, goals:6,  note:"Scudetto 2022, titolare inamovibile" },
+    { club:"Nazionale",      period:"2019–",     apps:6,   goals:0,  note:"Sceglie l'Inghilterra" },
+  ]},
+  { answer:"Marten De Roon", clues:[
+    { club:"Heerenveen",     period:"2012–2015", apps:87,  goals:5,  note:"Si afferma in Eredivisie" },
+    { club:"Atalanta",       period:"2015–2016", apps:36,  goals:1,  note:"Prima stagione a Bergamo" },
+    { club:"Middlesbrough",  period:"2016–2017", apps:34,  goals:4,  note:"Esperienza in Premier" },
+    { club:"Atalanta",       period:"2017–",     apps:297, goals:19, note:"Simbolo del progetto Gasperini" },
+    { club:"Nazionale",      period:"2016–2024", apps:42,  goals:1,  note:"Presenze con i Paesi Bassi" },
+  ]},
+  { answer:"Piotr Zielinski", clues:[
+    { club:"Udinese",        period:"2012–2014", apps:19,  goals:0,  note:"Esordio in Serie A" },
+    { club:"Empoli",         period:"2014–2016", apps:63,  goals:5,  note:"Si afferma in prestito" },
+    { club:"Napoli",         period:"2016–2024", apps:281, goals:37, note:"Scudetto 2023, colonna del centrocampo" },
+    { club:"Inter",          period:"2024–",     apps:54,  goals:7,  note:"Parametro zero di lusso" },
+    { club:"Nazionale",      period:"2013–",     apps:107, goals:17, note:"Capitano della Polonia" },
+  ]},
+  { answer:"Alexis Saelemaekers", clues:[
+    { club:"Anderlecht",     period:"2018–2020", apps:40,  goals:2,  note:"Esordio in Belgio" },
+    { club:"Milan",          period:"2020–2025", apps:141, goals:8,  note:"Tuttofare rossonero, Scudetto 2022" },
+    { club:"Bologna",        period:"2023–2024", apps:30,  goals:4,  note:"Prestito, ottima stagione" },
+    { club:"Roma",           period:"2024–2025", apps:22,  goals:7,  note:"Prestito con gol pesanti" },
+    { club:"Nazionale",      period:"2020–",     apps:23,  goals:2,  note:"Presente con il Belgio" },
+  ]},
+  { answer:"Charles De Ketelaere", clues:[
+    { club:"Club Bruges",    period:"2019–2022", apps:90,  goals:18, note:"Rivelazione in Belgio" },
+    { club:"Milan",          period:"2022–2023", apps:32,  goals:0,  note:"Anno difficile in rossonero" },
+    { club:"Atalanta",       period:"2023–",     apps:95,  goals:20, note:"Rinascita totale con Gasperini" },
+    { club:"Nazionale",      period:"2020–",     apps:28,  goals:5,  note:"Talento del Belgio" },
+  ]},
+  { answer:"Pierre Kalulu", clues:[
+    { club:"Olympique Lione 2",period:"2018–2020",apps:36, goals:0,  note:"Cresciuto nel settore giovanile" },
+    { club:"Milan",          period:"2020–2024", apps:84,  goals:3,  note:"Scudetto 2022, difensore affidabile" },
+    { club:"Juventus",       period:"2024–",     apps:59,  goals:3,  note:"Approdo a Torino" },
+    { club:"Nazionale",      period:"2025–",     apps:3,   goals:0,  note:"Esordio con la Francia" },
+  ]},
+  { answer:"Leonardo Spinazzola", clues:[
+    { club:"Atalanta",       period:"2016–2018", apps:48,  goals:0,  note:"Si afferma come terzino" },
+    { club:"Juventus",       period:"2018–2019", apps:10,  goals:0,  note:"Breve esperienza bianconera" },
+    { club:"Roma",           period:"2019–2024", apps:104, goals:5,  note:"Euro 2020 da protagonista prima dell'infortunio" },
+    { club:"Napoli",         period:"2024–",     apps:54,  goals:4,  note:"Nuovo inizio in azzurro" },
+    { club:"Nazionale",      period:"2017–",     apps:27,  goals:0,  note:"Euro 2020 tra i migliori prima dell'infortunio" },
+  ]},
+  { answer:"Ruslan Malinovskyi", clues:[
+    { club:"Genk",           period:"2016–2019", apps:73,  goals:16, note:"Si afferma in Belgio" },
+    { club:"Atalanta",       period:"2019–2023", apps:115, goals:23, note:"Europa League 2024, elemento chiave" },
+    { club:"Olympique Marsiglia",period:"2023",  apps:20,  goals:1,  note:"Breve parentesi in Francia" },
+    { club:"Genoa",          period:"2023–",     apps:66,  goals:9,  note:"Ritorno in Serie A" },
+    { club:"Nazionale",      period:"2015–",     apps:70,  goals:10, note:"Pilastro dell'Ucraina" },
+  ]},
+  { answer:"David Neres", clues:[
+    { club:"Ajax",           period:"2017–2022", apps:121, goals:37, note:"Finalista Champions League 2019" },
+    { club:"Benfica",        period:"2022–2024", apps:55,  goals:11, note:"Protagonista in Portogallo" },
+    { club:"Napoli",         period:"2024–",     apps:44,  goals:5,  note:"Scudetto in arrivo con gli Azzurri" },
+    { club:"Nazionale",      period:"2019–2023", apps:8,   goals:1,  note:"Presente con il Brasile" },
+  ]},
+
 
