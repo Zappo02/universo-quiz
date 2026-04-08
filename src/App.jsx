@@ -1690,7 +1690,7 @@ function Hdr({title,sub,onHome,archiveNav}){
 
 // ── ARCHIVE WRAPPER ──────────────────────────────────────────────────────
 const DB_SERIE_A=DB.filter(p=>p.league==="Serie A");
-const POOL_SIZES={calciodle:532,wordle:532,hangman:532,valore2:692,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:65,connections:CONNECTIONS_PUZZLES.length};
+const POOL_SIZES={calciodle:532,wordle:532,hangman:532,valore2:692,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:65,connections:50};
 
 const PAGE_SIZE=10;
 function ArchiveWrapper({gameKey,children}){
