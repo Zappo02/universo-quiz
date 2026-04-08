@@ -2654,7 +2654,7 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
   const[hintUsed,setHintUsed]=useState(false);
   const MAX_ERRORS=4;
 
-  useEffect(()=>{setSelected([]);setSolved([]);setHintUsed(false));setErrors(0);setShake(false);setWon(false);setDone(false);setLastResult(null);setConfettiShow(false);},[seed]);
+  useEffect(()=>{setSelected([]);setSolved([]);setHintUsed(false);setErrors(0);setShake(false);setWon(false);setDone(false);setLastResult(null);setConfettiShow(false);},[seed]);
 
   function toggleSelect(name){
     if(done)return;
