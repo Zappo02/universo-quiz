@@ -1408,7 +1408,7 @@ function Confetti({active}){
     size:6+Math.random()*8,
     shape:i%3===0?"50%":"2px"
   }));
-  return(<div style={{position:"absolute",inset:0,pointerEvents:"none",overflow:"hidden",zIndex:199}}>{pieces.map(p=><div key={p.id} className="confetti-piece" style={{left:`${p.left}%`,top:"-10px",width:`${p.size}px`,height:`${p.size}px`,background:p.color,borderRadius:p.shape,animationDelay:`${p.delay}s`,animationDuration:`${p.duration}s`}}/>)}</div>);
+  return(<div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:199,overflow:"visible"}}>{pieces.map(p=><div key={p.id} className="confetti-piece" style={{left:`${p.left}%`,top:"-10px",width:`${p.size}px`,height:`${p.size}px`,background:p.color,borderRadius:p.shape,animationDelay:`${p.delay}s`,animationDuration:`${p.duration}s`}}/>)}</div>);
 }
 function useCountdown(){
   const[t,sT]=useState("");
@@ -1672,6 +1672,18 @@ function Calciodle({onHome,isDaily,onArchive}){
 }
 
 // ── WORDLE COGNOME ───────────────────────────────────────────────────────
+function WordleFlipCell({letter,color,colIdx}){
+  const[flipped,setFlipped]=useState(false);
+  useEffect(()=>{const t=setTimeout(()=>setFlipped(true),colIdx*130);return()=>clearTimeout(t);},[]);
+  return(
+    <div style={{width:"42px",height:"42px",perspective:"400px"}}>
+      <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.5s ease ${colIdx*130}ms`,transform:flipped?"rotateX(180deg)":"rotateX(0deg)"}}>
+        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e0e0e0",borderRadius:"3px"}}/>
+        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateX(180deg)",background:color,borderRadius:"3px",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px",fontWeight:"700",color:"#fff"}}>{letter}</div>
+      </div>
+    </div>
+  );
+}
 function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const ROUNDS=5,MAX_ATT=6;
   const pool=useMemo(()=>{const daily=shuffle([...DB_SERIE_A],seedRandom(seed));return daily.filter(p=>normStr(p.surname).length>=4&&normStr(p.surname).length<=8).slice(1);},[seed]);
@@ -1734,11 +1746,7 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
               const bg=filled?(colBg[filled.s]||"#e0e0e0"):isActive&&disp[ci].trim()?"#fff":"#e0e0e0";
               const bd=filled?"transparent":isActive&&disp[ci].trim()?`2px solid ${US.black}`:"2px solid #d0d0d0";
               if(filled){
-                return(<div key={ci} className="flip-cell" style={{width:"42px",height:"42px"}}>
-                  <div className={`flip-inner flipped`} style={{transitionDelay:`${ci*130}ms`,transition:`transform 1.0s cubic-bezier(0.4,0,0.2,1) ${ci*130}ms`}}>
-                    <div className="flip-back" style={{background:colBg[filled.s]||"#e0e0e0",color:"#fff",fontSize:"16px"}}>{filled.c}</div>
-                  </div>
-                </div>);
+                return(<WordleFlipCell key={ci} letter={filled.c} color={colBg[filled.s]||"#e0e0e0"} colIdx={ci}/>);
               }
               return(<div key={ci} style={{width:"42px",height:"42px",borderRadius:"3px",background:bg,border:bd,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px",fontWeight:"700",color:US.black}}>{isActive?disp[ci].trim():""}</div>);
             })}
@@ -2432,7 +2440,7 @@ export default function App(){
       .flip-cell{perspective:300px;}
       .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.65s ease;}
       .flip-inner.flipped{transform:rotateX(180deg);}
-      .flip-front,.flip-back{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:3px;font-weight:700;}
+      .flip-front,.flip-back{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:3px;font-weight:700;backface-visibility:hidden;}
       .flip-back{backface-visibility:hidden;transform:rotateX(180deg);}
       @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
       .game-enter{animation:fadeSlideIn 0.35s ease forwards;}
