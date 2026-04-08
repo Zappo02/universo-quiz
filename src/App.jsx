@@ -1400,15 +1400,11 @@ function loadStats(gameKey){
 function Confetti({active}){
   if(!active)return null;
   const pieces=Array.from({length:40},(_,i)=>({
-    id:i,
-    left:Math.random()*100,
-    delay:Math.random()*1.5,
-    duration:2+Math.random()*2,
+    id:i,left:Math.random()*100,delay:Math.random()*1.2,duration:1.8+Math.random()*1.5,
     color:["#f5e000","#16a34a","#dc2626","#2563eb","#f97316","#a855f7"][i%6],
-    size:6+Math.random()*8,
-    shape:i%3===0?"50%":"2px"
+    size:6+Math.random()*8,shape:i%3===0?"50%":"2px"
   }));
-  return(<div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:199,overflow:"visible"}}>{pieces.map(p=><div key={p.id} className="confetti-piece" style={{left:`${p.left}%`,top:"-10px",width:`${p.size}px`,height:`${p.size}px`,background:p.color,borderRadius:p.shape,animationDelay:`${p.delay}s`,animationDuration:`${p.duration}s`}}/>)}</div>);
+  return(<div style={{position:"fixed",top:0,left:0,width:"100%",height:"100%",pointerEvents:"none",zIndex:9999,overflow:"hidden"}}>{pieces.map(p=><div key={p.id} className="confetti-piece" style={{left:`${p.left}%`,top:"-10px",width:`${p.size}px`,height:`${p.size}px`,background:p.color,borderRadius:p.shape,animationDelay:`${p.delay}s`,animationDuration:`${p.duration}s`}}/>)}</div>);
 }
 function useCountdown(){
   const[t,sT]=useState("");
@@ -1547,11 +1543,14 @@ function aD(k,g,t){if(k!=="age"&&k!=="value")return null;return g===t?null:g<t?"
 function cS(c){return{flex:1,minWidth:0,borderRadius:"2px",background:CLR[c]?.bg||"#fff",border:`1.5px solid ${CLR[c]?.bg||"#e8e8e8"}`,color:CLR[c]?.tx||"#ccc",fontSize:"8px",textAlign:"center",padding:"4px 2px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",minHeight:"32px",overflow:"hidden"};}
 
 function CalciodleFlipCell({value,arrow,color,flipped,colIdx}){
-  const delay=colIdx*200;
+  const delay=colIdx*150;
   const bg=CLR[color]?.bg||"#e0e0e0";
+  const[isFlipped,setIsFlipped]=useState(false);
+  useEffect(()=>{setIsFlipped(false);},[value,color]);
+  useEffect(()=>{if(flipped){const t=setTimeout(()=>setIsFlipped(true),delay);return()=>clearTimeout(t);}},[flipped]);
   return(
     <div style={{flex:1,minWidth:0,height:"38px",perspective:"400px"}}>
-      <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.8s ease ${delay}ms`,transform:flipped?"rotateX(180deg)":"rotateX(0deg)"}}>
+      <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.6s ease`,transform:isFlipped?"rotateX(180deg)":"rotateX(0deg)"}}>
         <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e8e8e8",borderRadius:"3px"}}/>
         <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateX(180deg)",background:bg,borderRadius:"3px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",overflow:"hidden"}}>
           <span style={{fontWeight:"700",fontSize:"8px",color:"#fff",lineHeight:1.2,textAlign:"center",padding:"0 2px"}}>{value}</span>
@@ -1628,7 +1627,7 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
               const cl=eC(c.key,g[c.key],target[c.key]);
               const ar=aD(c.key,g[c.key],target[c.key]);
               const val=`${g[c.key]}${c.key==="value"?"M":""}`;
-              return<CalciodleFlipCell key={c.key} value={val} arrow={ar} color={cl} colIdx={ci} flipped={animRows.includes(ri)}/>;
+              return<CalciodleFlipCell key={`${ri}-${ci}`} value={val} arrow={ar} color={cl} colIdx={ci} flipped={animRows.includes(ri)}/>;
             })}
           </div>
         ))}
@@ -1671,14 +1670,12 @@ function Calciodle({onHome,isDaily,onArchive}){
 
 // ── WORDLE COGNOME ───────────────────────────────────────────────────────
 function WordleFlipCell({letter,color,colIdx}){
-  const[flipped,setFlipped]=useState(false);
-  useEffect(()=>{const t=setTimeout(()=>setFlipped(true),colIdx*130);return()=>clearTimeout(t);},[]);
+  const[revealed,setRevealed]=useState(false);
+  const delay=colIdx*130;
+  useEffect(()=>{const t=setTimeout(()=>setRevealed(true),delay);return()=>clearTimeout(t);},[]);
   return(
-    <div style={{width:"42px",height:"42px",perspective:"400px"}}>
-      <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.5s ease ${colIdx*130}ms`,transform:flipped?"rotateX(180deg)":"rotateX(0deg)"}}>
-        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e0e0e0",borderRadius:"3px"}}/>
-        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateX(180deg)",background:color,borderRadius:"3px",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px",fontWeight:"700",color:"#fff"}}>{letter}</div>
-      </div>
+    <div style={{width:"42px",height:"42px",borderRadius:"3px",background:revealed?color:"#e0e0e0",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px",fontWeight:"700",color:"#fff",transition:`background 0.1s ${delay}ms, transform 0.25s ${delay}ms`,transform:revealed?"scaleY(1)":"scaleY(0.01)"}}>
+      {revealed?letter:""}
     </div>
   );
 }
@@ -1692,7 +1689,8 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const[attempts,setAttempts]=useState([]);
   const[current,setCurrent]=useState("");
   const[status,setStatus]=useState("playing"); // playing | won | lost
-  useEffect(()=>{setAttempts([]);setCurrent("");setStatus("playing");},[seed]);
+  const[showConfetti,setShowConfetti]=useState(false);
+  useEffect(()=>{setAttempts([]);setCurrent("");setStatus("playing");setShowConfetti(false);},[seed]);
 
   function evalGuess(guess){
     const g=normStr(guess).slice(0,word.length).padEnd(word.length," ");
@@ -1710,7 +1708,7 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     const newAttempts=[...attempts,ev];
     setAttempts(newAttempts);
     setCurrent("");
-    if(ev.every(x=>x.s==="green")){setStatus("won");if(isToday)saveResult("wordle",{won:true,attempts:newAttempts.length,word});}
+    if(ev.every(x=>x.s==="green")){setStatus("won");setShowConfetti(true);if(isToday)saveResult("wordle",{won:true,attempts:newAttempts.length,word});}
     else if(newAttempts.length>=MAX_ATT){setStatus("lost");if(isToday)saveResult("wordle",{won:false,attempts:MAX_ATT,word});}
   }
 
@@ -1718,14 +1716,15 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   attempts.flat().forEach(({c,s})=>{if(!used[c]||used[c]==="gray"||(used[c]==="yellow"&&s==="green"))used[c]=s;});
   const colBg={green:US.green,yellow:US.yellow,gray:"#9ca3af"};
 
-  const[hint,setHint]=useState(false);
+  const[hint,setHint]=useState(false);const[showConfetti,setShowConfetti]=useState(false);
+  useEffect(()=>{if(status==="won"&&!showConfetti)setTimeout(()=>setShowConfetti(true),word.length*130+400);},[status]);
   if(savedToday)return(<div style={T.app}><Hdr title="Wordle Cognome" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/><DoneScreen gameKey="wordle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
     <div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.won?`Trovato in ${s.attempts}/6`:"Non trovato"}</div>
     <div style={{fontSize:"11px",color:US.muted,marginBottom:"12px"}}>{word}</div>
     <ShareButton text={`🔤 Wordle #${day}\n${s.won?"Trovato in "+s.attempts+"/6":"Non trovato"}\n${word}\nuniverso-quiz-hmix.vercel.app`}/>
   </>}</DoneScreen></div>);
-  return(<div style={T.app}><Hdr title="Wordle Cognome" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={{...T.app,position:"relative"}}>{showConfetti&&<Confetti active={showConfetti}/>}<Hdr title="Wordle Cognome" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"400px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
         <span style={{fontSize:"11px",color:"#aaa"}}>{word.length} lettere</span>
@@ -1786,7 +1785,8 @@ function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   function g(c){if(st!=="p"||gu.has(c))return;sGu(x=>new Set([...x,c]));} 
   const bodyParts=[<circle key="h" cx="50" cy="19" r="8" stroke="#333" strokeWidth="2.5" fill="none"/>,<line key="b" x1="50" y1="27" x2="50" y2="58" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="la" x1="50" y1="37" x2="35" y2="49" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="ra" x1="50" y1="37" x2="65" y2="49" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="ll" x1="50" y1="58" x2="37" y2="75" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="rl" x1="50" y1="58" x2="63" y2="75" stroke="#333" strokeWidth="2.5" strokeLinecap="round"/>,<line key="rp" x1="50" y1="6" x2="50" y2="11" stroke="#333" strokeWidth="2.5"/>];
 
-  const[hint,setHint]=useState(false);
+  const[hint,setHint]=useState(false);const[wMo,setWMo]=useState(false);
+  useEffect(()=>{if(status==="won"&&!wMo)setTimeout(()=>setWMo(true),word.length*130+400);},[status]);
   if(savedToday)return(<div style={T.app}><Hdr title="Impiccato" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/><DoneScreen gameKey="hangman" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
     <div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.won?"Trovato!":"Non trovato"}</div>
@@ -2438,15 +2438,12 @@ export default function App(){
     const s=document.createElement("style");
     s.innerHTML=`
       input,select,textarea{font-size:16px !important;}
-      .flip-cell{perspective:300px;}
-      .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.65s ease;}
-      .flip-inner.flipped{transform:rotateX(180deg);}
-      .flip-front,.flip-back{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:3px;font-weight:700;backface-visibility:hidden;}
-      .flip-back{backface-visibility:hidden;transform:rotateX(180deg);}
+      .flip-reveal{animation:flipReveal 0.5s ease forwards;}
+      @keyframes flipReveal{0%{transform:scaleY(1);background:#e0e0e0;}49%{transform:scaleY(0);background:#e0e0e0;}50%{transform:scaleY(0);}100%{transform:scaleY(1);}}
       @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
       .game-enter{animation:fadeSlideIn 0.35s ease forwards;}
-      @keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(800px) rotate(720deg);opacity:0;}}
-      .confetti-piece{position:absolute;width:8px;height:8px;animation:confettiFall linear forwards;pointer-events:none;z-index:200;}
+      @keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+      .confetti-piece{position:absolute;width:8px;height:8px;animation:confettiFall linear forwards;pointer-events:none;}
     `;
     document.head.appendChild(s);
     return()=>document.head.removeChild(s);
