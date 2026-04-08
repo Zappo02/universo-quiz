@@ -535,6 +535,168 @@ const DB = [
   { name:"Djuric", surname:"Djuric", club:"Cremonese", league:"Serie A", role:"Attaccante", nation:"Bosnia", continent:"Europa", age:35, value:1 },
   { name:"Jamie Vardy", surname:"Vardy", club:"Cremonese", league:"Serie A", role:"Attaccante", nation:"Inghilterra", continent:"Europa", age:39, value:1 },
 
+  // ── ROSE EUROPEE (Champions League) ─────────────────
+  { name:"Thibaut Courtois", surname:"Courtois", club:"Real Madrid", league:"Champions League", role:"Portiere", nation:"Belgio", continent:"Europa", age:33, value:18 },
+  { name:"Andriy Lunin", surname:"Lunin", club:"Real Madrid", league:"Champions League", role:"Portiere", nation:"Ucraina", continent:"Europa", age:27, value:15 },
+  { name:"Fran González", surname:"Fran Gonzalez", club:"Real Madrid", league:"Champions League", role:"Portiere", nation:"Spagna", continent:"Europa", age:20, value:3 },
+  { name:"Éder Militão", surname:"Militao", club:"Real Madrid", league:"Champions League", role:"Difensore", nation:"Brasile", continent:"Sud America", age:28, value:25 },
+  { name:"Raúl Asencio", surname:"Asencio", club:"Real Madrid", league:"Champions League", role:"Difensore", nation:"Spagna", continent:"Europa", age:23, value:25 },
+  { name:"Antonio Rüdiger", surname:"Rudiger", club:"Real Madrid", league:"Champions League", role:"Difensore", nation:"Germania", continent:"Europa", age:33, value:9 },
+  { name:"David Alaba", surname:"Alaba", club:"Real Madrid", league:"Champions League", role:"Difensore", nation:"Austria", continent:"Europa", age:33, value:3.5 },
+  { name:"Fran García", surname:"Fran Garcia", club:"Real Madrid", league:"Champions League", role:"Terzino", nation:"Spagna", continent:"Europa", age:26, value:12 },
+  { name:"Ferland Mendy", surname:"Mendy", club:"Real Madrid", league:"Champions League", role:"Terzino", nation:"Francia", continent:"Europa", age:30, value:6 },
+  { name:"Daniel Carvajal", surname:"Carvajal", club:"Real Madrid", league:"Champions League", role:"Terzino", nation:"Spagna", continent:"Europa", age:34, value:6 },
+  { name:"Aurélien Tchouaméni", surname:"Tchouameni", club:"Real Madrid", league:"Champions League", role:"Centrocampista", nation:"Francia", continent:"Europa", age:26, value:75 },
+  { name:"Federico Valverde", surname:"Valverde", club:"Real Madrid", league:"Champions League", role:"Centrocampista", nation:"Uruguay", continent:"Sud America", age:27, value:120 },
+  { name:"Eduardo Camavinga", surname:"Camavinga", club:"Real Madrid", league:"Champions League", role:"Centrocampista", nation:"Francia", continent:"Europa", age:23, value:50 },
+  { name:"Dani Ceballos", surname:"Ceballos", club:"Real Madrid", league:"Champions League", role:"Centrocampista", nation:"Spagna", continent:"Europa", age:29, value:8 },
+  { name:"Jude Bellingham", surname:"Bellingham", club:"Real Madrid", league:"Champions League", role:"Trequartista", nation:"Inghilterra", continent:"Europa", age:22, value:140 },
+  { name:"Arda Güler", surname:"Guler", club:"Real Madrid", league:"Champions League", role:"Trequartista", nation:"Turchia", continent:"Europa", age:21, value:90 },
+  { name:"Vinicius Junior", surname:"Vinicius", club:"Real Madrid", league:"Champions League", role:"Ala", nation:"Brasile", continent:"Sud America", age:25, value:150 },
+  { name:"Rodrygo", surname:"Rodrygo", club:"Real Madrid", league:"Champions League", role:"Ala", nation:"Brasile", continent:"Sud America", age:25, value:50 },
+  { name:"Brahim Díaz", surname:"Brahim Diaz", club:"Real Madrid", league:"Champions League", role:"Ala", nation:"Spagna", continent:"Europa", age:26, value:35 },
+  { name:"Kylian Mbappé", surname:"Mbappe", club:"Real Madrid", league:"Champions League", role:"Attaccante", nation:"Francia", continent:"Europa", age:27, value:200 },
+  { name:"Wojciech Szczęsny", surname:"Szczesny", club:"Barcellona", league:"Champions League", role:"Portiere", nation:"Polonia", continent:"Europa", age:35, value:2 },
+  { name:"Pau Cubarsí", surname:"Cubarsi", club:"Barcellona", league:"Champions League", role:"Difensore", nation:"Spagna", continent:"Europa", age:19, value:80 },
+  { name:"Eric García", surname:"Eric Garcia", club:"Barcellona", league:"Champions League", role:"Difensore", nation:"Spagna", continent:"Europa", age:25, value:35 },
+  { name:"Ronald Araujo", surname:"Araujo", club:"Barcellona", league:"Champions League", role:"Difensore", nation:"Uruguay", continent:"Sud America", age:27, value:20 },
+  { name:"Andreas Christensen", surname:"Christensen", club:"Barcellona", league:"Champions League", role:"Difensore", nation:"Danimarca", continent:"Europa", age:29, value:9 },
+  { name:"Alejandro Balde", surname:"Balde", club:"Barcellona", league:"Champions League", role:"Terzino", nation:"Spagna", continent:"Europa", age:22, value:55 },
+  { name:"Gerard Martín", surname:"Gerard Martin", club:"Barcellona", league:"Champions League", role:"Terzino", nation:"Spagna", continent:"Europa", age:24, value:25 },
+  { name:"Jules Koundé", surname:"Kounde", club:"Barcellona", league:"Champions League", role:"Terzino", nation:"Francia", continent:"Europa", age:27, value:65 },
+  { name:"Marc Bernal", surname:"Bernal", club:"Barcellona", league:"Champions League", role:"Centrocampista", nation:"Spagna", continent:"Europa", age:18, value:30 },
+  { name:"Marc Casadó", surname:"Casado", club:"Barcellona", league:"Champions League", role:"Centrocampista", nation:"Spagna", continent:"Europa", age:22, value:20 },
+  { name:"Pedri", surname:"Pedri", club:"Barcellona", league:"Champions League", role:"Centrocampista", nation:"Spagna", continent:"Europa", age:23, value:150 },
+  { name:"Frenkie de Jong", surname:"De Jong", club:"Barcellona", league:"Champions League", role:"Centrocampista", nation:"Olanda", continent:"Europa", age:28, value:45 },
+  { name:"Gavi", surname:"Gavi", club:"Barcellona", league:"Champions League", role:"Centrocampista", nation:"Spagna", continent:"Europa", age:21, value:30 },
+  { name:"Fermín López", surname:"Fermin Lopez", club:"Barcellona", league:"Champions League", role:"Trequartista", nation:"Spagna", continent:"Europa", age:22, value:100 },
+  { name:"Dani Olmo", surname:"Olmo", club:"Barcellona", league:"Champions League", role:"Trequartista", nation:"Spagna", continent:"Europa", age:27, value:60 },
+  { name:"Raphinha", surname:"Raphinha", club:"Barcellona", league:"Champions League", role:"Ala", nation:"Brasile", continent:"Sud America", age:29, value:80 },
+  { name:"Lamine Yamal", surname:"Yamal", club:"Barcellona", league:"Champions League", role:"Ala", nation:"Spagna", continent:"Europa", age:18, value:200 },
+  { name:"Ferran Torres", surname:"Ferran Torres", club:"Barcellona", league:"Champions League", role:"Attaccante", nation:"Spagna", continent:"Europa", age:26, value:50 },
+  { name:"Robert Lewandowski", surname:"Lewandowski", club:"Barcellona", league:"Champions League", role:"Attaccante", nation:"Polonia", continent:"Europa", age:37, value:8 },
+  { name:"Jan Oblak", surname:"Oblak", club:"Atletico Madrid", league:"Champions League", role:"Portiere", nation:"Slovenia", continent:"Europa", age:33, value:17 },
+  { name:"Robin Le Normand", surname:"Le Normand", club:"Atletico Madrid", league:"Champions League", role:"Difensore", nation:"Spagna", continent:"Europa", age:29, value:25 },
+  { name:"José María Giménez", surname:"Gimenez J", club:"Atletico Madrid", league:"Champions League", role:"Difensore", nation:"Uruguay", continent:"Sud America", age:31, value:12 },
+  { name:"Marcos Llorente", surname:"Llorente", club:"Atletico Madrid", league:"Champions League", role:"Terzino", nation:"Spagna", continent:"Europa", age:31, value:22 },
+  { name:"Nahuel Molina", surname:"Molina", club:"Atletico Madrid", league:"Champions League", role:"Terzino", nation:"Argentina", continent:"Sud America", age:28, value:15 },
+  { name:"Pablo Barrios", surname:"Barrios", club:"Atletico Madrid", league:"Champions League", role:"Centrocampista", nation:"Spagna", continent:"Europa", age:22, value:60 },
+  { name:"Koke", surname:"Koke", club:"Atletico Madrid", league:"Champions League", role:"Centrocampista", nation:"Spagna", continent:"Europa", age:34, value:6 },
+  { name:"Giuliano Simeone", surname:"G Simeone", club:"Atletico Madrid", league:"Champions League", role:"Ala", nation:"Argentina", continent:"Sud America", age:23, value:40 },
+  { name:"Julián Álvarez", surname:"Julian Alvarez", club:"Atletico Madrid", league:"Champions League", role:"Attaccante", nation:"Argentina", continent:"Sud America", age:26, value:90 },
+  { name:"Alexander Sørloth", surname:"Sorloth", club:"Atletico Madrid", league:"Champions League", role:"Attaccante", nation:"Norvegia", continent:"Europa", age:30, value:20 },
+  { name:"Matvey Safonov", surname:"Safonov", club:"PSG", league:"Champions League", role:"Portiere", nation:"Russia", continent:"Europa", age:27, value:22 },
+  { name:"Willian Pacho", surname:"Pacho", club:"PSG", league:"Champions League", role:"Difensore", nation:"Ecuador", continent:"Sud America", age:24, value:70 },
+  { name:"Marquinhos", surname:"Marquinhos", club:"PSG", league:"Champions League", role:"Difensore", nation:"Brasile", continent:"Sud America", age:31, value:30 },
+  { name:"Lucas Beraldo", surname:"Beraldo", club:"PSG", league:"Champions League", role:"Difensore", nation:"Brasile", continent:"Sud America", age:22, value:20 },
+  { name:"Nuno Mendes", surname:"Nuno Mendes", club:"PSG", league:"Champions League", role:"Terzino", nation:"Portogallo", continent:"Europa", age:23, value:75 },
+  { name:"Lucas Hernández", surname:"Lucas Hernandez", club:"PSG", league:"Champions League", role:"Terzino", nation:"Francia", continent:"Europa", age:30, value:20 },
+  { name:"Achraf Hakimi", surname:"Hakimi", club:"PSG", league:"Champions League", role:"Terzino", nation:"Marocco", continent:"Africa", age:27, value:80 },
+  { name:"João Neves", surname:"Joao Neves", club:"PSG", league:"Champions League", role:"Centrocampista", nation:"Portogallo", continent:"Europa", age:21, value:110 },
+  { name:"Warren Zaïre-Emery", surname:"Zaire-Emery", club:"PSG", league:"Champions League", role:"Centrocampista", nation:"Francia", continent:"Europa", age:20, value:60 },
+  { name:"Fabián Ruiz", surname:"Fabian Ruiz", club:"PSG", league:"Champions League", role:"Centrocampista", nation:"Spagna", continent:"Europa", age:30, value:40 },
+  { name:"Kang-in Lee", surname:"Lee", club:"PSG", league:"Champions League", role:"Trequartista", nation:"Corea del Sud", continent:"Asia", age:25, value:28 },
+  { name:"Khvicha Kvaratskhelia", surname:"Kvaratskhelia", club:"PSG", league:"Champions League", role:"Ala", nation:"Georgia", continent:"Europa", age:25, value:90 },
+  { name:"Bradley Barcola", surname:"Barcola", club:"PSG", league:"Champions League", role:"Ala", nation:"Francia", continent:"Europa", age:23, value:70 },
+  { name:"Désiré Doué", surname:"Doue", club:"PSG", league:"Champions League", role:"Ala", nation:"Francia", continent:"Europa", age:20, value:90 },
+  { name:"Ousmane Dembélé", surname:"Dembele", club:"PSG", league:"Champions League", role:"Attaccante", nation:"Francia", continent:"Europa", age:28, value:100 },
+  { name:"Gonçalo Ramos", surname:"Goncalo Ramos", club:"PSG", league:"Champions League", role:"Attaccante", nation:"Portogallo", continent:"Europa", age:24, value:35 },
+  { name:"Jonas Urbig", surname:"Urbig", club:"Bayern Monaco", league:"Champions League", role:"Portiere", nation:"Germania", continent:"Europa", age:22, value:15 },
+  { name:"Manuel Neuer", surname:"Neuer", club:"Bayern Monaco", league:"Champions League", role:"Portiere", nation:"Germania", continent:"Europa", age:40, value:4 },
+  { name:"Dayot Upamecano", surname:"Upamecano", club:"Bayern Monaco", league:"Champions League", role:"Difensore", nation:"Francia", continent:"Europa", age:27, value:70 },
+  { name:"Min-jae Kim", surname:"Kim", club:"Bayern Monaco", league:"Champions League", role:"Difensore", nation:"Corea del Sud", continent:"Asia", age:29, value:25 },
+  { name:"Hiroki Ito", surname:"Ito", club:"Bayern Monaco", league:"Champions League", role:"Difensore", nation:"Giappone", continent:"Asia", age:26, value:18 },
+  { name:"Alphonso Davies", surname:"Davies", club:"Bayern Monaco", league:"Champions League", role:"Terzino", nation:"Canada", continent:"Nord America", age:25, value:45 },
+  { name:"Josip Stanisic", surname:"Stanisic", club:"Bayern Monaco", league:"Champions League", role:"Terzino", nation:"Croazia", continent:"Europa", age:26, value:35 },
+  { name:"Konrad Laimer", surname:"Laimer", club:"Bayern Monaco", league:"Champions League", role:"Terzino", nation:"Austria", continent:"Europa", age:28, value:32 },
+  { name:"Aleksandar Pavlovic", surname:"Pavlovic A", club:"Bayern Monaco", league:"Champions League", role:"Centrocampista", nation:"Germania", continent:"Europa", age:21, value:75 },
+  { name:"Joshua Kimmich", surname:"Kimmich", club:"Bayern Monaco", league:"Champions League", role:"Centrocampista", nation:"Germania", continent:"Europa", age:31, value:40 },
+  { name:"Jamal Musiala", surname:"Musiala", club:"Bayern Monaco", league:"Champions League", role:"Ala", nation:"Germania", continent:"Europa", age:23, value:120 },
+  { name:"Michael Olise", surname:"Olise", club:"Bayern Monaco", league:"Champions League", role:"Ala", nation:"Francia", continent:"Europa", age:24, value:140 },
+  { name:"Harry Kane", surname:"Kane", club:"Bayern Monaco", league:"Champions League", role:"Attaccante", nation:"Inghilterra", continent:"Europa", age:32, value:65 },
+  { name:"Gregor Kobel", surname:"Kobel", club:"Borussia Dortmund", league:"Champions League", role:"Portiere", nation:"Svizzera", continent:"Europa", age:28, value:40 },
+  { name:"Nico Schlotterbeck", surname:"Schlotterbeck", club:"Borussia Dortmund", league:"Champions League", role:"Difensore", nation:"Germania", continent:"Europa", age:26, value:55 },
+  { name:"Waldemar Anton", surname:"Anton", club:"Borussia Dortmund", league:"Champions League", role:"Difensore", nation:"Germania", continent:"Europa", age:29, value:18 },
+  { name:"Ramy Bensebaini", surname:"Bensebaini", club:"Borussia Dortmund", league:"Champions League", role:"Difensore", nation:"Algeria", continent:"Africa", age:30, value:7 },
+  { name:"Emre Can", surname:"Emre Can", club:"Borussia Dortmund", league:"Champions League", role:"Centrocampista", nation:"Germania", continent:"Europa", age:32, value:4 },
+  { name:"Julian Ryerson", surname:"Ryerson", club:"Borussia Dortmund", league:"Champions League", role:"Terzino", nation:"Norvegia", continent:"Europa", age:28, value:25 },
+  { name:"Felix Nmecha", surname:"Nmecha", club:"Borussia Dortmund", league:"Champions League", role:"Centrocampista", nation:"Germania", continent:"Europa", age:25, value:50 },
+  { name:"Marcel Sabitzer", surname:"Sabitzer", club:"Borussia Dortmund", league:"Champions League", role:"Trequartista", nation:"Austria", continent:"Europa", age:32, value:7 },
+  { name:"Karim Adeyemi", surname:"Adeyemi", club:"Borussia Dortmund", league:"Champions League", role:"Ala", nation:"Germania", continent:"Europa", age:24, value:50 },
+  { name:"Serhou Guirassy", surname:"Guirassy", club:"Borussia Dortmund", league:"Champions League", role:"Attaccante", nation:"Guinea", continent:"Africa", age:30, value:40 },
+  { name:"Maximilian Beier", surname:"Beier", club:"Borussia Dortmund", league:"Champions League", role:"Attaccante", nation:"Germania", continent:"Europa", age:23, value:40 },
+  { name:"Robert Sánchez", surname:"Robert Sanchez", club:"Chelsea", league:"Champions League", role:"Portiere", nation:"Spagna", continent:"Europa", age:28, value:22 },
+  { name:"Filip Jørgensen", surname:"Jorgensen", club:"Chelsea", league:"Champions League", role:"Portiere", nation:"Danimarca", continent:"Europa", age:23, value:15 },
+  { name:"Levi Colwill", surname:"Colwill", club:"Chelsea", league:"Champions League", role:"Difensore", nation:"Inghilterra", continent:"Europa", age:23, value:50 },
+  { name:"Trevoh Chalobah", surname:"Chalobah", club:"Chelsea", league:"Champions League", role:"Difensore", nation:"Inghilterra", continent:"Europa", age:26, value:40 },
+  { name:"Wesley Fofana", surname:"Fofana W", club:"Chelsea", league:"Champions League", role:"Difensore", nation:"Francia", continent:"Europa", age:25, value:28 },
+  { name:"Tosin Adarabioyo", surname:"Adarabioyo", club:"Chelsea", league:"Champions League", role:"Difensore", nation:"Inghilterra", continent:"Europa", age:28, value:18 },
+  { name:"Benoît Badiashile", surname:"Badiashile", club:"Chelsea", league:"Champions League", role:"Difensore", nation:"Francia", continent:"Europa", age:25, value:18 },
+  { name:"Marc Cucurella", surname:"Cucurella", club:"Chelsea", league:"Champions League", role:"Terzino", nation:"Spagna", continent:"Europa", age:27, value:50 },
+  { name:"Reece James", surname:"James", club:"Chelsea", league:"Champions League", role:"Terzino", nation:"Inghilterra", continent:"Europa", age:26, value:60 },
+  { name:"Malo Gusto", surname:"Gusto", club:"Chelsea", league:"Champions League", role:"Terzino", nation:"Francia", continent:"Europa", age:22, value:35 },
+  { name:"Moisés Caicedo", surname:"Caicedo", club:"Chelsea", league:"Champions League", role:"Centrocampista", nation:"Ecuador", continent:"Sud America", age:24, value:110 },
+  { name:"Roméo Lavia", surname:"Lavia", club:"Chelsea", league:"Champions League", role:"Centrocampista", nation:"Belgio", continent:"Europa", age:22, value:25 },
+  { name:"Enzo Fernández", surname:"Enzo Fernandez", club:"Chelsea", league:"Champions League", role:"Centrocampista", nation:"Argentina", continent:"Sud America", age:25, value:90 },
+  { name:"Cole Palmer", surname:"Palmer", club:"Chelsea", league:"Champions League", role:"Ala", nation:"Inghilterra", continent:"Europa", age:23, value:110 },
+  { name:"Pedro Neto", surname:"Pedro Neto", club:"Chelsea", league:"Champions League", role:"Ala", nation:"Portogallo", continent:"Europa", age:26, value:60 },
+  { name:"David Raya", surname:"Raya", club:"Arsenal", league:"Champions League", role:"Portiere", nation:"Spagna", continent:"Europa", age:30, value:35 },
+  { name:"William Saliba", surname:"Saliba", club:"Arsenal", league:"Champions League", role:"Difensore", nation:"Francia", continent:"Europa", age:25, value:90 },
+  { name:"Gabriel", surname:"Gabriel", club:"Arsenal", league:"Champions League", role:"Difensore", nation:"Brasile", continent:"Sud America", age:28, value:75 },
+  { name:"Riccardo Calafiori", surname:"Calafiori", club:"Arsenal", league:"Champions League", role:"Terzino", nation:"Italia", continent:"Europa", age:23, value:50 },
+  { name:"Myles Lewis-Skelly", surname:"Lewis-Skelly", club:"Arsenal", league:"Champions League", role:"Terzino", nation:"Inghilterra", continent:"Europa", age:19, value:35 },
+  { name:"Jurriën Timber", surname:"Timber", club:"Arsenal", league:"Champions League", role:"Terzino", nation:"Olanda", continent:"Europa", age:24, value:70 },
+  { name:"Ben White", surname:"Ben White", club:"Arsenal", league:"Champions League", role:"Terzino", nation:"Inghilterra", continent:"Europa", age:28, value:30 },
+  { name:"Declan Rice", surname:"Rice", club:"Arsenal", league:"Champions League", role:"Centrocampista", nation:"Inghilterra", continent:"Europa", age:27, value:120 },
+  { name:"Mikel Merino", surname:"Merino", club:"Arsenal", league:"Champions League", role:"Centrocampista", nation:"Spagna", continent:"Europa", age:29, value:30 },
+  { name:"Martin Ødegaard", surname:"Odegaard", club:"Arsenal", league:"Champions League", role:"Trequartista", nation:"Norvegia", continent:"Europa", age:27, value:65 },
+  { name:"Gabriel Martinelli", surname:"Martinelli", club:"Arsenal", league:"Champions League", role:"Ala", nation:"Brasile", continent:"Sud America", age:24, value:45 },
+  { name:"Leandro Trossard", surname:"Trossard", club:"Arsenal", league:"Champions League", role:"Ala", nation:"Belgio", continent:"Europa", age:31, value:20 },
+  { name:"Bukayo Saka", surname:"Saka", club:"Arsenal", league:"Champions League", role:"Attaccante", nation:"Inghilterra", continent:"Europa", age:24, value:120 },
+  { name:"Kai Havertz", surname:"Havertz", club:"Arsenal", league:"Champions League", role:"Attaccante", nation:"Germania", continent:"Europa", age:26, value:50 },
+  { name:"Alisson", surname:"Alisson", club:"Liverpool", league:"Champions League", role:"Portiere", nation:"Brasile", continent:"Sud America", age:33, value:17 },
+  { name:"Ibrahima Konaté", surname:"Konate", club:"Liverpool", league:"Champions League", role:"Difensore", nation:"Francia", continent:"Europa", age:26, value:50 },
+  { name:"Virgil van Dijk", surname:"Van Dijk", club:"Liverpool", league:"Champions League", role:"Difensore", nation:"Olanda", continent:"Europa", age:34, value:18 },
+  { name:"Joe Gomez", surname:"Gomez", club:"Liverpool", league:"Champions League", role:"Terzino", nation:"Inghilterra", continent:"Europa", age:28, value:15 },
+  { name:"Andrew Robertson", surname:"Robertson", club:"Liverpool", league:"Champions League", role:"Terzino", nation:"Scozia", continent:"Europa", age:32, value:10 },
+  { name:"Conor Bradley", surname:"Bradley", club:"Liverpool", league:"Champions League", role:"Terzino", nation:"Irlanda del Nord", continent:"Europa", age:22, value:30 },
+  { name:"Ryan Gravenberch", surname:"Gravenberch", club:"Liverpool", league:"Champions League", role:"Centrocampista", nation:"Olanda", continent:"Europa", age:23, value:90 },
+  { name:"Alexis Mac Allister", surname:"Mac Allister", club:"Liverpool", league:"Champions League", role:"Centrocampista", nation:"Argentina", continent:"Sud America", age:27, value:80 },
+  { name:"Curtis Jones", surname:"Jones", club:"Liverpool", league:"Champions League", role:"Centrocampista", nation:"Inghilterra", continent:"Europa", age:25, value:35 },
+  { name:"Dominik Szoboszlai", surname:"Szoboszlai", club:"Liverpool", league:"Champions League", role:"Trequartista", nation:"Ungheria", continent:"Europa", age:25, value:100 },
+  { name:"Cody Gakpo", surname:"Gakpo", club:"Liverpool", league:"Champions League", role:"Ala", nation:"Olanda", continent:"Europa", age:26, value:65 },
+  { name:"Federico Chiesa", surname:"Chiesa", club:"Liverpool", league:"Champions League", role:"Ala", nation:"Italia", continent:"Europa", age:28, value:15 },
+  { name:"Altay Bayındır", surname:"Bayindir", club:"Manchester United", league:"Champions League", role:"Portiere", nation:"Turchia", continent:"Europa", age:27, value:7 },
+  { name:"Leny Yoro", surname:"Yoro", club:"Manchester United", league:"Champions League", role:"Difensore", nation:"Francia", continent:"Europa", age:20, value:50 },
+  { name:"Matthijs de Ligt", surname:"De Ligt", club:"Manchester United", league:"Champions League", role:"Difensore", nation:"Olanda", continent:"Europa", age:26, value:40 },
+  { name:"Lisandro Martínez", surname:"Lisandro Martinez", club:"Manchester United", league:"Champions League", role:"Difensore", nation:"Argentina", continent:"Sud America", age:28, value:40 },
+  { name:"Harry Maguire", surname:"Maguire", club:"Manchester United", league:"Champions League", role:"Difensore", nation:"Inghilterra", continent:"Europa", age:33, value:10 },
+  { name:"Patrick Dorgu", surname:"Dorgu", club:"Manchester United", league:"Champions League", role:"Terzino", nation:"Danimarca", continent:"Europa", age:21, value:35 },
+  { name:"Luke Shaw", surname:"Shaw", club:"Manchester United", league:"Champions League", role:"Terzino", nation:"Inghilterra", continent:"Europa", age:30, value:10 },
+  { name:"Diogo Dalot", surname:"Dalot", club:"Manchester United", league:"Champions League", role:"Terzino", nation:"Portogallo", continent:"Europa", age:27, value:30 },
+  { name:"Noussair Mazraoui", surname:"Mazraoui", club:"Manchester United", league:"Champions League", role:"Terzino", nation:"Marocco", continent:"Africa", age:28, value:20 },
+  { name:"Manuel Ugarte", surname:"Ugarte", club:"Manchester United", league:"Champions League", role:"Centrocampista", nation:"Uruguay", continent:"Sud America", age:24, value:30 },
+  { name:"Kobbie Mainoo", surname:"Mainoo", club:"Manchester United", league:"Champions League", role:"Centrocampista", nation:"Inghilterra", continent:"Europa", age:20, value:50 },
+  { name:"Bruno Fernandes", surname:"Bruno Fernandes", club:"Manchester United", league:"Champions League", role:"Trequartista", nation:"Portogallo", continent:"Europa", age:31, value:40 },
+  { name:"Amad Diallo", surname:"Amad Diallo", club:"Manchester United", league:"Champions League", role:"Ala", nation:"Costa d'Avorio", continent:"Africa", age:23, value:50 },
+  { name:"Joshua Zirkzee", surname:"Zirkzee", club:"Manchester United", league:"Champions League", role:"Attaccante", nation:"Olanda", continent:"Europa", age:24, value:22 },
+  { name:"Josko Gvardiol", surname:"Gvardiol", club:"Manchester City", league:"Champions League", role:"Difensore", nation:"Croazia", continent:"Europa", age:24, value:70 },
+  { name:"Rúben Dias", surname:"Ruben Dias", club:"Manchester City", league:"Champions League", role:"Difensore", nation:"Portogallo", continent:"Europa", age:28, value:60 },
+  { name:"Abdukodir Khusanov", surname:"Khusanov", club:"Manchester City", league:"Champions League", role:"Difensore", nation:"Uzbekistan", continent:"Asia", age:22, value:35 },
+  { name:"John Stones", surname:"Stones", club:"Manchester City", league:"Champions League", role:"Difensore", nation:"Inghilterra", continent:"Europa", age:31, value:15 },
+  { name:"Nathan Aké", surname:"Ake", club:"Manchester City", league:"Champions League", role:"Difensore", nation:"Olanda", continent:"Europa", age:31, value:15 },
+  { name:"Matheus Nunes", surname:"Matheus Nunes", club:"Manchester City", league:"Champions League", role:"Terzino", nation:"Portogallo", continent:"Europa", age:27, value:45 },
+  { name:"Rico Lewis", surname:"Lewis", club:"Manchester City", league:"Champions League", role:"Terzino", nation:"Inghilterra", continent:"Europa", age:21, value:32 },
+  { name:"Rodri", surname:"Rodri", club:"Manchester City", league:"Champions League", role:"Centrocampista", nation:"Spagna", continent:"Europa", age:29, value:65 },
+  { name:"Nico González", surname:"Nico Gonzalez", club:"Manchester City", league:"Champions League", role:"Centrocampista", nation:"Spagna", continent:"Europa", age:24, value:45 },
+  { name:"Mateo Kovacic", surname:"Kovacic", club:"Manchester City", league:"Champions League", role:"Centrocampista", nation:"Croazia", continent:"Europa", age:31, value:12 },
+  { name:"Phil Foden", surname:"Foden", club:"Manchester City", league:"Champions League", role:"Trequartista", nation:"Inghilterra", continent:"Europa", age:25, value:80 },
+  { name:"Bernardo Silva", surname:"Bernardo Silva", club:"Manchester City", league:"Champions League", role:"Trequartista", nation:"Portogallo", continent:"Europa", age:31, value:27 },
+  { name:"Jérémy Doku", surname:"Doku", club:"Manchester City", league:"Champions League", role:"Ala", nation:"Belgio", continent:"Europa", age:23, value:65 },
+  { name:"Savinho", surname:"Savinho", club:"Manchester City", league:"Champions League", role:"Ala", nation:"Brasile", continent:"Sud America", age:21, value:40 },
+  { name:"Erling Haaland", surname:"Haaland", club:"Manchester City", league:"Champions League", role:"Attaccante", nation:"Norvegia", continent:"Europa", age:25, value:200 },
+  { name:"Omar Marmoush", surname:"Marmoush", club:"Manchester City", league:"Champions League", role:"Attaccante", nation:"Egitto", continent:"Africa", age:27, value:60 },
+
   { answer:"Bryan Cristante", clues:[
     { club:"Milan",          period:"2011–2014", apps:3,   goals:1,  note:"Esordio in Champions League a 16 anni" },
     { club:"Benfica",        period:"2014–2016", apps:7,   goals:0,  note:"Campionato portoghese vinto nel 2015" },
@@ -872,6 +1034,19 @@ const ROSE_LIST = [
     "Piccinini","Toure","Cuadrado","Iling-Junior","Angori","Lorran","Tramoni","Stengs",
     "Leris","Durosinmi","Meister","Stojilkovic","Moreo"
   ]},
+
+  // ── Rose Europee ─────────────────────────────────────
+  { key:"RealMadrid", nome:"Real Madrid", emoji:"⚪", giocatori:["Courtois","Lunin","Fran Gonzalez","Militao","Asencio","Rudiger","Alaba","Fran Garcia","Mendy","Carvajal","Tchouameni","Valverde","Camavinga","Ceballos","Bellingham","Guler","Vinicius","Rodrygo","Brahim Diaz","Mbappe"]},
+  { key:"Barcellona", nome:"FC Barcellona", emoji:"🔵", giocatori:["Szczesny","Cubarsi","Eric Garcia","Araujo","Christensen","Balde","Gerard Martin","Kounde","Bernal","Casado","Pedri","De Jong","Gavi","Fermin Lopez","Olmo","Raphinha","Yamal","Ferran Torres","Lewandowski"]},
+  { key:"AtleticoMadrid", nome:"Atletico Madrid", emoji:"🔴", giocatori:["Oblak","Le Normand","Gimenez J","Llorente","Molina","Barrios","Koke","G Simeone","Julian Alvarez","Sorloth"]},
+  { key:"PSG", nome:"Paris Saint-Germain", emoji:"🔵", giocatori:["Safonov","Pacho","Marquinhos","Beraldo","Nuno Mendes","Lucas Hernandez","Hakimi","Joao Neves","Zaire-Emery","Fabian Ruiz","Lee","Kvaratskhelia","Barcola","Doue","Dembele","Goncalo Ramos","Vitinha"]},
+  { key:"BayernMonaco", nome:"Bayern Monaco", emoji:"🔴", giocatori:["Urbig","Neuer","Upamecano","Kim","Ito","Davies","Stanisic","Laimer","Pavlovic A","Kimmich","Musiala","Olise","Kane"]},
+  { key:"BVB", nome:"Borussia Dortmund", emoji:"🟡", giocatori:["Kobel","Schlotterbeck","Anton","Bensebaini","Emre Can","Ryerson","Nmecha","Sabitzer","Adeyemi","Guirassy","Beier"]},
+  { key:"Chelsea", nome:"Chelsea FC", emoji:"🔵", giocatori:["Robert Sanchez","Jorgensen","Colwill","Chalobah","Fofana W","Adarabioyo","Badiashile","Cucurella","James","Gusto","Caicedo","Lavia","Enzo Fernandez","Palmer","Pedro Neto"]},
+  { key:"Arsenal", nome:"Arsenal FC", emoji:"🔴", giocatori:["Raya","Saliba","Gabriel","Calafiori","Lewis-Skelly","Timber","Ben White","Rice","Merino","Odegaard","Martinelli","Trossard","Saka","Havertz"]},
+  { key:"Liverpool", nome:"Liverpool FC", emoji:"🔴", giocatori:["Alisson","Konate","Van Dijk","Gomez","Robertson","Bradley","Gravenberch","Mac Allister","Jones","Szoboszlai","Gakpo","Chiesa"]},
+  { key:"ManUtd", nome:"Manchester United", emoji:"🔴", giocatori:["Bayindir","Yoro","De Ligt","Lisandro Martinez","Maguire","Dorgu","Shaw","Dalot","Mazraoui","Ugarte","Mainoo","Bruno Fernandes","Amad Diallo","Zirkzee"]},
+  { key:"ManCity", nome:"Manchester City", emoji:"🔵", giocatori:["Gvardiol","Ruben Dias","Khusanov","Stones","Ake","Matheus Nunes","Lewis","Rodri","Nico Gonzalez","Kovacic","Foden","Bernardo Silva","Doku","Savinho","Haaland","Marmoush"]},
 ];
 
 // ── CARRIERE ────────────────────────────────────────────────────────────
@@ -1151,6 +1326,8 @@ function seedRandom(s){let x=s;return()=>{x=(x*1664525+1013904223)&0xffffffff;re
 
 // todaySeed: YYYYMMDD as number — unique per calendar day
 function todaySeed(){const d=new Date();return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
+// dayIndex: giorni progressivi dall'epoca (1 Gen 2020) — evita il bug del modulo su YYYYMMDD
+function dayIndex(){const epoch=new Date(2020,0,1);const now=new Date();now.setHours(0,0,0,0);return Math.floor((now-epoch)/(1000*60*60*24));}
 
 // seedForDaysAgo(n): seed for n days ago (0=today, 1=yesterday, ...)
 function seedForDaysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
@@ -1307,7 +1484,7 @@ function Hdr({title,sub,onHome,archiveNav}){
 }
 
 // ── ARCHIVE WRAPPER ──────────────────────────────────────────────────────
-const POOL_SIZES={calciodle:DB.length,wordle:DB.length,hangman:DB.length,valore2:DB.length,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:42};
+const POOL_SIZES={calciodle:692,wordle:692,hangman:692,valore2:692,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:65};
 
 const PAGE_SIZE=10;
 function ArchiveWrapper({gameKey,children}){
@@ -1656,7 +1833,7 @@ function ChiValeDiPiu({onHome,isDaily,onArchive}){
 
 // ── CARRIERA ─────────────────────────────────────────────────────────────
 function CarreiraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
-  const player=CAREERS[seed%CAREERS.length];
+  const player=CAREERS[((dayIndex()+55)%CAREERS.length)];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("carriera"):null;
   const maxC=player.clues.length;
@@ -1712,7 +1889,7 @@ function TimerRing({seconds,total}){
 
 function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const TOTAL=60;
-  const squadra=ROSE_LIST[seed%ROSE_LIST.length];
+  const squadra=ROSE_LIST[((dayIndex()+10)%ROSE_LIST.length)];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("rosa"):null;
   const BONUS=5;
@@ -1921,7 +2098,7 @@ const LISTA_POOL = LISTA_CATEGORIES.length;
 
 function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const TOTAL=90,BONUS=5;
-  const cat=LISTA_CATEGORIES[(seed%LISTA_POOL)];
+  const cat=LISTA_CATEGORIES[((dayIndex()+40)%LISTA_POOL)];
   // use unique answers if defined (for categories with repeated winners)
   const validAnswers=cat.unique||cat.answers;
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
@@ -2059,10 +2236,33 @@ const TRANSFERS = [
   {player:"Ronaldo",              from:"Barcellona",       to:"Inter",          year:1997, fee:26},
   {player:"Gianluca Vialli",      from:"Sampdoria",        to:"Juventus",       year:1992, fee:20},
   {player:"Roberto Baggio",       from:"Fiorentina",       to:"Juventus",       year:1990, fee:12},
+  {player:"Min-jae Kim",             from:"Napoli",           to:"Bayern Monaco",  year:2023, fee:50},
+  {player:"Douglas Luiz",             from:"Aston Villa",      to:"Juventus",       year:2024, fee:52},
+  {player:"Fabián Ruiz",              from:"Napoli",           to:"PSG",            year:2022, fee:23},
+  {player:"Douglas Costa",            from:"Bayern Monaco",    to:"Juventus",       year:2018, fee:40},
+  {player:"Tijjani Reijnders",        from:"Milan",            to:"Arsenal",        year:2025, fee:55},
+  {player:"Cristian Romero",          from:"Atalanta",         to:"Tottenham",      year:2022, fee:52},
+  {player:"André Onana",              from:"Inter",            to:"Manchester Utd", year:2023, fee:50},
+  {player:"Sergej Milinkovic-Savic",  from:"Lazio",            to:"Al-Hilal",       year:2023, fee:40},
+  {player:"Nicolò Barella",           from:"Cagliari",         to:"Inter",          year:2020, fee:33},
+  {player:"Hirving Lozano",           from:"PSV",              to:"Napoli",         year:2019, fee:50},
+  {player:"Rafael Leao",              from:"Lille",            to:"Milan",          year:2019, fee:30},
+  {player:"Gaizka Mendieta",          from:"Valencia",         to:"Lazio",          year:2001, fee:48},
+  {player:"Christian Vieri",          from:"Atletico Madrid",  to:"Lazio",          year:1998, fee:25},
+  {player:"Ronaldo",                  from:"PSV",              to:"Barcellona",     year:1996, fee:19},
+  {player:"Leonardo Bonucci",         from:"Milan",            to:"Juventus",       year:2017, fee:42},
+  {player:"Konstantinos Manolas",     from:"Roma",             to:"Napoli",         year:2019, fee:36},
+  {player:"Radja Nainggolan",         from:"Roma",             to:"Inter",          year:2018, fee:38},
+  {player:"Dejan Kulusevski",         from:"Juventus",         to:"Tottenham",      year:2023, fee:30},
+  {player:"Javier Pastore",           from:"Palermo",          to:"PSG",            year:2011, fee:42},
+  {player:"Arthur Melo",          from:"Barcellona",      to:"Juventus",       year:2020, fee:81},
+  {player:"Christian Eriksen",    from:"Manchester Utd",  to:"Inter",          year:2020, fee:27},
+  {player:"Arturo Vidal",         from:"Juventus",        to:"Bayern Monaco",  year:2015, fee:39},
+  {player:"Romelu Lukaku",        from:"Inter",           to:"Chelsea",        year:2021, fee:113},
 ];
 
 function TransferGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
-  const tr=TRANSFERS[seed%TRANSFERS.length];
+  const tr=TRANSFERS[((dayIndex()+4)%TRANSFERS.length)];
   const label=isToday?"🗓 Giornaliero":"📂 Archivio";
   const savedToday=isToday?loadResult("transfer"):null;
   // 3 fields to guess: fee (±5M), from, year
@@ -2153,14 +2353,14 @@ function IndivinaTransferimento({onHome,isDaily,onArchive}){
 
 // ── HOME ──────────────────────────────────────────────────────────────────
 const MODES=[
-  {key:"calciodle", label:"Calciodle",                icon:"⚽", desc:"Indovina il calciatore in 6 tentativi. Ogni risposta rivela indizi.", badge:"532 giocatori", accent:"#f5e000", badgeBg:"#111", badgeTx:"#f5e000", size:"big"},
-  {key:"wordle",    label:"Wordle Cognome",            icon:"🔤", desc:"Indovina il cognome lettera per lettera in 6 tentativi.", badge:"379 cognomi", accent:"#378ADD", badgeBg:"#E6F1FB", badgeTx:"#185FA5", size:"big"},
-  {key:"hangman",   label:"Impiccato",                 icon:"🪢", desc:"Scopri il cognome prima che il pupazzo sia completato. 8 errori.", badge:"529 cognomi", accent:"#1D9E75", badgeBg:"#E1F5EE", badgeTx:"#0F6E56", size:"big"},
-  {key:"carriera",  label:"Indovina la Carriera",      icon:"🏆", desc:"Indovina il calciatore dai club della sua carriera.", badge:"72 calciatori", accent:"#7F77DD", badgeBg:"#EEEDFE", badgeTx:"#3C3489", size:"big"},
-  {key:"valore2",   label:"Chi Vale di Più?",          icon:"💶", desc:"Confronta due calciatori e indovina chi vale di più.", badge:"Farai 3/3?", accent:"", badgeBg:"", badgeTx:"#888", size:"small"},
-  {key:"rosa",      label:"Indovina la Rosa",          icon:"👕", desc:"Trova tutti i giocatori di una squadra di Serie A.", badge:"20 squadre", accent:"", badgeBg:"", badgeTx:"#888", size:"small"},
-  {key:"lista",     label:"Sfida a Tempo",             icon:"⏱", desc:"Trova tutti i nomi di una lista in 90 secondi.", badge:"50 categorie", accent:"", badgeBg:"", badgeTx:"#888", size:"small"},
-  {key:"transfer",  label:"Indovina il Trasferimento", icon:"🔄", desc:"Da quale club a quale club? Indovina i dettagli del trasferimento.", badge:"42 storici", accent:"", badgeBg:"", badgeTx:"#888", size:"small"},
+  {key:"calciodle", label:"Calciodle",                icon:"⚽", desc:"Indovina il calciatore in 6 tentativi. Ogni risposta rivela indizi.", badge:"532 giocatori", accent:"#f5e000", badgeBg:"#111",     badgeTx:"#f5e000", size:"big"},
+  {key:"wordle",    label:"Wordle Cognome",            icon:"🔤", desc:"Indovina il cognome lettera per lettera in 6 tentativi.",            badge:"379 cognomi",  accent:"#378ADD", badgeBg:"#E6F1FB", badgeTx:"#185FA5", size:"big"},
+  {key:"hangman",   label:"Impiccato",                 icon:"🪢", desc:"Scopri il cognome prima che il pupazzo sia completato. 8 errori.",   badge:"529 cognomi",  accent:"#1D9E75", badgeBg:"#E1F5EE", badgeTx:"#0F6E56", size:"big"},
+  {key:"carriera",  label:"Indovina la Carriera",      icon:"🏆", desc:"Indovina il calciatore dai club della sua carriera.",                badge:"72 calciatori",accent:"#7F77DD", badgeBg:"#EEEDFE", badgeTx:"#3C3489", size:"big"},
+  {key:"valore2",   label:"Chi Vale di Più?",          icon:"💶", desc:"Confronta valori di mercato.", badge:"Farai 3/3?",      accent:"#D85A30", badgeBg:"#FAECE7", badgeTx:"#993C1D", size:"small"},
+  {key:"lista",     label:"Sfida a Tempo",             icon:"⏱", desc:"Trova i nomi in 90 secondi.",  badge:"50 categorie",   accent:"#E91E8C", badgeBg:"#FBEAF0", badgeTx:"#993556", size:"small"},
+  {key:"transfer",  label:"Indovina il Trasferimento", icon:"🔄", desc:"Indovina cifra, club e anno.", badge:"42 trasferimenti",accent:"#888780", badgeBg:"#F1EFE8", badgeTx:"#5F5E5A", size:"small"},
+  {key:"rosa",      label:"Indovina la Rosa",          icon:"👕", desc:"Nomina tutta la rosa in 60s.", badge:"20 squadre",     accent:"#BA7517", badgeBg:"#FAEEDA", badgeTx:"#854F0B", size:"small"},
 ];
 
 function Card({m,onDaily,onArchive}){
@@ -2177,7 +2377,7 @@ function Card({m,onDaily,onArchive}){
       </div>
       {played&&<span style={{fontSize:"8px",color:US.green,fontWeight:"700",background:US.greenL,borderRadius:"4px",padding:"1px 5px",flexShrink:0}}>✓</span>}
     </div>
-    {isBig&&<span style={{fontSize:"10px",color:US.muted,lineHeight:1.3}}>{m.desc}</span>}
+    <span style={{fontSize:"10px",color:US.muted,lineHeight:1.3}}>{m.desc}</span>
     {m.badge&&<div><span style={{fontSize:"9px",fontWeight:"600",color:m.badgeTx,background:m.badgeBg||"transparent",borderRadius:"4px",padding:m.badgeBg?"2px 6px":"0"}}>{m.badge}</span></div>}
     <div style={{display:"flex",gap:"3px",marginTop:"4px"}}>
       <button onClick={()=>onDaily(m.key)} style={{flex:1,background:US.orange,color:US.black,border:"none",borderRadius:"4px",padding:"6px 2px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>🗓 Daily</button>
