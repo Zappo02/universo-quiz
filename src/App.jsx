@@ -1648,23 +1648,36 @@ function ShareButton({text}){
     try{navigator.clipboard.writeText(text).then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2000);});}
     catch(e){/* fallback */const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);setCopied(true);setTimeout(()=>setCopied(false),2000);}
   }
-  return(<button onClick={share} style={{...T.sb,display:"flex",alignItems:"center",gap:"6px",justifyContent:"center",width:"100%",marginTop:"8px",background:copied?US.greenL:"#fff",borderColor:copied?US.green:"#333",color:copied?US.green:US.black}}>
-    {copied?"✓ Copiato!":"📤 Condividi risultato"}
+  return(<button onClick={share} style={{display:"flex",alignItems:"center",gap:"6px",justifyContent:"center",
+    width:"100%",marginTop:"10px",padding:"11px",borderRadius:"8px",cursor:"pointer",
+    fontFamily:"inherit",fontWeight:"700",fontSize:"13px",border:"none",
+    background:copied?"#dcfce7":"#f5e000",color:copied?"#15803d":"#111",
+    transition:"all 0.2s",letterSpacing:"0.2px"}}>
+    {copied?"✓ Copiato negli appunti!":"📤 Condividi risultato"}
   </button>);
 }
 
 function DoneScreen({gameKey,day,isToday,onHome,onArchive,children}){
-  // children = the result UI to show (passed as function or element)
   const saved=isToday?loadResult(gameKey):null;
   if(saved)return(
-    <div style={{...T.body,textAlign:"center",paddingTop:"32px"}}>
-      <div style={{fontSize:"11px",color:US.muted,marginBottom:"4px",letterSpacing:"1px",textTransform:"uppercase"}}>Hai già giocato oggi</div>
-      {children(saved)}
-      {isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}
-      <button onClick={onHome} style={{...T.pb,marginTop:"8px",width:"100%"}}>Home</button>
+    <div style={{...T.body,textAlign:"center",paddingTop:"24px"}}>
+      <div style={{display:"inline-flex",alignItems:"center",gap:"6px",background:US.greenL,
+        borderRadius:"20px",padding:"5px 14px",marginBottom:"14px"}}>
+        <span style={{fontSize:"12px",color:US.green,fontWeight:"700",letterSpacing:"0.5px",textTransform:"uppercase"}}>
+          ✓ Già giocato oggi
+        </span>
+      </div>
+      <div style={{background:US.surface,borderRadius:"10px",padding:"16px",marginBottom:"12px",
+        border:`1px solid ${US.border}`}}>
+        {children(saved)}
+      </div>
+      {isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginBottom:"8px",color:US.black}}>
+        📂 Gioca le sfide passate
+      </button>}
+      <button onClick={onHome} style={{...T.pb,width:"100%"}}>← Torna alla Home</button>
     </div>
   );
-  return null; // not done yet — game renders normally
+  return null;
 }
 
 function Hdr({title,sub,onHome,archiveNav}){
@@ -1800,13 +1813,20 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   }
   // Flip cell component
 
-  if(savedToday)return(<div style={T.app}><Hdr title="Calciodle" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/><DoneScreen gameKey="calciodle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+  if(savedToday)return(<div style={T.app}><Hdr title="Calciodle" sub={`🗓 Giornaliero • #${day}`} onHome={onHome}/><DoneScreen gameKey="calciodle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
     <div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.won?`Trovato in ${s.attempts}/6`:"Non trovato"}</div>
-    <div style={{fontSize:"11px",color:US.muted,marginBottom:"12px"}}>{target.name}</div>
+    <div style={{fontSize:"12px",color:US.muted,marginBottom:"12px"}}>{target.name}</div>
     <ShareButton text={`⚽ Calciodle #${day}\n${s.won?"Trovato in "+s.attempts+"/6":"Non trovato"}\nuniverso-quiz-hmix.vercel.app`}/>
   </>}</DoneScreen></div>);
-  return(<div style={{...T.app,position:"relative"}}><Hdr title="Calciodle" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={{...T.app,position:"relative"}}><Hdr title="Calciodle" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+    <div style={{display:"flex",gap:"4px",padding:"6px 12px",background:"#f8f8f6",borderBottom:`1px solid ${US.border}`,justifyContent:"center",flexWrap:"wrap"}}>
+      {[["🟩","Esatto"],["🟨","Simile"],["🟥","Diverso"],["↑↓","Direzione età/valore"]].map(([ic,lb])=>(
+        <div key={lb} style={{display:"flex",alignItems:"center",gap:"3px",fontSize:"10px",color:US.muted}}>
+          <span style={{fontSize:"11px"}}>{ic}</span><span>{lb}</span>
+        </div>
+      ))}
+    </div>
     <div style={T.body}>
       {/* INPUT PRIMA — sempre visibile su mobile */}
       {!ov&&<div style={{marginBottom:"14px"}}>
@@ -1927,19 +1947,19 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   const colBg={green:US.green,yellow:US.yellow,gray:"#9ca3af"};
 
   const[hint,setHint]=useState(false);
-  if(savedToday)return(<div style={T.app}><Hdr title="Wordle Cognome" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/><DoneScreen gameKey="wordle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+  if(savedToday)return(<div style={T.app}><Hdr title="Wordle Cognome" sub={`🗓 Giornaliero • #${day}`} onHome={onHome}/><DoneScreen gameKey="wordle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
     <div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.won?`Trovato in ${s.attempts}/6`:"Non trovato"}</div>
-    <div style={{fontSize:"11px",color:US.muted,marginBottom:"12px"}}>{word}</div>
+    <div style={{fontSize:"12px",color:US.muted,marginBottom:"12px"}}>{word}</div>
     <ShareButton text={`🔤 Wordle #${day}\n${s.won?"Trovato in "+s.attempts+"/6":"Non trovato"}\n${word}\nuniverso-quiz-hmix.vercel.app`}/>
   </>}</DoneScreen></div>);
-  return(<div style={{...T.app,position:"relative"}}>{showConfetti&&<Confetti active={showConfetti}/>}<Hdr title="Wordle Cognome" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={{...T.app,position:"relative"}}>{showConfetti&&<Confetti active={showConfetti}/>}<Hdr title="Wordle Cognome" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"400px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
         <span style={{fontSize:"11px",color:"#aaa"}}>{word.length} lettere</span>
         <button onClick={()=>setHint(h=>!h)} style={{background:"none",border:`1px solid ${hint?US.yellow:"#ddd"}`,borderRadius:"4px",padding:"3px 9px",fontSize:"9px",color:hint?US.yellow:"#aaa",cursor:"pointer",fontFamily:"inherit"}}>💡 {hint?"Nascondi":"Indizio"}</button>
       </div>
-      {hint&&<div style={{fontSize:"10px",color:"#777",marginBottom:"10px",padding:"6px 10px",background:"#fffbea",border:"1px solid #fde68a",borderRadius:"4px"}}>{player.nation} · {player.role} · {player.club}</div>}
+      {hint&&<div style={{fontSize:"10px",color:"#777",marginBottom:"10px",padding:"6px 10px",background:"#fffbea",border:"1px solid #fde68a",borderRadius:"4px"}}>{player.nation} • {player.role} • {player.club}</div>}
       {/* Grid */}
       <div style={{display:"flex",flexDirection:"column",gap:"5px",marginBottom:"16px",alignItems:"center"}}>
         {Array.from({length:MAX_ATT}).map((_,ri)=>{
@@ -1966,10 +1986,10 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
         {/* Tastiera visiva */}
         <div style={{marginTop:"12px"}}>{[["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"]].map((row,ri)=><div key={ri} style={{display:"flex",justifyContent:"center",gap:"3px",marginBottom:"3px"}}>{row.map(k=>{const st=used[k];return<button key={k} onClick={()=>setCurrent(c=>(c.length<word.length?c+k:c))} style={{background:st?(colBg[st]||"#9ca3af"):"#e0e0e0",color:st?"#fff":"#333",border:"none",borderRadius:"3px",padding:"8px 5px",minWidth:"26px",fontSize:"10px",fontWeight:"600",cursor:"pointer",fontFamily:"inherit"}}>{k}</button>;})} </div>)}</div>
       </div>}
-      {(status==="won"||status==="lost")&&<div style={{textAlign:"center",padding:"14px",background:status==="won"?US.greenL:US.redL,borderRadius:"6px",color:status==="won"?US.green:US.red}}>
+      {(status==="won"||status==="lost")&&<div className="pop-in" style={{textAlign:"center",padding:"14px",background:status==="won"?US.greenL:US.redL,borderRadius:"6px",color:status==="won"?US.green:US.red}}>
         <div style={{fontSize:"14px",fontWeight:"700",marginBottom:"4px"}}>{status==="won"?"Corretto!":"Era..."}</div>
         <div style={{fontSize:"18px",fontWeight:"700",letterSpacing:"3px"}}>{word}</div>
-        <div style={{fontSize:"11px",marginTop:"2px",color:"#666"}}>{player.name} · {player.club}</div>
+        <div style={{fontSize:"11px",marginTop:"2px",color:"#666"}}>{player.name} • {player.club}</div>
         <ShareButton text={`🔤 Wordle #${day} — ${word}\n${attempts.map(a=>a.map(x=>x.s==="green"?"🟩":x.s==="yellow"?"🟨":"⬛").join("")).join("\n")}\nuniverso-quiz-hmix.vercel.app`}/>{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}
         {!isToday&&<button onClick={()=>{setAttempts([]);setCurrent("");setStatus("playing");}} style={{...T.sb,marginTop:"10px",color:US.black}}>🔀 Rigioca</button>}
       </div>}
@@ -1996,23 +2016,23 @@ function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
 
   const[hint,setHint]=useState(false);const[hgConfetti,setHgConfetti]=useState(false);
   useEffect(()=>{if(st==="w"&&!hgConfetti)setTimeout(()=>setHgConfetti(true),500);},[st]);
-  if(savedToday)return(<div style={T.app}><Hdr title="Impiccato" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/><DoneScreen gameKey="hangman" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
+  if(savedToday)return(<div style={T.app}><Hdr title="Impiccato" sub={`🗓 Giornaliero • #${day}`} onHome={onHome}/><DoneScreen gameKey="hangman" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
     <div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>{s.won?"🎉":"😔"}</div>
     <div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.won?"Trovato!":"Non trovato"}</div>
-    <div style={{fontSize:"11px",color:US.muted,marginBottom:"12px"}}>{s.word}</div>
+    <div style={{fontSize:"12px",color:US.muted,marginBottom:"12px"}}>{s.word}</div>
     <ShareButton text={`🪢 Impiccato #${day}\n${s.won?"Trovato":"Non trovato"}: ${s.word}\nuniverso-quiz-hmix.vercel.app`}/>
   </>}</DoneScreen></div>);
-  return(<div style={{...T.app,position:"relative"}}>{hgConfetti&&<Confetti active={hgConfetti}/>}<Hdr title="Impiccato" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={{...T.app,position:"relative"}}>{hgConfetti&&<Confetti active={hgConfetti}/>}<Hdr title="Impiccato" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"400px"}}>
       <div style={{display:"flex",justifyContent:"flex-end",marginBottom:"6px"}}>
         <button onClick={()=>setHint(h=>!h)} style={{background:"none",border:`1px solid ${hint?US.yellow:"#ddd"}`,borderRadius:"4px",padding:"3px 9px",fontSize:"9px",color:hint?US.yellow:"#aaa",cursor:"pointer",fontFamily:"inherit"}}>💡 {hint?"Nascondi":"Indizio"}</button>
       </div>
-      {hint&&<div style={{fontSize:"10px",color:"#777",marginBottom:"6px",padding:"6px 10px",background:"#fffbea",border:"1px solid #fde68a",borderRadius:"4px"}}>{pl.nation} · {pl.role} · {pl.age} anni</div>}
+      {hint&&<div style={{fontSize:"10px",color:"#777",marginBottom:"6px",padding:"6px 10px",background:"#fffbea",border:"1px solid #fde68a",borderRadius:"4px"}}>{pl.nation} • {pl.role} • {pl.age} anni</div>}
       <div style={{display:"flex",justifyContent:"center",marginBottom:"8px"}}><svg width="100" height="88" viewBox="0 0 100 88"><line x1="12" y1="84" x2="88" y2="84" stroke="#ddd" strokeWidth="2"/><line x1="24" y1="84" x2="24" y2="6" stroke="#ddd" strokeWidth="2"/><line x1="24" y1="6" x2="50" y2="6" stroke="#ddd" strokeWidth="2"/>{bodyParts.slice(0,wc)}</svg></div>
       <div style={{display:"flex",justifyContent:"center",gap:"4px",marginBottom:"14px",flexWrap:"wrap"}}>{wd.split("").map((c,i)=><div key={i} style={{width:"28px",height:"36px",borderBottom:`2.5px solid ${st==="l"&&!gu.has(c)?US.red:US.black}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"17px",fontWeight:"700",color:st==="l"&&!gu.has(c)?US.red:US.black}}>{gu.has(c)||st==="l"?c:""}</div>)}</div>
       <div style={{textAlign:"center",marginBottom:"10px",fontSize:"10px",color:"#999"}}>Errori: <strong style={{color:wc>=5?US.red:"#333"}}>{wc}/{M}</strong></div>
       {st==="p"&&<div>{[["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"]].map((row,ri)=><div key={ri} style={{display:"flex",justifyContent:"center",gap:"2px",marginBottom:"2px"}}>{row.map(k=>{const u=gu.has(k),cr=wd.includes(k)&&u,wr2=!wd.includes(k)&&u;return<button key={k} onClick={()=>g(k)} disabled={u} style={{background:cr?US.green:wr2?US.red:u?"#ccc":"#e8e8e8",color:u?"#fff":"#333",border:"none",borderRadius:"3px",padding:"7px 4px",minWidth:"24px",fontSize:"10px",fontWeight:"600",cursor:u?"default":"pointer",fontFamily:"inherit",opacity:u?0.7:1}}>{k}</button>;})} </div>)}</div>}
-      {(st==="w"||st==="l")&&<div style={{textAlign:"center",marginTop:"10px"}}><div style={{padding:"9px",borderRadius:"2px",background:st==="w"?US.greenL:US.redL,color:st==="w"?US.green:US.red,fontSize:"13px",fontWeight:"700",marginBottom:"8px"}}>{st==="w"?"🎉 Trovato!":"💀 Non trovato — "+wd}</div><ShareButton text={`🪢 Impiccato #${day} — ${st==="w"?"Trovato":"Non trovato"} (${wc}/${M} errori)\\n${wd}\\nuniverso-quiz-hmix.vercel.app`}/>{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}<button onClick={onHome} style={{...T.pb,marginTop:"8px"}}>Home</button></div>}
+      {(st==="w"||st==="l")&&<div className="pop-in" style={{textAlign:"center",marginTop:"10px"}}><div style={{padding:"9px",borderRadius:"2px",background:st==="w"?US.greenL:US.redL,color:st==="w"?US.green:US.red,fontSize:"13px",fontWeight:"700",marginBottom:"8px"}}>{st==="w"?"🎉 Trovato!":"💀 Non trovato — "+wd}</div><ShareButton text={`🪢 Impiccato #${day} — ${st==="w"?"Trovato":"Non trovato"} (${wc}/${M} errori)\\n${wd}\\nuniverso-quiz-hmix.vercel.app`}/>{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}<button onClick={onHome} style={{...T.pb,marginTop:"8px"}}>Home</button></div>}
     </div>
   </div>);
 }
@@ -2033,7 +2053,7 @@ function ValoreGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   if(!pairs.length||dn)return(<div style={T.app}><Hdr title="Chi Vale di Più?" onHome={onHome}/><div style={{...T.body,textAlign:"center",paddingTop:"40px"}}><div style={{fontSize:"48px",fontWeight:"300",color:US.black}}>{sc}<span style={{fontSize:"18px"}}> / {RR}</span></div><div style={{fontSize:"12px",color:"#888",marginBottom:"3px"}}>risposte corrette</div><div style={{fontSize:"11px",color:"#aaa",marginBottom:"18px"}}>Serie migliore: {best}</div><ShareButton text={`🆚 Chi Vale di Più? #${day}\n${sc}/${RR} corretti\nuniverso-quiz-hmix.vercel.app`}/>{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}<button onClick={onHome} style={T.pb}>Home</button></div></div>);
   const[a,b]=pairs[rn],cor=a.value>b.value?a:b;
   function choose(p){if(ch)return;sCh(p);const ok=p.name===cor.name;if(ok){sSc(x=>x+1);const ns=str+1;sStr(ns);sBest(x=>Math.max(x,ns));}else sStr(0);setTimeout(()=>{sCh(null);const nr=rn+1;if(nr>=RR){if(isToday)saveResult("valore2",{score:sc+(ok?1:0),total:RR});sDn(true);}else sRn(nr);},1500);}
-  return(<div style={T.app}><Hdr title="Chi Vale di Più?" sub={`${label} · #${day} · ${rn+1}/${RR}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={T.app}><Hdr title="Chi Vale di Più?" sub={`${label} • #${day} • ${rn+1}/${RR}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"480px"}}>
       <div style={{height:"3px",background:"#e0e0e0",borderRadius:"2px",marginBottom:"16px",overflow:"hidden"}}><div style={{height:"100%",width:`${(rn/RR*100).toFixed(0)}%`,background:US.green,transition:"width 0.3s"}}/></div>
       <div style={{fontSize:"11px",color:"#aaa",textAlign:"center",marginBottom:"12px"}}>Chi ha il valore di mercato più alto?</div>
@@ -2064,8 +2084,8 @@ function CarreiraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     sGu("");
   }
   if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Indovina dalla Carriera" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="carriera" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>🏆</div><div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.score} punti</div><ShareButton text={`🏆 Indovina la Carriera #${day}\n${s.score} punti\nuniverso-quiz-hmix.vercel.app`}/></>}</DoneScreen></div>);
-  if(fin)return(<div style={T.app}><Hdr title="Indovina dalla Carriera" onHome={onHome}/><div style={{...T.body,textAlign:"center",paddingTop:"40px"}}><div style={{fontSize:"48px",fontWeight:"300",color:US.black}}>{sc}</div><div style={{fontSize:"12px",color:"#888",marginBottom:"18px"}}>punti totali</div><ShareButton text={`🏆 Indovina la Carriera #${day}\n${sc} punti\nuniverso-quiz-hmix.vercel.app`}/>{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}<button onClick={onHome} style={{...T.pb,marginTop:"8px"}}>Home</button></div></div>);
-  return(<div style={T.app}><Hdr title="Indovina dalla Carriera" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  if(fin)return(<div style={T.app} className="pop-in"><Hdr title="Indovina dalla Carriera" onHome={onHome}/><div style={{...T.body,textAlign:"center",paddingTop:"40px"}}><div style={{fontSize:"48px",fontWeight:"300",color:US.black}}>{sc}</div><div style={{fontSize:"12px",color:"#888",marginBottom:"18px"}}>punti totali</div><ShareButton text={`🏆 Indovina la Carriera #${day}\n${sc} punti\nuniverso-quiz-hmix.vercel.app`}/>{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}<button onClick={onHome} style={{...T.pb,marginTop:"8px"}}>Home</button></div></div>);
+  return(<div style={T.app}><Hdr title="Indovina dalla Carriera" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"520px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
         <div style={{fontSize:"11px",color:"#888"}}>{st==="p"&&<>Vale <strong style={{color:US.black}}>{pts} punt{pts===1?"o":"i"}</strong></>}</div>
@@ -2135,7 +2155,7 @@ function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     const missed=squadra.giocatori.filter(p=>!found.includes(p));
     const pct=Math.round(found.length/squadra.giocatori.length*100);
     const emoji=pct===100?"🏆":pct>=70?"🥇":pct>=40?"👍":"📚";
-    return(<div style={T.app}><Hdr title={`Rosa Quiz · ${squadra.nome}`} sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+    return(<div style={T.app}><Hdr title={`Rosa Quiz • ${squadra.nome}`} sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
       <div style={T.body}>
         <div style={{textAlign:"center",marginBottom:"20px"}}><div style={{fontSize:"36px"}}>{emoji}</div><div style={{fontSize:"50px",fontWeight:"300",color:US.black,lineHeight:1}}>{found.length}<span style={{fontSize:"18px",color:US.muted}}>/{squadra.giocatori.length}</span></div><div style={{fontSize:"11px",color:US.muted,marginTop:"3px"}}>trovati ({pct}%)</div></div>
         {found.length>0&&<div style={{marginBottom:"14px"}}><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.green,marginBottom:"6px",fontWeight:"700"}}>✓ Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"5px"}}>{found.map(p=><div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"3px 8px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}
@@ -2148,7 +2168,7 @@ function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
       </div>
     </div>);
   }
-  return(<div style={T.app}><Hdr title={`Rosa Quiz · ${squadra.emoji} ${squadra.nome}`} sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={T.app}><Hdr title={`Rosa Quiz • ${squadra.emoji} ${squadra.nome}`} sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={T.body}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"14px"}}>
         <TimerRing seconds={seconds} total={TOTAL}/>
@@ -2160,8 +2180,8 @@ function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
       </div>
       <div style={{marginBottom:"12px"}}>
         <input ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} onFocus={e=>setTimeout(()=>e.target.scrollIntoView({behavior:"smooth",block:"center"}),300)} placeholder="Scrivi un cognome..." style={{width:"100%",boxSizing:"border-box",border:`2px solid ${wrong?US.red:lastFound?US.green:US.border}`,borderRadius:"6px",padding:"11px 13px",fontSize:"14px",fontFamily:"inherit",outline:"none",color:US.black,background:wrong?US.redL:lastFound?US.greenL:"#fff",transition:"all 0.2s"}}/>
-        {lastFound&&<div style={{fontSize:"11px",color:US.green,marginTop:"4px",fontWeight:"600",display:"flex",alignItems:"center",gap:"8px"}}>✓ {lastFound}<span style={{background:US.green,color:"#fff",borderRadius:"4px",padding:"1px 6px",fontSize:"10px"}}>+{BONUS}s ⏱</span></div>}
-        {wrong&&<div style={{fontSize:"11px",color:US.red,marginTop:"4px"}}>✗ "{wrong}" — non trovato</div>}
+        {lastFound&&<div style={{fontSize:"12px",color:US.green,marginTop:"4px",fontWeight:"600",display:"flex",alignItems:"center",gap:"8px"}}>✓ {lastFound}<span style={{background:US.green,color:"#fff",borderRadius:"4px",padding:"1px 6px",fontSize:"10px"}}>+{BONUS}s ⏱</span></div>}
+        {wrong&&<div style={{fontSize:"12px",color:US.red,marginTop:"4px"}}>✗ "{wrong}" — non trovato</div>}
       </div>
       {found.length>0&&<div><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.muted,marginBottom:"6px"}}>Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"5px"}}>{found.map(p=><div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"3px 8px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}
     </div>
@@ -2358,7 +2378,7 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   if(done){
     const missed=validAnswers.filter(p=>!found.includes(p));
     const emoji=pct===100?"🏆":pct>=70?"🥇":pct>=40?"👍":"📚";
-    return(<div style={T.app}><Hdr title="Sfida a Tempo" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+    return(<div style={T.app}><Hdr title="Sfida a Tempo" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
       <div style={T.body}>
         <div style={{marginBottom:"14px",padding:"10px 13px",background:US.black,borderRadius:"6px"}}>
           <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"2px"}}>Categoria</div>
@@ -2379,7 +2399,7 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
       </div>
     </div>);
   }
-  return(<div style={T.app}><Hdr title="Sfida a Tempo" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={T.app}><Hdr title="Sfida a Tempo" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={T.body}>
       <div style={{marginBottom:"12px",padding:"10px 13px",background:US.black,borderRadius:"6px"}}>
         <div style={{fontSize:"8px",color:US.orange,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"2px"}}>Categoria di oggi</div>
@@ -2399,8 +2419,8 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
       </div>
       <div style={{marginBottom:"12px"}}>
         <input ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} onFocus={e=>setTimeout(()=>e.target.scrollIntoView({behavior:"smooth",block:"center"}),300)} placeholder="Scrivi un nome..." style={{width:"100%",boxSizing:"border-box",border:`2px solid ${wrong?US.red:lastFound?US.green:US.border}`,borderRadius:"6px",padding:"11px 13px",fontSize:"14px",fontFamily:"inherit",outline:"none",color:US.black,background:wrong?US.redL:lastFound?US.greenL:"#fff",transition:"all 0.2s"}}/>
-        {lastFound&&<div style={{fontSize:"11px",color:US.green,marginTop:"4px",fontWeight:"600",display:"flex",alignItems:"center",gap:"8px"}}>✓ {lastFound}<span style={{background:US.green,color:"#fff",borderRadius:"4px",padding:"1px 6px",fontSize:"10px"}}>+{BONUS}s ⏱</span></div>}
-        {wrong&&<div style={{fontSize:"11px",color:US.red,marginTop:"4px"}}>✗ "{wrong}" — non in lista</div>}
+        {lastFound&&<div style={{fontSize:"12px",color:US.green,marginTop:"4px",fontWeight:"600",display:"flex",alignItems:"center",gap:"8px"}}>✓ {lastFound}<span style={{background:US.green,color:"#fff",borderRadius:"4px",padding:"1px 6px",fontSize:"10px"}}>+{BONUS}s ⏱</span></div>}
+        {wrong&&<div style={{fontSize:"12px",color:US.red,marginTop:"4px"}}>✗ "{wrong}" — non in lista</div>}
       </div>
       {found.length>0&&<div><div style={{fontSize:"8px",letterSpacing:"2px",textTransform:"uppercase",color:US.muted,marginBottom:"6px"}}>Trovati</div><div style={{display:"flex",flexWrap:"wrap",gap:"5px"}}>{found.map(p=><div key={p} style={{background:US.greenL,color:US.green,border:"1px solid #bbf7d0",borderRadius:"4px",padding:"3px 8px",fontSize:"11px",fontWeight:"600"}}>{p}</div>)}</div></div>}
     </div>
@@ -2514,7 +2534,7 @@ function TransferGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   }
   const score=Object.values(results).filter(v=>v==="green").length;
   const colMap={green:US.green,yellow:US.yellow,red:US.red};
-  return(<div style={T.app}><Hdr title="Indovina il Trasferimento" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+  return(<div style={T.app}><Hdr title="Indovina il Trasferimento" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"480px"}}>
       {/* Player card */}
       <div style={{background:US.black,borderRadius:"8px",padding:"14px 16px",marginBottom:"18px"}}>
@@ -2554,7 +2574,7 @@ function TransferGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
           return null;
         })}
       </div>
-      {step===3&&<div style={{textAlign:"center",padding:"12px",background:score===3?US.greenL:score>=1?"#fffbea":US.redL,borderRadius:"6px",color:score===3?US.green:score>=1?US.yellow:US.red,marginTop:"4px"}}>
+      {step===3&&<div className="pop-in" style={{textAlign:"center",padding:"12px",background:score===3?US.greenL:score>=1?"#fffbea":US.redL,borderRadius:"6px",color:score===3?US.green:score>=1?US.yellow:US.red,marginTop:"4px"}}>
         <div style={{fontSize:"20px",fontWeight:"700"}}>{score}/3 corretti</div>
         <div style={{fontSize:"11px",marginTop:"4px",color:"#666"}}>{score===3?"Perfetto!":score===2?"Quasi!":score===1?"Ci sei vicino":"Riprova domani"}</div>
         <ShareButton text={`💸 Trasferimento #${day}\n${tr.player} → ${tr.to}\n${["fee","from","year"].map(k=>results[k]==="green"?"✅":results[k]==="yellow"?"🟨":"❌").join(" ")} ${score}/3\nuniverso-quiz-hmix.vercel.app`}/>
@@ -2700,24 +2720,24 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
   const remaining=allPlayers.filter(p=>!solved.some(s=>s.players.includes(p.name)));
 
   if(savedToday)return(
-    <div style={T.app}><Hdr title="Connections" sub={`🗓 Giornaliero · #${day}`} onHome={onHome}/>
+    <div style={T.app}><Hdr title="Connections" sub={`🗓 Giornaliero • #${day}`} onHome={onHome}/>
     <DoneScreen gameKey="connections" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
       <div style={{fontSize:"36px",marginBottom:"6px"}}>{s.won?"🎉":"😔"}</div>
       <div style={{fontSize:"14px",fontWeight:"700",color:US.black,marginBottom:"4px"}}>{s.won?"Completato!":"Non completato"}</div>
-      <div style={{fontSize:"11px",color:US.muted,marginBottom:"12px"}}>Errori: {s.errors}/{MAX_ERRORS}</div>
+      <div style={{fontSize:"12px",color:US.muted,marginBottom:"12px"}}>Errori: {s.errors}/{MAX_ERRORS}</div>
       <ShareButton text={`🔗 Connections #${day}\n${s.won?"Completato":"Non completato"} (${s.errors} errori)\nuniverso-quiz-hmix.vercel.app`}/>
     </>}</DoneScreen></div>
   );
 
   return(<div style={{...T.app,position:"relative"}}>
     {confettiShow&&<Confetti active={confettiShow}/>}
-    <Hdr title="Connections" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+    <Hdr title="Connections" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"520px"}}>
       <div style={{fontSize:"11px",color:US.muted,textAlign:"center",marginBottom:"10px"}}>Trova i 4 gruppi da 4 calciatori</div>
 
       {/* Gruppi risolti */}
       {solved.map(g=>(
-        <div key={g.label} style={{background:CONN_COLORS[g.color].bg,borderRadius:"6px",padding:"10px 14px",marginBottom:"6px",textAlign:"center"}}>
+        <div key={g.label} className="conn-solve" style={{background:CONN_COLORS[g.color].bg,borderRadius:"6px",padding:"10px 14px",marginBottom:"6px",textAlign:"center"}}>
           <div style={{fontSize:"10px",fontWeight:"700",color:"#fff",letterSpacing:"1px",textTransform:"uppercase",marginBottom:"3px"}}>{g.label}</div>
           <div style={{fontSize:"12px",color:"rgba(255,255,255,0.9)"}}>{g.players.join(", ")}</div>
         </div>
@@ -2792,7 +2812,7 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
       </div>}
 
       {/* Fine partita */}
-      {done&&<div style={{textAlign:"center",marginTop:"8px"}}>
+      {done&&<div className="pop-in" style={{textAlign:"center",marginTop:"8px"}}>
         {/* Mostra gruppi non risolti */}
         {puzzle.groups.map(g=>{
           const ws=solved.some(s=>s.label===g.label);
@@ -2892,7 +2912,7 @@ function FootGuesserGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
 
   return(<div style={{...T.app,position:'relative'}}>
     {fgConfetti&&<Confetti active={fgConfetti}/>}
-    <Hdr title="FootGuessr" sub={`${isToday?"🗓 Giornaliero":"📂 Archivio"} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
+    <Hdr title="FootGuessr" sub={`${isToday?"🗓 Giornaliero":"📂 Archivio"} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={T.body}>
 
       {/* Pulsante come funziona */}
@@ -2979,7 +2999,7 @@ function FootGuesserGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
                 display:'flex',justifyContent:'space-between',alignItems:'center'}}
               onMouseEnter={()=>setHiIdx(i)}>
               <span>{p.n}</span>
-              <span style={{fontSize:'11px',color:US.muted}}>{p.c} · {p.r}</span>
+              <span style={{fontSize:'11px',color:US.muted}}>{p.c} • {p.r}</span>
             </div>
           ))}
         </div>}
@@ -3008,7 +3028,7 @@ function FootGuesserGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
           Trovato! Era {target.n}
         </div>
         <div style={{fontSize:'12px',color:US.muted}}>
-          {target.c} · {target.r} · {target.nat} · {target.a} anni · €{target.v}M
+          {target.c} • {target.r} • {target.nat} • {target.a} anni • €{target.v}M
         </div>
         <div style={{fontSize:'12px',color:US.muted,marginTop:'2px'}}>
           {guesses.length} tentativ{guesses.length===1?'o':'i'}
@@ -3024,17 +3044,23 @@ function FootGuesserGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
           const barCol=isWin?'#639922':rank<=15?'#E24B4A':rank<=60?'#BA7517':'#378ADD';
           const badgeBg=isWin?'#EAF3DE':rank<=15?'#FCEBEB':rank<=60?'#FAEEDA':'#E6F1FB';
           const badgeTx=isWin?'#3B6D11':rank<=15?'#A32D2D':rank<=60?'#854F0B':'#0C447C';
+          const prevRank=idx<guesses.length-1?guesses[idx+1].rank:null;
+          const arrow=isWin?'':prevRank===null?'':rank<prevRank?'↑':rank>prevRank?'↓':'=';
+          const arrowCol=arrow==='↑'?'#22c55e':arrow==='↓'?'#ef4444':'#888';
           return(
             <div key={idx} style={{display:'grid',gridTemplateColumns:'1fr auto',gap:'8px',
               alignItems:'center',padding:'8px 12px',borderRadius:'6px',
               border:`0.5px solid ${isWin?'#86efac':US.border}`,
               background:isWin?'#f0fdf4':US.bg}}>
               <div>
-                <div style={{fontSize:'13px',fontWeight:'500',color:US.black}}>{p.n}</div>
-                <div style={{fontSize:'11px',color:US.muted,marginTop:'2px'}}>
-                  {p.c} · {p.r} · {p.nat} · {p.a} anni · €{p.v}M
+                <div style={{display:'flex',alignItems:'center',gap:'6px'}}>
+                  <span style={{fontSize:'13px',fontWeight:'500',color:US.black}}>{p.n}</span>
+                  {arrow&&<span style={{fontSize:'11px',fontWeight:'700',color:arrowCol}}>{arrow}</span>}
                 </div>
-                <div style={{height:'3px',borderRadius:'2px',marginTop:'5px',
+                <div style={{fontSize:'11px',color:US.muted,marginTop:'2px'}}>
+                  {p.c} • {p.r} • {p.nat} • {p.a} anni • €{p.v}M
+                </div>
+                <div style={{height:'7px',borderRadius:'4px',marginTop:'6px',
                   width:`${pct}%`,background:barCol,maxWidth:'100%'}}/>
               </div>
               <div style={{fontSize:'13px',fontWeight:'500',padding:'4px 10px',
@@ -3074,19 +3100,21 @@ function Card({m,onDaily,onArchive}){
   const isBig=m.size==="big";
   const borderColor=played?US.green:hv?US.orange:US.border;
   const accentStyle=m.accent?{borderLeft:`3px solid ${m.accent}`}:{};
-  return(<div style={{background:"#fff",border:`1px solid ${borderColor}`,...accentStyle,borderRadius:"8px",padding:"11px",transition:"border-color 0.15s",display:"flex",flexDirection:"column",gap:"3px"}} onMouseEnter={()=>sHv(true)} onMouseLeave={()=>sHv(false)}>
-    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"1px"}}>
-      <div style={{display:"flex",alignItems:"center",gap:"5px"}}>
-        <span style={{fontSize:isBig?"17px":"15px"}}>{m.icon}</span>
-        <span style={{fontSize:isBig?"12px":"11px",fontWeight:"700",color:US.black,lineHeight:1.2}}>{m.label}</span>
+  return(<div style={{background:"#fff",border:`1px solid ${borderColor}`,...accentStyle,borderRadius:"8px",padding:"11px",transition:"border-color 0.15s",display:"flex",flexDirection:"column",justifyContent:"space-between",minHeight:isBig?"130px":"110px"}} onMouseEnter={()=>sHv(true)} onMouseLeave={()=>sHv(false)}>
+    <div>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"4px"}}>
+        <div style={{display:"flex",alignItems:"center",gap:"5px"}}>
+          <span style={{fontSize:isBig?"17px":"15px"}}>{m.icon}</span>
+          <span style={{fontSize:isBig?"12px":"11px",fontWeight:"700",color:US.black,lineHeight:1.2}}>{m.label}</span>
+        </div>
+        {played&&<span style={{fontSize:"8px",color:US.green,fontWeight:"700",background:US.greenL,borderRadius:"4px",padding:"1px 5px",flexShrink:0}}>✓</span>}
       </div>
-      {played&&<span style={{fontSize:"8px",color:US.green,fontWeight:"700",background:US.greenL,borderRadius:"4px",padding:"1px 5px",flexShrink:0}}>✓</span>}
+      <span style={{fontSize:"10px",color:US.muted,lineHeight:1.3,display:"block"}}>{m.desc}</span>
+      {m.badge&&<div style={{marginTop:"4px"}}><span style={{fontSize:"9px",fontWeight:"600",color:m.badgeTx,background:m.badgeBg||"transparent",borderRadius:"4px",padding:m.badgeBg?"2px 6px":"0"}}>{m.badge}</span></div>}
     </div>
-    <span style={{fontSize:"10px",color:US.muted,lineHeight:1.3}}>{m.desc}</span>
-    {m.badge&&<div><span style={{fontSize:"9px",fontWeight:"600",color:m.badgeTx,background:m.badgeBg||"transparent",borderRadius:"4px",padding:m.badgeBg?"2px 6px":"0"}}>{m.badge}</span></div>}
-    <div style={{display:"flex",gap:"3px",marginTop:"4px"}}>
-      <button onClick={()=>onDaily(m.key)} style={{flex:1,background:US.orange,color:US.black,border:"none",borderRadius:"4px",padding:"6px 2px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>🗓 Daily</button>
-      <button onClick={()=>onArchive(m.key)} style={{flex:1,background:US.black,color:"#fff",border:"none",borderRadius:"4px",padding:"6px 2px",fontSize:"8px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit"}}>📂 Arch.</button>
+    <div style={{display:"flex",gap:"3px",marginTop:"8px"}}>
+      <button onClick={()=>onDaily(m.key)} style={{flex:1,background:US.orange,color:US.black,border:"none",borderRadius:"4px",padding:"8px 2px",fontSize:"9px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit",letterSpacing:"0.3px",minHeight:"36px"}}>🗓 Daily</button>
+      <button onClick={()=>onArchive(m.key)} style={{flex:1,background:US.black,color:"#fff",border:"none",borderRadius:"4px",padding:"8px 2px",fontSize:"9px",fontWeight:"700",textTransform:"uppercase",cursor:"pointer",fontFamily:"inherit",letterSpacing:"0.3px",minHeight:"36px"}}>📂 Arch.</button>
     </div>
   </div>);
 }
@@ -3098,30 +3126,57 @@ function Home({onSelect}){
   const bigModes=MODES.filter(m=>m.size==="big");
   const smallModes=MODES.filter(m=>m.size==="small");
   return(<div style={{...T.app,paddingBottom:"40px"}}>
-    <div style={{background:US.black,color:"#fff",padding:"18px 18px 14px",borderBottom:`3px solid ${US.orange}`}}>
-      <div style={{fontSize:"8px",letterSpacing:"3px",textTransform:"uppercase",color:US.orange,marginBottom:"2px",fontWeight:"700"}}>Universo Sportivo</div>
-      <div style={{fontSize:"21px",fontWeight:"700",letterSpacing:"-0.5px",marginBottom:"7px"}}>Quiz Calcio</div>
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"6px"}}>
-        <div>
-          <div style={{fontSize:"10px",color:"#666",textTransform:"capitalize"}}>{today}</div>
-          {playedToday>0&&<div style={{fontSize:"9px",color:US.green,marginTop:"2px",fontWeight:"700"}}>✓ {playedToday} {playedToday===1?"modalità completata oggi":"modalità completate oggi"}</div>}
+    <div style={{background:US.black,color:"#fff",padding:"18px 18px 16px",borderBottom:`3px solid ${US.orange}`}}>
+      <div style={{fontSize:"8px",letterSpacing:"3px",textTransform:"uppercase",color:US.orange,marginBottom:"3px",fontWeight:"700"}}>Universo Sportivo</div>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
+        <div style={{fontSize:"22px",fontWeight:"700",letterSpacing:"-0.5px",lineHeight:1}}>Quiz Calcio</div>
+        <div style={{textAlign:"right"}}>
+          <div style={{fontSize:"9px",color:"#555",marginBottom:"1px"}}>nuove sfide in</div>
+          <div style={{fontSize:"15px",fontWeight:"700",color:US.orange,fontVariantNumeric:"tabular-nums",letterSpacing:"1px"}}>{countdown}</div>
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:"5px",background:"rgba(255,255,255,0.07)",borderRadius:"6px",padding:"5px 10px"}}>
-          <span style={{fontSize:"9px",color:"#555"}}>🔄 refresh in</span>
-          <span style={{fontSize:"13px",fontWeight:"700",color:US.orange,fontVariantNumeric:"tabular-nums",letterSpacing:"0.5px"}}>{countdown}</span>
+      </div>
+      <div>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"5px"}}>
+          <div style={{fontSize:"10px",color:"#666",textTransform:"capitalize"}}>{today}</div>
+          <div style={{fontSize:"9px",color:playedToday===10?US.green:"#888",fontWeight:"700"}}>
+            {playedToday}/10 {playedToday===10?"✓ completate":"completate"}
+          </div>
+        </div>
+        <div style={{height:"4px",background:"#1a1a1a",borderRadius:"2px",overflow:"hidden"}}>
+          <div style={{height:"100%",width:`${playedToday/10*100}%`,background:playedToday===10?US.green:US.orange,
+            borderRadius:"2px",transition:"width 0.5s ease"}}/>
         </div>
       </div>
     </div>
     <div style={{padding:"12px 12px 40px",maxWidth:"620px",margin:"0 auto",boxSizing:"border-box"}}>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"8px"}}>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"8px",alignItems:"stretch"}}>
         {bigModes.map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"8px"}}>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"8px",alignItems:"stretch"}}>
         {smallModes.map(m=><Card key={m.key} m={m} onDaily={k=>onSelect(k+"_daily")} onArchive={k=>onSelect(k+"_archive")}/>)}
       </div>
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 13px",background:US.black,borderRadius:"8px",marginBottom:"10px"}}>
-        <div><div style={{fontSize:"18px",fontWeight:"700",color:US.orange}}>2.508</div><div style={{fontSize:"9px",color:"#777",textTransform:"uppercase",letterSpacing:"1px"}}>sfide disponibili</div></div>
-        <div style={{fontSize:"9px",color:"#555",textAlign:"right",lineHeight:1.7}}>🗓 <span style={{color:"#fff",fontWeight:"700"}}>Daily</span> — sfida unica al giorno<br/>📂 <span style={{color:"#fff",fontWeight:"700"}}>Archivio</span> — sfide passate con ◀ ▶</div>
+      <div style={{background:US.black,borderRadius:"10px",padding:"14px 16px",marginBottom:"10px",
+        border:"1px solid #2a2a2a"}}>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
+          <div>
+            <div style={{fontSize:"24px",fontWeight:"700",color:US.orange,lineHeight:1}}>2.508</div>
+            <div style={{fontSize:"9px",color:"#666",textTransform:"uppercase",letterSpacing:"1.5px",marginTop:"2px"}}>sfide disponibili</div>
+          </div>
+          <div style={{textAlign:"right"}}>
+            <div style={{fontSize:"11px",color:"#fff",fontWeight:"700",marginBottom:"4px"}}>10 modalità di gioco</div>
+            <div style={{fontSize:"9px",color:"#555",lineHeight:1.6}}>
+              🗓 <span style={{color:"#aaa"}}>Daily</span> — nuova sfida ogni giorno<br/>
+              📂 <span style={{color:"#aaa"}}>Archivio</span> — sfide passate ◀ ▶
+            </div>
+          </div>
+        </div>
+        <div style={{display:"flex",gap:"6px"}}>
+          {["⚽ Calciodle","🔤 Wordle","🪢 Impiccato","🏆 Carriera","🔗 Connections",
+            "💶 Chi Vale","⏱ Sfida","🔄 Transfer","👕 Rosa","🔎 FootGuessr"].map(t=>(
+            <div key={t} style={{flex:"0 0 auto",fontSize:"8px",color:"#555",background:"#1a1a1a",
+              borderRadius:"4px",padding:"2px 5px",whiteSpace:"nowrap"}}>{t}</div>
+          ))}
+        </div>
       </div>
     </div>
   </div>);
@@ -3132,14 +3187,20 @@ export default function App(){
   useEffect(()=>{
     const s=document.createElement("style");
     s.innerHTML=`
+      *{-webkit-tap-highlight-color:transparent;}
       input,select,textarea{font-size:16px !important;}
+      button{touch-action:manipulation;}
       .flip-reveal{animation:flipReveal 0.5s ease forwards;}
       @keyframes flipReveal{0%{transform:scaleY(1);background:#e0e0e0;}49%{transform:scaleY(0);background:#e0e0e0;}50%{transform:scaleY(0);}100%{transform:scaleY(1);}}
-      @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-      .game-enter{animation:fadeSlideIn 0.35s ease forwards;}
+      @keyframes fadeSlideIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+      .game-enter{animation:fadeSlideIn 0.3s ease forwards;}
       @keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
       .confetti-piece{position:absolute;width:8px;height:8px;animation:confettiFall linear forwards;pointer-events:none;}
       @keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-5px);}40%,80%{transform:translateX(5px);}}
+      @keyframes popIn{0%{transform:scale(0.95);opacity:0;}100%{transform:scale(1);opacity:1;}}
+      .pop-in{animation:popIn 0.2s ease forwards;}
+      @keyframes slideDown{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+      .conn-solve{animation:slideDown 0.35s ease forwards;}
     `;
     document.head.appendChild(s);
     return()=>document.head.removeChild(s);
@@ -3150,16 +3211,18 @@ export default function App(){
   const key=sc.replace("_daily","").replace("_archive","");
   if(sc==="home")return<Home onSelect={sSc}/>;
   const goArchive=()=>sSc(key+"_archive");
-  if(key==="calciodle")return<Calciodle onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
-  if(key==="wordle")return<WordleCognome onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
-  if(key==="hangman")return<Hangman onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
-  if(key==="valore2")return<ChiValeDiPiu onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
-  if(key==="carriera")return<Carriera onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
-  if(key==="rosa")return<RosaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
-  if(key==="lista")return<ListaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
-  if(key==="transfer")return<IndivinaTransferimento onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
-  if(key==="connections")return<Connections onHome={home} isDaily={isDaily} onArchive={goArchive}/>;
-  if(key==="footguessr")return<FootGuessr onHome={home}/>;
+  // Wrapper fade-in per transizione Home→gioco
+  const FadeWrap=({children})=>(<div key={sc} className="game-enter">{children}</div>);
+  if(key==="calciodle")return<FadeWrap><Calciodle onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
+  if(key==="wordle")return<FadeWrap><WordleCognome onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
+  if(key==="hangman")return<FadeWrap><Hangman onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
+  if(key==="valore2")return<FadeWrap><ChiValeDiPiu onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
+  if(key==="carriera")return<FadeWrap><Carriera onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
+  if(key==="rosa")return<FadeWrap><RosaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
+  if(key==="lista")return<FadeWrap><ListaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
+  if(key==="transfer")return<FadeWrap><IndivinaTransferimento onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
+  if(key==="connections")return<FadeWrap><Connections onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
+  if(key==="footguessr")return<FadeWrap><FootGuessr onHome={home}/></FadeWrap>;
   return<Home onSelect={sSc}/>;
 }
 
