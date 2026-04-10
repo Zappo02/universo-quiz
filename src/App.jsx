@@ -1713,7 +1713,7 @@ function ArchiveWrapper({gameKey,children,todayDay}){
   // page: which group of 10 we show. page=0 → most recent 10 (excluding today)
   const[page,setPage]=useState(0);
   const SEED_OFFSET={calciodle:0,wordle:100001,hangman:200002,valore2:300011,carriera:0,rosa:0,lista:0,transfer:0,connections:400013,footguessr:500017};
-  const seed=seedForNum(num,poolSize)+(SEED_OFFSET[gameKey]||0);
+  const seed=seedForNum(num,todayN)+(SEED_OFFSET[gameKey]||0);
   const isToday=num===todayN;
 
   // build chip list for current page (excluding today=todayN)
@@ -1745,7 +1745,7 @@ function ArchiveWrapper({gameKey,children,todayDay}){
               style={{flexShrink:0,background:num===n?"#2a2200":"#222",border:`1.5px solid ${num===n?US.orange:"#333"}`,
                 borderRadius:"6px",padding:"4px 8px",cursor:"pointer",textAlign:"center",minWidth:"46px"}}>
               <div style={{fontSize:"10px",fontWeight:"700",color:num===n?US.orange:"#ccc"}}>#{n}</div>
-              <div style={{fontSize:"7px",color:num===n?US.orange:"#555",marginTop:"1px"}}>{dayToDate(n,poolSize)}</div>
+              <div style={{fontSize:"7px",color:num===n?US.orange:"#555",marginTop:"1px"}}>{dayToDate(n,todayN)}</div>
             </div>
           ))}
         </div>
@@ -1767,16 +1767,17 @@ function cS(c){return{flex:1,minWidth:0,borderRadius:"2px",background:CLR[c]?.bg
 function CalciodleFlipCell({value,arrow,color,flipped,colIdx}){
   const delay=colIdx*150;
   const bg=CLR[color]?.bg||"#e0e0e0";
+  const borderCol=CLR[color]?.bg||"transparent";
   const[isFlipped,setIsFlipped]=useState(false);
   useEffect(()=>{setIsFlipped(false);},[value,color]);
   useEffect(()=>{if(flipped){const t=setTimeout(()=>setIsFlipped(true),delay);return()=>clearTimeout(t);}},[flipped]);
   return(
-    <div style={{flex:1,minWidth:0,height:"38px",perspective:"400px"}}>
+    <div style={{flex:1,minWidth:0,height:"46px",perspective:"400px"}}>
       <div style={{position:"relative",width:"100%",height:"100%",transformStyle:"preserve-3d",transition:`transform 0.9s ease`,transform:isFlipped?"rotateX(180deg)":"rotateX(0deg)"}}>
-        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e8e8e8",borderRadius:"3px"}}/>
-        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateX(180deg)",background:bg,borderRadius:"3px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",overflow:"hidden"}}>
-          <span style={{fontWeight:"700",fontSize:"8px",color:"#fff",lineHeight:1.2,textAlign:"center",padding:"0 2px"}}>{value}</span>
-          {arrow&&<span style={{fontSize:"7px",color:"rgba(255,255,255,0.85)"}}>{arrow}</span>}
+        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",background:"#e8e8e8",borderRadius:"4px"}}/>
+        <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateX(180deg)",background:bg,borderRadius:"4px",border:color!=="empty"&&color!=="active"?`2.5px solid ${borderCol}`:"none",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",overflow:"hidden",boxSizing:"border-box"}}>
+          <span style={{fontWeight:"800",fontSize:"9px",color:"#fff",lineHeight:1.2,textAlign:"center",padding:"0 3px",letterSpacing:"0.2px"}}>{value}</span>
+          {arrow&&<span style={{fontSize:"8px",color:"rgba(255,255,255,0.9)",fontWeight:"700"}}>{arrow}</span>}
         </div>
       </div>
     </div>
@@ -1849,10 +1850,10 @@ function CalciodleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
       <div style={{display:"flex",gap:"10px",marginBottom:"10px"}}>{[[US.green,"Esatto"],[US.yellow,"Vicino"],[US.red,"Sbagliato"]].map(([c,l])=><div key={c} style={{display:"flex",alignItems:"center",gap:"3px",fontSize:"9px",color:"#999"}}><div style={{width:"8px",height:"8px",borderRadius:"2px",background:c}}/>{l}</div>)}</div>
       {/* GRIGLIA — header + righe indovinati */}
       <div style={{width:"100%"}}>
-        <div style={{display:"flex",gap:"3px",marginBottom:"4px",paddingLeft:"52px"}}>{COLS.map(c=><div key={c.key} style={{flex:1,fontSize:"7px",letterSpacing:"1px",textTransform:"uppercase",color:hintCol===c.key?"#2563eb":"#bbb",textAlign:"center",fontWeight:hintCol===c.key?"700":"400"}}>{c.label}{hintCol===c.key?" ★":""}</div>)}</div>
+        <div style={{display:"flex",gap:"3px",marginBottom:"4px",paddingLeft:"56px"}}>{COLS.map(c=><div key={c.key} style={{flex:1,fontSize:"8px",letterSpacing:"0.5px",textTransform:"uppercase",color:hintCol===c.key?"#fbbf24":"#fff",textAlign:"center",fontWeight:"700",background:hintCol===c.key?"#1d4ed8":"#222",borderRadius:"3px",padding:"3px 1px"}}>{c.label}{hintCol===c.key?" ★":""}</div>)}</div>
         {G.map((g,ri)=>(
-          <div key={ri} style={{display:"flex",gap:"3px",alignItems:"center",marginBottom:"3px"}}>
-            <div style={{width:"50px",fontSize:"8px",color:"#555",textAlign:"right",paddingRight:"5px",flexShrink:0,overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{g.name.split(" ").pop()}</div>
+          <div key={ri} style={{display:"flex",gap:"4px",alignItems:"center",marginBottom:"4px",borderRadius:"5px",outline:won&&ri===G.length-1?"2.5px solid #16a34a":"none",outlineOffset:"2px"}}>
+            <div style={{width:"54px",fontSize:"9px",color:"#333",fontWeight:"600",textAlign:"right",paddingRight:"5px",flexShrink:0,overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{g.name.split(" ").pop()}</div>
             {COLS.map((c,ci)=>{
               const cl=eC(c.key,g[c.key],target[c.key]);
               const ar=aD(c.key,g[c.key],target[c.key]);
@@ -1904,7 +1905,7 @@ function WordleFlipCell({letter,color,colIdx}){
   const delay=colIdx*130;
   useEffect(()=>{const t=setTimeout(()=>setRevealed(true),delay);return()=>clearTimeout(t);},[]);
   return(
-    <div style={{width:"42px",height:"42px",borderRadius:"3px",background:revealed?color:"#e0e0e0",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px",fontWeight:"700",color:"#fff",transition:`background 0.1s ${delay}ms, transform 0.25s ${delay}ms`,transform:revealed?"scaleY(1)":"scaleY(0.01)"}}>
+    <div style={{width:"52px",height:"52px",borderRadius:"4px",background:revealed?color:"#e0e0e0",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"22px",fontWeight:"800",color:"#fff",transition:`background 0.1s ${delay}ms, transform 0.25s ${delay}ms`,transform:revealed?"scaleY(1)":"scaleY(0.01)",letterSpacing:"1px"}}>
       {revealed?letter:""}
     </div>
   );
@@ -1944,7 +1945,7 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
 
   const used={};
   attempts.flat().forEach(({c,s})=>{if(!used[c]||used[c]==="gray"||(used[c]==="yellow"&&s==="green"))used[c]=s;});
-  const colBg={green:US.green,yellow:US.yellow,gray:"#9ca3af"};
+  const colBg={green:"#538d4e",yellow:"#b59f3b",gray:"#3a3a3c"};
 
   const[hint,setHint]=useState(false);
   if(savedToday)return(<div style={T.app}><Hdr title="Wordle Cognome" sub={`🗓 Giornaliero • #${day}`} onHome={onHome}/><DoneScreen gameKey="wordle" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><>
@@ -1956,17 +1957,17 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   return(<div style={{...T.app,position:"relative"}}>{showConfetti&&<Confetti active={showConfetti}/>}<Hdr title="Wordle Cognome" sub={`${label} • #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"400px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px"}}>
-        <span style={{fontSize:"11px",color:"#aaa"}}>{word.length} lettere</span>
+        <div style={{display:"flex",gap:"10px",alignItems:"center"}}><span style={{fontSize:"11px",color:"#888",fontWeight:"600"}}>{word.length} lettere</span><span style={{fontSize:"11px",color:attempts.length>0?US.orange:"#aaa",fontWeight:"700"}}>{attempts.length}/{MAX_ATT}</span></div>
         <button onClick={()=>setHint(h=>!h)} style={{background:"none",border:`1px solid ${hint?US.yellow:"#ddd"}`,borderRadius:"4px",padding:"3px 9px",fontSize:"9px",color:hint?US.yellow:"#aaa",cursor:"pointer",fontFamily:"inherit"}}>💡 {hint?"Nascondi":"Indizio"}</button>
       </div>
       {hint&&<div style={{fontSize:"10px",color:"#777",marginBottom:"10px",padding:"6px 10px",background:"#fffbea",border:"1px solid #fde68a",borderRadius:"4px"}}>{player.nation} • {player.role} • {player.club}</div>}
       {/* Grid */}
-      <div style={{display:"flex",flexDirection:"column",gap:"5px",marginBottom:"16px",alignItems:"center"}}>
+      <div style={{display:"flex",flexDirection:"column",gap:"6px",marginBottom:"16px",alignItems:"center"}}>
         {Array.from({length:MAX_ATT}).map((_,ri)=>{
           const att=attempts[ri];
           const isActive=ri===attempts.length&&status==="playing";
           const disp=isActive?normStr(current).padEnd(word.length," ").slice(0,word.length).split(""):Array(word.length).fill(" ");
-          return(<div key={ri} style={{display:"flex",gap:"5px"}}>
+          const isShaking=isActive&&status==="playing"&&normStr(current).length>0&&normStr(current).length<word.length&&false;return(<div key={ri} style={{display:"flex",gap:"5px",padding:"2px 0"}}>
             {Array.from({length:word.length}).map((_,ci)=>{
               const filled=att?att[ci]:null;
               const bg=filled?(colBg[filled.s]||"#e0e0e0"):isActive&&disp[ci].trim()?"#fff":"#e0e0e0";
@@ -1974,7 +1975,7 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
               if(filled){
                 return(<WordleFlipCell key={ci} letter={filled.c} color={colBg[filled.s]||"#e0e0e0"} colIdx={ci}/>);
               }
-              return(<div key={ci} style={{width:"42px",height:"42px",borderRadius:"3px",background:bg,border:bd,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"16px",fontWeight:"700",color:US.black}}>{isActive?disp[ci].trim():""}</div>);
+              const hasletter=isActive&&disp[ci].trim();return(<div key={ci} style={{width:"52px",height:"52px",borderRadius:"4px",background:hasletter?"#fff":"#f3f3f3",border:hasletter?"2.5px solid #888":"2px solid #d0d0d0",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"22px",fontWeight:"800",color:US.black,transform:hasletter?"scale(1.05)":"scale(1)",transition:"transform 0.1s ease"}}>{isActive?disp[ci].trim():""}</div>);
             })}
           </div>);
         })}
@@ -1984,7 +1985,7 @@ function WordleGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
         <input value={current} onChange={e=>{const v=e.target.value.toUpperCase().replace(/[^A-Z]/g,"").slice(0,word.length);setCurrent(v);}} onKeyDown={e=>{if(e.key==="Enter"){e.preventDefault();submit();}}} placeholder={`${word.length} lettere...`} style={{...T.ip,width:"100%",marginBottom:"8px",textTransform:"uppercase",letterSpacing:"3px",textAlign:"center",fontSize:"16px"}} autoFocus/>
         <button onClick={submit} disabled={normStr(current).length!==word.length} style={{...T.pb,width:"100%",opacity:normStr(current).length===word.length?1:0.4}}>Invio</button>
         {/* Tastiera visiva */}
-        <div style={{marginTop:"12px"}}>{[["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"]].map((row,ri)=><div key={ri} style={{display:"flex",justifyContent:"center",gap:"3px",marginBottom:"3px"}}>{row.map(k=>{const st=used[k];return<button key={k} onClick={()=>setCurrent(c=>(c.length<word.length?c+k:c))} style={{background:st?(colBg[st]||"#9ca3af"):"#e0e0e0",color:st?"#fff":"#333",border:"none",borderRadius:"3px",padding:"8px 5px",minWidth:"26px",fontSize:"10px",fontWeight:"600",cursor:"pointer",fontFamily:"inherit"}}>{k}</button>;})} </div>)}</div>
+        <div style={{marginTop:"12px"}}>{[["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"]].map((row,ri)=><div key={ri} style={{display:"flex",justifyContent:"center",gap:"5px",marginBottom:"5px"}}>{row.map(k=>{const st=used[k];return<button key={k} onClick={()=>setCurrent(c=>(c.length<word.length?c+k:c))} style={{background:st?(colBg[st]||"#9ca3af"):"#e0e0e0",color:st?"#fff":"#333",border:"none",borderRadius:"3px",padding:"10px 4px",minWidth:"30px",fontSize:"11px",fontWeight:"700",cursor:"pointer",fontFamily:"inherit",borderRadius:"5px",border:"1px solid rgba(0,0,0,0.1)"}}>{k}</button>;})} </div>)}</div>
       </div>}
       {(status==="won"||status==="lost")&&<div className="pop-in" style={{textAlign:"center",padding:"14px",background:status==="won"?US.greenL:US.redL,borderRadius:"6px",color:status==="won"?US.green:US.red}}>
         <div style={{fontSize:"14px",fontWeight:"700",marginBottom:"4px"}}>{status==="won"?"Corretto!":"Era..."}</div>
@@ -2042,30 +2043,156 @@ function Hangman({onHome,isDaily,onArchive}){
 }
 
 // ── CHI VALE DI PIÙ ──────────────────────────────────────────────────────
-function ValoreGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
-  const pairs=useMemo(()=>{const rng=seedRandom(seed+300011);const sh=shuffle(DB,rng),p=[];for(let i=0;i<sh.length-1;i+=2)if(sh[i].value!==sh[i+1].value)p.push([sh[i],sh[i+1]]);return p;},[seed]);
-  const label=isToday?"🗓 Giornaliero":"📂 Archivio";
-  const savedToday=isToday?loadResult("valore2"):null;
-  const RR=Math.min(3,pairs.length);
-  const[rn,sRn]=useState(0);const[sc,sSc]=useState(0);const[ch,sCh]=useState(null);const[dn,sDn]=useState(false);const[str,sStr]=useState(0);const[best,sBest]=useState(0);
-  useEffect(()=>{sRn(0);sSc(0);sCh(null);sDn(false);sStr(0);sBest(0);},[seed]);
-  if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Chi Vale di Più?" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="valore2" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>{s.score===s.total?"🏆":s.score>0?"👍":"😔"}</div><div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.score}/{s.total} corretti</div><ShareButton text={`🆚 Chi Vale di Più? #${day}\n${s.score}/${s.total} corretti\nuniverso-quiz-hmix.vercel.app`}/></>}</DoneScreen></div>);
-  if(!pairs.length||dn)return(<div style={T.app}><Hdr title="Chi Vale di Più?" onHome={onHome}/><div style={{...T.body,textAlign:"center",paddingTop:"40px"}}><div style={{fontSize:"48px",fontWeight:"300",color:US.black}}>{sc}<span style={{fontSize:"18px"}}> / {RR}</span></div><div style={{fontSize:"12px",color:"#888",marginBottom:"3px"}}>risposte corrette</div><div style={{fontSize:"11px",color:"#aaa",marginBottom:"18px"}}>Serie migliore: {best}</div><ShareButton text={`🆚 Chi Vale di Più? #${day}\n${sc}/${RR} corretti\nuniverso-quiz-hmix.vercel.app`}/>{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}<button onClick={onHome} style={T.pb}>Home</button></div></div>);
-  const[a,b]=pairs[rn],cor=a.value>b.value?a:b;
-  function choose(p){if(ch)return;sCh(p);const ok=p.name===cor.name;if(ok){sSc(x=>x+1);const ns=str+1;sStr(ns);sBest(x=>Math.max(x,ns));}else sStr(0);setTimeout(()=>{sCh(null);const nr=rn+1;if(nr>=RR){if(isToday)saveResult("valore2",{score:sc+(ok?1:0),total:RR});sDn(true);}else sRn(nr);},1500);}
-  return(<div style={T.app}><Hdr title="Chi Vale di Più?" sub={`${label} • #${day} • ${rn+1}/${RR}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
-    <div style={{...T.body,maxWidth:"480px"}}>
-      <div style={{height:"3px",background:"#e0e0e0",borderRadius:"2px",marginBottom:"16px",overflow:"hidden"}}><div style={{height:"100%",width:`${(rn/RR*100).toFixed(0)}%`,background:US.green,transition:"width 0.3s"}}/></div>
-      <div style={{fontSize:"11px",color:"#aaa",textAlign:"center",marginBottom:"12px"}}>Chi ha il valore di mercato più alto?</div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px"}}>{[a,b].map(p=>{let brd="1.5px solid #e0e0e0",bg="#fff";if(ch){if(p.name===cor.name){brd="2px solid "+US.green;bg=US.greenL;}else if(p.name===ch.name){brd="2px solid "+US.red;bg=US.redL;}}return(<button key={p.name} onClick={()=>choose(p)} style={{background:bg,border:brd,borderRadius:"6px",padding:"14px 10px",cursor:ch?"default":"pointer",textAlign:"center",transition:"all 0.2s",fontFamily:"inherit"}} onMouseEnter={e=>{if(!ch){e.currentTarget.style.borderColor=US.orange;e.currentTarget.style.background="#fffbea";}}} onMouseLeave={e=>{if(!ch){e.currentTarget.style.borderColor="#e0e0e0";e.currentTarget.style.background=bg;}}}><div style={{fontSize:"14px",fontWeight:"700",marginBottom:"3px"}}>{p.name}</div><div style={{fontSize:"10px",color:"#888",marginBottom:"1px"}}>{p.club}</div><div style={{fontSize:"10px",color:"#aaa",marginBottom:"7px"}}>{p.role}</div>{ch?<div style={{fontSize:"17px",fontWeight:"700",color:p.name===cor.name?US.green:US.red}}>€{p.value}M</div>:<div style={{fontSize:"20px",color:"#ddd"}}>?</div>}</button>);})}</div>
-      {ch&&<div style={{textAlign:"center",marginTop:"10px",fontSize:"11px",color:ch.name===cor.name?US.green:US.red,fontStyle:"italic"}}>{ch.name===cor.name?"Corretto!":"Sbagliato"} — {cor.name} vale €{cor.value}M</div>}
-    </div>
-  </div>);
+function HigherOrLowerGame({onHome}){
+  const DB_HL=DB.filter(p=>p.value>=5);
+  function rndPlayer(exclude){
+    let p;do{p=DB_HL[Math.floor(Math.random()*DB_HL.length)];}while(exclude&&p.name===exclude.name);
+    return p;
+  }
+  const[base,setBase]=useState(()=>rndPlayer(null));
+  const[challenger,setChallenger]=useState(()=>rndPlayer(base));
+  const[choice,setChoice]=useState(null);// 'higher'|'lower'
+  const[streak,setStreak]=useState(0);
+  const[best,setBest]=useState(()=>{try{return parseInt(localStorage.getItem('hl_best')||'0');}catch{return 0;}});
+  const[done,setDone]=useState(false);
+  const[skipped,setSkipped]=useState(false);
+  const[skipUsed,setSkipUsed]=useState(false);
+
+  const correct=challenger.value>base.value?'higher':'lower';
+
+  function choose(ans){
+    if(choice||done)return;
+    setChoice(ans);
+    const ok=ans===correct;
+    setTimeout(()=>{
+      if(ok){
+        const ns=streak+1;
+        setStreak(ns);
+        if(ns>best){setBest(ns);try{localStorage.setItem('hl_best',ns);}catch{}}
+        setBase(challenger);
+        setChallenger(rndPlayer(challenger));
+        setChoice(null);
+      } else {
+        setDone(true);
+      }
+    },1200);
+  }
+
+  function skip(){
+    if(skipUsed||choice||done)return;
+    setSkipUsed(true);
+    setSkipped(true);
+    setChallenger(rndPlayer(base));
+    setTimeout(()=>setSkipped(false),800);
+  }
+
+  function restart(){
+    const nb=rndPlayer(null);
+    setBase(nb);
+    setChallenger(rndPlayer(nb));
+    setChoice(null);
+    setStreak(0);
+    setDone(false);
+    setSkipUsed(false);
+    setSkipped(false);
+  }
+
+  if(done)return(
+    <div style={T.app}><Hdr title="Higher or Lower" onHome={onHome}/>
+    <div style={{...T.body,textAlign:"center",paddingTop:"32px"}} className="pop-in">
+      <div style={{fontSize:"52px",marginBottom:"6px"}}>😔</div>
+      <div style={{fontSize:"20px",fontWeight:"700",color:US.black,marginBottom:"4px"}}>Streak: {streak}</div>
+      <div style={{fontSize:"13px",color:US.muted,marginBottom:"16px"}}>Record: {best}</div>
+      <div style={{background:US.surface,borderRadius:"8px",padding:"12px",marginBottom:"14px",border:`1px solid ${US.border}`}}>
+        <div style={{fontSize:"11px",color:US.muted,marginBottom:"6px"}}>La risposta era:</div>
+        <div style={{fontSize:"14px",fontWeight:"700"}}>{challenger.name}</div>
+        <div style={{fontSize:"11px",color:US.muted}}>{challenger.club} • {challenger.role}</div>
+        <div style={{fontSize:"17px",fontWeight:"700",color:challenger.value>base.value?US.green:US.red,marginTop:"4px"}}>€{challenger.value}M</div>
+        <div style={{fontSize:"11px",color:US.muted,marginTop:"4px"}}>vs {base.name} (€{base.value}M)</div>
+      </div>
+      <button onClick={restart} style={{...T.pb,width:"100%",marginBottom:"8px"}}>🔄 Rigioca</button>
+      <button onClick={onHome} style={{...T.sb,width:"100%",color:US.black}}>← Home</button>
+    </div></div>
+  );
+
+  return(
+    <div style={T.app}><Hdr title="Higher or Lower" sub="💶 Infinito" onHome={onHome}/>
+    <div style={{...T.body,maxWidth:"460px"}}>
+      {/* Streak bar */}
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"14px"}}>
+        <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
+          <span style={{fontSize:"22px",fontWeight:"800",color:US.orange}}>{streak}</span>
+          <span style={{fontSize:"11px",color:US.muted}}>streak</span>
+        </div>
+        <div style={{fontSize:"11px",color:US.muted}}>🏆 record: {best}</div>
+        {!skipUsed&&<button onClick={skip} style={{...T.sb,fontSize:"10px",padding:"4px 10px",color:US.black,opacity:skipUsed?0.4:1}}>⏭ Salta</button>}
+      </div>
+
+      <div style={{textAlign:"center",fontSize:"12px",color:US.muted,marginBottom:"12px",fontWeight:"600"}}>
+        Chi vale di più?
+      </div>
+
+      <div style={{display:"grid",gridTemplateColumns:"1fr auto 1fr",gap:"8px",alignItems:"stretch"}}>
+        {/* BASE */}
+        <div style={{background:US.surface,border:`1px solid ${US.border}`,borderRadius:"10px",padding:"14px 10px",textAlign:"center"}}>
+          <div style={{fontSize:"9px",color:US.muted,textTransform:"uppercase",letterSpacing:"1px",marginBottom:"6px",fontWeight:"700"}}>Base</div>
+          <div style={{fontSize:"13px",fontWeight:"700",color:US.black,marginBottom:"3px"}}>{base.name}</div>
+          <div style={{fontSize:"10px",color:US.muted,marginBottom:"2px"}}>{base.club}</div>
+          <div style={{fontSize:"10px",color:US.muted,marginBottom:"8px"}}>{base.role}</div>
+          <div style={{fontSize:"20px",fontWeight:"800",color:US.black}}>€{base.value}M</div>
+        </div>
+
+        {/* VS */}
+        <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+          <span style={{fontSize:"12px",fontWeight:"700",color:US.muted}}>vs</span>
+        </div>
+
+        {/* CHALLENGER */}
+        {(()=>{
+          let bg=US.surface,bd=`1px solid ${US.border}`;
+          if(choice){
+            const ok=choice===correct;
+            bg=ok?'#f0fdf4':'#fef2f2';
+            bd=`2px solid ${ok?'#16a34a':'#dc2626'}`;
+          }
+          return(
+            <div style={{background:bg,border:bd,borderRadius:"10px",padding:"14px 10px",textAlign:"center",transition:"all 0.2s"}}>
+              <div style={{fontSize:"9px",color:US.muted,textTransform:"uppercase",letterSpacing:"1px",marginBottom:"6px",fontWeight:"700"}}>Sfidante</div>
+              <div style={{fontSize:"13px",fontWeight:"700",color:US.black,marginBottom:"3px"}}>{challenger.name}</div>
+              <div style={{fontSize:"10px",color:US.muted,marginBottom:"2px"}}>{challenger.club}</div>
+              <div style={{fontSize:"10px",color:US.muted,marginBottom:"8px"}}>{challenger.role}</div>
+              {choice
+                ? <div style={{fontSize:"20px",fontWeight:"800",color:choice===correct?'#16a34a':'#dc2626'}}>€{challenger.value}M</div>
+                : <div style={{fontSize:"20px",color:"#ddd",fontWeight:"700"}}>?</div>
+              }
+            </div>
+          );
+        })()}
+      </div>
+
+      {/* Bottoni scelta */}
+      {!choice&&<div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginTop:"14px"}}>
+        <button onClick={()=>choose('higher')} style={{...T.pb,padding:"12px",fontSize:"13px",fontWeight:"800",borderRadius:"8px"}}>
+          ↑ Vale di più
+        </button>
+        <button onClick={()=>choose('lower')} style={{background:"#1e293b",color:"#fff",border:"none",borderRadius:"8px",padding:"12px",fontSize:"13px",fontWeight:"800",cursor:"pointer",fontFamily:"inherit"}}>
+          ↓ Vale di meno
+        </button>
+      </div>}
+
+      {/* Feedback */}
+      {choice&&<div style={{textAlign:"center",marginTop:"12px",fontSize:"13px",fontWeight:"700",
+        color:choice===correct?'#16a34a':'#dc2626'}}>
+        {choice===correct?`✅ Corretto! Streak: ${streak+1}`:`❌ Sbagliato — €${challenger.value}M`}
+      </div>}
+    </div></div>
+  );
 }
+
 function ChiValeDiPiu({onHome,isDaily,onArchive}){
-  if(isDaily){const d=DB.length,s=todaySeed();return<ValoreGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
-  return<ArchiveWrapper gameKey="valore2">{({day,seed,isToday,archiveNav,chipBar})=><ValoreGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
+  return <HigherOrLowerGame onHome={onHome}/>;
 }
+
 
 // ── CARRIERA ─────────────────────────────────────────────────────────────
 function CarreiraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
@@ -2813,14 +2940,13 @@ function ConnectionsGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
 
       {/* Fine partita */}
       {done&&<div className="pop-in" style={{textAlign:"center",marginTop:"8px"}}>
-        {/* Mostra gruppi non risolti */}
-        {puzzle.groups.map(g=>{
-          const ws=solved.some(s=>s.label===g.label);
-          return(<div key={g.label} style={{background:ws?CONN_COLORS[g.color].bg:CONN_COLORS[g.color].light,border:`2px solid ${CONN_COLORS[g.color].bg}`,borderRadius:"6px",padding:"8px 12px",marginBottom:"6px",textAlign:"center"}}>
-            <div style={{fontSize:"10px",fontWeight:"700",color:ws?"#fff":CONN_COLORS[g.color].bg,textTransform:"uppercase",marginBottom:"2px"}}>{g.label}</div>
-            <div style={{fontSize:"11px",color:ws?"rgba(255,255,255,0.9)":"#555"}}>{g.players.join(", ")}</div>
-          </div>);
-        })}
+        {/* Mostra gruppi non risolti solo in caso di game over */}
+        {!won&&puzzle.groups.filter(g=>!solved.some(s=>s.label===g.label)).map(g=>(
+          <div key={g.label} style={{background:CONN_COLORS[g.color].light,border:`2px solid ${CONN_COLORS[g.color].bg}`,borderRadius:"6px",padding:"8px 12px",marginBottom:"6px",textAlign:"center"}}>
+            <div style={{fontSize:"10px",fontWeight:"700",color:CONN_COLORS[g.color].bg,textTransform:"uppercase",marginBottom:"2px"}}>{g.label}</div>
+            <div style={{fontSize:"11px",color:"#555"}}>{g.players.join(", ")}</div>
+          </div>
+        ))}
         <div style={{padding:"10px",background:won?US.greenL:US.redL,borderRadius:"6px",marginBottom:"10px",color:won?US.green:US.red}}>
           <div style={{fontSize:"14px",fontWeight:"700",marginBottom:"3px"}}>{won?"🎉 Perfetto!":"😔 Game Over"}</div>
           <div style={{fontSize:"11px"}}>Errori: {errors}/{MAX_ERRORS}</div>
@@ -3202,6 +3328,9 @@ export default function App(){
       .pop-in{animation:popIn 0.2s ease forwards;}
       @keyframes slideDown{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
       .conn-solve{animation:slideDown 0.35s ease forwards;}
+      @keyframes letterPop{0%{transform:scale(1);}50%{transform:scale(1.15);}100%{transform:scale(1.05);}}
+      @keyframes rowShake{0%,100%{transform:translateX(0);}20%{transform:translateX(-6px);}40%{transform:translateX(6px);}60%{transform:translateX(-4px);}80%{transform:translateX(4px);}}
+      .row-shake{animation:rowShake 0.4s ease;}
     `;
     document.head.appendChild(s);
     return()=>document.head.removeChild(s);
