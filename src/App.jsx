@@ -1608,10 +1608,10 @@ function loadStats(gameKey){
 
 function Confetti({active}){
   if(!active)return null;
-  const pieces=Array.from({length:60},(_,i)=>({
-    id:i,left:Math.random()*100,delay:Math.random()*1.0,duration:2.0+Math.random()*1.5,
+  const pieces=Array.from({length:80},(_,i)=>({
+    id:i,left:Math.random()*100,delay:Math.random()*0.8,duration:2.5+Math.random()*1.5,
     color:["#f5e000","#16a34a","#dc2626","#2563eb","#f97316","#a855f7","#ec4899","#06b6d4"][i%8],
-    size:7+Math.random()*8,shape:i%3===0?"50%":i%3===1?"2px":"4px"
+    size:9+Math.random()*10,shape:i%3===0?"50%":i%3===1?"2px":"4px"
   }));
   return(<div style={{position:"fixed",top:0,left:0,right:0,bottom:0,pointerEvents:"none",zIndex:9999,overflow:"hidden"}}>{pieces.map(p=><div key={p.id} className="confetti-piece" style={{left:`${p.left}%`,top:"-12px",width:`${p.size}px`,height:`${p.size}px`,background:p.color,borderRadius:p.shape,animationDelay:`${p.delay}s`,animationDuration:`${p.duration}s`}}/>)}</div>);
 }
@@ -2243,7 +2243,7 @@ function CarreiraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
     else{if(rev<maxC){sRev(x=>x+1);sSt("w");setTimeout(()=>sSt("p"),900);}else sSt("r");}
     sGu("");
   }
-  if(savedToday&&isToday)return(<div style={T.app}><Hdr title="Indovina dalla Carriera" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="carriera" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>🏆</div><div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.score} punti</div><ShareButton text={`🏆 Indovina la Carriera #${day}\n${s.score} punti\nuniverso-quiz-hmix.vercel.app`}/></>}</DoneScreen></div>);
+  if(savedToday&&isToday)return(<div style={{...T.app,position:"relative"}}>{carConf&&<Confetti active={carConf}/>}<Hdr title="Indovina dalla Carriera" sub="🗓 Giornaliero" onHome={onHome}/><DoneScreen gameKey="carriera" day={day} isToday={isToday} onHome={onHome} onArchive={onArchive}>{(s)=><><div style={{fontSize:"48px",fontWeight:"300",color:US.black,lineHeight:1}}>🏆</div><div style={{fontSize:"14px",fontWeight:"700",color:US.black,margin:"8px 0 2px"}}>{s.score} punti</div><ShareButton text={`🏆 Indovina la Carriera #${day}\n${s.score} punti\nuniverso-quiz-hmix.vercel.app`}/></>}</DoneScreen></div>);
   if(fin)return(<div style={{...T.app,position:"relative"}} className="pop-in">{carConf&&<Confetti active={carConf}/>}<Hdr title="Indovina dalla Carriera" onHome={onHome}/><div style={{...T.body,textAlign:"center",paddingTop:"40px"}}><div style={{fontSize:"48px",fontWeight:"300",color:US.black}}>{sc}</div><div style={{fontSize:"12px",color:"#888",marginBottom:"18px"}}>punti totali</div><ShareButton text={`🏆 Indovina la Carriera #${day}\n${sc} punti\nuniverso-quiz-hmix.vercel.app`}/>{!isToday&&archiveNav&&archiveNav.day<archiveNav.max&&<button onClick={archiveNav.next} style={{...T.pb,width:"100%",marginBottom:"6px"}}>→ Prossima sfida</button>}{isToday&&onArchive&&<button onClick={onArchive} style={{...T.sb,width:"100%",marginTop:"6px",color:US.black}}>📂 Vai all'archivio</button>}<button onClick={onHome} style={{...T.pb,marginTop:"8px"}}>Home</button></div></div>);
   return(<div style={T.app}><Hdr title="Indovina dalla Carriera" sub={`${label} · #${day}`} onHome={onHome} archiveNav={archiveNav}/>{chipBar||null}
     <div style={{...T.body,maxWidth:"520px"}}>
@@ -3255,11 +3255,11 @@ function FootGuessr({onHome,isDaily,onArchive}){
 const MODES=[
   {key:"calciodle",   label:"Calciodle",                icon:"⚽", desc:"Indovina il calciatore in 6 tentativi. Ogni risposta rivela indizi.", badge:"532 giocatori",  accent:"#f5e000", badgeBg:"#111",     badgeTx:"#f5e000", size:"big"},
   {key:"wordle",      label:"Wordle Cognome",            icon:"🔤", desc:"Indovina il cognome lettera per lettera in 6 tentativi.",            badge:"379 cognomi",    accent:"#378ADD", badgeBg:"#E6F1FB", badgeTx:"#185FA5", size:"big"},
-  {key:"hangman",     label:"Impiccato",                 icon:"🪢", desc:"Scopri il cognome prima che il pupazzo sia completato. 8 errori.",   badge:"529 cognomi",    accent:"#1D9E75", badgeBg:"#E1F5EE", badgeTx:"#0F6E56", size:"big"},
+  {key:"hangman",     label:"Impiccato",                 icon:"💀", desc:"Scopri il cognome prima che il pupazzo sia completato. 8 errori.",   badge:"529 cognomi",    accent:"#1D9E75", badgeBg:"#E1F5EE", badgeTx:"#0F6E56", size:"big"},
   {key:"carriera",    label:"Indovina la Carriera",      icon:"🏆", desc:"Indovina il calciatore dai club della sua carriera.",                badge:"103 calciatori", accent:"#7F77DD", badgeBg:"#EEEDFE", badgeTx:"#3C3489", size:"big"},
   {key:"connections", label:"Connections",              icon:"🔗", desc:"Trova i 4 gruppi nascosti tra 16 calciatori.",                       badge:"50 puzzle",      accent:"#16a34a", badgeBg:"#dcfce7", badgeTx:"#15803d", size:"small"},
   {key:"footguessr",  label:"FootGuessr",                icon:"🔎", desc:"Indovina il calciatore segreto dalla similarità dei tuoi guess.", badge:"287 giocatori",  accent:"#7F77DD", badgeBg:"#EEEDFE", badgeTx:"#3C3489", size:"small"},
-  {key:"valore2",   label:"Higher or Lower",           icon:"💶", desc:"Clicca sul giocatore che vale di più. Chi vinci passa al round successivo.", badge:"∞ Infinito",    accent:"#D85A30", badgeBg:"#FAECE7", badgeTx:"#993C1D", size:"small"},
+  {key:"valore2",   label:"Higher or Lower",           icon:"💶", desc:"Clicca su chi vale di più. Lo sfidante passa al round successivo.", badge:"∞ Infinito",    accent:"#D85A30", badgeBg:"#FAECE7", badgeTx:"#993C1D", size:"small"},
   {key:"lista",     label:"Sfida a Tempo",             icon:"⏱", desc:"Trova i nomi in 90 secondi.",  badge:"50 categorie",   accent:"#E91E8C", badgeBg:"#FBEAF0", badgeTx:"#993556", size:"small"},
   {key:"transfer",  label:"Indovina il Trasferimento", icon:"🔄", desc:"Indovina cifra, club e anno.", badge:"65 trasferimenti",accent:"#888780", badgeBg:"#F1EFE8", badgeTx:"#5F5E5A", size:"small"},
   {key:"rosa",      label:"Indovina la Rosa",          icon:"👕", desc:"Nomina tutta la rosa in 60s.", badge:"31 squadre",     accent:"#BA7517", badgeBg:"#FAEEDA", badgeTx:"#854F0B", size:"small"},
@@ -3365,7 +3365,7 @@ export default function App(){
       @keyframes flipReveal{0%{transform:scaleY(1);background:#e0e0e0;}49%{transform:scaleY(0);background:#e0e0e0;}50%{transform:scaleY(0);}100%{transform:scaleY(1);}}
       @keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
       .game-enter{animation:fadeSlideIn 0.45s ease forwards;}
-      @keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+      @keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
       .confetti-piece{position:absolute;width:8px;height:8px;animation:confettiFall linear forwards;pointer-events:none;}
       @keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-5px);}40%,80%{transform:translateX(5px);}}
       @keyframes popIn{0%{transform:scale(0.95);opacity:0;}100%{transform:scale(1);opacity:1;}}
