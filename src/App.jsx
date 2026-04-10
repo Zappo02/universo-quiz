@@ -1706,9 +1706,9 @@ const DB_SERIE_A=DB.filter(p=>p.league==="Serie A");
 const POOL_SIZES={calciodle:532,wordle:532,hangman:532,valore2:692,carriera:CAREERS.length,rosa:ROSE_LIST.length,lista:50,transfer:65,connections:50,footguessr:287};
 
 const PAGE_SIZE=10;
-function ArchiveWrapper({gameKey,children}){
+function ArchiveWrapper({gameKey,children,todayDay}){
   const poolSize=POOL_SIZES[gameKey]||DB.length;
-  const todayN=poolSize;
+  const todayN=todayDay||poolSize;
   const[num,setNum]=useState(Math.max(1,todayN-1));
   // page: which group of 10 we show. page=0 → most recent 10 (excluding today)
   const[page,setPage]=useState(0);
@@ -3077,8 +3077,9 @@ function FootGuesserGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive})
 }
 
 function FootGuessr({onHome,isDaily,onArchive}){
-  if(isDaily){const d=(dayIndex()+7)%FG_DB.length+1,s=todaySeed()+777;return<FootGuesserGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
-  return<ArchiveWrapper gameKey="footguessr">{({day,seed,isToday,archiveNav,chipBar})=><FootGuesserGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
+  const todayFG=(dayIndex()+7)%FG_DB.length+1;
+  if(isDaily){const d=todayFG,s=todaySeed()+777;return<FootGuesserGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="footguessr" todayDay={todayFG}>{({day,seed,isToday,archiveNav,chipBar})=><FootGuesserGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 const MODES=[
