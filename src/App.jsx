@@ -1680,16 +1680,14 @@ function DoneScreen({gameKey,day,isToday,onHome,onArchive,children}){
   return null;
 }
 
-function Hdr({title,sub,onHome,archiveNav}){
-  const cd=useCountdown();
-  const isDaily=sub&&sub.includes("Giornaliero");
+function Hdr({title,sub,onHome,archiveNav,countdown}){
   return(
     <div style={T.hdr}>
       <div style={{flex:1,minWidth:0}}>
         <div style={T.ey}>Universo Sportivo</div>
         <div style={T.ht}>{title}</div>
         {sub&&<div style={{fontSize:"9px",color:"#777",marginTop:"1px"}}>{sub}</div>}
-        {isDaily&&<div style={{fontSize:"8px",color:"#555",marginTop:"1px"}}>🔄 {cd}</div>}
+        {countdown&&<div style={{fontSize:"8px",color:"#555",marginTop:"1px"}}>🔄 {countdown}</div>}
       </div>
       {archiveNav&&<div style={{display:"flex",alignItems:"center",gap:"4px",marginRight:"10px"}}>
         <button onClick={archiveNav.prev} disabled={archiveNav.day<=1} style={{...T.bk,padding:"5px 10px",fontSize:"12px",opacity:archiveNav.day<=1?0.3:1}}>◀</button>
@@ -3375,20 +3373,6 @@ function Home({onSelect}){
 }
 
 // ── ROOT ──────────────────────────────────────────────────────────────────
-function useSwipeBack(onBack){
-  const startX=useRef(null);
-  const startY=useRef(null);
-  function onTouchStart(e){startX.current=e.touches[0].clientX;startY.current=e.touches[0].clientY;}
-  function onTouchEnd(e){
-    if(startX.current===null)return;
-    const dx=e.changedTouches[0].clientX-startX.current;
-    const dy=Math.abs(e.changedTouches[0].clientY-startY.current);
-    if(dx>60&&dy<40&&startX.current<40){onBack();}
-    startX.current=null;startY.current=null;
-  }
-  return{onTouchStart,onTouchEnd};
-}
-
 export default function App(){
   useEffect(()=>{
     const s=document.createElement("style");
@@ -3415,24 +3399,32 @@ export default function App(){
     return()=>document.head.removeChild(s);
   },[]);
   const[sc,sSc]=useState("home");
+  const swipeX=useRef(null);
+  const swipeY=useRef(null);
+  function onTouchStart(e){swipeX.current=e.touches[0].clientX;swipeY.current=e.touches[0].clientY;}
+  function onTouchEnd(e){
+    if(swipeX.current===null)return;
+    const dx=e.changedTouches[0].clientX-swipeX.current;
+    const dy=Math.abs(e.changedTouches[0].clientY-swipeY.current);
+    if(dx>60&&dy<40&&swipeX.current<40&&sc!=="home"){sSc("home");}
+    swipeX.current=null;swipeY.current=null;
+  }
   const home=()=>sSc("home");
   const isDaily=sc.endsWith("_daily");
   const key=sc.replace("_daily","").replace("_archive","");
   if(sc==="home")return<Home onSelect={sSc}/>;
   const goArchive=()=>sSc(key+"_archive");
-  const swipe=useSwipeBack(home);
-  // Wrapper fade-in per transizione Home→gioco
-  const FadeWrap=({children})=>(<div key={sc} className="game-enter" onTouchStart={swipe.onTouchStart} onTouchEnd={swipe.onTouchEnd}>{children}</div>);
-  if(key==="calciodle")return<FadeWrap><Calciodle onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
-  if(key==="wordle")return<FadeWrap><WordleCognome onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
-  if(key==="hangman")return<FadeWrap><Hangman onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
-  if(key==="valore2")return<FadeWrap><ChiValeDiPiu onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
-  if(key==="carriera")return<FadeWrap><Carriera onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
-  if(key==="rosa")return<FadeWrap><RosaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
-  if(key==="lista")return<FadeWrap><ListaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
-  if(key==="transfer")return<FadeWrap><IndivinaTransferimento onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
-  if(key==="connections")return<FadeWrap><Connections onHome={home} isDaily={isDaily} onArchive={goArchive}/></FadeWrap>;
-  if(key==="footguessr")return<FadeWrap><FootGuessr onHome={home}/></FadeWrap>;
+
+  if(key==="calciodle")return(<div className="game-enter" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}><Calciodle onHome={home} isDaily={isDaily} onArchive={goArchive}/></div>);
+  if(key==="wordle")return(<div className="game-enter" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}><WordleCognome onHome={home} isDaily={isDaily} onArchive={goArchive}/></div>);
+  if(key==="hangman")return(<div className="game-enter" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}><Hangman onHome={home} isDaily={isDaily} onArchive={goArchive}/></div>);
+  if(key==="valore2")return(<div className="game-enter" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}><ChiValeDiPiu onHome={home} isDaily={isDaily} onArchive={goArchive}/></div>);
+  if(key==="carriera")return(<div className="game-enter" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}><Carriera onHome={home} isDaily={isDaily} onArchive={goArchive}/></div>);
+  if(key==="rosa")return(<div className="game-enter" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}><RosaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/></div>);
+  if(key==="lista")return(<div className="game-enter" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}><ListaQuiz onHome={home} isDaily={isDaily} onArchive={goArchive}/></div>);
+  if(key==="transfer")return(<div className="game-enter" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}><IndivinaTransferimento onHome={home} isDaily={isDaily} onArchive={goArchive}/></div>);
+  if(key==="connections")return(<div className="game-enter" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}><Connections onHome={home} isDaily={isDaily} onArchive={goArchive}/></div>);
+  if(key==="footguessr")return(<div className="game-enter" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}><FootGuessr onHome={home}/></div>);
   return<Home onSelect={sSc}/>;
 }
 
