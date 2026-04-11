@@ -2041,35 +2041,8 @@ function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   useEffect(()=>{if(rv&&st==="p"){sSt("w");if(isToday)saveResult("hangman",{won:true,word:wd,errors:wc});}else if(wc>=M&&st==="p"){sSt("l");if(isToday)saveResult("hangman",{won:false,word:wd,errors:wc});}},[gu]);
   function g(c){if(st!=="p"||gu.has(c))return;sGu(x=>new Set([...x,c]));} 
   const isAlive=st!=="l";
-  const bodyColor=isAlive?"#2563eb":"#dc2626";
-  const faceEl=st==="w"
-    ?<g key="face">
-        <circle cx="47" cy="17" r="1.5" fill="#22c55e"/>
-        <circle cx="53" cy="17" r="1.5" fill="#22c55e"/>
-        <path d="M45 22 Q50 26 55 22" stroke="#22c55e" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
-      </g>
-    :st==="l"
-    ?<g key="face">
-        <line x1="45" y1="15" x2="49" y2="19" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round"/>
-        <line x1="49" y1="15" x2="45" y2="19" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round"/>
-        <line x1="51" y1="15" x2="55" y2="19" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round"/>
-        <line x1="55" y1="15" x2="51" y2="19" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M45 24 Q50 20 55 24" stroke="#dc2626" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
-      </g>
-    :<g key="face">
-        <circle cx="47" cy="17" r="1.5" fill={bodyColor}/>
-        <circle cx="53" cy="17" r="1.5" fill={bodyColor}/>
-        <path d="M46 22 Q50 24 54 22" stroke={bodyColor} strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-      </g>;
-  const bodyParts=[
-    <g key="h"><circle cx="50" cy="19" r="9" stroke={bodyColor} strokeWidth="2.5" fill={isAlive?"#eff6ff":"#fef2f2"}/>{faceEl}</g>,
-    <line key="b" x1="50" y1="28" x2="50" y2="58" stroke={bodyColor} strokeWidth="3" strokeLinecap="round"/>,
-    <line key="la" x1="50" y1="36" x2="34" y2="50" stroke={bodyColor} strokeWidth="2.5" strokeLinecap="round"/>,
-    <line key="ra" x1="50" y1="36" x2="66" y2="50" stroke={bodyColor} strokeWidth="2.5" strokeLinecap="round"/>,
-    <line key="ll" x1="50" y1="58" x2="36" y2="76" stroke={bodyColor} strokeWidth="2.5" strokeLinecap="round"/>,
-    <line key="rl" x1="50" y1="58" x2="64" y2="76" stroke={bodyColor} strokeWidth="2.5" strokeLinecap="round"/>,
-    <line key="rp" x1="50" y1="10" x2="50" y2="11" stroke="#888" strokeWidth="2.5"/>
-  ];
+  const bc=isAlive?"#2563eb":"#dc2626";
+  const fc=isAlive?"#eff6ff":"#fef2f2";
 
   const[hint,setHint]=useState(false);const[hgConfetti,setHgConfetti]=useState(false);
   useEffect(()=>{if(st==="w"&&!hgConfetti)setTimeout(()=>setHgConfetti(true),500);},[st]);
@@ -2095,7 +2068,19 @@ function HangmanGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
         <button onClick={()=>setHint(h=>!h)} style={{background:"none",border:`1px solid ${hint?US.yellow:"#ddd"}`,borderRadius:"4px",padding:"3px 9px",fontSize:"9px",color:hint?US.yellow:"#aaa",cursor:"pointer",fontFamily:"inherit"}}>💡 {hint?"Nascondi":"Indizio"}</button>
       </div>
       {hint&&<div style={{fontSize:"10px",color:"#777",marginBottom:"6px",padding:"6px 10px",background:"#fffbea",border:"1px solid #fde68a",borderRadius:"4px"}}>{pl.nation} • {pl.role} • {pl.age} anni</div>}
-      <div style={{display:"flex",justifyContent:"center",marginBottom:"8px"}}><svg width="110" height="96" viewBox="0 0 110 96"><line x1="8" y1="90" x2="102" y2="90" stroke="#ccc" strokeWidth="3" strokeLinecap="round"/><line x1="24" y1="90" x2="24" y2="4" stroke="#aaa" strokeWidth="3" strokeLinecap="round"/><line x1="24" y1="4" x2="54" y2="4" stroke="#aaa" strokeWidth="3" strokeLinecap="round"/><line x1="54" y1="4" x2="54" y2="10" stroke="#888" strokeWidth="2.5" strokeLinecap="round"/>{bodyParts.slice(0,wc)}</svg></div>
+      <div style={{display:"flex",justifyContent:"center",marginBottom:"8px"}}><svg width="110" height="96" viewBox="0 0 110 96">
+              <line x1="8" y1="90" x2="102" y2="90" stroke="#ccc" strokeWidth="3" strokeLinecap="round"/>
+              <line x1="24" y1="90" x2="24" y2="4" stroke="#aaa" strokeWidth="3" strokeLinecap="round"/>
+              <line x1="24" y1="4" x2="54" y2="4" stroke="#aaa" strokeWidth="3" strokeLinecap="round"/>
+              <line x1="54" y1="4" x2="54" y2="10" stroke="#888" strokeWidth="2.5" strokeLinecap="round"/>
+              {wc>=1&&<circle cx="54" cy="19" r="9" stroke={bc} strokeWidth="2.5" fill={fc}/>}
+              {wc>=1&&(st==="w"?<><circle cx="51" cy="17" r="1.5" fill="#22c55e"/><circle cx="57" cy="17" r="1.5" fill="#22c55e"/><path d="M49 22 Q54 26 59 22" stroke="#22c55e" strokeWidth="1.8" fill="none" strokeLinecap="round"/></>:st==="l"?<><line x1="49" y1="15" x2="53" y2="19" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round"/><line x1="53" y1="15" x2="49" y2="19" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round"/><line x1="55" y1="15" x2="59" y2="19" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round"/><line x1="59" y1="15" x2="55" y2="19" stroke="#dc2626" strokeWidth="1.8" strokeLinecap="round"/><path d="M49 24 Q54 20 59 24" stroke="#dc2626" strokeWidth="1.8" fill="none" strokeLinecap="round"/></>:<><circle cx="51" cy="17" r="1.5" fill={bc}/><circle cx="57" cy="17" r="1.5" fill={bc}/><path d="M50 22 Q54 24 58 22" stroke={bc} strokeWidth="1.5" fill="none" strokeLinecap="round"/></>)}
+              {wc>=2&&<line x1="54" y1="28" x2="54" y2="58" stroke={bc} strokeWidth="3" strokeLinecap="round"/>}
+              {wc>=3&&<line x1="54" y1="36" x2="38" y2="50" stroke={bc} strokeWidth="2.5" strokeLinecap="round"/>}
+              {wc>=4&&<line x1="54" y1="36" x2="70" y2="50" stroke={bc} strokeWidth="2.5" strokeLinecap="round"/>}
+              {wc>=5&&<line x1="54" y1="58" x2="40" y2="76" stroke={bc} strokeWidth="2.5" strokeLinecap="round"/>}
+              {wc>=6&&<line x1="54" y1="58" x2="68" y2="76" stroke={bc} strokeWidth="2.5" strokeLinecap="round"/>}
+            </svg></div>
       <div style={{display:"flex",justifyContent:"center",gap:"4px",marginBottom:"14px",flexWrap:"wrap"}}>{wd.split("").map((c,i)=><div key={i} style={{width:"28px",height:"36px",borderBottom:`2.5px solid ${st==="l"&&!gu.has(c)?US.red:US.black}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"17px",fontWeight:"700",color:st==="l"&&!gu.has(c)?US.red:US.black}}>{gu.has(c)||st==="l"?c:""}</div>)}</div>
       <div style={{textAlign:"center",marginBottom:"10px",fontSize:"10px",color:"#999"}}>Errori: <strong style={{color:wc>=5?US.red:"#333"}}>{wc}/{M}</strong></div>
       {st==="p"&&<div>{[["Q","W","E","R","T","Y","U","I","O","P"],["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"]].map((row,ri)=><div key={ri} style={{display:"flex",justifyContent:"center",gap:"2px",marginBottom:"2px"}}>{row.map(k=>{const u=gu.has(k),cr=wd.includes(k)&&u,wr2=!wd.includes(k)&&u;return<button key={k} onClick={()=>g(k)} disabled={u} style={{background:cr?"#22c55e":wr2?"#ef4444":u?"#d1d5db":"#e8e8e8",color:u?"#fff":"#111",border:cr?"2px solid #16a34a":wr2?"2px solid #dc2626":"1px solid #ccc",borderRadius:"4px",padding:"8px 4px",minWidth:"26px",fontSize:"11px",fontWeight:"700",cursor:u?"default":"pointer",fontFamily:"inherit",opacity:u?1:1,transform:cr||wr2?"scale(1)":"scale(1)"}}>{k}</button>;})} </div>)}</div>}
