@@ -2290,8 +2290,9 @@ function CarreiraGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function Carriera({onHome,isDaily,onArchive}){
-  if(isDaily){const d=(dayIndex()+3)%CAREERS.length+1,s=todaySeed();return<CarreiraGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
-  return<ArchiveWrapper gameKey="carriera">{({day,seed,isToday,archiveNav,chipBar})=><CarreiraGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
+  const todayCarriera=(dayIndex()+3)%CAREERS.length+1;
+  if(isDaily){const d=todayCarriera,s=todaySeed();return<CarreiraGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="carriera" todayDay={todayCarriera}>{({day,seed,isToday,archiveNav,chipBar})=><CarreiraGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 // ── ROSA QUIZ ─────────────────────────────────────────────────────────────
@@ -2367,8 +2368,9 @@ function RosaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function RosaQuiz({onHome,isDaily,onArchive}){
-  if(isDaily){const d=(dayIndex()+10)%ROSE_LIST.length+1,s=todaySeed();return<RosaQuizGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
-  return<ArchiveWrapper gameKey="rosa">{({day,seed,isToday,archiveNav,chipBar})=><RosaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
+  const todayRosa=(dayIndex()+10)%ROSE_LIST.length+1;
+  if(isDaily){const d=todayRosa,s=todaySeed();return<RosaQuizGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="rosa" todayDay={todayRosa}>{({day,seed,isToday,archiveNav,chipBar})=><RosaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 
@@ -2607,8 +2609,9 @@ function ListaQuizGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function ListaQuiz({onHome,isDaily,onArchive}){
-  if(isDaily){const d=(dayIndex()+40)%LISTA_POOL+1,s=todaySeed();return<ListaQuizGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
-  return<ArchiveWrapper gameKey="lista">{({day,seed,isToday,archiveNav,chipBar})=><ListaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
+  const todayLista=(dayIndex()+40)%LISTA_POOL+1;
+  if(isDaily){const d=todayLista,s=todaySeed();return<ListaQuizGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="lista" todayDay={todayLista}>{({day,seed,isToday,archiveNav,chipBar})=><ListaQuizGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 // ── INDOVINA IL TRASFERIMENTO ─────────────────────────────────────────────
@@ -2767,8 +2770,9 @@ function TransferGame({day,seed,isToday,archiveNav,chipBar,onHome,onArchive}){
   </div>);
 }
 function IndivinaTransferimento({onHome,isDaily,onArchive}){
-  if(isDaily){const d=(dayIndex()+4)%TRANSFERS.length+1,s=todaySeed();return<TransferGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
-  return<ArchiveWrapper gameKey="transfer">{({day,seed,isToday,archiveNav,chipBar})=><TransferGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
+  const todayTransfer=(dayIndex()+4)%TRANSFERS.length+1;
+  if(isDaily){const d=todayTransfer,s=todaySeed();return<TransferGame day={d} seed={s} isToday archiveNav={null} chipBar={null} onHome={onHome} onArchive={onArchive}/>;}
+  return<ArchiveWrapper gameKey="transfer" todayDay={todayTransfer}>{({day,seed,isToday,archiveNav,chipBar})=><TransferGame day={day} seed={seed} isToday={isToday} archiveNav={archiveNav} chipBar={chipBar} onHome={onHome} onArchive={onArchive}/>}</ArchiveWrapper>;
 }
 
 // ── HOME ──────────────────────────────────────────────────────────────────
@@ -3360,11 +3364,12 @@ function Home({onSelect}){
             </div>
           </div>
         </div>
-        <div style={{display:"flex",gap:"6px"}}>
-          {["⚽ Calciodle","🔤 Wordle","🪢 Impiccato","🏆 Carriera","🔗 Connections",
-            "💶 Chi Vale","⏱ Sfida","🔄 Transfer","👕 Rosa","🔎 FootGuessr"].map(t=>(
-            <div key={t} style={{flex:"0 0 auto",fontSize:"8px",color:"#555",background:"#1a1a1a",
-              borderRadius:"4px",padding:"2px 5px",whiteSpace:"nowrap"}}>{t}</div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:"4px"}}>
+          {["⚽ Calciodle","🔤 Wordle","💀 Impiccato","🏆 Carriera","🔗 Connections",
+            "💶 Higher","⏱ Sfida","🔄 Transfer","👕 Rosa","🔎 FootGuessr"].map(t=>(
+            <div key={t} style={{fontSize:"7px",color:"#666",background:"#1a1a1a",
+              borderRadius:"4px",padding:"2px 3px",textAlign:"center",
+              overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{t}</div>
           ))}
         </div>
       </div>
